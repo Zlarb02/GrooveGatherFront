@@ -1,14 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 * {
-  margin: 0;
-  padding: 0;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-      "Segoe UI Symbol";
-}
-
-/* You can add global styles to this file, and also import other style files */
-* {
     margin: 0;
     padding: 0;
     font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -16,3 +7,1596 @@
         "Segoe UI Symbol";
 }
 
+.gg-home {
+    background:
+        linear-gradient(to left,
+            currentColor 5px, transparent 0) no-repeat 0 bottom/4px 2px,
+        linear-gradient(to left,
+            currentColor 5px, transparent 0) no-repeat right bottom/4px 2px;
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 18px;
+    height: 14px;
+    border: 2px solid;
+    border-top: 0;
+    border-bottom: 0;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    margin-bottom: -2px
+}
+
+.gg-home::after,
+.gg-home::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute
+}
+
+.gg-home::before {
+    border-top: 2px solid;
+    border-left: 2px solid;
+    border-top-left-radius: 4px;
+    transform: rotate(45deg);
+    top: -5px;
+    border-radius: 3px;
+    width: 14px;
+    height: 14px;
+    left: 0
+}
+
+.gg-home::after {
+    width: 8px;
+    height: 10px;
+    border: 2px solid;
+    border-radius: 100px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: 0;
+    left: 3px;
+    bottom: 0
+}
+
+.gg-search {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 16px;
+    height: 16px;
+    border: 2px solid;
+    border-radius: 100%;
+    margin-left: -4px;
+    margin-top: -4px
+}
+
+.gg-search::after {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    border-radius: 3px;
+    width: 2px;
+    height: 8px;
+    background: currentColor;
+    transform: rotate(-45deg);
+    top: 10px;
+    left: 12px
+}
+
+.gg-add {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    width: 22px;
+    height: 22px;
+    border: 2px solid;
+    transform: scale(var(--ggs, 1));
+    border-radius: 22px
+}
+
+.gg-add::after,
+.gg-add::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 10px;
+    height: 2px;
+    background: currentColor;
+    border-radius: 5px;
+    top: 8px;
+    left: 4px
+}
+
+.gg-add::after {
+    width: 2px;
+    height: 10px;
+    top: 4px;
+    left: 8px
+}
+
+.gg-bell,
+.gg-bell::before {
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px
+}
+
+.gg-bell {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    border: 2px solid;
+    border-bottom: 0;
+    width: 14px;
+    height: 14px
+}
+
+.gg-bell::after,
+.gg-bell::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute
+}
+
+.gg-bell::before {
+    background: currentColor;
+    width: 4px;
+    height: 4px;
+    top: -4px;
+    left: 3px
+}
+
+.gg-bell::after {
+    border-radius: 3px;
+    width: 16px;
+    height: 10px;
+    border: 6px solid transparent;
+    border-top: 1px solid transparent;
+    box-shadow:
+        inset 0 0 0 4px,
+        0 -2px 0 0;
+    top: 14px;
+    left: -3px;
+    border-bottom-left-radius: 100px;
+    border-bottom-right-radius: 100px
+}
+
+.gg-bell,
+.gg-bell::before {
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px
+}
+
+.gg-bell {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    border: 2px solid;
+    border-bottom: 0;
+    width: 14px;
+    height: 14px
+}
+
+.gg-bell::after,
+.gg-bell::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute
+}
+
+.gg-bell::before {
+    background: currentColor;
+    width: 4px;
+    height: 4px;
+    top: -4px;
+    left: 3px
+}
+
+.gg-bell::after {
+    border-radius: 3px;
+    width: 16px;
+    height: 10px;
+    border: 6px solid transparent;
+    border-top: 1px solid transparent;
+    box-shadow:
+        inset 0 0 0 4px,
+        0 -2px 0 0;
+    top: 14px;
+    left: -3px;
+    border-bottom-left-radius: 100px;
+    border-bottom-right-radius: 100px
+}
+
+.gg-mail,
+.gg-mail::after {
+    display: block;
+    box-sizing: border-box;
+    height: 14px;
+    border: 2px solid
+}
+
+.gg-mail {
+    overflow: hidden;
+    transform: scale(var(--ggs, 1));
+    position: relative;
+    width: 18px;
+    border-radius: 2px
+}
+
+.gg-mail::after {
+    content: "";
+    position: absolute;
+    border-radius: 3px;
+    width: 14px;
+    transform: rotate(-45deg);
+    bottom: 3px;
+    left: 0
+}
+
+.gg-menu {
+    transform: scale(var(--ggs, 1))
+}
+
+.gg-menu,
+.gg-menu::after,
+.gg-menu::before {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    width: 20px;
+    height: 2px;
+    border-radius: 3px;
+    background: currentColor
+}
+
+.gg-menu::after,
+.gg-menu::before {
+    content: "";
+    position: absolute;
+    top: -6px
+}
+
+.gg-menu::after {
+    top: 6px
+}
+
+.gg-close {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 22px;
+    height: 22px;
+    border: 2px solid transparent;
+    border-radius: 40px
+}
+
+.gg-close::after,
+.gg-close::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 16px;
+    height: 2px;
+    background: currentColor;
+    transform: rotate(45deg);
+    border-radius: 5px;
+    top: 8px;
+    left: 1px
+}
+
+.gg-close::after {
+    transform: rotate(-45deg)
+}
+
+.gg-profile,
+.gg-profile::after,
+.gg-profile::before {
+    display: block;
+    box-sizing: border-box;
+    border: 2px solid;
+    border-radius: 100px
+}
+
+.gg-profile {
+    overflow: hidden;
+    transform: scale(var(--ggs, 1));
+    width: 22px;
+    height: 22px;
+    position: relative
+}
+
+.gg-profile::after,
+.gg-profile::before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 5px;
+    width: 8px;
+    height: 8px
+}
+
+.gg-profile::after {
+    border-radius: 200px;
+    top: 11px;
+    left: 0px;
+    width: 18px;
+    height: 18px
+}
+
+.gg-danger {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 20px;
+    height: 20px;
+    border: 2px solid;
+    border-radius: 40px
+}
+
+.gg-danger::after,
+.gg-danger::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    border-radius: 3px;
+    width: 2px;
+    background: currentColor;
+    left: 7px
+}
+
+.gg-danger::after {
+    top: 2px;
+    height: 8px
+}
+
+.gg-danger::before {
+    height: 2px;
+    bottom: 2px
+}
+
+.gg-add-r {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    width: 22px;
+    height: 22px;
+    border: 2px solid;
+    transform: scale(var(--ggs, 1));
+    border-radius: 4px
+}
+
+.gg-add-r::after,
+.gg-add-r::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 10px;
+    height: 2px;
+    background: currentColor;
+    border-radius: 5px;
+    top: 8px;
+    left: 4px
+}
+
+.gg-add-r::after {
+    width: 2px;
+    height: 10px;
+    top: 4px;
+    left: 8px
+}
+
+.gg-share {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 6px;
+    height: 6px;
+    background: currentColor;
+    border-radius: 100px;
+    box-shadow:
+        10px -6px 0,
+        10px 6px 0
+}
+
+.gg-share::after,
+.gg-share::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    border-radius: 3px;
+    width: 10px;
+    height: 2px;
+    background: currentColor;
+    left: 2px
+}
+
+.gg-share::before {
+    top: 0;
+    transform: rotate(-35deg)
+}
+
+.gg-share::after {
+    bottom: 0;
+    transform: rotate(35deg)
+}
+
+.gg-arrows-exchange-alt-v {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 14px;
+    height: 16px
+}
+
+.gg-arrows-exchange-alt-v::after,
+.gg-arrows-exchange-alt-v::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 2px;
+    background: currentColor;
+    border-radius: 4px
+}
+
+.gg-arrows-exchange-alt-v::before {
+    height: 6px;
+    transform: rotate(-45deg);
+    box-shadow: 13px -2px 0;
+    top: 10px;
+    left: 2px
+}
+
+.gg-arrows-exchange-alt-v::after {
+    height: 12px;
+    box-shadow: -4px 4px 0;
+    right: 4px
+}
+
+.gg-arrows-exchange-v {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 14px;
+    height: 16px
+}
+
+.gg-arrows-exchange-v::after,
+.gg-arrows-exchange-v::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 2px;
+    background: currentColor;
+    border-radius: 4px
+}
+
+.gg-arrows-exchange-v::before {
+    height: 6px;
+    transform: rotate(45deg);
+    box-shadow: 7px -4px 0;
+    top: 4px;
+    left: 2px
+}
+
+.gg-arrows-exchange-v::after {
+    height: 12px;
+    box-shadow: -4px 4px 0;
+    right: 4px;
+    bottom: 4px
+}
+
+.gg-chevron-left {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 22px;
+    height: 22px;
+    border: 2px solid transparent;
+    border-radius: 100px
+}
+
+.gg-chevron-left::after {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-bottom: 2px solid;
+    border-left: 2px solid;
+    transform: rotate(45deg);
+    left: 6px;
+    top: 4px
+}
+
+.gg-chevron-right {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 22px;
+    height: 22px;
+    border: 2px solid transparent;
+    border-radius: 100px
+}
+
+.gg-chevron-right::after {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-bottom: 2px solid;
+    border-right: 2px solid;
+    transform: rotate(-45deg);
+    right: 6px;
+    top: 4px
+}
+
+.gg-options {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 10px;
+    height: 2px;
+    box-shadow:
+        -3px 4px 0 0,
+        3px -4px 0 0
+}
+
+.gg-options::after,
+.gg-options::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border: 2px solid;
+    border-radius: 100%
+}
+
+.gg-options::before {
+    top: -7px;
+    left: -4px
+}
+
+.gg-options::after {
+    bottom: -7px;
+    right: -4px
+}
+
+.gg-reorder {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 14px;
+    height: 2px;
+    border-radius: 3px;
+    background: currentColor
+}
+
+.gg-reorder::after,
+.gg-reorder::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    border-radius: 3px
+}
+
+.gg-reorder::before {
+    border: 2px solid;
+    width: 6px;
+    height: 6px;
+    left: 12px;
+    top: -2px
+}
+
+.gg-reorder::after {
+    top: -4px;
+    left: 0;
+    width: 10px;
+    height: 2px;
+    opacity: .5;
+    background: currentColor;
+    box-shadow:
+        0 8px 0 0,
+        0 12px 0 0,
+        0 16px 0 0
+}
+
+.gg-file-add {
+    background:
+        linear-gradient(to bottom,
+            currentColor 5px, transparent 0) no-repeat 2px 9px/6px 2px;
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 14px;
+    height: 16px;
+    border: 2px solid transparent;
+    border-right: 0;
+    border-top: 0;
+    box-shadow: 0 0 0 2px;
+    border-radius: 1px;
+    border-top-right-radius: 4px;
+    overflow: hidden
+}
+
+.gg-file-add::after,
+.gg-file-add::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    height: 6px
+}
+
+.gg-file-add::before {
+    background: currentColor;
+    left: 4px;
+    width: 2px;
+    top: 7px
+}
+
+.gg-file-add::after {
+    width: 6px;
+    border-left: 2px solid;
+    border-bottom: 2px solid;
+    right: -1px;
+    top: -1px
+}
+
+.gg-folder-add {
+    background:
+        linear-gradient(to left,
+            currentColor 10px, transparent 0) no-repeat center center/2px 6px;
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 22px;
+    height: 16px;
+    border: 2px solid;
+    border-radius: 3px
+}
+
+.gg-folder-add::after,
+.gg-folder-add::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute
+}
+
+.gg-folder-add::before {
+    background: currentColor;
+    left: 6px;
+    width: 6px;
+    height: 2px;
+    top: 5px
+}
+
+.gg-folder-add::after {
+    width: 10px;
+    height: 4px;
+    border: 2px solid;
+    border-bottom: 0;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 4px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    top: -5px
+}
+
+.gg-attachment {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid;
+    border-top: 0;
+    border-bottom-left-radius: 100px;
+    border-bottom-right-radius: 100px;
+    transform: scale(var(--ggs, 1));
+    margin-top: 11px
+}
+
+.gg-attachment::after,
+.gg-attachment::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    border-radius: 3px;
+    border: 2px solid
+}
+
+.gg-attachment::after {
+    border-bottom: 0;
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+    right: -2px;
+    width: 10px;
+    height: 14px;
+    bottom: 8px
+}
+
+.gg-attachment::before {
+    width: 6px;
+    height: 12px;
+    border-top: 0;
+    border-bottom-left-radius: 100px;
+    border-bottom-right-radius: 100px;
+    left: 2px;
+    bottom: 4px
+}
+
+.gg-music,
+.gg-music::after,
+.gg-music::before {
+    display: block;
+    box-sizing: border-box;
+    border: 2px solid
+}
+
+.gg-music {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom: 0;
+    margin-top: -4px;
+    position: relative;
+    transform: skewY(-15deg) scale(var(--ggs, 1));
+    width: 14px;
+    height: 16px
+}
+
+.gg-music::after,
+.gg-music::before {
+    content: "";
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    top: 9px;
+    left: -7px;
+    transform: skewY(15deg);
+    border-radius: 10px
+}
+
+.gg-music::after {
+    left: 5px
+}
+
+.gg-music-note {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 2px;
+    height: 14px;
+    background: currentColor
+}
+
+.gg-music-note::after,
+.gg-music-note::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    border: 2px solid
+}
+
+.gg-music-note::before {
+    bottom: -4px;
+    width: 8px;
+    height: 8px;
+    left: -6px;
+    border-radius: 10px
+}
+
+.gg-music-note::after {
+    width: 10px;
+    height: 6px;
+    top: -4px;
+    left: 0;
+    border-radius: 2px;
+    transform: skewY(-15deg)
+}
+
+.gg-cloud {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 8px;
+    height: 2px;
+    background: currentColor;
+    margin-bottom: -20px
+}
+
+.gg-cloud::after,
+.gg-cloud::before {
+    content: "";
+    display: block;
+    position: absolute;
+    border: 2px solid;
+    box-sizing: border-box;
+    bottom: 0
+}
+
+.gg-cloud::before {
+    border-top-left-radius: 100px;
+    border-bottom-left-radius: 100px;
+    border-right: 0;
+    left: -6px;
+    width: 7px;
+    height: 12px
+}
+
+.gg-cloud::after {
+    width: 16px;
+    height: 16px;
+    border-radius: 100px;
+    border-left-color: transparent;
+    right: -8px;
+    transform: rotate(-45deg)
+}
+
+.gg-file-remove {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 14px;
+    height: 16px;
+    border: 2px solid transparent;
+    border-right: 0;
+    border-top: 0;
+    box-shadow: 0 0 0 2px;
+    border-radius: 1px;
+    border-top-right-radius: 4px;
+    overflow: hidden
+}
+
+.gg-file-remove::after,
+.gg-file-remove::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 6px
+}
+
+.gg-file-remove::before {
+    background: currentColor;
+    left: 2px;
+    height: 2px;
+    top: 9px
+}
+
+.gg-file-remove::after {
+    height: 6px;
+    border-left: 2px solid;
+    border-bottom: 2px solid;
+    right: -1px;
+    top: -1px
+}
+
+.gg-folder-remove {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 22px;
+    height: 16px;
+    border: 2px solid;
+    border-radius: 3px
+}
+
+.gg-folder-remove::after,
+.gg-folder-remove::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    border-radius: 3px
+}
+
+.gg-folder-remove::before {
+    background: currentColor;
+    left: 5px;
+    width: 8px;
+    height: 2px;
+    top: 5px
+}
+
+.gg-folder-remove::after {
+    width: 10px;
+    height: 4px;
+    border: 2px solid;
+    border-bottom: 0;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 4px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    top: -5px
+}
+
+.gg-folder {
+    transform: scale(var(--ggs, 1))
+}
+
+.gg-folder,
+.gg-folder::after {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    width: 22px;
+    height: 16px;
+    border: 2px solid;
+    border-radius: 3px
+}
+
+.gg-folder::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 4px;
+    border-bottom: 0;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 4px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    top: -5px
+}
+
+.gg-toolbox {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 22px;
+    height: 16px;
+    border: 2px solid;
+    border-radius: 2px
+}
+
+.gg-toolbox::after,
+.gg-toolbox::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute
+}
+
+.gg-toolbox::before {
+    border: 2px solid;
+    border-bottom: 0;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    left: 4px;
+    width: 10px;
+    height: 4px;
+    top: -5px
+}
+
+.gg-toolbox::after {
+    width: 18px;
+    height: 2px;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    box-shadow:
+        0 -2px 0,
+        inset 4px 0 0,
+        inset -4px 0 0;
+    top: 4px
+}
+
+.gg-drive {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 26px;
+    height: 10px;
+    border: 2px solid;
+    border-radius: 2px
+}
+
+.gg-drive::after,
+.gg-drive::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    border-radius: 10px;
+    background: currentColor;
+    top: 2px;
+    right: 2px
+}
+
+.gg-drive::before {
+    right: 6px
+}
+
+.gg-comment {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 20px;
+    height: 16px;
+    border: 2px solid;
+    border-bottom: 0;
+    box-shadow:
+        -6px 8px 0 -6px,
+        6px 8px 0 -6px
+}
+
+.gg-comment::after,
+.gg-comment::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 8px
+}
+
+.gg-comment::before {
+    border: 2px solid;
+    border-top-color: transparent;
+    border-bottom-left-radius: 20px;
+    right: 4px;
+    bottom: -6px;
+    height: 6px
+}
+
+.gg-comment::after {
+    height: 2px;
+    background: currentColor;
+    box-shadow: 0 4px 0 0;
+    left: 4px;
+    top: 4px
+}
+
+.gg-disc,
+.gg-disc::after,
+.gg-disc::before {
+    display: block;
+    box-sizing: border-box;
+    border: 2px solid;
+    border-radius: 50%
+}
+
+.gg-disc {
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    transform: rotate(45deg) scale(var(--ggs, 1));
+    position: relative;
+    width: 14px;
+    height: 14px
+}
+
+.gg-disc::after,
+.gg-disc::before {
+    content: "";
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    top: 2px;
+    left: 2px
+}
+
+.gg-disc::after {
+    width: 22px;
+    height: 22px;
+    border-radius: 100%;
+    top: -6px;
+    left: -6px
+}
+
+.gg-headset {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 18px;
+    height: 18px;
+    border-top-left-radius: 120px;
+    border-top-right-radius: 120px;
+    border: 2px solid;
+    border-bottom: 0
+}
+
+.gg-headset::after,
+.gg-headset::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    border: 2px solid;
+    width: 6px;
+    height: 8px;
+    top: 8px
+}
+
+.gg-headset::before {
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    left: -2px
+}
+
+.gg-headset::after {
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    left: 10px
+}
+
+.gg-image {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 20px;
+    height: 16px;
+    overflow: hidden;
+    box-shadow: 0 0 0 2px;
+    border-radius: 2px
+}
+
+.gg-image::after,
+.gg-image::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    border: 2px solid
+}
+
+.gg-image::after {
+    transform: rotate(45deg);
+    border-radius: 3px;
+    width: 16px;
+    height: 16px;
+    top: 9px;
+    left: 6px
+}
+
+.gg-image::before {
+    width: 6px;
+    height: 6px;
+    border-radius: 100%;
+    top: 2px;
+    left: 2px
+}
+
+.gg-mic {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 16px;
+    height: 12px;
+    border-bottom-left-radius: 120px;
+    border-bottom-right-radius: 120px;
+    border: 2px solid;
+    border-top: 0;
+    margin-top: 3px
+}
+
+.gg-mic::after,
+.gg-mic::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute
+}
+
+.gg-mic::after {
+    border: 2px solid;
+    width: 8px;
+    height: 18px;
+    left: 2px;
+    top: -10px;
+    border-radius: 4px
+}
+
+.gg-mic::before {
+    width: 10px;
+    height: 4px;
+    top: 12px;
+    left: 1px;
+    border-right: 4px solid transparent;
+    box-shadow:
+        0 2px 0,
+        inset -2px 0 0
+}
+
+.gg-piano {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 23px;
+    height: 18px;
+    border: 2px solid;
+    border-radius: 2px
+}
+
+.gg-piano::after,
+.gg-piano::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    height: 10px;
+    background: currentColor;
+    box-shadow:
+        5px 0 0,
+        10px 0 0
+}
+
+.gg-piano::before {
+    top: -2px;
+    width: 3px;
+    left: 3px
+}
+
+.gg-piano::after {
+    width: 1px;
+    bottom: -2px;
+    left: 4px
+}
+
+.gg-play-backwards {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 3px;
+    height: 10px;
+    background: currentColor
+}
+
+.gg-play-backwards::after,
+.gg-play-backwards::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 0;
+    height: 10px;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-right: 6px solid;
+    right: -7px
+}
+
+.gg-play-backwards::before {
+    right: -14px
+}
+
+.gg-play-button-o {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 22px;
+    height: 22px;
+    border: 2px solid;
+    border-radius: 20px
+}
+
+.gg-play-button-o::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 0;
+    height: 10px;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 6px solid;
+    top: 4px;
+    left: 7px
+}
+
+.gg-play-button-r {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 22px;
+    height: 22px;
+    border: 2px solid;
+    border-radius: 4px
+}
+
+.gg-play-button-r::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 0;
+    height: 10px;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 6px solid;
+    top: 4px;
+    left: 7px
+}
+
+.gg-play-button {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 22px;
+    height: 22px
+}
+
+.gg-play-button::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 0;
+    height: 10px;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 6px solid;
+    top: 6px;
+    left: 9px
+}
+
+.gg-play-forwards {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 3px;
+    height: 10px;
+    background: currentColor
+}
+
+.gg-play-forwards::after,
+.gg-play-forwards::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 0;
+    height: 10px;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 6px solid;
+    left: -7px
+}
+
+.gg-play-forwards::before {
+    left: -14px
+}
+
+.gg-play-pause-o {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 22px;
+    height: 22px;
+    border: 2px solid;
+    border-radius: 22px
+}
+
+.gg-play-pause-o::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    left: 6px;
+    top: 6px;
+    border-left: 2px solid;
+    border-right: 2px solid
+}
+
+.gg-play-stop-o {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 22px;
+    height: 22px;
+    border: 2px solid;
+    border-radius: 20px
+}
+
+.gg-play-stop-o::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    top: 6px;
+    left: 6px;
+    background: currentColor
+}
+
+.gg-play-track-next-o {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 22px;
+    height: 22px;
+    border: 2px solid;
+    border-radius: 20px
+}
+
+.gg-play-track-next-o::after,
+.gg-play-track-next-o::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    height: 8px;
+    top: 5px
+}
+
+.gg-play-track-next-o::before {
+    width: 2px;
+    border-radius: 2px;
+    left: 11px;
+    background: currentColor
+}
+
+.gg-play-track-next-o::after {
+    width: 0;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-left: 5px solid;
+    left: 5px
+}
+
+.gg-play-track-prev-o {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 22px;
+    height: 22px;
+    border: 2px solid;
+    border-radius: 20px
+}
+
+.gg-play-track-prev-o::after,
+.gg-play-track-prev-o::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    height: 8px;
+    top: 5px
+}
+
+.gg-play-track-prev-o::before {
+    width: 2px;
+    border-radius: 2px;
+    right: 11px;
+    background: currentColor
+}
+
+.gg-play-track-prev-o::after {
+    width: 0;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-right: 5px solid;
+    right: 5px
+}
+
+.gg-volume {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 8px;
+    height: 8px;
+    border: 2px solid;
+    border-right: 0;
+    -webkit-perspective: 12px;
+    perspective: 12px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px
+}
+
+.gg-volume::after,
+.gg-volume::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute
+}
+
+.gg-volume::before {
+    left: 2px;
+    transform: rotateY(-90deg);
+    width: 10px;
+    height: 10px;
+    border: 2px solid;
+    border-left: 0;
+    top: -3px
+}
+
+.gg-volume::after {
+    width: 8px;
+    height: 16px;
+    border: 6px double;
+    border-left: 0;
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+    right: -14px;
+    top: -6px
+}
+
+.gg-add-r {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    width: 22px;
+    height: 22px;
+    border: 2px solid;
+    transform: scale(var(--ggs, 1));
+    border-radius: 4px
+}
+
+.gg-add-r::after,
+.gg-add-r::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 10px;
+    height: 2px;
+    background: currentColor;
+    border-radius: 5px;
+    top: 8px;
+    left: 4px
+}
+
+.gg-add-r::after {
+    width: 2px;
+    height: 10px;
+    top: 4px;
+    left: 8px
+}
