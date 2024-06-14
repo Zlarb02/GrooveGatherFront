@@ -19,7 +19,7 @@
 }
 
 .header p {
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 .main-content {
@@ -30,19 +30,22 @@
 }
 .bouttons {
   /* Styles pour le pied de page */
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .btn-signup, .btn-login {
   /* Styles pour les boutons s'inscrire et se connecter */
   color: white;
   background-color: black;
-  border-width: 3px;
+  border-width: 7px;
   border-color: #e39d48;
-  padding: 5px;
   padding-bottom: 5px;
-  margin: 10px;
-  width: 100px;
-
+  margin-left: 20px;
+  margin-right: 20px;
+  margin: 4% 10%;
+  width: 110px;
+  border-style: solid;
 }
 
