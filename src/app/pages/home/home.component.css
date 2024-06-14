@@ -5,12 +5,44 @@
   height : 100%;
 }
 
-/* .img-background {
-  position: absolute;
-  top: 0;
-  left: 0;
+.groove-gather-container {
+  /* Styles pour le conteneur principal */
+  background-color: black;
+}
+
+.header {
+  /* Styles pour l'en-tête */
+  color:white;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  padding: 10px;
+}
+
+.header p {
+  margin-bottom: 40px;
+}
+
+.main-content {
+  /* Styles pour le contenu principal */
+}
+.main-content img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1;
-} */
+}
+.bouttons {
+  /* Styles pour le pied de page */
+
+}
+
+.btn-signup, .btn-login {
+  /* Styles pour les boutons s'inscrire et se connecter */
+  color: white;
+  background-color: black;
+  border-width: 3px;
+  border-color: #e39d48;
+  padding: 5px;
+  padding-bottom: 5px;
+  margin: 10px;
+  width: 100px;
+
+}
+
