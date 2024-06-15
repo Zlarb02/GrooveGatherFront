@@ -3,6 +3,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { SearchComponent } from './pages/search/search.component';
 import { CreateProjectComponent } from './pages/project/create-project/create-project.component';
 import { MessagesComponent } from './pages/messages/messages.component';
+import { NotificationComponent } from './pages/notification/notification.component';
 
 export const routes: Routes = [
     {
@@ -19,7 +20,7 @@ export const routes: Routes = [
     },
     {
         path: 'notification',
-        component: HomeComponent
+        component: NotificationComponent
     },
     {
         path: 'messages',
