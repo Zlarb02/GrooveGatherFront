@@ -7,6 +7,76 @@
         "Segoe UI Symbol";
 }
 
+/* COLORS START BLOCK */
+
+body {
+    --light-bg: whitesmoke;
+    --light-color: black;
+    --light-orange: #e39d48;
+    --light-lines: #575756;
+    --light-placeholder: darkgrey;
+
+
+    --dark-bg: black;
+    --dark-color: whitesmoke;
+    --dark-orange: #e39d48;
+    --dark-lines: #575756;
+    --dark-placeholder: darkgrey;
+}
+
+/* Media queries for user-preferred theme */
+@media (prefers-color-scheme: dark) {
+    body {
+        --user-preferred-bg: var(--dark-bg);
+        --user-preferred-color: var(--dark-color);
+        /* Update other variables for user-preferred dark theme */
+
+        --user-inverse-bg: var(--light-bg);
+        --user-inverse-color: var(--light-color);
+    }
+}
+
+@media (prefers-color-scheme: light),
+(prefers-color-scheme: no-preference) {
+    body {
+        --user-preferred-bg: var(--light-bg);
+        --user-preferred-color: var(--light-color);
+        /* Update other variables for user-preferred light theme */
+
+        --user-inverse-bg: var(--dark-bg);
+        --user-inverse-color: var(--dark-color);
+    }
+}
+
+
+body {
+    --bg: var(--user-preferred-bg);
+    --color: var(--user-preferred-color);
+    --orange: #e39d48;
+    --lines: #575756;
+    --placeholder: darkgrey;
+}
+
+/* Apply user-inverse theme when inverse class is present on body */
+body.inverse {
+    --bg-inverse: var(--user-inverse-bg);
+    --color-inverse: var(--user-inverse-color);
+    --orange-inverse: #e39d48;
+    --lines-inverse: #575756;
+    --placeholder-inverse: darkgrey;
+    display: none
+}
+
+/* Transition style */
+body {
+    background-color: var(--bg);
+    color: var(--color);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* COLORS END BLOCK */
+
+
 /* GG ICONS START BLOCK */
 
 .gg-home {
