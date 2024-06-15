@@ -1,0 +1,13 @@
+.theme-toggle {
+    display: block;
+}
+
+.toggle-label {
+    cursor: pointer;
+    padding: 10px;
+    background-color: var(--bg);
+    color: var(--light-color);
+    border: 1px solid var(--color);
+    border-radius: 5px;
+    display: inline-block;
+}

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { SearchBarComponent } from '../../core/search-bar/search-bar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ThemeToggleComponent } from '../../core/theme-toggle/theme-toggle.component';
 
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [SearchBarComponent, ReactiveFormsModule, FormsModule],
+  imports: [SearchBarComponent, ReactiveFormsModule, FormsModule, ThemeToggleComponent],
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })

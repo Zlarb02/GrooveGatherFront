@@ -9,8 +9,8 @@ ul {
     justify-content: space-around;
     align-items: center;
     height: 10vh;
-    background-color: black;
-    color: white;
+    background-color: var(--bg);
+    color: var(--color);
 }
 
 li {
