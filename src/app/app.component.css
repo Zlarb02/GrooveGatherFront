@@ -6,7 +6,6 @@
 .page-container {
     height: 75vh;
     background-color: var(--bg);
-    ;
     color: var(--color);
     overflow: scroll;
     overflow-x: hidden;
