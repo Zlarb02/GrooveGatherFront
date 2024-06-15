@@ -1,8 +1,24 @@
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
 ul {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    height: 60px;
-    background-color: #f5f5f5;
-    color: #555;
+    height: 10vh;
+    background-color: black;
+    color: white;
+}
+
+li {
+    list-style: none;
+    cursor: pointer;
+    font-size: xx-large;
+}
+
+.create-project {
+    margin-bottom: 2vh;
 }
