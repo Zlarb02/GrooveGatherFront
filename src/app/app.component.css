@@ -1,3 +1,8 @@
+/* allow only scroll y on page-container for router outlet  */
+
+/*      header + page-container + footer =    100vh     */
+/*        15   +       75       +   10   =    100       */
+
 .page-container {
     height: 75vh;
     background-color: black;
