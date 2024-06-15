@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, type OnInit } from '@angular/core';
+// biome-ignore lint/style/useImportType: <explanation>
 import { ThemeService } from '../../shared/services/theme.service';
 
 @Component({
@@ -14,6 +15,8 @@ export class ThemeToggleComponent implements OnInit {
   constructor(private themeService: ThemeService) { }
 
   ngOnInit(): void {
+    // Initialisation de l'état de la case à cocher en fonction du thème actuel
+    this.isChecked = this.themeService.isInverseTheme;
   }
 
   toggleTheme() {
