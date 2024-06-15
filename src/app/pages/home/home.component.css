@@ -5,15 +5,15 @@
   height: 100%;
 }
 
+/* attention nom de classe non approprié poue groove-gather-container, ce serait plutot home page container*/
 .groove-gather-container {
   /* Styles pour le conteneur principal */
-  background-color: black;
+  background-color: var(--bg);
 }
 
+/* attention nom de classe non approprié, on garde le mot clé header pour le header au dessus de la page */
 .header {
-  /* Styles pour l'en-tête */
-  color: white;
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--color);
   text-align: center;
   padding: 10px;
 }
@@ -28,26 +28,24 @@
 
 .main-content img {
   width: 100%;
+  max-height: 30vh;
+  object-fit: cover;
 }
 
 .bouttons {
-  /* Styles pour le pied de page */
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
+  height: 200px;
 }
 
 .btn-signup,
 .btn-login {
-  /* Styles pour les boutons s'inscrire et se connecter */
   color: var(--color);
   background-color: var(--bg);
-  border-width: 7px;
-  border-color: var(--orange);
-  padding-bottom: 5px;
-  margin-left: 20px;
-  margin-right: 20px;
-  margin: 4% 10%;
-  width: 110px;
-  border-style: solid;
+  border: var(--orange) 1px solid;
+  border-radius: 6px;
+  padding: 18px;
+  font-size: 18px;
+  font-weight: lighter;
 }

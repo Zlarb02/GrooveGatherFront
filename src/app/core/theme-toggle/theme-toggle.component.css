@@ -1,13 +1,62 @@
-.theme-toggle {
-    display: block;
+/* Cacher la checkbox réelle */
+#theme-toggle {
+    display: none;
 }
 
+/* Style du label */
 .toggle-label {
-    cursor: pointer;
-    padding: 10px;
-    background-color: var(--bg);
-    color: var(--light-color);
-    border: 1px solid var(--color);
-    border-radius: 5px;
+    position: relative;
+    width: 120px;
+    height: 40px;
+    background-color: var(--color);
+    border-radius: 20px;
     display: inline-block;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: 1px solid var(--bg);
+    overflow: hidden;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+/* Style des icônes */
+.toggle-label .icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    padding: 0 10px;
+    color: var(--bg);
+}
+
+.toggle-label .sun {
+    left: 5px;
+    opacity: 1;
+}
+
+.toggle-label .moon {
+    right: -1px;
+    opacity: 0;
+}
+
+.toggle-label .text {
+    margin-left: 5px;
+}
+
+/* Lorsque la checkbox est cochée */
+#theme-toggle:checked+.toggle-label {
+    background-color: var(--color);
+}
+
+#theme-toggle:checked+.toggle-label .sun {
+    opacity: 0;
+    transform: translateX(-50px) translateY(-50%);
+}
+
+#theme-toggle:checked+.toggle-label .moon {
+    opacity: 1;
+    transform: translateX(-10px) translateY(-50%);
 }
