@@ -1,102 +1,129 @@
-<form #searchForm="ngForm" (ngSubmit)="onSubmit(searchForm)">
-    <app-search-bar></app-search-bar>
-</form>
-<ul class="filters">
-    <li>
-        <p>filter</p>
-    </li>
-    <li>
-        <p>filter</p>
-    </li>
-    <li>
-        <p>...</p>
-    </li>
-    <input type="checkbox" id="more" name="view more filters" class="filters__more-checkbox" /><label
-        class="filters__more-label" for="more"><span>See all filters
-            <svg width="18" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129"
-                xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 129 129">
-                <g>
-                    <path fill="#fff"
-                        d="m121.3,34.6c-1.6-1.6-4.2-1.6-5.8,0l-51,51.1-51.1-51.1c-1.6-1.6-4.2-1.6-5.8,0-1.6,1.6-1.6,4.2 0,5.8l53.9,53.9c0.8,0.8 1.8,1.2 2.9,1.2 1,0 2.1-0.4 2.9-1.2l53.9-53.9c1.7-1.6 1.7-4.2 0.1-5.8z">
-                    </path>
-                </g>
-            </svg></span></label>
-    <input type="checkbox" id="more" name="view more filters" class="filters__less-checkbox" /><label
-        class="filters__less-label" for="more"><span>Collapse all filters
-            <svg width="18" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129"
-                xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 129 129">
-                <g>
-                    <path fill="#fff" d="M7.7,94.4c1.6,1.6,4.2,1.6,5.8,0l51-51.1,51.1,51.1c1.6,1.6,4.2,1.6,5.8,0c1.6-1.6,1.6-4.2,0-5.8l-53.9-53.9
+<div id="search_page_container">
+    <form #searchForm="ngForm" (ngSubmit)="onSearch(searchForm)">
+        <ul class="active-filters">
+            <app-search-bar [placeholder]="searchPlaceholder" class="search_bar"></app-search-bar>
+            <li>
+                <p>Rock'n'Roll</p>
+            </li>
+            <li>
+                <p>Guitare</p>
+            </li>
+            <li>
+                <p>Batterie</p>
+
+            </li>
+            <input type="checkbox" id="more" name="view more active-filters"
+                class="active-filters__more-checkbox" /><label class="active-filters__more-label" for="more"><span>See
+                    all active filters
+                    <svg width="18" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 129 129">
+                        <g>
+                            <path fill="#fff"
+                                d="m121.3,34.6c-1.6-1.6-4.2-1.6-5.8,0l-51,51.1-51.1-51.1c-1.6-1.6-4.2-1.6-5.8,0-1.6,1.6-1.6,4.2 0,5.8l53.9,53.9c0.8,0.8 1.8,1.2 2.9,1.2 1,0 2.1-0.4 2.9-1.2l53.9-53.9c1.7-1.6 1.7-4.2 0.1-5.8z">
+                            </path>
+                        </g>
+                    </svg></span></label>
+            <input type="checkbox" id="less" name="view more active-filters"
+                class="active-filters__less-checkbox" /><label class="active-filters__less-label"
+                for="more"><span>Collapse all active filters
+                    <svg width="18" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 129 129">
+                        <g>
+                            <path fill="#fff" d="M7.7,94.4c1.6,1.6,4.2,1.6,5.8,0l51-51.1,51.1,51.1c1.6,1.6,4.2,1.6,5.8,0c1.6-1.6,1.6-4.2,0-5.8l-53.9-53.9
             c-0.8-0.8-1.8-1.2-2.9-1.2s-2.1,0.4-2.9,1.2L7.7,88.6C6,90.2,6,92.8,7.7,94.4z">
-                    </path>
-                </g>
-            </svg>
-        </span></label>
-    <li>
-        <p>filter</p>
+                            </path>
+                        </g>
+                    </svg>
+                </span></label>
+            <li>
+                <p>filter</p>
 
-    </li>
-    <li>
-        <p>filter</p>
+            </li>
 
-    </li>
-    <li>
-        <p>filter</p>
+            <li>
+                <p>filter</p>
 
-    </li>
-    <li>
-        <p>filter</p>
+            </li>
+            <li>
+                <p>filter</p>
 
-    </li>
-    <li>
-        <p>filter</p>
+            </li>
+            <li>
+                <p>filter</p>
+            </li>
+            <li>
+                <p>filter</p>
+            </li>
+            <li>
+                <p>filter</p>
+            </li>
+            <li>
+                <p>filter</p>
+            </li>
+            <li>
+                <p>filter</p>
+            </li>
+            <li>
+                <p>filter</p>
+            </li>
+            <li>
+                <p>filter</p>
+            </li>
+            <li>
+                <p>filter</p>
+            </li>
+            <li>
+                <p>filter</p>
+            </li>
+            <li>
+                <p>filter</p>
+            </li>
+            <li>
+                <p>filter</p>
+            </li>
+            <li>
+                <p>filter</p>
+            </li>
+            <li>
+                <p>filter</p>
+            </li>
+            <select name="sort" id="sort">
+                <option value=""> Popularity</option>
+                <option value="">Newest</option>
+            </select>
+            <button class="sortBy" (click)="toggleSort()">
+                <i class="gg-arrows-exchange-v sort-icon" [class.rotated]="isSortedAsc"></i>
+            </button>
+        </ul>
+    </form>
+    <span class="separation"></span>
+    <div class="choose-filters-title">
+        <h3>
+            Filtrez les projets par: </h3>
+        <br>
+        <br>
+    </div>
+    <form id="filters" #filtersForm="ngForm" (ngSubmit)="onSelectFilters(filters)">
+        <div class="filter-select"> Compétence déjà présente dans projet : <select name="sort">
+                <option value=""> truc</option>
+                <option value="">machin</option>
+            </select>
+            <br>
+        </div>
+        <div class="filter-select"> Compétence manquante que vous pouvez proposer : <select name="sort">
+                <option value=""> truc</option>
+                <option value="">machin</option>
+            </select>
+            <br>
+        </div>
+        <div class="filter-select"> Genre musical : <select name="sort">
+                <option value=""> truc</option>
+                <option value="">machin</option>
+            </select>
+        </div>
+    </form>
 
-    </li>
-    <li>
-        <p>filter</p>
+    <span class="separation"></span>
 
-    </li>
-    <li>
-        <p>filter</p>
 
-    </li>
-    <li>
-        <p>filter</p>
-    </li>
-    <li>
-        <p>filter</p>
-    </li>
-    <li>
-        <p>filter</p>
-    </li>
-    <li>
-        <p>filter</p>
-    </li>
-    <li>
-        <p>filter</p>
-    </li>
-    <li>
-        <p>filter</p>
-    </li>
-    <li>
-        <p>filter</p>
-    </li>
-    <li>
-        <p>filter</p>
-    </li>
-    <li>
-        <p>filter</p>
-    </li>
-    <li>
-        <p>filter</p>
-    </li>
-    <li>
-        <p>filter</p>
-    </li>
-    <li>
-        <p>filter</p>
-    </li>
-    <li>
-        <p>filter</p>
-    </li>
-</ul>
+</div>
