@@ -15,7 +15,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent {
-  searchPlaceholder = `Chercher projet par nom, tags ou nom d'utilisateur`;
+  searchPlaceholder = `Nom de projet, tag ou nom d'utilisateur`;
 
   filters: string[] = [];
   isSortedAsc = true; // State for sort order

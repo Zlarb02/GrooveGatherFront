@@ -3,13 +3,13 @@
         <ul class="active-filters">
             <app-search-bar [placeholder]="searchPlaceholder" class="search_bar"></app-search-bar>
             <li style="--pill-accent: var(--purple);">
-                <p>Rock'n'Roll</p>
+                <p>Rock'n'Roll</p> <i class="gg-close"></i>
             </li>
             <li style="--pill-accent: var(--red);">
-                <p>Guitare</p>
+                <p>Guitare</p><i class="gg-close"></i>
             </li>
             <li style="--pill-accent: var(--green);">
-                <p>Batterie</p>
+                <p>Batterie</p><i class="gg-close"></i>
 
             </li>
             <input type="checkbox" id="more" name="view more active-filters"
@@ -90,27 +90,30 @@
         </ul>
     </form>
     <span class="separation"></span>
-    <div class="choose-filters-title">
-        <h3>
-            Filtrez les projets par: </h3>
-        <br>
-        <br>
+    <div class="choose-filters">
+        <div class="choose-filters-title">
+            <h3>
+                Filtrez les projets </h3>
+            <br>
+            <br>
+        </div>
+        <form id="filters" #filtersForm="ngForm" (ngSubmit)="onSelectFilters(filters)">
+            <div class="filter-select"> Compétence déjà présente dans projet :
+                <input type="text" style="--pill-accent: var(--green);">
+            </div>
+            <span class="separation"></span>
+            <div class="filter-select"> Compétence manquante que vous pouvez proposer :
+                <input type="text" style="--pill-accent: var(--red);">
+            </div>
+            <span class="separation"></span>
+            <div class="filter-select"> Genre musical :
+                <input type="text" style="--pill-accent: var(--purple);">
+            </div>
+        </form>
     </div>
-    <form id="filters" #filtersForm="ngForm" (ngSubmit)="onSelectFilters(filters)">
-        <div class="filter-select"> Compétence déjà présente dans projet :
-            <input type="text" style="--pill-accent: var(--green);">
-        </div>
-        <span class="separation"></span>
-        <div class="filter-select"> Compétence manquante que vous pouvez proposer :
-            <input type="text" style="--pill-accent: var(--red);">
-        </div>
-        <span class="separation"></span>
-        <div class="filter-select"> Genre musical :
-            <input type="text" style="--pill-accent: var(--purple);">
-        </div>
-    </form>
+    <span style="margin-top: 0;" class="separation">
+    </span>
 
-    <span class="separation"></span>
 
     <div *ngIf="projects.length > itemsPerPage" class="projects-pagination">
         <pagination-controls class="page-controls" (pageChange)="p = $event" previousLabel=""
