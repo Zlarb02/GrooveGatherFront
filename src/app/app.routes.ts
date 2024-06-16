@@ -4,6 +4,7 @@ import { SearchComponent } from './pages/search/search.component';
 import { CreateProjectComponent } from './pages/project/create-project/create-project.component';
 import { MessagesComponent } from './pages/messages/messages.component';
 import { NotificationComponent } from './pages/notification/notification.component';
+import { ProjectDetailComponent } from './pages/project/project-detail/project-detail.component';
 
 export const routes: Routes = [
     {
@@ -25,5 +26,13 @@ export const routes: Routes = [
     {
         path: 'messages',
         component: MessagesComponent
+    },
+    {
+        path: 'project/:id',
+        component: ProjectDetailComponent
+    },
+    {
+        path: '**',
+        redirectTo: ''
     }
 ];
