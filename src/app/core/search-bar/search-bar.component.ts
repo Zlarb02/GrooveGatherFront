@@ -10,5 +10,5 @@ import { SearchComponent } from '../../pages/search/search.component';
 })
 export class SearchBarComponent {
   @Input()
-  placeholder: string = "search";
+  placeholder = "search";
 }

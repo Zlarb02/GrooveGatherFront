@@ -125,7 +125,16 @@
 
     <span class="separation"></span>
 
-
-
+    <div *ngIf="projects.length > itemsPerPage" class="projects">
+        <pagination-controls class="page-controls" (pageChange)="p = $event" previousLabel="Precedent"
+            nextLabel="Suivant"></pagination-controls>
+        <div style="display: flex; flex-direction: column;">
+            <app-project-card
+                *ngFor="let project of projects | paginate: { itemsPerPage: itemsPerPage, currentPage: p }"
+                [project]="project"></app-project-card>
+        </div>
+        <pagination-controls class="page-controls" (pageChange)="p = $event" previousLabel="Precedent"
+            nextLabel="Suivant"></pagination-controls>
+    </div>
 
 </div>

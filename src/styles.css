@@ -7,6 +7,27 @@
         "Segoe UI Symbol";
 }
 
+html {
+    overflow: hidden;
+}
+
+.ngx-pagination a {
+    color: var(--color) !important
+}
+
+.current {
+    background-color: var(--orange) !important
+}
+
+.ngx-pagination a:hover {
+    background-color: var(--bg) !important
+}
+
+a {
+    text-decoration: none;
+    color: var(--color)
+}
+
 button,
 input,
 label,
