@@ -1,4 +1,20 @@
-div{
-    background-color: rgb(0, 0, 0);
-    height: 150px;
+.header-container {
+    display: flex;
+
+    background-color: black;
+    padding-bottom: 42px;
 }
+.burger {
+    position: relative;
+    margin-top: 17px;
+    margin-left: 24px;
+  }
+
+
+  .profil {
+    position: relative;
+    right: 0px;
+    margin-top: 8px;
+    margin-left: auto;
+    margin-right: 24px;
+  }

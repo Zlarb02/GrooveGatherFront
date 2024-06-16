@@ -6,9 +6,9 @@ import { FooterComponent } from './core/footer/footer.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, RouterOutlet, FooterComponent],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent],  // Supprimer l'import en double de RouterOutlet
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'GrooveGatherFront';
