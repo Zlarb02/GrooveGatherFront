@@ -1,27 +1,52 @@
-import { Component, type OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject, type OnInit } from '@angular/core';
+// biome-ignore lint/style/useImportType: <explanation>
+import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
+import { ThemeService } from './shared/services/theme.service';
 import { HeaderComponent } from './core/header/header.component';
 import { FooterComponent } from './core/footer/footer.component';
-// biome-ignore lint/style/useImportType: <explanation>
-import { ThemeService } from './shared/services/theme.service';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, HeaderComponent, RouterOutlet, FooterComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css'],
+  imports: [HeaderComponent, RouterOutlet, FooterComponent],
+  standalone: true,
 })
 export class AppComponent implements OnInit {
   title = 'GrooveGatherFront';
+  currentPageTitle = '';
 
-  constructor(private themeService: ThemeService) {
+  themeService = inject(ThemeService)
+
+  constructor(private router: Router) {
     // Appliquer le thème lors de la création du composant
     this.themeService.applyTheme();
+
+    // S'abonner aux événements de navigation du router
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.currentPageTitle = this.router.url;
+        this.definePageTitle(this.currentPageTitle);
+      }
+    });
   }
 
   ngOnInit(): void {
     // Vous pouvez également appliquer le thème ici si nécessaire
     this.themeService.applyTheme();
+  }
+
+  definePageTitle(pageTitle: string) {
+    console.table(`Page changed: ${pageTitle}`);
+    switch (pageTitle) {
+      case '/':
+        this.currentPageTitle = 'GrooveGather';
+        break;
+      case '/search':
+        this.currentPageTitle = 'Rechercher';
+        break;
+      default:
+        this.currentPageTitle = 'GrooveGather';
+    }
   }
 }
