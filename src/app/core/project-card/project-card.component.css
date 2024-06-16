@@ -30,13 +30,13 @@
     padding: 30px 20px;
     overflow: hidden;
     position: relative;
-    border: 1px solid;
+    background-color: var(--bg-inverse);
 }
 
 .ag-courses-item_link:hover,
 .ag-courses-item_link:hover .ag-courses-item_date {
     text-decoration: none;
-    color: var(--color);
+    color: var(--bg);
 }
 
 .ag-courses-item_link:hover .ag-courses-item_bg {
@@ -53,7 +53,7 @@
 
     font-weight: bold;
     font-size: 30px;
-    color: var(--color);
+    color: var(--bg);
 
     z-index: 2;
     position: relative;
@@ -61,7 +61,7 @@
 
 .ag-courses-item_date-box {
     font-size: 18px;
-    color: var(--color);
+    color: var(--bg);
 
     z-index: 2;
     position: relative;

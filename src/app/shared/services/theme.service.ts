@@ -26,7 +26,7 @@ export class ThemeService {
   public applyTheme() {
     const root = document.getElementsByTagName('body')[0];
     if (this.isInverseTheme) {
-      root.style.setProperty('--bg', 'var(--user-inverse-bg)');
+      root.style.setProperty('--bg', 'var( --bg-inverseTheme)');
       root.style.setProperty('--color', 'var(--user-inverse-color)');
     } else {
       root.style.setProperty('--bg', 'var(--user-preferred-bg)');
