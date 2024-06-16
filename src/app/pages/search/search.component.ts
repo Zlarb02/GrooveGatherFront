@@ -1,20 +1,40 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { SearchBarComponent } from '../../core/search-bar/search-bar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ThemeToggleComponent } from '../../core/theme-toggle/theme-toggle.component';
+import { ProjectCardComponent } from '../../core/project-card/project-card.component';
+import { ProjectService } from '../../shared/services/project.service';
+import type { Project } from '../../shared/models/project.model';
+import { CommonModule } from '@angular/common';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [SearchBarComponent, ReactiveFormsModule, FormsModule, ThemeToggleComponent],
+  imports: [SearchBarComponent, ReactiveFormsModule, FormsModule, ProjectCardComponent, CommonModule, NgxPaginationModule],
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent {
   searchPlaceholder = `Chercher projet par nom, tags ou nom d'utilisateur`;
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  filters: any[] = [];
+
+  filters: string[] = [];
   isSortedAsc = true; // State for sort order
+
+  projects: Project[] = [];
+
+  p = 1;
+  itemsPerPage = 5;
+  totalItems: number | undefined;
+
+  projectService = inject(ProjectService);
+
+  ngOnInit(): void {
+    this.projectService.getProjects().subscribe((projects) => {
+      this.projects = projects;
+      this.totalItems = this.projects.length;
+    });
+  }
+
 
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   onSearch(searchForm: any) {
