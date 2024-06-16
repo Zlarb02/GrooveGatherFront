@@ -20,7 +20,7 @@ export class ThemeService {
     this.isInverseTheme = isChecked;
     this.applyTheme();
     // Stocker le thème dans localStorage pour persister entre les sessions
-    //localStorage.setItem('theme', this.isInverseTheme ? 'dark' : 'light');
+    localStorage.setItem('theme', this.isInverseTheme ? 'dark' : 'light');
   }
 
   public applyTheme() {
