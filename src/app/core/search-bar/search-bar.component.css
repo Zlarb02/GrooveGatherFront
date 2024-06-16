@@ -38,7 +38,8 @@
 
 .search__input:hover,
 .search__input:focus {
-    width: 80vw;
+    width: 92vw;
+    translate: -8vw;
     padding: 12px 0;
     outline: 0;
     border: 1px solid transparent;

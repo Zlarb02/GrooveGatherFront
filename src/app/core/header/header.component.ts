@@ -9,5 +9,6 @@ import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+  actualPageTitle = 'GrooveGather';
 
 }

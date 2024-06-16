@@ -1,100 +1,23 @@
 <div ngif="project" class="ag-courses_item">
-    <a href="#" class="ag-courses-item_link">
-        <div class="ag-courses-item_bg"></div>
+    <a [routerLink]="['/project', project!.id]" routerLinkActive="router-link-active" class="ag-courses-item_link">
+        <div class="ag-courses-item_bg" [class.bg-orange]="i % 6 === 0" [class.bg-green]="i % 6 === 1"
+            [class.bg-red]="i % 6 === 2" [class.bg-purple]="i % 6 === 3" [class.bg-pink]="i % 6 === 4"
+            [class.bg-blue]="i % 6 === 5"></div>
 
         <div class="ag-courses-item_title">
             {{project!.name}}
         </div>
         <div class="ag-courses-item_date-box">
-            <h4>{{project!.genre}}</h4><br>
-            <p>{{project!.description}}</p><br>
+            <div
+                style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; width: 100% ">
+                <span>{{project!.genre}}</span>
+                <span class="ag-courses-item_date">
+                    {{project!.date}}
+                </span>
+            </div><br> <br>
+            <u>description</u>: <p>{{project!.description}}</p><br> <br>
+            likes: <span>{{project!.likes}}</span>
 
-            Start:
-            <span class="ag-courses-item_date">
-                {{project!.date}}
-            </span>
         </div>
     </a>
 </div>
-<!-- 
-        <div class="ag-courses_item">
-            <a href="#" class="ag-courses-item_link">
-                <div class="ag-courses-item_bg"></div>
-
-                <div class="ag-courses-item_title">
-                    UX/UI Web-Design&#160;+ Mobile Design
-                </div>
-
-                <div class="ag-courses-item_date-box">
-                    Start:
-                    <span class="ag-courses-item_date">
-                        04.11.2022
-                    </span>
-                </div>
-            </a>
-        </div>
-
-        <div class="ag-courses_item">
-            <a href="#" class="ag-courses-item_link">
-                <div class="ag-courses-item_bg"></div>
-
-                <div class="ag-courses-item_title">
-                    Annual package "Product+UX/UI+Graph designer&#160;2022"
-                </div>
-
-                <div class="ag-courses-item_date-box">
-                    Start:
-                    <span class="ag-courses-item_date">
-                        04.11.2022
-                    </span>
-                </div>
-            </a>
-        </div>
-
-        <div class="ag-courses_item">
-            <a href="#" class="ag-courses-item_link">
-                <div class="ag-courses-item_bg"></div>
-
-                <div class="ag-courses-item_title">
-                    Graphic Design
-                </div>
-
-                <div class="ag-courses-item_date-box">
-                    Start:
-                    <span class="ag-courses-item_date">
-                        04.11.2022
-                    </span>
-                </div>
-            </a>
-        </div>
-
-        <div class="ag-courses_item">
-            <a href="#" class="ag-courses-item_link">
-                <div class="ag-courses-item_bg"></div>
-
-                <div class="ag-courses-item_title">
-                    Motion Design
-                </div>
-
-                <div class="ag-courses-item_date-box">
-                    Start:
-                    <span class="ag-courses-item_date">
-                        30.11.2022
-                    </span>
-                </div>
-            </a>
-        </div>
-
-        <div class="ag-courses_item">
-            <a href="#" class="ag-courses-item_link">
-                <div class="ag-courses-item_bg"></div>
-
-                <div class="ag-courses-item_title">
-                    Front-end development&#160;+ jQuery&#160;+ CMS
-                </div>
-            </a>
-        </div>
-
-
-    </div>
-</div> -->
