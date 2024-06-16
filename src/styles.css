@@ -49,7 +49,8 @@ body {
 }
 
 /* Media queries for user-preferred theme */
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark),
+(prefers-color-scheme: no-preference) {
     body {
         --user-preferred-bg: var(--dark-bg);
         --user-preferred-color: var(--dark-color);
@@ -60,8 +61,7 @@ body {
     }
 }
 
-@media (prefers-color-scheme: light),
-(prefers-color-scheme: no-preference) {
+@media (prefers-color-scheme: light) {
     body {
         --user-preferred-bg: var(--light-bg);
         --user-preferred-color: var(--light-color);
