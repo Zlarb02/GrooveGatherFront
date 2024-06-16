@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
     console.table(`Page changed: ${pageTitle}`);
     switch (pageTitle) {
       case '/':
-        this.currentPageTitle = 'GrooveGather';
+        this.currentPageTitle = '';
         break;
       case '/search':
         this.currentPageTitle = 'Rechercher';
