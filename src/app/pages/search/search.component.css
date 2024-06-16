@@ -191,3 +191,20 @@ select {
     justify-self: center;
     flex-direction: column;
 }
+
+.choose-filters #filters {
+    display: none;
+}
+
+/* Display the form when hovering over the parent div */
+.choose-filters:hover #filters {
+    display: flex;
+}
+
+.active-filters>li>i {
+    display: none;
+}
+
+.active-filters>li:hover>i {
+    display: flex;
+}
