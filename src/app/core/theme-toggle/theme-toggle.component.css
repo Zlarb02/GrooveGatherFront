@@ -8,7 +8,7 @@
     position: relative;
     width: 120px;
     height: 40px;
-    background-color: var(--color);
+    background-color: var(--bg-inverse);
     border-radius: 20px;
     display: inline-block;
     cursor: pointer;
@@ -48,7 +48,7 @@
 
 /* Lorsque la checkbox est cochée */
 #theme-toggle:checked+.toggle-label {
-    background-color: var(--color);
+    background-color: var(--bg-inverse);
 }
 
 #theme-toggle:checked+.toggle-label .sun {

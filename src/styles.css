@@ -126,6 +126,7 @@ body {
 body {
     --bg: var(--user-preferred-bg);
     --color: var(--user-preferred-color);
+    --bg-inverse: lightgrey;
     --orange: #f9b234;
     --green: #3ecd5e;
     --purple: #952aff;
@@ -134,16 +135,6 @@ body {
     --pink: #cd3e94;
     --lines: #575756;
     --placeholder: darkgrey;
-}
-
-/* Apply user-inverse theme when inverse class is present on body */
-body.inverse {
-    --bg-inverse: var(--user-inverse-bg);
-    --color-inverse: var(--user-inverse-color);
-    --orange-inverse: #f9b234;
-    --lines-inverse: #575756;
-    --placeholder-inverse: darkgrey;
-    display: none
 }
 
 /* Transition style */
