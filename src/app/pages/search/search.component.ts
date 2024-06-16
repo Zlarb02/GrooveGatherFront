@@ -28,13 +28,8 @@ export class SearchComponent {
 
   projectService = inject(ProjectService);
 
-  @Output() customEvent = new EventEmitter<string>();
-
-
-
   ngOnInit(): void {
     this.getProjects();
-    this.sendPageNameToParent();
   }
 
   getProjects() {
@@ -42,9 +37,6 @@ export class SearchComponent {
       this.projects = projects;
       this.totalItems = this.projects.length;
     });
-  }
-  sendPageNameToParent() {
-    this.customEvent.emit('Rechercher');
   }
 
 
