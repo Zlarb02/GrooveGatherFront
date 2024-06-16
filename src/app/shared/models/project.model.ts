@@ -3,5 +3,6 @@ export interface Project {
     name: string;
     genre: string;
     description: string;
-    date: Date;
+    date: string;
+    likes: number;
 }

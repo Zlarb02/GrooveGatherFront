@@ -16,7 +16,7 @@ html {
 }
 
 .current {
-    background-color: var(--orange) !important
+    background-color: var(--lines) !important
 }
 
 .ngx-pagination a:hover {
@@ -30,19 +30,32 @@ a {
 
 button,
 input,
+label {
+    border-radius: 2.75rem;
+}
+
+select {
+    border-radius: 0.25rem;
+}
+
+button,
+input,
 label,
 select {
+    --pill-accent: var(--lines);
+    background: color-mix(in srgb, var(--pill-accent) 5%, transparent);
+    transition: background 0.3s ease;
+    border: var(--pill-accent) 1px solid;
     display: flex;
     align-items: center;
     justify-self: center;
-    border: var(--lines) 1px solid;
-    border-radius: 2.75rem;
     padding-inline: 0.75rem;
     padding-block: 0.375rem;
     font-size: 0.875rem;
     font-style: normal;
     font-weight: 500;
     line-height: 1.4rem;
+    height: 30px;
     letter-spacing: -0.00875rem;
     text-decoration: none;
     text-align: center;
@@ -52,19 +65,35 @@ select {
     padding-right: 10px;
 }
 
+button:hover,
+input:hover,
+label:hover,
+select:hover {
+    background: color-mix(in srgb, var(--pill-accent) 20%, transparent);
+}
+
 /* COLORS START BLOCK */
 
 body {
     --light-bg: whitesmoke;
     --light-color: black;
-    --light-orange: #e39d48;
+    --light-orange: #f9b234;
+    --light-green: #3ecd5e;
+    --light-purple: #952aff;
+    --light-blue: #4c49ea;
+    --light-red: #e44002;
+    --light-pink: #cd3e94;
     --light-lines: #575756;
     --light-placeholder: darkgrey;
 
 
     --dark-bg: black;
     --dark-color: whitesmoke;
-    --dark-orange: #e39d48;
+    --dark-orange: #f9b234;
+    --light-green: #3ecd5e;
+    --light-purple: #952aff;
+    --light-blue: #4c49ea;
+    --light-red: #e44002;
     --dark-lines: #575756;
     --dark-placeholder: darkgrey;
 }
@@ -97,7 +126,12 @@ body {
 body {
     --bg: var(--user-preferred-bg);
     --color: var(--user-preferred-color);
-    --orange: #e39d48;
+    --orange: #f9b234;
+    --green: #3ecd5e;
+    --purple: #952aff;
+    --blue: #4c49ea;
+    --red: #e44002;
+    --pink: #cd3e94;
     --lines: #575756;
     --placeholder: darkgrey;
 }
@@ -106,7 +140,7 @@ body {
 body.inverse {
     --bg-inverse: var(--user-inverse-bg);
     --color-inverse: var(--user-inverse-color);
-    --orange-inverse: #e39d48;
+    --orange-inverse: #f9b234;
     --lines-inverse: #575756;
     --placeholder-inverse: darkgrey;
     display: none

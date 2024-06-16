@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
 
 @Component({
@@ -9,5 +9,5 @@ import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-
+  @Input() pageTitle!: string;
 }
