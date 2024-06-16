@@ -1,5 +1,4 @@
 <div id="search_page_container">
-    <span class="separation"></span>
     <form #searchForm="ngForm" (ngSubmit)="onSearch(searchForm)">
         <ul class="active-filters">
             <app-search-bar [placeholder]="searchPlaceholder" class="search_bar"></app-search-bar>
@@ -126,8 +125,16 @@
 
     <span class="separation"></span>
 
-
-    <app-theme-toggle></app-theme-toggle>
-
+    <div *ngIf="projects.length > itemsPerPage" class="projects">
+        <pagination-controls class="page-controls" (pageChange)="p = $event" previousLabel="Precedent"
+            nextLabel="Suivant"></pagination-controls>
+        <div style="display: flex; flex-direction: column;">
+            <app-project-card
+                *ngFor="let project of projects | paginate: { itemsPerPage: itemsPerPage, currentPage: p }"
+                [project]="project"></app-project-card>
+        </div>
+        <pagination-controls class="page-controls" (pageChange)="p = $event" previousLabel="Precedent"
+            nextLabel="Suivant"></pagination-controls>
+    </div>
 
 </div>

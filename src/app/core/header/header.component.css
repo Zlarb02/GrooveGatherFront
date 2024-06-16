@@ -1,4 +1,8 @@
 div {
     background-color: var(--bg);
     height: 15vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 5vw;
 }
