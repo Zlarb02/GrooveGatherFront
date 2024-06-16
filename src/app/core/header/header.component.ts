@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
+import { MenuComponent } from '../menu/menu.component';
+import { ProfileMenuComponent } from '../profile-menu/profile-menu.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [ThemeToggleComponent],
+  imports: [MenuComponent, ProfileMenuComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
