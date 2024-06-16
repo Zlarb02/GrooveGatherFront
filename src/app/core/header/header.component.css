@@ -1,15 +1,3 @@
-/* div {
-    background-color: var(--bg);
-    color: var(--color);
-    height: 15vh;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 5vw;
-    padding: 0 5vw;
-    border-bottom: var(--lines) 1px solid;
-}
- */
 header {
   display: flex;
   align-items: center;
@@ -17,7 +5,9 @@ header {
   background-color: var(--bg);
   color: var(--color);
   height: 15vh;
-  padding: 0 24px 0 12px;
+  width: 98vw;
+  margin-left: 1vw;
+  border-bottom: 1px solid var(--lines);
 }
 
 h2 {
@@ -25,6 +15,3 @@ h2 {
   align-items: center;
   gap: 2rem;
 }
-
-
-/* Add similar styles for other ham classes if needed */
