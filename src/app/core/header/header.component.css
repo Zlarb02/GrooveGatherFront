@@ -10,13 +10,20 @@
     border-bottom: var(--lines) 1px solid;
 }
  */
-header{
+header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: var(--bg);
+  color: var(--color);
   height: 15vh;
-  padding: 10px 24px;
+  padding: 0 24px 0 12px;
+}
+
+h2 {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
 }
 
 

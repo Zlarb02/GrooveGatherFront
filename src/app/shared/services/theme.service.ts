@@ -20,13 +20,13 @@ export class ThemeService {
     this.isInverseTheme = isChecked;
     this.applyTheme();
     // Stocker le thème dans localStorage pour persister entre les sessions
-    localStorage.setItem('theme', this.isInverseTheme ? 'dark' : 'light');
+    //localStorage.setItem('theme', this.isInverseTheme ? 'dark' : 'light');
   }
 
   public applyTheme() {
     const root = document.getElementsByTagName('body')[0];
     if (this.isInverseTheme) {
-      root.style.setProperty('--bg', 'var( --bg-inverseTheme)');
+      root.style.setProperty('--bg', 'var( --user-inverse-bg)');
       root.style.setProperty('--color', 'var(--user-inverse-color)');
     } else {
       root.style.setProperty('--bg', 'var(--user-preferred-bg)');
