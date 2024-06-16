@@ -1,4 +1,4 @@
-div {
+/* div {
     background-color: var(--bg);
     color: var(--color);
     height: 15vh;
@@ -9,3 +9,15 @@ div {
     padding: 0 5vw;
     border-bottom: var(--lines) 1px solid;
 }
+ */
+header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--bg);
+  height: 15vh;
+  padding: 10px 24px;
+}
+
+
+/* Add similar styles for other ham classes if needed */
