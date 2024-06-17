@@ -9,9 +9,4 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 
 export class HomeComponent {
-  @Output() customEvent = new EventEmitter<string>();
-
-  sendPageNameToParent() {
-    this.customEvent.emit('');
-  }
 }

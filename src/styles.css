@@ -83,7 +83,7 @@ body {
     --light-blue: #4c49ea;
     --light-red: #e44002;
     --light-pink: #cd3e94;
-    --light-lines: #575756;
+    --light-lines: #7f7f7f;
     --light-placeholder: darkgrey;
 
 
@@ -94,7 +94,7 @@ body {
     --light-purple: #952aff;
     --light-blue: #4c49ea;
     --light-red: #e44002;
-    --dark-lines: #575756;
+    --dark-lines: #7f7f7f;
     --dark-placeholder: darkgrey;
 }
 
@@ -124,6 +124,9 @@ body {
 
 
 body {
+    height: 100vh;
+    width: 100vw;
+    background-color: var(--bg);
     --bg: var(--user-preferred-bg);
     --color: var(--user-preferred-color);
     --bg-inverse: lightgrey;
@@ -133,7 +136,7 @@ body {
     --blue: #4c49ea;
     --red: #e44002;
     --pink: #cd3e94;
-    --lines: #575756;
+    --lines: #7f7f7f;
     --placeholder: darkgrey;
 }
 
@@ -141,7 +144,6 @@ body {
 * {
     transition: background-color 0.1s, color 0.1s;
 }
-
 
 /* COLORS END BLOCK */
 

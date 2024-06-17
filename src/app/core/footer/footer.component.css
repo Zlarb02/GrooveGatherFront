@@ -1,8 +1,9 @@
 footer {
     position: fixed;
     bottom: 0;
-    width: 100%;
-    border-top: var(--lines) 1px solid;
+    width: 98vw;
+    margin-left: 1vw;
+    border-top: 1px solid var(--lines);
 }
 
 ul {
