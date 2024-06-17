@@ -36,7 +36,7 @@
 .ag-courses-item_link:hover,
 .ag-courses-item_link:hover .ag-courses-item_date {
     text-decoration: none;
-    color: var(--bg);
+    color: black;
 }
 
 .ag-courses-item_link:hover .ag-courses-item_bg {
@@ -53,7 +53,7 @@
 
     font-weight: bold;
     font-size: 30px;
-    color: var(--bg);
+    color: black;
 
     z-index: 2;
     position: relative;
@@ -61,7 +61,7 @@
 
 .ag-courses-item_date-box {
     font-size: 18px;
-    color: var(--bg);
+    color: black;
 
     z-index: 2;
     position: relative;

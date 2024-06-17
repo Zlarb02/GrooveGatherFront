@@ -126,7 +126,7 @@ select {
 }
 
 .separation {
-    width: 90%;
+    width: 96%;
     border-top: 1px solid var(--lines);
     margin: 16px 0;
 }
