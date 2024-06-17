@@ -1,9 +1,9 @@
-name: Deploy Backend to Docker
+name: Deploy Frontend to Docker
 
 on:
   push:
     branches:
-      - "main"
+      - "dev"
   workflow_dispatch:
 
 jobs:
