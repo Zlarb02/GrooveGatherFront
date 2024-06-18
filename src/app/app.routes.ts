@@ -5,6 +5,8 @@ import { CreateProjectComponent } from './pages/project/create-project/create-pr
 import { MessagesComponent } from './pages/messages/messages.component';
 import { NotificationComponent } from './pages/notification/notification.component';
 import { ProjectDetailComponent } from './pages/project/project-detail/project-detail.component';
+import { AuthComponent } from './pages/auth/auth.component';
+import { ProfileComponent } from './pages/user/profile/profile.component';
 
 export const routes: Routes = [
     {
@@ -26,6 +28,18 @@ export const routes: Routes = [
     {
         path: 'messages',
         component: MessagesComponent
+    },
+    {
+        path: 'log-in',
+        component: AuthComponent
+    },
+    {
+        path: 'sign-in',
+        component: AuthComponent
+    },
+    {
+        path: 'profile',
+        component: ProfileComponent
     },
     {
         path: 'project/:id',
