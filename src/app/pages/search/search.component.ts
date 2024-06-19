@@ -23,8 +23,7 @@ import type { Genre } from '../../shared/models/genre';
 export class SearchComponent {
   searchPlaceholder = `Nom de projet, tag ou nom d'utilisateur`;
 
-  filters: (skillName | Genre)[] = ['Guitare 12 cordes', 'Batterie acoustique', 'Basse fretless', 'Pop psychédélique', 'Hip-hop australien'];
-
+  filters: (skillName | Genre)[] = [];
   skillsPossibles = SkillNamesList;
   filteredSkills: string[] = [];
 
@@ -54,6 +53,7 @@ export class SearchComponent {
   ngOnInit(): void {
     this.getProjects();
     this.setupAutocomplete();
+    this.listenFiltersEntries();
   }
 
   getProjects() {
@@ -61,6 +61,47 @@ export class SearchComponent {
       this.projects = projects;
       this.totalItems = this.projects.length;
     });
+  }
+
+  listenFiltersEntries(): void {
+    this.skillControl.valueChanges.subscribe(value => {
+      if (this.filteredSkills.includes(value)) {
+        this.addFilter(value);
+        this.skillControl.reset();
+      }
+    });
+
+    this.genreControl.valueChanges.subscribe(value => {
+      if (this.genres.includes(value)) {
+        this.addFilter(value);
+        this.genreControl.reset();
+      }
+    });
+  }
+
+  onKeydown(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      const skillValue = this.skillControl.value;
+      const genreValue = this.genreControl.value;
+
+      if (skillValue && this.filteredSkills.includes(skillValue)) {
+        this.addFilter(skillValue);
+        this.skillControl.reset();
+      }
+
+      if (genreValue && this.genres.includes(genreValue)) {
+        this.addFilter(genreValue);
+        this.genreControl.reset();
+      }
+
+      event.preventDefault(); // Prevent form submission on Enter
+    }
+  }
+
+  addFilter(filter: skillName | Genre) {
+    if (!this.filters.includes(filter)) {
+      this.filters.push(filter);
+    }
   }
 
   removeFilter(index: number): void {
@@ -88,14 +129,15 @@ export class SearchComponent {
 
 
   private _filterSkills(value: string): string[] {
-    const filterValue = value.toLowerCase();
+    const filterValue = value ? value.toLowerCase() : '';
     return this.skillsPossibles.filter(skill => skill.toLowerCase().includes(filterValue));
   }
 
   private _filterGenres(value: string): string[] {
-    const filterValue = value.toLowerCase();
-    return this.genresPossibles.filter(genre => genre.toLowerCase().includes(filterValue));
+    const filterValue = value ? value.toLowerCase() : '';
+    return this.genres.filter(genre => genre.toLowerCase().includes(filterValue));
   }
+
 
 
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
