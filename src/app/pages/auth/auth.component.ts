@@ -63,7 +63,6 @@ export class AuthComponent implements AfterViewInit {
     if (window.google) {
       window.google.accounts.id.initialize({
         client_id: '674011661072-mvs1hadt0jgppkfv76b5tkeroohqtbij.apps.googleusercontent.com',
-        callback: this.handleCredentialResponse.bind(this),
         auto_select: true,
         itp_support: true
       });
@@ -91,5 +90,9 @@ export class AuthComponent implements AfterViewInit {
     this.authService.setName(data.name);
     this.authService.setEmail(data.email);
     this.authService.setPicture(data.picture);
+  }
+
+  signOut() {
+    this.authService.clearUserData();
   }
 }
