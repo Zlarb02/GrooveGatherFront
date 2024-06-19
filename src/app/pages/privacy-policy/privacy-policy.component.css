@@ -1,0 +1,18 @@
+main {
+    width: 70vw;
+    margin: 5vh auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px var(--bg);
+    background-color: var(--bg-inverse);
+    color: black;
+    font: Arial, sans-serif;
+}
+
+ul {
+    margin: 20px;
+}
+
+p {
+    margin: 10px 0;
+}
