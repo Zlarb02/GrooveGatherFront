@@ -7,6 +7,10 @@
         "Segoe UI Symbol";
 }
 
+:root {
+    --ggs: 1.3;
+}
+
 html {
     overflow: hidden;
 }
@@ -27,6 +31,16 @@ a {
     text-decoration: none;
     color: var(--color)
 }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 400;
+}
+
 
 button,
 input,
@@ -75,27 +89,39 @@ select:hover {
 /* COLORS START BLOCK */
 
 body {
-    --light-bg: whitesmoke;
-    --light-color: black;
-    --light-orange: #f9b234;
-    --light-green: #3ecd5e;
-    --light-purple: #952aff;
-    --light-blue: #4c49ea;
-    --light-red: #e44002;
-    --light-pink: #cd3e94;
+    --light-bg: #f1f3f4;
+    /* Light gray similar to Google apps background */
+    --light-color: #202124;
+    /* Dark gray for text similar to Google apps fonts */
+    --light-orange: #ffcc99;
+    --light-green: #b3e6c1;
+    --light-purple: #e3c3ff;
+    --light-blue: #8ab0f2;
+    --light-red: #ffb3b3;
+    --light-pink: #f8d0e8;
     --light-lines: #7f7f7f;
     --light-placeholder: darkgrey;
 
-
-    --dark-bg: black;
-    --dark-color: whitesmoke;
-    --dark-orange: #f9b234;
-    --light-green: #3ecd5e;
-    --light-purple: #952aff;
-    --light-blue: #4c49ea;
-    --light-red: #e44002;
-    --dark-lines: #7f7f7f;
-    --dark-placeholder: darkgrey;
+    --dark-bg: #121212;
+    /* Gris très foncé */
+    --dark-color: #e0e0e0;
+    /* Gris clair pour le texte */
+    --dark-orange: #ffa726;
+    /* Orange vif */
+    --dark-green: #66bb6a;
+    /* Vert vif */
+    --dark-purple: #ab47bc;
+    /* Violet vif */
+    --dark-blue: #42a5f5;
+    /* Bleu vif */
+    --dark-red: #ef5350;
+    /* Rouge vif */
+    --dark-pink: #ec407a;
+    /* Rose vif */
+    --dark-lines: #555555;
+    /* Gris pour les lignes */
+    --dark-placeholder: #757575;
+    /* Gris pour les placeholders */
 }
 
 /* Media queries for user-preferred theme */
