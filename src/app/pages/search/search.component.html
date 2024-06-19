@@ -3,18 +3,19 @@
         <app-search-bar [placeholder]="searchPlaceholder"></app-search-bar>
         <ul class="active-filters">
             <ng-container *ngFor="let filter of filters; let i = index">
-                <li *ngIf="i < 3 || showMore">
-                    <p>{{ filter }}</p>
+                <li *ngIf="i < 3 || showMore" [ngClass]="filter.class">
+                    <p>{{ filter.value }}</p>
                     <i class="gg-close" style="transform: scale(0.85);" (click)="removeFilter(i)"></i>
                 </li>
                 <li *ngIf="i === 3 && !showMore" (click)="showMore = true">
                     Afficher plus
                 </li>
-                <li *ngIf="i === filters.length -1 && showMore" (click)="showMore = false">
+                <li *ngIf="i === filters.length - 1 && showMore" (click)="showMore = false">
                     Afficher moins
                 </li>
             </ng-container>
         </ul>
+
 
 
     </form>
@@ -28,7 +29,7 @@
         </div>
         <form id="filters" #filtersForm="ngForm" (ngSubmit)="onSelectFilters(filters)">
             <div class="filter-select"> Compétence déjà présente dans le projet :
-                <input type="text" style="--pill-accent: var(--green);" [formControl]="skillControl"
+                <input type="text" style="--pill-accent: var(--green);" [formControl]="skillControlPresent"
                     [matAutocomplete]="autoSkill" (keydown)="onKeydown($event)">
                 <mat-autocomplete #autoSkill="matAutocomplete">
                     <mat-option *ngFor="let skill of filteredSkills" [value]="skill">
@@ -38,7 +39,7 @@
             </div>
             <span class="separation"></span>
             <div class="filter-select"> Compétence manquante que vous pouvez proposer :
-                <input type="text" style="--pill-accent: var(--red);" [formControl]="skillControl"
+                <input type="text" style="--pill-accent: var(--red);" [formControl]="skillControlMissing"
                     [matAutocomplete]="autoSkill" (keydown)="onKeydown($event)">
                 <mat-autocomplete #autoSkill="matAutocomplete">
                     <mat-option *ngFor="let skill of filteredSkills" [value]="skill">

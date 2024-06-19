@@ -53,6 +53,19 @@
     margin: 0 8px 8px 0;
 }
 
+.filter-skill-present {
+    --pill-accent: var(--green) !important;
+}
+
+.filter-skill-missing {
+    --pill-accent: var(--red) !important;
+}
+
+.filter-genre {
+    --pill-accent: var(--purple) !important;
+}
+
+
 .active-filters>li:hover {
     background: color-mix(in srgb, var(--pill-accent) 20%, transparent);
 }
