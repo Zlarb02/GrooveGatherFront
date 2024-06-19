@@ -5,6 +5,7 @@ main {
     border-radius: 8px;
     box-shadow: 0 0 10px var(--bg);
     background-color: var(--bg-inverse);
+    color: black;
 }
 
 h1 {
