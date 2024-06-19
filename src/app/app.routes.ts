@@ -7,6 +7,7 @@ import { NotificationComponent } from './pages/notification/notification.compone
 import { ProjectDetailComponent } from './pages/project/project-detail/project-detail.component';
 import { AuthComponent } from './pages/auth/auth.component';
 import { ProfileComponent } from './pages/user/profile/profile.component';
+import { BestPracticesComponent } from './pages/best-practices/best-practices.component';
 
 export const routes: Routes = [
     {
@@ -44,6 +45,10 @@ export const routes: Routes = [
     {
         path: 'project/:id',
         component: ProjectDetailComponent
+    },
+    {
+        path: 'best-practices',
+        component: BestPracticesComponent,
     },
     {
         path: '**',
