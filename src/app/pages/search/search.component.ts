@@ -13,6 +13,11 @@ import { map, startWith } from 'rxjs';
 import { genresList } from '../../shared/models/genres-list';
 import type { Genre } from '../../shared/models/genre';
 
+interface Filter {
+  value: skillName | Genre;
+  class: string;
+}
+
 @Component({
   selector: 'app-search',
   standalone: true,
@@ -23,7 +28,7 @@ import type { Genre } from '../../shared/models/genre';
 export class SearchComponent {
   searchPlaceholder = `Nom de projet, tag ou nom d'utilisateur`;
 
-  filters: (skillName | Genre)[] = [];
+  filters: Filter[] = [];
   skillsPossibles = SkillNamesList;
   filteredSkills: string[] = [];
 
@@ -44,7 +49,8 @@ export class SearchComponent {
   totalItems: number | undefined;
 
   // Ajout des contrôles de formulaire pour l'autocomplétion
-  skillControl = new FormControl();
+  skillControlPresent = new FormControl();
+  skillControlMissing = new FormControl();
   genreControl = new FormControl();
 
   projectService = inject(ProjectService);
@@ -64,16 +70,23 @@ export class SearchComponent {
   }
 
   listenFiltersEntries(): void {
-    this.skillControl.valueChanges.subscribe(value => {
+    this.skillControlPresent.valueChanges.subscribe(value => {
       if (this.filteredSkills.includes(value)) {
-        this.addFilter(value);
-        this.skillControl.reset();
+        this.addFilter(value, 'skillPresent');
+        this.skillControlPresent.reset();
+      }
+    });
+
+    this.skillControlMissing.valueChanges.subscribe(value => {
+      if (this.filteredSkills.includes(value)) {
+        this.addFilter(value, 'skillMissing');
+        this.skillControlMissing.reset();
       }
     });
 
     this.genreControl.valueChanges.subscribe(value => {
       if (this.genres.includes(value)) {
-        this.addFilter(value);
+        this.addFilter(value, 'genre');
         this.genreControl.reset();
       }
     });
@@ -81,16 +94,22 @@ export class SearchComponent {
 
   onKeydown(event: KeyboardEvent) {
     if (event.key === 'Enter') {
-      const skillValue = this.skillControl.value;
+      const skillPresentValue = this.skillControlPresent.value;
+      const skillMissingValue = this.skillControlMissing.value;
       const genreValue = this.genreControl.value;
 
-      if (skillValue && this.filteredSkills.includes(skillValue)) {
-        this.addFilter(skillValue);
-        this.skillControl.reset();
+      if (skillPresentValue && this.filteredSkills.includes(skillPresentValue)) {
+        this.addFilter(skillPresentValue, 'skillPresent');
+        this.skillControlPresent.reset();
+      }
+
+      if (skillMissingValue && this.filteredSkills.includes(skillMissingValue)) {
+        this.addFilter(skillMissingValue, 'skillMissing');
+        this.skillControlMissing.reset();
       }
 
       if (genreValue && this.genres.includes(genreValue)) {
-        this.addFilter(genreValue);
+        this.addFilter(genreValue, 'genre');
         this.genreControl.reset();
       }
 
@@ -98,8 +117,17 @@ export class SearchComponent {
     }
   }
 
-  addFilter(filter: skillName | Genre) {
-    if (!this.filters.includes(filter)) {
+
+  addFilter(value: skillName | Genre, type: 'skillPresent' | 'skillMissing' | 'genre') {
+    const filterClass = {
+      skillPresent: 'filter-skill-present',
+      skillMissing: 'filter-skill-missing',
+      genre: 'filter-genre'
+    }[type];
+
+    const filter: Filter = { value, class: filterClass };
+
+    if (!this.filters.some(f => f.value === value && f.class === filterClass)) {
       this.filters.push(filter);
     }
   }
@@ -110,7 +138,15 @@ export class SearchComponent {
   }
 
   setupAutocomplete(): void {
-    this.skillControl.valueChanges
+    this.skillControlPresent.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filterSkills(value))
+      )
+      // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
+      .subscribe(skills => this.filteredSkills = skills);
+
+    this.skillControlMissing.valueChanges
       .pipe(
         startWith(''),
         map(value => this._filterSkills(value))
@@ -126,6 +162,7 @@ export class SearchComponent {
       // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
       .subscribe(genres => this.filteredGenres = genres);
   }
+
 
 
   private _filterSkills(value: string): string[] {
