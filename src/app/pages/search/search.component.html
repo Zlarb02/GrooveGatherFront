@@ -1,93 +1,22 @@
 <div id="search_page_container">
     <form #searchForm="ngForm" (ngSubmit)="onSearch(searchForm)">
+        <app-search-bar [placeholder]="searchPlaceholder"></app-search-bar>
         <ul class="active-filters">
-            <app-search-bar [placeholder]="searchPlaceholder" class="search_bar"></app-search-bar>
-            <li style="--pill-accent: var(--purple);">
-                <p>Rock'n'Roll</p> <i class="gg-close"></i>
-            </li>
-            <li style="--pill-accent: var(--red);">
-                <p>Guitare</p><i class="gg-close"></i>
-            </li>
-            <li style="--pill-accent: var(--green);">
-                <p>Batterie</p><i class="gg-close"></i>
-
-            </li>
-            <input type="checkbox" id="more" name="view more active-filters"
-                class="active-filters__more-checkbox" /><label class="active-filters__more-label"
-                for="more"><span>Afficher filtres actifs
-                    <svg width="18" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129"
-                        xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 129 129">
-                        <g>
-                            <path fill="var(--color)"
-                                d="m121.3,34.6c-1.6-1.6-4.2-1.6-5.8,0l-51,51.1-51.1-51.1c-1.6-1.6-4.2-1.6-5.8,0-1.6,1.6-1.6,4.2 0,5.8l53.9,53.9c0.8,0.8 1.8,1.2 2.9,1.2 1,0 2.1-0.4 2.9-1.2l53.9-53.9c1.7-1.6 1.7-4.2 0.1-5.8z">
-                            </path>
-                        </g>
-                    </svg></span></label>
-            <input type="checkbox" id="less" name="view more active-filters"
-                class="active-filters__less-checkbox" /><label class="active-filters__less-label"
-                for="more"><span>Masquer filtres actifs
-                    <svg width="18" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129"
-                        xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 129 129">
-                        <g>
-                            <path fill="var(--color)" d="M7.7,94.4c1.6,1.6,4.2,1.6,5.8,0l51-51.1,51.1,51.1c1.6,1.6,4.2,1.6,5.8,0c1.6-1.6,1.6-4.2,0-5.8l-53.9-53.9
-            c-0.8-0.8-1.8-1.2-2.9-1.2s-2.1,0.4-2.9,1.2L7.7,88.6C6,90.2,6,92.8,7.7,94.4z">
-                            </path>
-                        </g>
-                    </svg>
-                </span></label>
-            <li>
-                <p>filter</p>
-
-            </li>
-
-            <li>
-                <p>filter</p>
-
-            </li>
-            <li>
-                <p>filter</p>
-
-            </li>
-            <li>
-                <p>filter</p>
-            </li>
-            <li>
-                <p>filter</p>
-            </li>
-            <li>
-                <p>filter</p>
-            </li>
-            <li>
-                <p>filter</p>
-            </li>
-            <li>
-                <p>filter</p>
-            </li>
-            <li>
-                <p>filter</p>
-            </li>
-            <li>
-                <p>filter</p>
-            </li>
-            <li>
-                <p>filter</p>
-            </li>
-            <li>
-                <p>filter</p>
-            </li>
-            <li>
-                <p>filter</p>
-            </li>
-            <li>
-                <p>filter</p>
-            </li>
-            <li>
-                <p>filter</p>
-            </li>
-            <li>
-                <p>filter</p>
-            </li>
+            <ng-container *ngFor="let filter of filters; let i = index">
+                <li *ngIf="i < 3 || showMore">
+                    <p>{{ filter }}</p>
+                    <i class="gg-close" style="transform: scale(0.85);" (click)="removeFilter(i)"></i>
+                </li>
+                <li *ngIf="i === 3 && !showMore" (click)="showMore = true">
+                    Afficher plus
+                </li>
+                <li *ngIf="i === filters.length -1 && showMore" (click)="showMore = false">
+                    Afficher moins
+                </li>
+            </ng-container>
         </ul>
+
+
     </form>
     <span class="separation"></span>
     <div class="choose-filters">
@@ -98,16 +27,34 @@
             <br>
         </div>
         <form id="filters" #filtersForm="ngForm" (ngSubmit)="onSelectFilters(filters)">
-            <div class="filter-select"> Compétence déjà présente dans projet :
-                <input type="text" style="--pill-accent: var(--green);">
+            <div class="filter-select"> Compétence déjà présente dans le projet :
+                <input type="text" style="--pill-accent: var(--green);" [formControl]="skillControl"
+                    [matAutocomplete]="autoSkill">
+                <mat-autocomplete #autoSkill="matAutocomplete">
+                    <mat-option *ngFor="let skill of filteredSkills" [value]="skill">
+                        {{skill}}
+                    </mat-option>
+                </mat-autocomplete>
             </div>
             <span class="separation"></span>
             <div class="filter-select"> Compétence manquante que vous pouvez proposer :
-                <input type="text" style="--pill-accent: var(--red);">
+                <input type="text" style="--pill-accent: var(--red);" [formControl]="skillControl"
+                    [matAutocomplete]="autoSkill">
+                <mat-autocomplete #autoSkill="matAutocomplete">
+                    <mat-option *ngFor="let skill of filteredSkills" [value]="skill">
+                        {{skill}}
+                    </mat-option>
+                </mat-autocomplete>
             </div>
             <span class="separation"></span>
             <div class="filter-select"> Genre musical :
-                <input type="text" style="--pill-accent: var(--purple);">
+                <input type="text" style="--pill-accent: var(--purple);" [formControl]="genreControl"
+                    [matAutocomplete]="autoGenre">
+                <mat-autocomplete #autoGenre="matAutocomplete">
+                    <mat-option *ngFor="let genre of genres" [value]="genre">
+                        {{genre}}
+                    </mat-option>
+                </mat-autocomplete>
             </div>
         </form>
     </div>
