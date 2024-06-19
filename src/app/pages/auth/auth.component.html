@@ -1,8 +1,18 @@
-<div id="g_id_onload" data-client_id="674011661072-mvs1hadt0jgppkfv76b5tkeroohqtbij.apps.googleusercontent.com"
-    data-context="signin" data-ux_mode="popup" data-login_uri="https://reqres.in/api/posts" data-auto_select="true"
-    data-itp_support="true">
-</div>
+<div style="display: flex; align-items: center; justify-content: center;">
+    <div *ngIf="!name" style="margin-top: 30vh;">
+        <div id="g_id_onload" data-client_id="674011661072-mvs1hadt0jgppkfv76b5tkeroohqtbij.apps.googleusercontent.com"
+            data-context="signin" data-ux_mode="popup" data-login_uri="https://gg.olprog-a.fr/profile"
+            data-callback="handleCredentialResponse()" data-auto_select="true" data-itp_support="true">
+        </div>
 
-<div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="outline" data-text="signin_with"
-    data-size="large" data-logo_alignment="left">
+        <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="outline" data-text="signin_with"
+            data-size="large" data-logo_alignment="left">
+        </div>
+    </div>
+
+    <div *ngIf="name">
+        <p>Bonjour, {{ name }} !</p>
+        <p>Votre email est : {{ email }}</p>
+        <img [src]="picture" alt="Photo de {{ name }}" />
+    </div>
 </div>

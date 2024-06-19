@@ -16,6 +16,8 @@ export class AppComponent implements OnInit {
   title = 'GrooveGatherFront';
   currentPageTitle = '';
 
+  userIsConnected = false;
+
   themeService = inject(ThemeService)
 
   constructor(private router: Router) {
