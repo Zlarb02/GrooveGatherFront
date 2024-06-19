@@ -63,7 +63,13 @@
     </span>
 
 
-    <div *ngIf="projects.length > itemsPerPage" class="projects-pagination">
+    <div *ngIf="!projects.length" class="load">
+        <hr />
+        <hr />
+        <hr />
+        <hr />
+    </div>
+    <div *ngIf="projects.length" class="projects-pagination">
         <pagination-controls class="page-controls" (pageChange)="p = $event" previousLabel=""
             nextLabel=""></pagination-controls>
         <div style="display: flex; flex-direction: row; gap:0.3rem; align-items: center; justify-content: center;">

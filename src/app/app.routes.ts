@@ -8,6 +8,7 @@ import { ProjectDetailComponent } from './pages/project/project-detail/project-d
 import { AuthComponent } from './pages/auth/auth.component';
 import { ProfileComponent } from './pages/user/profile/profile.component';
 import { BestPracticesComponent } from './pages/best-practices/best-practices.component';
+import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
 
 export const routes: Routes = [
     {
@@ -49,6 +50,10 @@ export const routes: Routes = [
     {
         path: 'best-practices',
         component: BestPracticesComponent,
+    },
+    {
+        path: 'privacy-policy',
+        component: PrivacyPolicyComponent,
     },
     {
         path: '**',
