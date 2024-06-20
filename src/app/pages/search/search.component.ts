@@ -128,7 +128,7 @@ export class SearchComponent {
     const filter: Filter = { value, class: filterClass };
 
     if (!this.filters.some(f => f.value === value && f.class === filterClass)) {
-      this.filters.push(filter);
+      this.filters.unshift(filter);
     }
   }
 
