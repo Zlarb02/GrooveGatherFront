@@ -16,8 +16,16 @@ h2 {
   gap: 2rem;
 }
 
+.search-bar {
+  display: none;
+}
+
 @media (min-width: 1025px) {
   header {
     border: none;
+  }
+
+  .search-bar {
+    display: flex;
   }
 }

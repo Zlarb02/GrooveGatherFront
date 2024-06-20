@@ -1,4 +1,4 @@
-/* search-bar.component.scss */
+/* search-bar.component.css */
 .search__container {
     padding-top: 8px;
     margin-left: 9%;
@@ -38,7 +38,7 @@
 
 .search__input:hover,
 .search__input:focus {
-    width: 92vw;
+    width: 60vw;
     translate: -8vw;
     padding: 12px 0;
     outline: 0;

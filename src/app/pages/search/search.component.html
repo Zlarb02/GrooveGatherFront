@@ -1,6 +1,8 @@
 <div id="search_page_container">
     <form #searchForm="ngForm" (ngSubmit)="onSearch(searchForm)">
-        <app-search-bar [placeholder]="searchPlaceholder"></app-search-bar>
+        <div class="search__container">
+            <input class="search__input" type="text" placeholder="placeholder">
+        </div>
         <ul class="active-filters">
             <ng-container *ngFor="let filter of filters; let i = index">
                 <li *ngIf="i < 3 || showMore" [ngClass]="filter.class">
