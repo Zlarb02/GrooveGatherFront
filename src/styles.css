@@ -478,15 +478,15 @@ body {
 .gg-profile::before {
     display: block;
     box-sizing: border-box;
-    border: 2px solid;
+    border: 1px solid;
     border-radius: 100px
 }
 
 .gg-profile {
     overflow: hidden;
     transform: scale(var(--ggs, 1));
-    width: 22px;
-    height: 22px;
+    width: 21px;
+    height: 21px;
     position: relative
 }
 
