@@ -1,52 +1,76 @@
-
 .burger {
-    cursor: pointer;
-  }
-  
-  .burger svg {
-    height: 44px;
-    width: 44px;
-  }
-  
-  
-  
-  .ham {
-    -webkit-tap-highlight-color: transparent;
-    transition: transform 400ms;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
-  
-  .hamRotate.active {
-    transform: rotate(45deg);
-  }
-  
-  .hamRotate180.active {
-    transform: rotate(180deg);
-  }
-  
-  .line {
-    fill: none;
-    transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
-    stroke: var(--color);
-    stroke-width: 5.5;
-    stroke-linecap: round;
-  }
-  
-  .ham1 .top {
-    stroke-dasharray: 40 139;
-  }
-  
-  .ham1 .bottom {
-    stroke-dasharray: 40 180;
-  }
-  
-  .ham1.active .top {
-    stroke-dashoffset: -98px;
-  }
-  
-  .ham1.active .bottom {
-    stroke-dashoffset: -138px;
-  }
+  cursor: pointer;
+  z-index: 11;
+}
+
+.burger svg {
+  height: 44px;
+  width: 44px;
+}
+
+.ham {
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 400ms;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.hamRotate.active {
+  transform: rotate(45deg);
+}
+
+.hamRotate180.active {
+  transform: rotate(180deg);
+}
+
+.line {
+  fill: none;
+  transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+  stroke: var(--color);
+  stroke-width: 5.5;
+  stroke-linecap: round;
+}
+
+.ham1 .top {
+  stroke-dasharray: 40 139;
+}
+
+.ham1 .bottom {
+  stroke-dasharray: 40 180;
+}
+
+.ham1.active .top {
+  stroke-dashoffset: -98px;
+}
+
+.ham1.active .bottom {
+  stroke-dashoffset: -138px;
+}
+
+/* Style initial de la div à afficher/cacher */
+nav {
+  top: 8vh;
+  color:black;
+  font-size:larger;
+  position: fixed;
+  background-color: lightgrey;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 5px;
+  transition: opacity 0.3s ease-in-out;
+  opacity: 0;  
+  display:none;
+  li{
+    height:15vh;
+    list-style: none;
+    }
+}
+
+/* Lorsque le SVG a la classe active, change l'opacité de la div pour la rendre visible */
+.burger .ham.active ~ nav{
+  opacity: 1;
+  display: block;
+}
+
