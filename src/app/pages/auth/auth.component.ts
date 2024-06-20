@@ -56,6 +56,10 @@ export class AuthComponent implements AfterViewInit {
     script.onload = () => {
       this.renderButton();
     };
+    script.onerror = () => {
+      console.error('Failed to load the Google script. Retrying...');
+      setTimeout(() => this.initializeGoogleSignIn(), 3000); // Retry after 3 seconds
+    };
     document.head.appendChild(script);
   }
 
@@ -64,7 +68,9 @@ export class AuthComponent implements AfterViewInit {
       window.google.accounts.id.initialize({
         client_id: '674011661072-mvs1hadt0jgppkfv76b5tkeroohqtbij.apps.googleusercontent.com',
         auto_select: true,
-        itp_support: true
+        itp_support: true,
+        login_uri: "/profile",
+        callback: (response: any) => this.handleCredentialResponse(response),
       });
 
       window.google.accounts.id.renderButton(
@@ -79,7 +85,8 @@ export class AuthComponent implements AfterViewInit {
         }
       );
     } else {
-      console.error('Google script not loaded.');
+      console.error('Google script not loaded. Retrying...');
+      setTimeout(() => this.renderButton(), 3000); // Retry after 3 seconds
     }
   }
 
@@ -91,7 +98,6 @@ export class AuthComponent implements AfterViewInit {
     this.authService.setEmail(data.email);
     this.authService.setPicture(data.picture);
   }
-
   signOut() {
     this.authService.clearUserData();
   }
