@@ -14,7 +14,7 @@
   cursor: pointer;
   border: none;
   padding: 1px 6px;
-  z-index: 4 !important;
+  z-index: 4;
 }
 
 .dropdown-profile-menu .dropdown {
@@ -61,7 +61,6 @@
   animation: showMenu .5s forwards;
 
   position: relative;
-  z-index: 3 !important;
 }
 
 #toggle-menu:checked~.dropdown li:first-child {

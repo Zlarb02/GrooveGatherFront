@@ -83,7 +83,6 @@ nav {
   display: flex;
   position: absolute;
   height: fit-content;
-  z-index: 3 !important;
   opacity: 1;
   transition: opacity 2s ease-in-out;
 
