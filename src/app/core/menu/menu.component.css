@@ -58,15 +58,13 @@ path {
 
 /* Style initial de la div à afficher/cacher */
 nav {
-  top: 2vh;
-  color: black;
+  top: 1.8vh;
+  color: var(--bg-inverse);
   font-size: large;
-  background-color: var(--orange);
-  padding: 20px;
+  background-color: var(--purple);
   margin-top: 20px;
   border-radius: 8px;
   display: none;
-  margin-left: -1vw;
   opacity: 0;
   transition: opacity 2s ease-in-out;
 
@@ -74,6 +72,9 @@ nav {
     height: 9.5vh;
     padding: 0 20px;
     list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
@@ -81,11 +82,18 @@ nav {
 .burger .ham.active~nav {
   display: flex;
   position: absolute;
-  z-index: 3 !important;
+  height: fit-content;
   opacity: 1;
   transition: opacity 2s ease-in-out;
+
 }
 
 .burger .ham.active .line {
-  stroke: black;
+  stroke: var(--bg-inverse);
+}
+
+li:hover {
+
+  background-color: var(--blue);
+  color: var(--green);
 }
