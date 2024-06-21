@@ -9,4 +9,5 @@
     color: var(--color);
     overflow: scroll;
     overflow-x: hidden;
+    z-index: 2 !important;
 }
