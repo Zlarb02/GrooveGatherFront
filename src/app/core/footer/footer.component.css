@@ -1,8 +1,8 @@
 footer {
     position: fixed;
     bottom: 0;
-    width: 98vw;
-    margin-left: 1vw;
+    width: 95vw;
+    margin-left: 2.5vw;
     border-top: 1px solid var(--lines);
     z-index: 10;
 }

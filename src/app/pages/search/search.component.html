@@ -3,7 +3,7 @@
         <div class="search__container">
             <input class="search__input" type="text" placeholder="placeholder">
         </div>
-        <ul class="active-filters">
+        <ul *ngIf="filters.length > 0" class="active-filters">
             <ng-container *ngFor="let filter of filters; let i = index">
                 <li *ngIf="i < 3 || showMore" [ngClass]="filter.class">
                     <p>{{ filter.value }}</p>
@@ -24,12 +24,14 @@
     <span class="separation"></span>
     <div class="choose-filters">
         <div class="choose-filters-title">
-            <h3>
-                Filtrez les projets </h3>
+            <h3 style="display: flex; width: 100%; justify-content: space-between;">
+                <p style="margin-left: 22vw">Filtrez</p>
+            </h3>
             <br>
             <br>
         </div>
         <form id="filters" #filtersForm="ngForm" (ngSubmit)="onSelectFilters(filters)">
+
             <div class="filter-select"> Compétence déjà présente dans le projet :
                 <input type="text" style="--pill-accent: var(--green);" [formControl]="skillControlPresent"
                     [matAutocomplete]="autoSkill" (keydown)="onKeydown($event)">
@@ -39,17 +41,6 @@
                     </mat-option>
                 </mat-autocomplete>
             </div>
-            <span class="separation"></span>
-            <div class="filter-select"> Compétence manquante que vous pouvez proposer :
-                <input type="text" style="--pill-accent: var(--red);" [formControl]="skillControlMissing"
-                    [matAutocomplete]="autoSkill" (keydown)="onKeydown($event)">
-                <mat-autocomplete #autoSkill="matAutocomplete">
-                    <mat-option *ngFor="let skill of filteredSkills" [value]="skill">
-                        {{skill}}
-                    </mat-option>
-                </mat-autocomplete>
-            </div>
-            <span class="separation"></span>
             <div class="filter-select"> Genre musical :
                 <input type="text" style="--pill-accent: var(--purple);" [formControl]="genreControl"
                     [matAutocomplete]="autoGenre" (keydown)="onKeydown($event)">
@@ -59,6 +50,16 @@
                     </mat-option>
                 </mat-autocomplete>
             </div>
+            <div class="filter-select"> Compétence manquante, à vous de jouer :
+                <input type="text" style="--pill-accent: var(--red);" [formControl]="skillControlMissing"
+                    [matAutocomplete]="autoSkill" (keydown)="onKeydown($event)">
+                <mat-autocomplete #autoSkill="matAutocomplete">
+                    <mat-option *ngFor="let skill of filteredSkills" [value]="skill">
+                        {{skill}}
+                    </mat-option>
+                </mat-autocomplete>
+            </div>
+
         </form>
     </div>
     <span style="margin-top: 0;" class="separation">
@@ -71,95 +72,65 @@
         <hr />
         <hr />
     </div>
-    <div style="display: flex; width: 100vw; flex-direction: row; align-items: center; justify-content: space-between;">
-        <div
-            style="display: flex; width: 100vw; flex-direction: row; gap:0.3rem; align-items: center; justify-content: start; margin: 0 4vw;">
-            Trier:
-            <select name="sort" id="sort" [(ngModel)]="sortOption" (change)="toggleSort()">
-                <option value="date">Date</option>
-                <option value="popularity">Popularité</option>
-            </select>
-            <button class="sortBy" (click)="toggleSort()">
-                <i class="gg-arrows-exchange-v sort-icon" [class.rotated]="isSortedAsc"></i>
-            </button>
-        </div>
-        <div
-            style="display: flex; width: 100vw; flex-direction: row; gap:0.3rem; align-items: center; justify-content: end; margin: 0 4vw;">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            Par page:
-            <select name="itemsPerPage" id="itemsPerPage" [(ngModel)]="itemsPerPage" (change)="toggleSort()">
-                <option value=1>1</option>
-                <option value=2>2</option>
-                <option value=3>3</option>
-                <option value=4>4</option>
-                <option value=5>5</option>
-                <option value=6>6</option>
-                <option value=7>7</option>
-                <option value=8>8</option>
-                <option value=9>9</option>
-                <option value=10>10</option>
-                <option value=11>11</option>
-                <option value=12>12</option>
-                <option value=13>13</option>
-                <option value=14>14</option>
-                <option value=15>15</option>
-                <option value=20>20</option>
-                <option value=25>25</option>
-                <option value=30>30</option>
-                <option value=40>40</option>
-                <option value=50>50</option>
-                <option value=100>100</option>
-            </select>
-        </div>
-    </div>
     <div *ngIf="projects.length" class="projects-pagination">
 
+        <div
+            style="display: flex; width: 100vw; flex-direction: row; align-items: center; justify-content: space-between;">
+            <div
+                style="display: flex; width: 100vw; flex-direction: row; gap:0.3rem; align-items: center; justify-content: start; margin: 0 4vw;">
+                Triez Par:
+                <select name="sort" id="sort" [(ngModel)]="sortOption" (change)="toggleSort()">
+                    <option value="date">Date</option>
+                    <option value="popularity">Popularité</option>
+                </select>
+                <button class="sortBy" (click)="toggleSort()">
+                    <i class="gg-arrows-exchange-v sort-icon" [class.rotated]="isSortedAsc"></i>
+                </button>
+            </div>
+            <div
+                style="display: flex; width: 100vw; flex-direction: row; gap:0.3rem; align-items: center; justify-content: end; margin: 0 4vw;">
+                &nbsp;&nbsp;&nbsp;
+                <select name="itemsPerPage" id="itemsPerPage" [(ngModel)]="itemsPerPage" (change)="toggleSort()">
+                    <option value=1>1</option>
+                    <option value=2>2</option>
+                    <option value=3>3</option>
+                    <option value=4>4</option>
+                    <option value=5>5</option>
+                    <option value=6>6</option>
+                    <option value=7>7</option>
+                    <option value=8>8</option>
+                    <option value=9>9</option>
+                    <option value=10>10</option>
+                    <option value=11>11</option>
+                    <option value=12>12</option>
+                    <option value=13>13</option>
+                    <option value=14>14</option>
+                    <option value=15>15</option>
+                    <option value=20>20</option>
+                    <option value=25>25</option>
+                    <option value=30>30</option>
+                    <option value=40>40</option>
+                    <option value=50>50</option>
+                    <option value=100>100</option>
+                </select>
+                <span class="sortBy" style="height: 30px;
+    border-radius: 0 1rem 1rem 0; border-left: none; border-top: none; font-size: 14px; line-height: 14px;">par
+                    page</span>
+
+            </div>
+        </div>
+
         <br>
-        <div class="projects-container" style="display: flex; flex-direction: column;">
-            <app-project-card
+        <div class="projects-container">
+            <app-project-card class="project-card"
                 *ngFor="let project of projects | paginate: { itemsPerPage: itemsPerPage, currentPage: p }; index as i"
                 [project]="project" [i]="i" [class.bg-orange]="i % 6 === 0" [class.bg-green]="i % 6 === 1"
                 [class.bg-red]="i % 6 === 2" [class.bg-purple]="i % 6 === 3" [class.bg-pink]="i % 6 === 4"
                 [class.bg-blue]="i % 6 === 5"></app-project-card>
         </div>
-        <div style="display: flex; flex-direction: row; gap:0.3rem; align-items: center; justify-content: center;">
-            Trier:
-            <select name="sort" id="sort" [(ngModel)]="sortOption" (change)="toggleSort()">
-                <option value="date">Date</option>
-                <option value="popularity">Popularité</option>
-            </select>
-            <button class="sortBy" (click)="toggleSort()">
-                <i class="gg-arrows-exchange-v sort-icon" [class.rotated]="isSortedAsc"></i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            Par page:
-            <select name="itemsPerPage" id="itemsPerPage" [(ngModel)]="itemsPerPage" (change)="toggleSort()">
-                <option value=1>1</option>
-                <option value=2>2</option>
-                <option value=3>3</option>
-                <option value=4>4</option>
-                <option value=5>5</option>
-                <option value=6>6</option>
-                <option value=7>7</option>
-                <option value=8>8</option>
-                <option value=9>9</option>
-                <option value=10>10</option>
-                <option value=11>11</option>
-                <option value=12>12</option>
-                <option value=13>13</option>
-                <option value=14>14</option>
-                <option value=15>15</option>
-                <option value=20>20</option>
-                <option value=25>25</option>
-                <option value=30>30</option>
-                <option value=40>40</option>
-                <option value=50>50</option>
-                <option value=100>100</option>
-            </select>
-        </div>
-        <br>
         <pagination-controls class="page-controls" (pageChange)="p = $event" previousLabel=""
             nextLabel=""></pagination-controls>
     </div>
-    <br>
+    <br><br>
+    <br><br>
 </div>
