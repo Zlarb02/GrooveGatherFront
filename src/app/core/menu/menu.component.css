@@ -1,11 +1,18 @@
 .burger {
   cursor: pointer;
-  z-index: 11;
 }
 
 .burger svg {
   height: 44px;
   width: 44px;
+  display: flex;
+  position: relative;
+}
+
+svg,
+path {
+  position: fixed;
+  z-index: 4;
 }
 
 .ham {
@@ -51,26 +58,34 @@
 
 /* Style initial de la div à afficher/cacher */
 nav {
-  top: 8vh;
-  color:black;
-  font-size:larger;
-  position: fixed;
-  background-color: lightgrey;
+  top: 2vh;
+  color: black;
+  font-size: large;
+  background-color: var(--orange);
   padding: 20px;
   margin-top: 20px;
-  border-radius: 5px;
-  transition: opacity 0.3s ease-in-out;
-  opacity: 0;  
-  display:none;
-  li{
-    height:15vh;
+  border-radius: 8px;
+  display: none;
+  margin-left: -1vw;
+  opacity: 0;
+  transition: opacity 2s ease-in-out;
+
+  li {
+    height: 9.5vh;
+    padding: 0 20px;
     list-style: none;
-    }
+  }
 }
 
 /* Lorsque le SVG a la classe active, change l'opacité de la div pour la rendre visible */
-.burger .ham.active ~ nav{
+.burger .ham.active~nav {
+  display: flex;
+  position: absolute;
+  z-index: 3 !important;
   opacity: 1;
-  display: block;
+  transition: opacity 2s ease-in-out;
 }
 
+.burger .ham.active .line {
+  stroke: black;
+}
