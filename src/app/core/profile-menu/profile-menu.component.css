@@ -1,0 +1,100 @@
+/* Réinitialisation globale */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+/* Menu déroulant du profil */
+.dropdown-profile-menu {
+  display: flex;
+  justify-content: flex-end; /* Aligne les éléments à droite */
+  align-items: center; /* Aligne les éléments au centre verticalement */
+
+  width: 100%; /* Largeur complète */
+  background: #f8f9fa; /* Couleur de fond */
+
+
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Légère ombre pour le header */
+  z-index: 1000; /* Assure que le menu est au-dessus des autres éléments */
+}
+/* .dropdown {
+  margin: 100%;
+} */
+.dropdown-profile-menu .dropdown {
+  display: none; /* Cache le menu déroulant par défaut */
+  position: absolute; /* Positionne absolument par rapport au parent */
+  top: 25px; /* Positionne en dessous de l'icône */
+  right: 10px; /* Aligne avec l'icône */
+  list-style: none;
+  /*background: white; /* Couleur de fond du menu déroulant */
+  /*border: 1px solid #ccc; /* Bordure du menu déroulant */
+  /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre */
+  padding: 0;
+  margin: 0;
+  z-index: 1000; /* Assure que c'est au-dessus des autres éléments */
+}
+
+.dropdown-profile-menu .gg-profile {
+  font-size: 24px; /* Taille de l'icône */
+  cursor: pointer; /* Change le curseur au survol */
+}
+
+.dropdown-profile-menu .dropdown li {
+  padding: 10px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity .5s, transform .5s, background .3s, color .3s;
+  background-color: var(--bg-inverse);
+  width: 100%;
+  display: block;
+  /* border-radius: 5px; */
+  text-align: center;
+  font-size: large;
+  height: 8vh;
+  padding-bottom: 0;
+}
+
+.dropdown-profile-menu .dropdown li:hover {
+  background: #F5F3FA; /* Surligne au survol */
+  color: #4027C1; /* Change la couleur du texte au survol */
+}
+
+/* Affiche le menu déroulant et anime les éléments au survol */
+.dropdown-profile-menu:hover .dropdown {
+  display: block;
+}
+
+.dropdown-profile-menu:hover .dropdown li {
+  display: block;
+  animation: showMenu .5s forwards;
+}
+
+.dropdown-profile-menu .dropdown li:nth-last-child(1) {
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.dropdown-profile-menu:hover .dropdown li:nth-child(2) { animation-delay: .2s; }
+.dropdown-profile-menu:hover .dropdown li:nth-child(3) { animation-delay: .4s; }
+.dropdown-profile-menu:hover .dropdown li:nth-child(4) { animation-delay: .6s; }
+.dropdown-profile-menu:hover .dropdown li:nth-child(5) { animation-delay: .8s; }
+
+@keyframes showMenu {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+
+
+
