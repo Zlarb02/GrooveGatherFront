@@ -5,8 +5,8 @@ header {
   background-color: var(--bg);
   color: var(--color);
   height: 15vh;
-  width: 98vw;
-  margin-left: 1vw;
+  width: 95vw;
+  margin-left: 2.5vw;
   border-bottom: 1px solid var(--lines);
 }
 
