@@ -241,6 +241,8 @@ select {
 .search__container {
     padding-top: 8px;
     margin-left: 9%;
+
+    z-index: 2 !important;
 }
 
 .search__title {
@@ -265,10 +267,11 @@ select {
     background-size: 18px 18px;
     background-position: 95% center;
     border-radius: 50px;
-    border: 1px solid var(--color);
+    border: 1px solid var(--lines);
     transition: all 250ms ease-in-out;
     backface-visibility: hidden;
     transform-style: preserve-3d;
+    z-index: 2 !important;
 }
 
 .search__input::placeholder {
@@ -297,10 +300,19 @@ body.inverse .search__container {
     display: flex;
 }
 
+
+/* search bar end */
+
+
+/* desktop start */
+
+
 .projects-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    z-index: 2 !important;
 }
 
 @media (min-width: 1025px) {
@@ -316,15 +328,15 @@ body.inverse .search__container {
 
         .project-card {
             max-width: 33%;
+
+            z-index: 2 !important;
         }
     }
 }
 
 
+/* desktop end */
 
-
-
-/* search bar end */
 
 
 

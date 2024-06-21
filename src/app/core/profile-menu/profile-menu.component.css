@@ -34,21 +34,21 @@
   padding: 0 10px;
   cursor: pointer;
   transition: opacity .5s, transform .5s, background .3s, color .3s;
-  background-color: var(--orange);
+  background-color: var(--purple);
   text-align: center;
   font-size: x-small;
   height: 8vh;
-  color: black;
+  color: var(--bg-inverse);
 }
 
 .dropdown-profile-menu .dropdown li:hover {
-  background: #F5F3FA;
-  color: var(--purple);
+  background-color: var(--blue);
+  color: var(--green);
 }
 
 #toggle-menu:checked+label {
-  background-color: var(--orange);
-  color: black;
+  background-color: var(--purple);
+  color: var(--bg-inverse);
 }
 
 /* Affiche le menu déroulant et anime les éléments lorsqu'on coche la checkbox */
