@@ -45,7 +45,7 @@ export class SearchComponent {
 
 
   p = 1;
-  itemsPerPage = 2;
+  itemsPerPage = 6;
   totalItems: number | undefined;
 
   // Ajout des contrôles de formulaire pour l'autocomplétion
