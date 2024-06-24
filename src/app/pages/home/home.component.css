@@ -25,10 +25,12 @@ img {
 .btn-signup,
 .btn-login {
   color: var(--color);
-  background-color: var(--bg);
   border: var(--orange) 2px solid;
   border-radius: 6px;
   padding: 18px;
   font-size: 18px;
   font-weight: 400;
+
+  --pill-accent: var(--orange);
+  background: color-mix(in srgb, var(--pill-accent) 5%, transparent);
 }
