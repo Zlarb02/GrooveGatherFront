@@ -59,9 +59,10 @@ path {
 /* Style initial de la div à afficher/cacher */
 nav {
   top: 1.8vh;
-  color: var(--bg-inverse);
   font-size: large;
-  background-color: var(--purple);
+  color: white;
+  --pill-accent: var(--purple);
+  background: color-mix(in srgb, var(--pill-accent) 80%, transparent);
   margin-top: 20px;
   border-radius: 8px;
   display: none;
