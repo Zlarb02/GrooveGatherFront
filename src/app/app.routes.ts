@@ -9,54 +9,60 @@ import { CreateProjectComponent } from './pages/project/create-project/create-pr
 import { ProjectDetailComponent } from './pages/project/project-detail/project-detail.component';
 import { SearchComponent } from './pages/search/search.component';
 import { ProfileComponent } from './pages/user/profile/profile.component';
+import { AboutUsComponent } from './pages/about-us/about-us.component';
 
 export const routes: Routes = [
-    {
-        path: '',
-        component: HomeComponent
-    },
-    {
-        path: 'search',
-        component: SearchComponent
-    },
-    {
-        path: 'create-project',
-        component: CreateProjectComponent
-    },
-    {
-        path: 'notification',
-        component: NotificationComponent
-    },
-    {
-        path: 'messages',
-        component: MessagesComponent
-    },
-    {
-        path: 'login',
-        component: LoginComponent
-    },
-    {
-        path: 'logout',
-        component: LoginComponent
-    },
-    {
-        path: 'profile',
-        component: ProfileComponent
-    },
-    {
-        path: 'project/:id',
-        component: ProjectDetailComponent
-    },
-    {
-        path: 'best-practices',
-        component: BestPracticesComponent,
-    },
-    {
-        path: 'privacy-policy',
-        component: PrivacyPolicyComponent,
-    },
-    {
-        path: '**',
-        redirectTo: ''
-    }
+  {
+    path: '',
+    component: HomeComponent,
+  },
+  {
+    path: 'search',
+    component: SearchComponent,
+  },
+  {
+    path: 'create-project',
+    component: CreateProjectComponent,
+  },
+  {
+    path: 'notification',
+    component: NotificationComponent,
+  },
+  {
+    path: 'messages',
+    component: MessagesComponent,
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'logout',
+    component: LoginComponent,
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
+  },
+  {
+    path: 'project/:id',
+    component: ProjectDetailComponent,
+  },
+  {
+    path: 'best-practices',
+    component: BestPracticesComponent,
+  },
+  {
+    path: 'about-us',
+    component: AboutUsComponent,
+  },
+  {
+    path: 'privacy-policy',
+    component: PrivacyPolicyComponent,
+  },
+
+  {
+    path: '**',
+    redirectTo: '',
+  },
 ];
