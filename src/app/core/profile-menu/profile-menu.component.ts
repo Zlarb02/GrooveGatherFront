@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
+import { AuthService } from '../../shared/services/auth.service';
+import type { User } from '../../shared/models/user.model';
 
 @Component({
   selector: 'app-profile-menu',
@@ -9,20 +11,10 @@ import { Component } from '@angular/core';
   styleUrl: './profile-menu.component.css'
 })
 export class ProfileMenuComponent {
-  menuVisible = false;
 
-  toggleMenu() {
-    this.menuVisible = !this.menuVisible;
-  }
+  @Input()
+  actualUser!: User;
+
+  authService: AuthService = inject(AuthService);
 
 }
-
-
-// Dans votre composant TypeScript
-// export class AppComponent {
-//   menuVisible: boolean = false;
-
-//   toggleMenu() {
-//     this.menuVisible = !this.menuVisible;
-//   }
-// }
