@@ -240,8 +240,7 @@ select {
 /* search bar start */
 .search__container {
     padding-top: 8px;
-    margin-left: 9%;
-
+    margin-left: 29%;
     z-index: 2 !important;
 }
 
@@ -254,7 +253,7 @@ select {
 .search__input {
     width: 81vw;
     height: 5vh;
-    translate: -12vw;
+    translate: -20%;
     padding: 12px 24px;
     background-color: transparent;
     transition: transform 250ms ease-in-out;
@@ -283,7 +282,6 @@ select {
 .search__input:hover,
 .search__input:focus {
     width: 92vw;
-    translate: -8vw;
     padding: 12px 0;
     outline: 0;
     border: 1px solid transparent;
