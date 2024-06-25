@@ -1,14 +1,14 @@
 import type { Routes } from '@angular/router';
+import { LoginComponent } from './pages/auth/login/login.component';
+import { BestPracticesComponent } from './pages/best-practices/best-practices.component';
 import { HomeComponent } from './pages/home/home.component';
-import { SearchComponent } from './pages/search/search.component';
-import { CreateProjectComponent } from './pages/project/create-project/create-project.component';
 import { MessagesComponent } from './pages/messages/messages.component';
 import { NotificationComponent } from './pages/notification/notification.component';
-import { ProjectDetailComponent } from './pages/project/project-detail/project-detail.component';
-import { AuthComponent } from './pages/auth/auth.component';
-import { ProfileComponent } from './pages/user/profile/profile.component';
-import { BestPracticesComponent } from './pages/best-practices/best-practices.component';
 import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
+import { CreateProjectComponent } from './pages/project/create-project/create-project.component';
+import { ProjectDetailComponent } from './pages/project/project-detail/project-detail.component';
+import { SearchComponent } from './pages/search/search.component';
+import { ProfileComponent } from './pages/user/profile/profile.component';
 
 export const routes: Routes = [
     {
@@ -32,12 +32,12 @@ export const routes: Routes = [
         component: MessagesComponent
     },
     {
-        path: 'log-in',
-        component: AuthComponent
+        path: 'login',
+        component: LoginComponent
     },
     {
-        path: 'sign-in',
-        component: AuthComponent
+        path: 'logout',
+        component: LoginComponent
     },
     {
         path: 'profile',
