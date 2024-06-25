@@ -1,13 +1,13 @@
 <nav class="dropdown-profile-menu">
   <input type="checkbox" id="toggle-menu" />
-  <label for="toggle-menu" *ngIf="!actualUser.isConnected"><i class="gg-profile"></i></label>
-  <ul class="dropdown" *ngIf="!actualUser.isConnected">
+  <label for="toggle-menu" *ngIf="!actualUser.name"><i class="gg-profile"></i></label>
+  <ul class="dropdown" *ngIf="!actualUser.name">
     <li style="padding-top: 2vh;;">Se connecter</li>
     <li>S'inscrire</li>
   </ul>
-  <label for="toggle-menu" *ngIf="actualUser.isConnected"><img [src]="actualUser.picture"
+  <label for="toggle-menu" *ngIf="actualUser.name"><img [src]="actualUser.picture"
       style="border-radius: 50px; font-size: smaller; height: 30px;" alt="google profile"></label>
-  <ul class="dropdown" *ngIf="actualUser.isConnected">
+  <ul class="dropdown" *ngIf="actualUser.name">
     <li style="padding-top: 2vh;;">Mon profil</li>
     <li>Mes projets</li>
     <li>Paramètres</li>
