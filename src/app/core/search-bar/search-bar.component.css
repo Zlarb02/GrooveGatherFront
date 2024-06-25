@@ -12,7 +12,7 @@
 
 .search__input {
     width: 20vw;
-    translate: -7vw;
+    translate: -6.3vw;
     padding: 12px 24px;
     background-color: transparent;
     transition: transform 250ms ease-in-out;
@@ -41,7 +41,7 @@
 .search__input:hover,
 .search__input:focus {
     width: 60vw;
-    translate: -4vw;
+    translate: -2.9vw;
     padding: 12px 0;
     outline: 0;
     border: 1px solid transparent;
