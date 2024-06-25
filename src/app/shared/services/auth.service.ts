@@ -5,34 +5,23 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private _userIsConnected = new BehaviorSubject<boolean>(this.getFromLocalStorage('userIsConnected') === 'true');
-  private _name = new BehaviorSubject<string>(this.getFromLocalStorage('name'));
-  private _email = new BehaviorSubject<string>(this.getFromLocalStorage('email'));
-  private _picture = new BehaviorSubject<string>(this.getFromLocalStorage('picture'));
+  private _token = new BehaviorSubject<string>(this.getFromLocalStorage('token'));
+  private _userIsConnected = new BehaviorSubject<boolean>(!!this.getFromLocalStorage('token'));
+  private _name = new BehaviorSubject<string>('');
+  private _email = new BehaviorSubject<string>('');
+  private _picture = new BehaviorSubject<string>('');
 
+  token = this._token.asObservable();
   userIsConnected = this._userIsConnected.asObservable();
   name = this._name.asObservable();
   email = this._email.asObservable();
   picture = this._picture.asObservable();
 
-  setUserIsConnected(value: boolean) {
-    this._userIsConnected.next(value);
-    this.setToLocalStorage('userIsConnected', value.toString());
-  }
-
-  setName(value: string) {
-    this._name.next(value);
-    this.setToLocalStorage('name', value);
-  }
-
-  setEmail(value: string) {
-    this._email.next(value);
-    this.setToLocalStorage('email', value);
-  }
-
-  setPicture(value: string) {
-    this._picture.next(value);
-    this.setToLocalStorage('picture', value);
+  setToken(value: string) {
+    this._token.next(value);
+    this.setToLocalStorage('token', value);
+    this._userIsConnected.next(!!value);
+    this.parseToken(value);
   }
 
   private setToLocalStorage(key: string, value: string) {
@@ -43,11 +32,21 @@ export class AuthService {
     return localStorage.getItem(key) || '';
   }
 
-  clearUserData() {
-    this.setUserIsConnected(false);
-    this.setName('');
-    this.setEmail('');
-    this.setPicture('');
-    localStorage.clear();
+  clearToken() {
+    this._token.next('');
+    this._userIsConnected.next(false);
+    this._name.next('');
+    this._email.next('');
+    this._picture.next('');
+    localStorage.removeItem('token');
+  }
+
+  private parseToken(token: string) {
+    if (token) {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      this._name.next(payload.name);
+      this._email.next(payload.email);
+      this._picture.next(payload.picture);
+    }
   }
 }
