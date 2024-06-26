@@ -10,6 +10,7 @@ import { ProjectDetailComponent } from './pages/project/project-detail/project-d
 import { SearchComponent } from './pages/search/search.component';
 import { ProfileComponent } from './pages/user/profile/profile.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
+import { ProfileMenuComponent } from './core/profile-menu/profile-menu.component';
 
 export const routes: Routes = [
   {
@@ -44,6 +45,12 @@ export const routes: Routes = [
     path: 'profile',
     component: ProfileComponent,
   },
+
+  {
+    path: 'profile-menu',
+    component: ProfileMenuComponent,
+  },
+
   {
     path: 'project/:id',
     component: ProjectDetailComponent,
