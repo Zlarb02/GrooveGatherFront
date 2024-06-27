@@ -2,12 +2,13 @@ import { Component, inject } from '@angular/core';
 import { ProjectService } from '../../../shared/services/project.service';
 // biome-ignore lint/style/useImportType: <explanation>
 import { Project } from '../../../shared/models/project.model';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-project-detail',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './project-detail.component.html',
   styleUrl: './project-detail.component.css'
 })
@@ -22,6 +23,7 @@ export class ProjectDetailComponent {
     date : '26-06-2024',
     likes : 250
   };
+
   projectService = inject(ProjectService);
 
 
