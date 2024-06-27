@@ -1,8 +1,6 @@
 <div class="flex-center">
     <div class="login-container">
         <h2>Login</h2>
-        <br>
-        <br>
         <div *ngIf="!name">
             <div id="g_id_onload"
                 data-client_id="674011661072-mvs1hadt0jgppkfv76b5tkeroohqtbij.apps.googleusercontent.com"
@@ -29,11 +27,5 @@
             <button type="submit">Login</button>
         </form>
         <p>Don't have an account? <a [routerLink]="['/signup']">Sign Up</a></p>
-    </div>
-    <div *ngIf="name">
-        <p>Bonjour, {{ name }} !</p>
-        <p>Votre email est : {{ email }}</p>
-        <img [src]="picture" alt="Photo de {{ name }}" />
-        <button (click)="signOut()">Se déconnecter</button>
     </div>
 </div>
