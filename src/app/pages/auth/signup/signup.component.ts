@@ -1,23 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, type AfterViewInit, type OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../shared/services/auth.service';
 
-declare global {
-  interface Window {
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-    google: any;
-  }
-}
-
 @Component({
-  selector: 'app-login',
+  selector: 'app-signup',
   standalone: true,
-  imports: [CommonModule, RouterLink],
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css', '../signupLogin.css']
+  imports: [RouterLink, CommonModule],
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.css', '../signupLogin.css']
 })
-export class LoginComponent implements OnInit, AfterViewInit {
+export class SignupComponent {
   name = '';
   email = '';
   picture = '';
