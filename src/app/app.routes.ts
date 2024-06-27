@@ -1,6 +1,7 @@
 import type { Routes } from '@angular/router';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { LoginComponent } from './pages/auth/login/login.component';
+import { SignupComponent } from './pages/auth/signup/signup.component';
 import { BestPracticesComponent } from './pages/best-practices/best-practices.component';
 import { HomeComponent } from './pages/home/home.component';
 import { MessagesComponent } from './pages/messages/messages.component';
@@ -31,6 +32,10 @@ export const routes: Routes = [
   {
     path: 'messages',
     component: MessagesComponent,
+  },
+  {
+    path: 'signup',
+    component: SignupComponent,
   },
   {
     path: 'login',

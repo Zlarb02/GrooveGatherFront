@@ -1,6 +1,7 @@
-import { Component, inject, type OnInit } from '@angular/core';
-import { AuthService } from '../../../shared/services/auth.service';
 import { CommonModule } from '@angular/common';
+import { Component, inject, type OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../shared/services/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -16,6 +17,7 @@ export class ProfileComponent implements OnInit {
   picture = '';
 
   authService = inject(AuthService);
+  router: Router = inject(Router);
 
   ngOnInit() {
     // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
@@ -27,6 +29,8 @@ export class ProfileComponent implements OnInit {
     // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
     this.authService.picture.subscribe(value => this.picture = value);
 
-    console.table(this.userIsConnected)
+    if (!this.name)
+
+      this.router.navigate(['/login']);
   }
 }
