@@ -60,8 +60,6 @@
 #toggle-menu:checked~.dropdown li {
   display: flex;
   animation: showMenu .5s forwards;
-
-  position: relative;
 }
 
 #toggle-menu:checked~.dropdown li:first-child {
