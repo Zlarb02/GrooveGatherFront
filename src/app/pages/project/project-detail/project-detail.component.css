@@ -1,0 +1,20 @@
+.wrapper {
+  background-color: var(--dark-color);
+  width: 60%;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.comment-section {
+  background-color: var(--dark-color);
+  width: 60%;
+  margin-right: auto;
+  margin-left: auto;
+  height: 20%;
+}
