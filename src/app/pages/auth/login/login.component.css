@@ -9,8 +9,3 @@
 .login-container button:hover {
     background-color: #0056b3;
 }
-
-.login-container .google-login {
-    border: none;
-    margin-bottom: 10px;
-}
