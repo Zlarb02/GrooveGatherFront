@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { User } from '../models/user.model';
+import type { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,13 @@ export class AuthService {
 
   token = this._token.asObservable();
   user = this._user.asObservable();
+
+  constructor() {
+    const token = this.getFromLocalStorage('token');
+    if (token) {
+      this.parseToken(token);
+    }
+  }
 
   setToken(value: string) {
     this._token.next(value);
@@ -34,13 +41,20 @@ export class AuthService {
 
   private parseToken(token: string) {
     if (token) {
-      const payload = JSON.parse(atob(token.split('.')[1]));
-      this._user.next({
-        name: payload.name,
-        mail: payload.email, // Adjust the payload property name if necessary
-        picture: payload.picture,
-        isConnected: true
-      });
+      try {
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        this._user.next({
+          name: payload.name,
+          mail: payload.email, // Adjust the payload property name if necessary
+          picture: payload.picture,
+          isConnected: true
+        });
+      } catch (e) {
+        console.error('Invalid token format', e);
+        this.clearToken(); // Clear token if parsing fails
+      }
+    } else {
+      this._user.next({ name: '', mail: '', picture: '', isConnected: false });
     }
   }
 }
