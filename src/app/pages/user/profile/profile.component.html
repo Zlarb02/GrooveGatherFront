@@ -1,5 +1,5 @@
-<div *ngIf="name">
-    <h2>Bonjour, {{ name }}</h2>
-    <p>Email: {{ email }}</p>
-    <img [src]="picture" alt="User picture">
+<div *ngIf="user.name">
+    <h2>Bonjour, {{ user.name }}</h2>
+    <p>Email: {{ user.mail }}</p>
+    <img [src]="user.picture" alt="User picture">
 </div>
