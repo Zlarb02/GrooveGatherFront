@@ -1,5 +1,6 @@
-<app-header [pageTitle]="currentPageTitle" [actualUser]="actualUser"></app-header>
-<main class="page-container">
+<app-header [pageTitle]="currentPageTitle" [actualUser]="actualUser" *ngIf="!landingPage"></app-header>
+<main class="page-container" *ngIf="!landingPage">
     <router-outlet></router-outlet>
 </main>
-<app-footer></app-footer>
+<app-footer *ngIf="!landingPage"></app-footer>
+<app-landing-page *ngIf="landingPage"></app-landing-page>
