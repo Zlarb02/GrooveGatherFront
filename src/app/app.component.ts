@@ -1,6 +1,6 @@
 import { Component, inject, type OnInit } from '@angular/core';
 // biome-ignore lint/style/useImportType: <explanation>
-import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
 import type { Subscription } from 'rxjs';
 import { FooterComponent } from './core/footer/footer.component';
 import { HeaderComponent } from './core/header/header.component';
