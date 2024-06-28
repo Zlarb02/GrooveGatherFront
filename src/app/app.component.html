@@ -1,4 +1,4 @@
-<app-header [pageTitle]="currentPageTitle" [actualUser]="actualUser" *ngIf="!landingPage"></app-header>
+<app-header [pageTitle]="currentPageTitle" [user]="user" *ngIf="!landingPage"></app-header>
 <main class="page-container" *ngIf="!landingPage">
     <router-outlet></router-outlet>
 </main>

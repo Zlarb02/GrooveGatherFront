@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, type OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from '../../../shared/models/user.model';
 import { AuthService } from '../../../shared/services/auth.service';
 
 @Component({
@@ -11,21 +12,14 @@ import { AuthService } from '../../../shared/services/auth.service';
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent implements OnInit {
-
-  name = '';
-  email = '';
-  picture = '';
+  user!: User;
 
   authService = inject(AuthService);
   router: Router = inject(Router);
 
   ngOnInit() {
     // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
-    this.authService.name.subscribe(value => this.name = value);
-    // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
-    this.authService.email.subscribe(value => this.email = value);
-    // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
-    this.authService.picture.subscribe(value => this.picture = value);
+    this.authService.user.subscribe(value => this.user = value);
 
     // if (!this.name)
 
