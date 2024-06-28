@@ -7,6 +7,7 @@
   width: 44px;
   display: flex;
   position: relative;
+  margin-top: 50px;
 }
 
 svg,
@@ -71,12 +72,19 @@ nav {
 
   li {
     height: 9.5vh;
+    min-height: 100px;
+    max-height: 200px;
     padding: 0 20px;
     list-style: none;
     display: flex;
     align-items: center;
     justify-content: center;
   }
+}
+a{
+  color : var(--dark-color);
+  font-weight: 700;
+
 }
 
 /* Lorsque le SVG a la classe active, change l'opacité de la div pour la rendre visible */
