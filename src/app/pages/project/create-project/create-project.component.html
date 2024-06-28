@@ -1,51 +1,39 @@
 <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-    <div>
-      <label for="nameProject">Nom du Projet</label>
-      <input id="nameProject" formControlName="nameProject" type="text">
-      <div *ngIf="myForm.get('nameProject')?.invalid && myForm.get('nameProject')?.touched">
-        Le nom du projet est requis.
-      </div>
+  <div class="form-group">
+    <label for="nameProject">Nom du Projet</label>
+    <input id="nameProject" formControlName="nameProject" type="text" class="form-control">
+    <div *ngIf="myForm.get('nameProject')?.invalid && myForm.get('nameProject')?.touched" class="error">
+      Le nom du projet est requis.
     </div>
-  
-    <div>
-      <label for="nameOwner">Nom du Propriétaire</label>
-      <input id="nameOwner" formControlName="nameOwner" type="text">
-      <div *ngIf="myForm.get('nameOwner')?.invalid && myForm.get('nameOwner')?.touched">
-        Le nom du propriétaire est requis.
-      </div>
+  </div>
+
+  <div class="form-group">
+    <label for="nameOwner">Nom du Propriétaire</label>
+    <input id="nameOwner" formControlName="nameOwner" type="text" class="form-control">
+    <div *ngIf="myForm.get('nameOwner')?.invalid && myForm.get('nameOwner')?.touched" class="error">
+      Le nom du propriétaire est requis.
     </div>
-  
-    <div>
-      <label for="genre">Genre</label>
-      <input id="genre" formControlName="genre" type="text">
-      <div *ngIf="myForm.get('genre')?.invalid && myForm.get('genre')?.touched">
-        Le genre est requis.
-      </div>
+  </div>
+
+  <div class="form-group">
+    <label for="genre">Genre</label>
+    <input id="genre" formControlName="genre" type="text" class="form-control">
+    <div *ngIf="myForm.get('genre')?.invalid && myForm.get('genre')?.touched" class="error">
+      Le genre est requis.
     </div>
-  
-    <div>
-      <label for="description">Description</label>
-      <textarea id="description" formControlName="description"></textarea>
-      <div *ngIf="myForm.get('description')?.invalid && myForm.get('description')?.touched">
-        La description est requise.
-      </div>
+  </div>
+
+  <div class="form-group">
+    <label for="description">Description</label>
+    <div class="center-textarea">
+       <textarea id="description" formControlName="description" class="
+   form-control"></textarea>
     </div>
-  
-  <!--   <div>
-      <label for="date">Date</label>
-      <input id="date" formControlName="date" type="date">
-      <div *ngIf="myForm.get('date')?.invalid && myForm.get('date')?.touched">
-        La date est requise.
-      </div>
-    </div> -->
-  
-  <!--   <div>
-      <label for="like">Like</label>
-      <input id="like" formControlName="like" type="number">
-      <div *ngIf="myForm.get('like')?.invalid && myForm.get('like')?.touched">
-        Le nombre de "like" est requis.
-      </div>
-    </div> -->
-  
-    <button type="submit" [disabled]="myForm.invalid">Submit</button>
-  </form>
+    <div *ngIf="myForm.get('description')?.invalid && myForm.get('
+   description')?.touched" class="error">
+       La description est requise.
+    </div>
+   </div>
+
+  <button type="submit" [disabled]="myForm.invalid" class="btn btn-primary">Submit</button>
+</form> 
