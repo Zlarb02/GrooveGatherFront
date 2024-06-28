@@ -20,6 +20,14 @@ html {
     overflow: hidden;
 }
 
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
 .ngx-pagination a {
     color: var(--color) !important
 }

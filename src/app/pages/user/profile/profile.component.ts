@@ -11,7 +11,7 @@ import { AuthService } from '../../../shared/services/auth.service';
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent implements OnInit {
-  userIsConnected!: boolean;
+
   name = '';
   email = '';
   picture = '';
@@ -21,16 +21,14 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
-    this.authService.userIsConnected.subscribe(value => this.userIsConnected = value);
-    // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
     this.authService.name.subscribe(value => this.name = value);
     // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
     this.authService.email.subscribe(value => this.email = value);
     // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
     this.authService.picture.subscribe(value => this.picture = value);
 
-    if (!this.name)
+    // if (!this.name)
 
-      this.router.navigate(['/login']);
+    //   this.router.navigate(['/login']);
   }
 }
