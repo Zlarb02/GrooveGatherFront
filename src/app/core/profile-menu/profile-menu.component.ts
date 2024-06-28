@@ -16,7 +16,7 @@ import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
 export class ProfileMenuComponent {
 
   @Input()
-  actualUser!: User;
+  user!: User;
 
   authService: AuthService = inject(AuthService);
 

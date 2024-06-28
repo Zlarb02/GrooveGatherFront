@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
+import type { User } from '../../shared/models/user.model';
 import { MenuComponent } from '../menu/menu.component';
 import { ProfileMenuComponent } from '../profile-menu/profile-menu.component';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
-import type { User } from '../../shared/models/user.model';
 
 @Component({
   selector: 'app-header',
@@ -13,5 +13,5 @@ import type { User } from '../../shared/models/user.model';
 })
 export class HeaderComponent {
   @Input() pageTitle!: string;
-  @Input() actualUser!: User;
+  @Input() user!: User;
 }

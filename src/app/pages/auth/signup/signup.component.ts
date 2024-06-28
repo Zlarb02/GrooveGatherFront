@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { User } from '../../../shared/models/user.model';
 import { AuthService } from '../../../shared/services/auth.service';
 
 @Component({
@@ -11,23 +12,14 @@ import { AuthService } from '../../../shared/services/auth.service';
   styleUrls: ['./signup.component.css', '../signupLogin.css']
 })
 export class SignupComponent {
-  name = '';
-  email = '';
-  picture = '';
-  userIsConnected = false;
+  user!: User;
 
   authService = inject(AuthService);
   router: Router = inject(Router);
 
   ngOnInit() {
     // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
-    this.authService.userIsConnected.subscribe(isConnected => this.userIsConnected = isConnected);
-    // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
-    this.authService.name.subscribe(name => this.name = name);
-    // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
-    this.authService.email.subscribe(email => this.email = email);
-    // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
-    this.authService.picture.subscribe(picture => this.picture = picture);
+    this.authService.user.subscribe(user => this.user = user);
   }
 
   ngAfterViewInit() {
