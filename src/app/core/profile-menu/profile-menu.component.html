@@ -2,16 +2,25 @@
   <input type="checkbox" id="toggle-menu" />
   <label for="toggle-menu" *ngIf="!user.name"><i class="gg-profile"></i></label>
   <ul class="dropdown" *ngIf="!user.name">
-    <li [routerLink]="['/login']" style="padding-top: 2vh">Se connecter</li>
-    <li [routerLink]="['/sigup']">S'inscrire</li>
-    <li><app-theme-toggle></app-theme-toggle></li>
+    <a href="/login">
+      <li style="padding-top: 2vh">Se connecter</li>
+    </a>
+    <a href="/signup">
+      <li>S'inscrire</li>
+    </a>
   </ul>
   <label for="toggle-menu" *ngIf="user.name"><img [src]="user.picture"
       style="border-radius: 50px; font-size: smaller; height: 30px;" alt="google profile"></label>
   <ul class="dropdown" *ngIf="user.name">
-    <li [routerLink]="['/my-projects']">style="padding-top: 2vh">Mon profil</li>
-    <li [routerLink]="['/my-projects']">Mes projets</li>
-    <li [routerLink]="['/settings']">Paramètres</li>
-    <li (click)="signOut()">Se deconnecter</li>
+    <a href="/profile">
+      <li style="padding-top: 2vh">Mon profil</li>
+    </a>
+    <a href="/my-projects">
+      <li>Mes projets</li>
+    </a>
+    <a href="/settings">
+      <li>Paramètres</li>
+    </a>
+    <li (click)="signOut()">Se déconnecter</li>
   </ul>
 </nav>

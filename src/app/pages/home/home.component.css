@@ -1,5 +1,7 @@
 main {
   text-align: center;
+  overflow-y: scroll;
+  height: 75vh;
 }
 
 h3 {
