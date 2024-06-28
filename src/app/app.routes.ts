@@ -9,9 +9,11 @@ import { MessagesComponent } from './pages/messages/messages.component';
 import { NotificationComponent } from './pages/notification/notification.component';
 import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
 import { CreateProjectComponent } from './pages/project/create-project/create-project.component';
+import { MyProjectsComponent } from './pages/project/my-projects/my-projects.component';
 import { ProjectDetailComponent } from './pages/project/project-detail/project-detail.component';
 import { SearchComponent } from './pages/search/search.component';
 import { ProfileComponent } from './pages/user/profile/profile.component';
+import { SettingsComponent } from './pages/user/settings/settings.component';
 
 export const routes: Routes = [
   {
@@ -51,8 +53,16 @@ export const routes: Routes = [
     component: ProfileComponent,
   },
   {
+    path: 'settings',
+    component: SettingsComponent,
+  },
+  {
     path: 'project/:id',
     component: ProjectDetailComponent,
+  },
+  {
+    path: 'my-projects',
+    component: MyProjectsComponent,
   },
   {
     path: 'best-practices',

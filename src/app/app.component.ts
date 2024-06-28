@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, type OnInit } from '@angular/core';
 // biome-ignore lint/style/useImportType: <explanation>
-import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import type { Subscription } from 'rxjs';
 import { FooterComponent } from './core/footer/footer.component';
 import { HeaderComponent } from './core/header/header.component';
@@ -63,6 +63,12 @@ export class AppComponent implements OnInit {
         break;
       case '/landing-page':
         this.currentPageTitle = 'landingPage';
+        break;
+      case '/signup':
+        this.currentPageTitle = "S'inscrire";
+        break;
+      case '/login':
+        this.currentPageTitle = 'Se connecter';
         break;
       default:
         this.currentPageTitle = 'GrooveGather';

@@ -7,7 +7,6 @@
     height: 75vh;
     background-color: var(--bg);
     color: var(--color);
-    overflow: scroll;
-    overflow-x: hidden;
+    overflow: hidden;
     z-index: 2 !important;
 }

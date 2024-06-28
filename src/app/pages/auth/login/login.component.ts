@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, type AfterViewInit, type OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { User } from '../../../shared/models/user.model';
+import type { User } from '../../../shared/models/user.model';
 import { AuthService } from '../../../shared/services/auth.service';
 
 declare global {
