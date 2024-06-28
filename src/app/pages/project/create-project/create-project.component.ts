@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+// biome-ignore lint/style/useImportType: <explanation>
 import {
   FormBuilder,
   FormGroup,
@@ -43,7 +44,7 @@ export class CreateProjectComponent {
   // Méthode pour écouter les changements de valeurs du formulaire
   ecouter() {
     this.myForm.valueChanges.subscribe((value) => {
-      console.log(value);
+      //console.log(value);
     });
   }
 
