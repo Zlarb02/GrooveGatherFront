@@ -24,9 +24,7 @@ export class AppComponent implements OnInit {
 
   currentPageTitle = '';
 
-  actualUser: User = { name: '', mail: '', picture: '', isConnected: false };
-
-  userIsConnected = false;
+  user: User = { name: '', mail: '', picture: '', isConnected: false };
 
   private subscriptions: Subscription[] = [];
 
@@ -51,13 +49,7 @@ export class AppComponent implements OnInit {
   authSubscriptions() {
     this.subscriptions.push(
       // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
-      this.authService.userIsConnected.subscribe(isConnected => this.actualUser.isConnected = isConnected),
-      // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
-      this.authService.name.subscribe(name => this.actualUser.name = name),
-      // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
-      this.authService.email.subscribe(email => this.actualUser.mail = email),
-      // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
-      this.authService.picture.subscribe(picture => this.actualUser.picture = picture)
+      this.authService.user.subscribe(user => this.user = user),
     );
   }
 
