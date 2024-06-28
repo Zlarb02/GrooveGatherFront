@@ -4,6 +4,7 @@ import { LoginComponent } from './pages/auth/login/login.component';
 import { SignupComponent } from './pages/auth/signup/signup.component';
 import { BestPracticesComponent } from './pages/best-practices/best-practices.component';
 import { HomeComponent } from './pages/home/home.component';
+import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 import { MessagesComponent } from './pages/messages/messages.component';
 import { NotificationComponent } from './pages/notification/notification.component';
 import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
@@ -64,6 +65,10 @@ export const routes: Routes = [
   {
     path: 'privacy-policy',
     component: PrivacyPolicyComponent,
+  },
+  {
+    path: 'landing-page',
+    component: LandingPageComponent,
   },
   {
     path: '**',

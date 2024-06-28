@@ -1,9 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject, type OnInit } from '@angular/core';
 // biome-ignore lint/style/useImportType: <explanation>
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import type { Subscription } from 'rxjs';
 import { FooterComponent } from './core/footer/footer.component';
 import { HeaderComponent } from './core/header/header.component';
+import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 import type { User } from './shared/models/user.model';
 import { AuthService } from './shared/services/auth.service';
 import { ThemeService } from './shared/services/theme.service';
@@ -12,12 +14,16 @@ import { ThemeService } from './shared/services/theme.service';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  imports: [HeaderComponent, RouterOutlet, FooterComponent],
+  imports: [CommonModule, HeaderComponent, RouterOutlet, FooterComponent, LandingPageComponent],
   standalone: true,
 })
 export class AppComponent implements OnInit {
   title = 'GrooveGatherFront';
+
+  landingPage = true;
+
   currentPageTitle = '';
+
   actualUser: User = { name: '', mail: '', picture: '', isConnected: false };
 
   userIsConnected = false;
@@ -63,8 +69,16 @@ export class AppComponent implements OnInit {
       case '/search':
         this.currentPageTitle = 'Rechercher';
         break;
+      case '/landing-page':
+        this.currentPageTitle = 'landingPage';
+        break;
       default:
         this.currentPageTitle = 'GrooveGather';
+    }
+    if (this.currentPageTitle === 'landingPage') {
+      this.landingPage = true;
+    } else {
+      this.landingPage = false;
     }
   }
 }
