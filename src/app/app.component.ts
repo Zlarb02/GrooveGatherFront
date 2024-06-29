@@ -57,6 +57,12 @@ export class AppComponent implements OnInit {
     switch (pageTitle) {
       case '/':
         this.currentPageTitle = '';
+        if (this.user.name) {
+
+          this.router.navigate(['/search']);
+        } else {
+          this.router.navigate(['/landing-page']);
+        }
         break;
       case '/search':
         this.currentPageTitle = 'Rechercher';
@@ -70,8 +76,26 @@ export class AppComponent implements OnInit {
       case '/login':
         this.currentPageTitle = 'Se connecter';
         break;
+      case '/profile':
+        this.currentPageTitle = 'Mon profil';
+        break;
+      case '/settings':
+        this.currentPageTitle = 'Paramètres';
+        break;
+      case '/my-projects':
+        this.currentPageTitle = 'Mes projets';
+        break;
+      case '/create-project':
+        this.currentPageTitle = 'Créer un projet';
+        break;
+      case '/notification':
+        this.currentPageTitle = 'Notifications';
+        break;
+      case '/messages':
+        this.currentPageTitle = 'Messagerie';
+        break;
       default:
-        this.currentPageTitle = 'GrooveGather';
+        this.currentPageTitle = '';
     }
     if (this.currentPageTitle === " ") {
       this.landingPage = true;
