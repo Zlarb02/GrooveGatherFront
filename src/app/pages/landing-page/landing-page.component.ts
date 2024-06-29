@@ -3,10 +3,10 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { ChangeDetectorRef, Component, Input, ViewEncapsulation, type OnInit } from '@angular/core';
 // biome-ignore lint/style/useImportType: <explanation>
 import { DomSanitizer } from '@angular/platform-browser';
+import Aos from 'aos';
 import { interval } from 'rxjs/internal/observable/interval';
 import { HeaderComponent } from '../../core/header/header.component';
 import type { User } from '../../shared/models/user.model';
-
 
 @Component({
   selector: 'app-landing-page',
@@ -16,8 +16,8 @@ import type { User } from '../../shared/models/user.model';
   styleUrl: './landing-page.component.css',
   animations: [
     trigger('fadeIn', [
-      state('in', style({ opacity: 0.7 })),
-      state('out', style({ opacity: 0.6 })),
+      state('in', style({ opacity: 0.8 })),
+      state('out', style({ opacity: 0.8 })),
       transition('in => out', [
         animate('0.3s')
       ]),
@@ -80,6 +80,19 @@ export class LandingPageComponent implements OnInit {
       .subscribe((x) => {
         this.runAnimation();
       })
+  }
+
+  ngAfterViewInit() {
+    Aos.init({
+      offset: 90, // Ajuste l'offset selon tes besoins
+      duration: 1000, // Durée de l'animation
+      easing: 'ease', // Type d'animation
+      once: true, // Si vrai, l'animation se déclenche une seule fois
+      mirror: false, // Si vrai, l'animation se déclenche aussi lors du scroll vers le haut
+    });
+    setInterval(() => {
+      Aos.refresh()
+    }, 200);
   }
 
   runAnimation() {

@@ -26,7 +26,8 @@
             ],
             "styles": [
               "src/styles.css",
-              "src/desktop.css"
+              "src/desktop.css",
+              "node_modules/aos/dist/aos.css"
             ],
             "scripts": []
           },

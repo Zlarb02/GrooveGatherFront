@@ -38,6 +38,9 @@ importers:
       '@material/web':
         specifier: ^1.5.0
         version: 1.5.0
+      aos:
+        specifier: ^2.3.4
+        version: 2.3.4
       ngx-pagination:
         specifier: ^6.0.3
         version: 6.0.3(@angular/common@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))
@@ -63,6 +66,9 @@ importers:
       '@biomejs/biome':
         specifier: 1.8.1
         version: 1.8.1
+      '@types/aos':
+        specifier: ^3.0.7
+        version: 3.0.7
       '@types/jasmine':
         specifier: ~5.1.0
         version: 5.1.4
@@ -1683,6 +1689,9 @@ packages:
     resolution: {integrity: sha512-92F7/SFyufn4DXsha9+QfKnN03JGqtMFMXgSHbZOo8JG59WkTni7UzAouNQDf7AuP9OAMxVOPQcqG3sB7w+kkg==}
     engines: {node: ^16.14.0 || >=18.0.0}
 
+  '@types/aos@3.0.7':
+    resolution: {integrity: sha512-sEhyFqvKauUJZDbvAB3Pggynrq6g+2PS4XB3tmUr+mDL1gfDJnwslUC4QQ7/l8UD+LWpr3RxZVR/rHoZrLqZVg==}
+
   '@types/body-parser@1.19.5':
     resolution: {integrity: sha512-fB3Zu92ucau0iQ0JMCFQE7b/dv8Ot07NI3KaZIkIUNXq82k4eBAqUaneXfleGY9JWskeS9y+u0nXMyspcuQrCg==}
 
@@ -1926,6 +1935,9 @@ packages:
     resolution: {integrity: sha512-KMReFUr0B4t+D+OBkjR3KYqvocp2XaSzO55UcB6mgQMd3KbcE+mWTyvVV7D/zsdEbNnV6acZUutkiHQXvTr1Rw==}
     engines: {node: '>= 8'}
 
+  aos@2.3.4:
+    resolution: {integrity: sha512-zh/ahtR2yME4I51z8IttIt4lC1Nw0ktsFtmeDzID1m9naJnWXhCoARaCgNOGXb5CLy3zm+wqmRAEgMYB5E2HUw==}
+
   argparse@1.0.10:
     resolution: {integrity: sha512-o5Roy6tNG4SL/FOkCAN6RzjiakZS25RLYFrcMttJqbdd8BWrnA+fGz57iN5Pb06pvBGvl5gQ0B48dJlslXvoTg==}
 
@@ -2079,6 +2091,9 @@ packages:
   chrome-trace-event@1.0.4:
     resolution: {integrity: sha512-rNjApaLzuwaOTjCiT8lSDdGN1APCiqkChLMJxJPWLunPAt5fy8xgU9/jNOchV84wfIxrA0lRQB7oCT8jrn/wrQ==}
     engines: {node: '>=6.0'}
+
+  classlist-polyfill@1.2.0:
+    resolution: {integrity: sha512-GzIjNdcEtH4ieA2S8NmrSxv7DfEV5fmixQeyTmqmRmRJPGpRBaSnA2a0VrCjyT8iW8JjEdMbKzDotAJf+ajgaQ==}
 
   clean-stack@2.2.0:
     resolution: {integrity: sha512-4diC9HaTE+KRAMWhDhrGOECgWZxoevMc5TlkObMqNSsVU62PYzXZ/SMTjzyGAFF1YusgxGcSWTEXBhp0CPwQ1A==}
@@ -3084,6 +3099,9 @@ packages:
 
   lodash.debounce@4.0.8:
     resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
+
+  lodash.throttle@4.1.1:
+    resolution: {integrity: sha512-wIkUCfVKpVsWo3JSZlc+8MB5it+2AN5W8J7YVMST30UrvcQNZ1Okbj+rbVniijTWE6FGYy4XJq/rHkas8qJMLQ==}
 
   lodash@4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
@@ -6595,6 +6613,8 @@ snapshots:
       '@tufjs/canonical-json': 2.0.0
       minimatch: 9.0.4
 
+  '@types/aos@3.0.7': {}
+
   '@types/body-parser@1.19.5':
     dependencies:
       '@types/connect': 3.4.38
@@ -6876,6 +6896,12 @@ snapshots:
       normalize-path: 3.0.0
       picomatch: 2.3.1
 
+  aos@2.3.4:
+    dependencies:
+      classlist-polyfill: 1.2.0
+      lodash.debounce: 4.0.8
+      lodash.throttle: 4.1.1
+
   argparse@1.0.10:
     dependencies:
       sprintf-js: 1.0.3
@@ -7071,6 +7097,8 @@ snapshots:
   chownr@2.0.0: {}
 
   chrome-trace-event@1.0.4: {}
+
+  classlist-polyfill@1.2.0: {}
 
   clean-stack@2.2.0: {}
 
@@ -8170,6 +8198,8 @@ snapshots:
       p-locate: 6.0.0
 
   lodash.debounce@4.0.8: {}
+
+  lodash.throttle@4.1.1: {}
 
   lodash@4.17.21: {}
 
