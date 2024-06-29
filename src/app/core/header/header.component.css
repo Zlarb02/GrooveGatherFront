@@ -20,6 +20,19 @@ h2 {
   display: none;
 }
 
+.app-menu {
+  margin-top: 0.7vh;
+  margin-left: 2vw;
+  z-index: 3;
+}
+
+.app-profile-menu {
+  margin-top: 0.7vh;
+  margin-right: 7vw;
+  transform: scale(1.6);
+  z-index: 3;
+}
+
 @media (min-width: 1025px) {
   header {
     border: none;
@@ -27,5 +40,9 @@ h2 {
 
   .search-bar {
     display: flex;
+  }
+
+  .app-profile-menu {
+    margin-right: 2vw;
   }
 }
