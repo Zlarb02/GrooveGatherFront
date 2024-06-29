@@ -58,7 +58,7 @@ path {
 
 /* Style initial de la div à afficher/cacher */
 nav {
-  top: 1.8vh;
+  top: 2vh;
   font-size: large;
   color: white;
   --pill-accent: var(--purple);

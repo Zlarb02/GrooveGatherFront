@@ -1,4 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
+// biome-ignore lint/style/useImportType: <explanation>
 import { ChangeDetectorRef, Component, type OnInit } from '@angular/core';
 // biome-ignore lint/style/useImportType: <explanation>
 import { DomSanitizer } from '@angular/platform-browser';
@@ -56,6 +57,7 @@ export class LandingPageComponent implements OnInit {
       '../../../assets/images/photos/pexels-dmitry-demidov-515774-3774606.jpg',
       '../../../assets/images/photos/pexels-rdne-8198629.jpg',
     ];
+    // biome-ignore lint/complexity/noForEach: <explanation>
     this.bgImgs.forEach(img => {
       const image = new Image();
       image.src = img;
