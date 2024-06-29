@@ -40,9 +40,12 @@ body {
     background-color: var(--bg) !important
 }
 
-a {
+a,
+li {
     text-decoration: none;
-    color: var(--color)
+    color: var(--color);
+    font-weight: 700;
+    font-size: 0.6rem;
 }
 
 h1,

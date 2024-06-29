@@ -48,9 +48,8 @@ a {
   transition: opacity .5s, transform .5s, background .3s, color .3s;
   color: white;
   --pill-accent: var(--purple);
-  background: color-mix(in srgb, var(--pill-accent) 80%, transparent);
+  background: color-mix(in srgb, var(--pill-accent) 90%, transparent);
   text-align: center;
-  font-size: x-small;
   height: 8vh;
   min-height: 60px;
   max-height: 200px;

@@ -62,7 +62,7 @@ export class AppComponent implements OnInit {
         this.currentPageTitle = 'Rechercher';
         break;
       case '/landing-page':
-        this.currentPageTitle = 'landingPage';
+        this.currentPageTitle = " ";
         break;
       case '/signup':
         this.currentPageTitle = "S'inscrire";
@@ -73,7 +73,7 @@ export class AppComponent implements OnInit {
       default:
         this.currentPageTitle = 'GrooveGather';
     }
-    if (this.currentPageTitle === 'landingPage') {
+    if (this.currentPageTitle === " ") {
       this.landingPage = true;
     } else {
       this.landingPage = false;
