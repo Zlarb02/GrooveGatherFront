@@ -24,6 +24,6 @@ export class ProfileMenuComponent {
 
   signOut() {
     this.authService.clearToken();
-    this.router.navigate(['/']);
+    this.router.navigate(['/home']);
   }
 }
