@@ -80,9 +80,6 @@ export class LandingPageComponent implements OnInit {
       .subscribe((x) => {
         this.runAnimation();
       })
-  }
-
-  ngAfterViewInit() {
     Aos.init({
       offset: 90, // Ajuste l'offset selon tes besoins
       duration: 1000, // Durée de l'animation
