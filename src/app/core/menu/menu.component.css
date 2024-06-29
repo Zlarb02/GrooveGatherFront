@@ -59,10 +59,9 @@ path {
 /* Style initial de la div à afficher/cacher */
 nav {
   top: 2vh;
-  font-size: large;
   color: white;
   --pill-accent: var(--purple);
-  background: color-mix(in srgb, var(--pill-accent) 80%, transparent);
+  background: color-mix(in srgb, var(--pill-accent) 90%, transparent);
   margin-top: 20px;
   border-radius: 8px;
   display: none;
@@ -81,10 +80,21 @@ nav {
   }
 }
 
+@media screen and (max-height: 800px) {
+  nav {
+    top: 1vh;
+  }
+}
+
+@media screen and (max-height: 500px) {
+  nav {
+    top: -2vh;
+  }
+}
+
 a {
   color: var(--dark-color);
-  font-weight: 700;
-
+  font-size: 1rem;
 }
 
 /* Lorsque le SVG a la classe active, change l'opacité de la div pour la rendre visible */

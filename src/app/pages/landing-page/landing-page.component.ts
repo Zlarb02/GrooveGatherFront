@@ -1,29 +1,32 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 // biome-ignore lint/style/useImportType: <explanation>
-import { ChangeDetectorRef, Component, type OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, ViewEncapsulation, type OnInit } from '@angular/core';
 // biome-ignore lint/style/useImportType: <explanation>
 import { DomSanitizer } from '@angular/platform-browser';
 import { interval } from 'rxjs/internal/observable/interval';
+import { HeaderComponent } from '../../core/header/header.component';
+import type { User } from '../../shared/models/user.model';
 
 
 @Component({
   selector: 'app-landing-page',
   standalone: true,
-  imports: [],
+  imports: [HeaderComponent],
   templateUrl: './landing-page.component.html',
   styleUrl: './landing-page.component.css',
   animations: [
     trigger('fadeIn', [
-      state('in', style({ opacity: 1 })),
-      state('out', style({ opacity: 0 })),
+      state('in', style({ opacity: 0.7 })),
+      state('out', style({ opacity: 0.6 })),
       transition('in => out', [
-        animate('1s')
+        animate('0.3s')
       ]),
       transition('out => in', [
-        animate('1s')
+        animate('0.3s')
       ])
     ])
-  ]
+  ],
+  encapsulation: ViewEncapsulation.None
 
 
 })
@@ -36,6 +39,11 @@ export class LandingPageComponent implements OnInit {
   state = 'in';
   counter = 0;
   enableAnimation = false;
+
+  @Input()
+  user!: User;
+  @Input()
+  pageTitle!: string;
 
   constructor(private sanitize: DomSanitizer, private cdr: ChangeDetectorRef) {
     this.bgImgs = [
@@ -68,7 +76,7 @@ export class LandingPageComponent implements OnInit {
 
 
   ngOnInit() {
-    interval(4000)
+    interval(3000)
       .subscribe((x) => {
         this.runAnimation();
       })

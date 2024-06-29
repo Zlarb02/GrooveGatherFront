@@ -12,7 +12,7 @@ declare global {
   standalone: true,
   imports: [],
   templateUrl: './logout.component.html',
-  styleUrl: './logout.component.css'
+  styleUrl: './logout.component.css',
 })
 
 
