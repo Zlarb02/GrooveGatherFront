@@ -8,12 +8,13 @@
     position: relative;
     width: 120px;
     height: 40px;
-    background-color: var(--bg-inverse);
+    background-color: var(--bg);
+    color: var(--color);
     border-radius: 20px;
     display: inline-block;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    border: 1px solid var(--bg);
+    border: 1px solid black;
     overflow: hidden;
     padding: 5px;
     box-sizing: border-box;
@@ -29,7 +30,6 @@
     font-size: 1em;
     transition: opacity 0.3s ease, transform 0.3s ease;
     padding: 0 10px;
-    color: black;
 }
 
 .toggle-label .sun {
@@ -47,8 +47,10 @@
 }
 
 /* Lorsque la checkbox est cochée */
-#theme-toggle:checked+.toggle-label {
-    background-color: var(--bg-inverse);
+#theme-toggle:checked .toggle-label {
+
+    background-color: var(--color);
+    color: var(--bg);
 }
 
 #theme-toggle:checked+.toggle-label .sun {

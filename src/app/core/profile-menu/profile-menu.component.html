@@ -8,6 +8,7 @@
     <a href="/signup">
       <li>S'inscrire</li>
     </a>
+    <li><app-theme-toggle style="transform: scale(.6);"></app-theme-toggle></li>
   </ul>
   <label for="toggle-menu" *ngIf="user.name"><img [src]="user.picture"
       style="border-radius: 50px; font-size: smaller; height: 30px;" alt="google profile"></label>
@@ -21,6 +22,7 @@
     <a href="/settings">
       <li>Paramètres</li>
     </a>
+    <li><app-theme-toggle style="transform: scale(.6);"></app-theme-toggle></li>
     <li (click)="signOut()">Se déconnecter</li>
   </ul>
 </nav>
