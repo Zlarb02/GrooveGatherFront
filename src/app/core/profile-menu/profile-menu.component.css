@@ -35,7 +35,6 @@ a {
   height: fit-content;
 
   border-radius: 0 0 5px 5px;
-
 }
 
 .dropdown-profile-menu .dropdown li {
@@ -46,23 +45,25 @@ a {
   width: 14vw;
   cursor: pointer;
   transition: opacity .5s, transform .5s, background .3s, color .3s;
-  color: white;
-  --pill-accent: var(--purple);
+  color: var(--dark-bg);
+  --pill-accent: var(--bg-inverse);
   background: color-mix(in srgb, var(--pill-accent) 90%, transparent);
+  filter: contrast(130%);
   text-align: center;
-  height: 8vh;
-  min-height: 60px;
-  max-height: 200px;
+  height: 4vh;
+  min-height: 40px;
+  max-height: 70px;
+  max-width: 100px;
+  border: var(--dark-bg) 1px solid;
 }
 
 .dropdown-profile-menu .dropdown li:hover {
-  background-color: var(--blue);
-  color: var(--green);
+  background-color: var(--purple);
+  color: white;
 }
 
 #toggle-menu:checked+label {
   background-color: var(--purple);
-  color: var(--bg-inverse);
 }
 
 /* Affiche le menu déroulant et anime les éléments lorsqu'on coche la checkbox */
