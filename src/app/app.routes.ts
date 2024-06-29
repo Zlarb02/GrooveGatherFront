@@ -17,7 +17,7 @@ import { SettingsComponent } from './pages/user/settings/settings.component';
 
 export const routes: Routes = [
   {
-    path: '',
+    path: 'home',
     component: HomeComponent,
   },
   {

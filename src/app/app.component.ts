@@ -64,6 +64,12 @@ export class AppComponent implements OnInit {
           this.router.navigate(['/landing-page']);
         }
         break;
+      case '/home':
+        this.currentPageTitle = '';
+        if (this.user.name) {
+          this.router.navigate(['/profile']);
+        }
+        break;
       case '/search':
         this.currentPageTitle = 'Rechercher';
         break;
@@ -87,12 +93,21 @@ export class AppComponent implements OnInit {
         break;
       case '/create-project':
         this.currentPageTitle = 'Créer un projet';
+        if (!this.user.name) {
+          this.router.navigate(['/login']);
+        }
         break;
       case '/notification':
         this.currentPageTitle = 'Notifications';
+        if (!this.user.name) {
+          this.router.navigate(['/login']);
+        }
         break;
       case '/messages':
         this.currentPageTitle = 'Messagerie';
+        if (!this.user.name) {
+          this.router.navigate(['/login']);
+        }
         break;
       default:
         this.currentPageTitle = '';
