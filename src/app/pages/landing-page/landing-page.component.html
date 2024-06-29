@@ -1,12 +1,12 @@
 <div class="bg-bg"></div>
 <div class="bg-landig" [@fadeIn]="state" (@fadeIn.done)="onDone($event)" [style.backgroundImage]="currentImage"></div>
+<app-header style="position: relative;" [pageTitle]="pageTitle" [user]="user"></app-header>
 <div class="landing-page">
     <div class="overlay">
         <div class="content">
             <br>
             <br>
-            <br>
-            <h1>Collaborez sur des projets musicaux en toute simplicité avec <b>GrooveGather</b></h1>
+            <h1>Collaborez sur des projets musicaux en toute simplicité avec <br><br> <b>GrooveGather</b></h1>
             <p class="white-pink">Rejoignez GrooveGather, une communauté dynamique de musiciens et de producteurs,
                 pour créer, partager et
                 découvrir des projets musicaux exceptionnels.</p>
@@ -58,6 +58,11 @@
             <a href="/search" class="btn-secondary">Explorer les projets</a>
         </div>
     </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     <br>
     <br>
     <br>
