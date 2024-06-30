@@ -1,5 +1,28 @@
-<div *ngIf="user.name">
-    <h2>Bonjour, {{ user.name }}</h2>
-    <p>Email: {{ user.mail }}</p>
-    <img [src]="user.picture" alt="User picture">
+<div class="container">
+    <span>
+        <img [src]="user.picture" alt="User picture">
+        <button class="edit-btn edit-picture" (click)="editPicture()">
+            <i class="gg-pen picture-pen"></i>
+        </button>
+    </span>
+    <span>
+        <h2>{{ user.name }}</h2>
+        <button class="edit-btn edit-name" (click)="editName()">
+            <i class="gg-pen name-pen"></i>
+        </button>
+    </span>
+    <span>{{ user.mail }}
+        <button class="edit-btn edit-mail" (click)="editEmail()">
+            <i class="gg-pen mail-pen"></i>
+        </button>
+    </span>
+    <button class="change-password-btn" (click)="changePassword()">Modifier le mot de passe</button>
+    <button (click)="signOut()">Se déconnecter</button>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 </div>

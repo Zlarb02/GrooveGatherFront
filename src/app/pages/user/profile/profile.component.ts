@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, type OnInit } from '@angular/core';
+// biome-ignore lint/style/useImportType: <explanation>
+import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import type { User } from '../../../shared/models/user.model';
 import { AuthService } from '../../../shared/services/auth.service';
@@ -20,9 +21,35 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
     this.authService.user.subscribe(value => this.user = value);
-
-    // if (!this.name)
-
-    //   this.router.navigate(['/login']);
   }
+
+  signOut() {
+    this.authService.clearToken();
+    this.router.navigate(['/home']);
+  }
+
+  editPicture() {
+    // Logique pour éditer la photo de profil
+    // biome-ignore lint/suspicious/noConsoleLog: <explanation>
+    console.log('Edit picture');
+  }
+
+  editName() {
+    // biome-ignore lint/suspicious/noConsoleLog: <explanation>
+    console.log('Edit name');
+    // Logique pour éditer le nom
+  }
+
+  editEmail() {
+    // Logique pour éditer l'email
+    // biome-ignore lint/suspicious/noConsoleLog: <explanation>
+    console.log('Edit email');
+  }
+
+  changePassword() {
+    // Logique pour changer le mot de passe
+    // biome-ignore lint/suspicious/noConsoleLog: <explanation>
+    console.log('Change password');
+  }
+
 }

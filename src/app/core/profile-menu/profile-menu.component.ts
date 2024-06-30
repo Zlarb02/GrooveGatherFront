@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, inject } from '@angular/core';
+// biome-ignore lint/style/useImportType: <explanation>
+import { Component, ElementRef, Input, ViewChild, inject } from '@angular/core';
 // biome-ignore lint/style/useImportType: <explanation>
 import { Router, RouterLink } from '@angular/router';
 import type { User } from '../../shared/models/user.model';
@@ -18,6 +19,7 @@ export class ProfileMenuComponent {
   @Input()
   user!: User;
 
+  @ViewChild('toggleMenu') toggleMenu!: ElementRef;
   authService: AuthService = inject(AuthService);
 
   constructor(private router: Router) { }
@@ -25,5 +27,10 @@ export class ProfileMenuComponent {
   signOut() {
     this.authService.clearToken();
     this.router.navigate(['/home']);
+    this.closeMenu(); // Close menu after signing out
+  }
+
+  closeMenu() {
+    this.toggleMenu.nativeElement.checked = false;
   }
 }

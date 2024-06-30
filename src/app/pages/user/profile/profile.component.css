@@ -1,0 +1,66 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4vh;
+    padding-top: 10vh;
+    height: 75vh;
+    overflow-y: scroll;
+}
+
+span {
+    display: flex;
+    align-items: baseline;
+    justify-content: baseline;
+    flex-direction: row;
+    gap: 1vh;
+    --ggs: 0.8;
+}
+
+i {
+    top: -7px;
+    left: -10px;
+}
+
+.picture-pen {
+    left: -40px;
+}
+
+img {
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+}
+
+
+
+
+.change-password-btn {
+    margin-top: 1rem;
+    background-color: var(--primary-color);
+    border: none;
+    color: var(--color);
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.change-password-btn:hover {
+    background-color: var(--primary-color-dark);
+}
+
+button {
+    margin-top: 1rem;
+    background-color: var(--primary-color);
+    border: none;
+    color: var(--color);
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--primary-color-dark);
+}
