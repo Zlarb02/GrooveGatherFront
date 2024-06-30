@@ -49,11 +49,19 @@
     width: 100%;
 }
 
+h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 1000;
+    flex-direction: column;
+    gap: 10vh;
+}
+
 h1,
 h2,
 h3 {
-    font-size: 2rem;
-    font-weight: 1000;
     background: radial-gradient(circle, var(--orange), white);
     background-clip: text;
     color: transparent;
@@ -68,6 +76,7 @@ p {
     font-weight: 300;
     max-width: 95vw;
     padding: 2.5vw;
+    margin: 10vh 0 20vh 0;
 }
 
 h2 {
@@ -126,17 +135,42 @@ b {
 
 
 
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 8vw;
+    margin-top: 40px;
+    margin-bottom: 15vh;
+}
+
+.btn,
+.btn-secondary {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+    width: 25vw;
+    height: 65px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
 @media screen and (min-width: 768px) {
     p {
-        font-size: 1.4em;
+        font-size: 1.6em;
     }
 
     h1 {
-        font-size: 2em;
+        font-size: 2.4em;
     }
 
     h2 {
-        font-size: 1.8em;
+        font-size: 3em;
     }
 
     h3 {
@@ -151,31 +185,14 @@ b {
     .white-pink {
         font-size: 1.6em;
     }
+
+    .btn,
+    .btn-secondary {
+        font-size: 1.2em;
+    }
 }
 
 
-.cta-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 8vw;
-    margin-top: 40px;
-}
-
-.btn,
-.btn-secondary {
-    padding: 15px 30px;
-    border: none;
-    border-radius: 5px;
-    text-decoration: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    transition: background 0.3s, color 0.3s;
-    width: 25vw;
-    height: 65px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
 .btn {
     background: var(--pink);
@@ -197,6 +214,32 @@ b {
 .btn-secondary:hover {
     background: #c6afff;
     filter: contrast(200%);
+}
+
+
+
+.btn span {
+    background: radial-gradient(circle, var(--orange), white);
+    background-clip: text;
+    color: transparent;
+    animation: colorGradient 4s linear infinite;
+    background-size: 200% 200%;
+
+}
+
+.btn-secondary span {
+    background: radial-gradient(circle, var(--red), var(--light-color));
+    background-clip: text;
+    color: transparent;
+    animation: colorGradient 4s linear infinite;
+    background-size: 250% 300%;
+    filter: contrast(200%);
+}
+
+.btn:hover span,
+.btn-secondary:hover span {
+    color: var(--light-color);
+    background-clip: none;
 }
 
 .features-section,

@@ -28,9 +28,13 @@ export class ThemeService {
     if (this.isInverseTheme) {
       root.style.setProperty('--bg', 'var( --user-inverse-bg)');
       root.style.setProperty('--color', 'var(--user-inverse-color)');
+      root.style.setProperty('--link', 'var(--user-inverse-link)');
+      root.style.setProperty('--colored', 'var(--user-inverse-colored)');
     } else {
       root.style.setProperty('--bg', 'var(--user-preferred-bg)');
       root.style.setProperty('--color', 'var(--user-preferred-color)');
+      root.style.setProperty('--link', 'var(--user-preferred-link)');
+      root.style.setProperty('--colored', 'var(--user-preferred-colored)');
     }
   }
 }
