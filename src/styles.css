@@ -118,6 +118,11 @@ body {
     --light-lines: #7f7f7f;
     --light-placeholder: darkgrey;
 
+    --light-link: var(--pink);
+    --dark-link: var(--orange);
+    --light-colored: var(--orange);
+    --dark-colored: var(--pink);
+
     --dark-bg: #121212;
     /* Gris très foncé */
     --dark-color: #e0e0e0;
@@ -146,10 +151,14 @@ body {
     body {
         --user-preferred-bg: var(--dark-bg);
         --user-preferred-color: var(--dark-color);
+        --user-preferred-link: var(--dark-link);
+        --user-preferred-colored: var(--dark-colored);
         /* Update other variables for user-preferred dark theme */
 
         --user-inverse-bg: var(--light-bg);
         --user-inverse-color: var(--light-color);
+        --user-inverse-link: var(--light-link);
+        --user-inverse-colored: var(--light-colored);
     }
 }
 
@@ -157,10 +166,14 @@ body {
     body {
         --user-preferred-bg: var(--light-bg);
         --user-preferred-color: var(--light-color);
+        --user-preferred-link: var(--light-link);
+        --user-preferred-colored: var(--light-colored);
         /* Update other variables for user-preferred light theme */
 
         --user-inverse-bg: var(--dark-bg);
         --user-inverse-color: var(--dark-color);
+        --user-inverse-link: var(--dark-link);
+        --user-inverse-colored: var(--dark-colored);
     }
 }
 
@@ -171,6 +184,8 @@ body {
     background-color: var(--bg);
     --bg: var(--user-preferred-bg);
     --color: var(--user-preferred-color);
+    --link: var(--user-preferred-link);
+    --colored: var(--user-preferred-colored);
     --bg-inverse: lightgrey;
     --orange: #f9b234;
     --green: #3ecd5e;
