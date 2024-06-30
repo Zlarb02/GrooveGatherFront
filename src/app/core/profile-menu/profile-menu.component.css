@@ -55,6 +55,7 @@ a {
   max-height: 70px;
   max-width: 100px;
   border: var(--dark-bg) 1px solid;
+  font-weight: 400;
 }
 
 .dropdown-profile-menu .dropdown li:hover {
@@ -100,6 +101,7 @@ a {
   animation-delay: .8s;
 }
 
+/* 
 @keyframes showMenu {
   from {
     opacity: 1;
@@ -110,4 +112,4 @@ a {
     opacity: 1;
     transform: translateY(0);
   }
-}
+} */
