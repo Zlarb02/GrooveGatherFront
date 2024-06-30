@@ -7,6 +7,10 @@
     width: 100vw;
 }
 
+.app-landing-page {
+    top: 15vh
+}
+
 .page-container {
     height: 75vh;
     background-color: var(--bg);
