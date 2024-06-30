@@ -1,8 +1,9 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 // biome-ignore lint/style/useImportType: <explanation>
-import { ChangeDetectorRef, Component, Input, ViewEncapsulation, type OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, ViewEncapsulation } from '@angular/core';
 // biome-ignore lint/style/useImportType: <explanation>
 import { DomSanitizer } from '@angular/platform-browser';
+import { RouterLink } from '@angular/router';
 import Aos from 'aos';
 import { interval } from 'rxjs/internal/observable/interval';
 import { HeaderComponent } from '../../core/header/header.component';
@@ -11,7 +12,7 @@ import type { User } from '../../shared/models/user.model';
 @Component({
   selector: 'app-landing-page',
   standalone: true,
-  imports: [HeaderComponent],
+  imports: [HeaderComponent, RouterLink],
   templateUrl: './landing-page.component.html',
   styleUrl: './landing-page.component.css',
   animations: [
@@ -31,7 +32,7 @@ import type { User } from '../../shared/models/user.model';
 
 })
 
-export class LandingPageComponent implements OnInit {
+export class LandingPageComponent {
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   private bgImgs: Array<any>;
   private current = 1;
@@ -82,7 +83,7 @@ export class LandingPageComponent implements OnInit {
       })
     Aos.init({
       offset: 90, // Ajuste l'offset selon tes besoins
-      duration: 1000, // Durée de l'animation
+      duration: 1600, // Durée de l'animation
       easing: 'ease', // Type d'animation
       once: true, // Si vrai, l'animation se déclenche une seule fois
       mirror: false, // Si vrai, l'animation se déclenche aussi lors du scroll vers le haut
