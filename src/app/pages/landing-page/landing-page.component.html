@@ -1,0 +1,81 @@
+<div class="bg-bg"></div>
+<div class="bg-header"></div>
+<div class="bg-landig" [@fadeIn]="state" (@fadeIn.done)="onDone($event)" [style.backgroundImage]="currentImage"
+    data-aos="fade-in"></div>
+<app-header style="position: relative; z-index: 5;" [pageTitle]="pageTitle" [user]="user"
+    data-aos="fade-down"></app-header>
+<div class="landing-page">
+    <div class="overlay">
+        <div class="content">
+            <h1 data-aos="fade-left">Collaborez sur des projets musicaux en toute simplicité avec
+                <br><br>
+                <b data-aos="fade-right" data-aos-delay="400">GrooveGather</b>
+            </h1>
+            <p data-aos="fade-up" class="white-pink">Rejoignez GrooveGather, une communauté dynamique de musiciens et de
+                producteurs,
+                pour créer, partager et
+                découvrir des projets musicaux exceptionnels.</p>
+            <div class="cta-buttons">
+                <a [routerLink]="['/signup']" class="btn" data-aos="flip-left" data-aos-delay="200">
+                    <span>Inscrivez-vous
+                        gratuitement</span></a>
+                <a [routerLink]="['/search']" class="btn-secondary" data-aos="flip-left"><span>Explorer les
+                        projets</span></a>
+            </div>
+        </div>
+    </div>
+    <div class="features-section">
+        <h2 data-aos="fade-up">Fonctionnalités</h2>
+        <div class="features-grid">
+            <div class="feature-item" data-aos="fade-up" data-aos-delay="100">
+                <h3>Collaboration fluide</h3>
+                <span>Connectez-vous avec d'autres musiciens et travaillez ensemble sans effort grâce à
+                    GrooveGather.</span>
+            </div>
+            <div class="feature-item" data-aos="fade-up" data-aos-delay="200">
+                <h3>Gestion de projet efficace</h3>
+                <span>Gérez vos projets musicaux de A à Z avec une organisation optimale.</span>
+            </div>
+            <div class="feature-item" data-aos="fade-up" data-aos-delay="300">
+                <h3>Découverte de talents</h3>
+                <span>Découvrez des collaborateurs talentueux pour enrichir et sublimer vos créations musicales.</span>
+            </div>
+        </div>
+    </div>
+    <div class="testimonials-section">
+        <h2 data-aos="fade-up">Témoignages de nos utilisateurs</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-item" data-aos="fade-up" data-aos-delay="100">
+                <span>“GrooveGather a révolutionné ma manière de créer de la musique. C'est tout simplement incroyable
+                    !“
+                </span>
+                <h4>- Jane Doe</h4>
+            </div>
+            <div class="testimonial-item" data-aos="fade-up" data-aos-delay="200">
+                <span>“La meilleure plateforme pour collaborer en musique. Je la recommande vivement !“</span>
+                <h4>- John Smith</h4>
+            </div>
+            <div class="testimonial-item" data-aos="fade-up" data-aos-delay="300">
+                <span>“J'ai découvert des talents incroyables grâce à GrooveGather. Un véritable <i>game changer</i>.“
+                </span>
+                <h4>- Emily Johnson</h4>
+            </div>
+        </div>
+        <br><br>
+        <p data-aos="fade-up" data-aos-delay="400">Rejoignez GrooveGather, une communauté
+            dynamique de musiciens et de
+            producteurs, pour créer, partager et découvrir des projets musicaux exceptionnels.</p>
+        <div class="cta-buttons" data-aos="fade-up" data-aos-delay="500">
+            <a [routerLink]="['/search']" class="btn-secondary"><span>Explorer les projets</span></a>
+            <a [routerLink]="['/signup']" class="btn"> <span>Inscrivez-vous gratuitement</span></a>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+</div>

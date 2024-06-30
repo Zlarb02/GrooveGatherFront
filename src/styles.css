@@ -20,6 +20,14 @@ html {
     overflow: hidden;
 }
 
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
 .ngx-pagination a {
     color: var(--color) !important
 }
@@ -32,9 +40,12 @@ html {
     background-color: var(--bg) !important
 }
 
-a {
+a,
+li {
     text-decoration: none;
-    color: var(--color)
+    color: var(--color);
+    font-weight: 500;
+    font-size: 0.6rem;
 }
 
 h1,
@@ -107,6 +118,11 @@ body {
     --light-lines: #7f7f7f;
     --light-placeholder: darkgrey;
 
+    --light-link: var(--pink);
+    --dark-link: var(--orange);
+    --light-colored: var(--orange);
+    --dark-colored: var(--pink);
+
     --dark-bg: #121212;
     /* Gris très foncé */
     --dark-color: #e0e0e0;
@@ -135,10 +151,14 @@ body {
     body {
         --user-preferred-bg: var(--dark-bg);
         --user-preferred-color: var(--dark-color);
+        --user-preferred-link: var(--dark-link);
+        --user-preferred-colored: var(--dark-colored);
         /* Update other variables for user-preferred dark theme */
 
         --user-inverse-bg: var(--light-bg);
         --user-inverse-color: var(--light-color);
+        --user-inverse-link: var(--light-link);
+        --user-inverse-colored: var(--light-colored);
     }
 }
 
@@ -146,10 +166,14 @@ body {
     body {
         --user-preferred-bg: var(--light-bg);
         --user-preferred-color: var(--light-color);
+        --user-preferred-link: var(--light-link);
+        --user-preferred-colored: var(--light-colored);
         /* Update other variables for user-preferred light theme */
 
         --user-inverse-bg: var(--dark-bg);
         --user-inverse-color: var(--dark-color);
+        --user-inverse-link: var(--dark-link);
+        --user-inverse-colored: var(--dark-colored);
     }
 }
 
@@ -160,6 +184,8 @@ body {
     background-color: var(--bg);
     --bg: var(--user-preferred-bg);
     --color: var(--user-preferred-color);
+    --link: var(--user-preferred-link);
+    --colored: var(--user-preferred-colored);
     --bg-inverse: lightgrey;
     --orange: #f9b234;
     --green: #3ecd5e;
@@ -177,7 +203,6 @@ body {
 }
 
 /* COLORS END BLOCK */
-
 
 /* GG ICONS START BLOCK */
 
@@ -1881,6 +1906,50 @@ body {
     transform: rotate(45deg);
     left: 6px;
     top: 3px
+}
+
+.gg-pen {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: rotate(-45deg) scale(var(--ggs, 1));
+    width: 14px;
+    height: 4px;
+    border-right: 2px solid transparent;
+    box-shadow:
+        0 0 0 2px,
+        inset -2px 0 0;
+    border-top-right-radius: 1px;
+    border-bottom-right-radius: 1px;
+    margin-right: -2px
+}
+
+.gg-pen::after,
+.gg-pen::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute
+}
+
+.gg-pen::before {
+    background: currentColor;
+    border-left: 0;
+    right: -6px;
+    width: 3px;
+    height: 4px;
+    border-radius: 1px;
+    top: 0
+}
+
+.gg-pen::after {
+    width: 8px;
+    height: 7px;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-right: 7px solid;
+    left: -11px;
+    top: -2px
 }
 
 /* GG ICONS START BLOCK */

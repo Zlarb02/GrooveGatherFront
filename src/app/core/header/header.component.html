@@ -1,9 +1,8 @@
 <header>
 
-    <app-menu style="margin-top: 0.7vh; margin-left: 2vw; z-index: 3;"></app-menu>
+    <app-menu class="app-menu"></app-menu>
     <h2> {{pageTitle}}</h2>
     <app-search-bar class="search-bar"></app-search-bar>
-    <app-profile-menu style="margin-top: 0.7vh; margin-right: 0vw; transform:scale(1.6); z-index: 3;"
-        [actualUser]="actualUser"></app-profile-menu>
+    <app-profile-menu class="app-profile-menu" [user]="user"></app-profile-menu>
 
 </header>

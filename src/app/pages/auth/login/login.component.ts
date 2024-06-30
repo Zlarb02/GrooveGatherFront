@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, type AfterViewInit, type OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import type { User } from '../../../shared/models/user.model';
 import { AuthService } from '../../../shared/services/auth.service';
 
 declare global {
@@ -13,28 +14,19 @@ declare global {
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css', '../signupLogin.css']
 })
 export class LoginComponent implements OnInit, AfterViewInit {
-  name = '';
-  email = '';
-  picture = '';
-  userIsConnected = false;
+  user!: User;
 
   authService = inject(AuthService);
   router: Router = inject(Router);
 
   ngOnInit() {
     // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
-    this.authService.userIsConnected.subscribe(isConnected => this.userIsConnected = isConnected);
-    // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
-    this.authService.name.subscribe(name => this.name = name);
-    // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
-    this.authService.email.subscribe(email => this.email = email);
-    // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
-    this.authService.picture.subscribe(picture => this.picture = picture);
+    this.authService.user.subscribe(user => this.user = user);
   }
 
   ngAfterViewInit() {
@@ -86,12 +78,11 @@ export class LoginComponent implements OnInit, AfterViewInit {
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   handleCredentialResponse(response: any) {
     this.authService.setToken(response.credential);
-    this.router.navigate(['/']);
+    this.router.navigate(['/search']);
   }
 
   signOut() {
     this.authService.clearToken();
     this.router.navigate(['/']);
-
   }
 }

@@ -1,9 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject, type OnInit } from '@angular/core';
 // biome-ignore lint/style/useImportType: <explanation>
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import type { Subscription } from 'rxjs';
 import { FooterComponent } from './core/footer/footer.component';
 import { HeaderComponent } from './core/header/header.component';
+import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 import type { User } from './shared/models/user.model';
 import { AuthService } from './shared/services/auth.service';
 import { ThemeService } from './shared/services/theme.service';
@@ -12,15 +14,17 @@ import { ThemeService } from './shared/services/theme.service';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  imports: [HeaderComponent, RouterOutlet, FooterComponent],
+  imports: [CommonModule, HeaderComponent, RouterOutlet, FooterComponent, LandingPageComponent],
   standalone: true,
 })
 export class AppComponent implements OnInit {
   title = 'GrooveGatherFront';
-  currentPageTitle = '';
-  actualUser: User = { name: '', mail: '', picture: '', isConnected: false };
 
-  userIsConnected = false;
+  landingPage = true;
+
+  currentPageTitle = '';
+
+  user: User = { name: '', mail: '', picture: '', isConnected: false };
 
   private subscriptions: Subscription[] = [];
 
@@ -45,13 +49,7 @@ export class AppComponent implements OnInit {
   authSubscriptions() {
     this.subscriptions.push(
       // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
-      this.authService.userIsConnected.subscribe(isConnected => this.actualUser.isConnected = isConnected),
-      // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
-      this.authService.name.subscribe(name => this.actualUser.name = name),
-      // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
-      this.authService.email.subscribe(email => this.actualUser.mail = email),
-      // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
-      this.authService.picture.subscribe(picture => this.actualUser.picture = picture)
+      this.authService.user.subscribe(user => this.user = user),
     );
   }
 
@@ -59,12 +57,65 @@ export class AppComponent implements OnInit {
     switch (pageTitle) {
       case '/':
         this.currentPageTitle = '';
+        if (this.user.name) {
+
+          this.router.navigate(['/search']);
+        } else {
+          this.router.navigate(['/landing-page']);
+        }
+        break;
+      case '/home':
+        this.currentPageTitle = '';
+        if (this.user.name) {
+          this.router.navigate(['/profile']);
+        }
         break;
       case '/search':
         this.currentPageTitle = 'Rechercher';
         break;
+      case '/landing-page':
+        this.currentPageTitle = " ";
+        break;
+      case '/signup':
+        this.currentPageTitle = "S'inscrire";
+        break;
+      case '/login':
+        this.currentPageTitle = 'Se connecter';
+        break;
+      case '/profile':
+        this.currentPageTitle = 'Mon profil';
+        break;
+      case '/settings':
+        this.currentPageTitle = 'Paramètres';
+        break;
+      case '/my-projects':
+        this.currentPageTitle = 'Mes projets';
+        break;
+      case '/create-project':
+        this.currentPageTitle = 'Créer un projet';
+        if (!this.user.name) {
+          this.router.navigate(['/login']);
+        }
+        break;
+      case '/notification':
+        this.currentPageTitle = 'Notifications';
+        if (!this.user.name) {
+          this.router.navigate(['/login']);
+        }
+        break;
+      case '/messages':
+        this.currentPageTitle = 'Messagerie';
+        if (!this.user.name) {
+          this.router.navigate(['/login']);
+        }
+        break;
       default:
-        this.currentPageTitle = 'GrooveGather';
+        this.currentPageTitle = '';
+    }
+    if (this.currentPageTitle === " ") {
+      this.landingPage = true;
+    } else {
+      this.landingPage = false;
     }
   }
 }

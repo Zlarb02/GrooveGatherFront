@@ -1,1 +1,8 @@
-<p>project-detail works!</p>
+<div class="wrapper" *ngIf="project">
+  <h1>{{ project.name }}</h1>
+  <p>Genre: {{ project.genre }}</p>
+  <p>Date: {{ project.date }}</p>
+  <p>Description: {{ project.description }}</p>
+  <p>Likes: {{ project.likes }}</p>
+</div>
+<div class="comment-section"></div>

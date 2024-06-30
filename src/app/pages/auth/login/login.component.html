@@ -1,20 +1,29 @@
-<div style="display: flex; align-items: center; justify-content: center;">
-    <div *ngIf="!name" style="margin-top: 30vh;">
-
-        <div id="g_id_onload" data-client_id="674011661072-mvs1hadt0jgppkfv76b5tkeroohqtbij.apps.googleusercontent.com"
-            data-context="signin" data-ux_mode="popup" data-itp_support="true">
+<div class="flex-center">
+    <div class="login-container">
+        <div *ngIf="!user.name">
+            <div id="g_id_onload"
+                data-client_id="674011661072-mvs1hadt0jgppkfv76b5tkeroohqtbij.apps.googleusercontent.com"
+                data-context="signin" data-ux_mode="popup" data-itp_support="true"></div>
+            <div class="g_id_signin google-login" data-type="standard" data-shape="pill" data-theme="outline"
+                data-text="signin_with" data-size="large" data-logo_alignment="left"></div>
         </div>
-        <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="outline" data-text="signin_with"
-            data-size="large" data-logo_alignment="left">
-        </div>
-
-    </div>
-
-    <div *ngIf="name">
-        <p>Bonjour, {{ name }} !</p>
-        <p>Votre email est : {{ email }}</p>
-        <img [src]="picture" alt="Photo de {{ name }}" />
-
-        <button (click)="signOut()">Se déconnecter</button>
+        <br>
+        <form>
+            <div>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required placeholder="Email">
+            </div>
+            <br>
+            <div>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required placeholder="Password">
+            </div>
+            <div>
+                <a href="#">Forgot password?</a>
+                <br>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+        <p>Don't have an account? <a [routerLink]="['/signup']">Sign Up</a></p>
     </div>
 </div>
