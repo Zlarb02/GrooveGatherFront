@@ -1,37 +1,57 @@
 .form-group {
-  margin-bottom: 1rem;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   }
+   
+   /* Taille minimale pour les inputs */
+   input[type="text"], input[type="number"] {
+    min-width: 50%;
+    height: 50px; /* Ajustez cette valeur selon vos besoins */
+    max-width: 100%;
+    border-radius: 15px;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: var(--bg-inverse);
+   }
+   
+   .error {
+    color: red;
+    margin-top: 5px;
+   }
+   
+   #description {
+    width: 60vw;
+    height:40vh;
+    border-radius: 10px;
+   }
+   input{
+    width: 60vw; 
+   }
+
+/* Style pour le label 'Genre' */
+.genre-label {
+    display: flex;
+    justify-content: center; /* Centrer horizontalement */
+    align-items: center; /* Centrer verticalement */
+    width: min-content; /* Prend seulement autant d'espace que nécessaire */
+    height: auto; /* Permet à la taille du label de s'adapter à son contenu */
 }
 
-.form-control {
-  width: 50%;
-  padding: 0.5rem;
-  margin-top: 0.5rem;
 
-  label {
-    height: 50%;
-  }
-
-}
-
-.error {
-  color: red;
-  font-size: 0.875rem;
-  margin-top: 0.25rem;
+.genre-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 
-.center-textarea {
-  display: flex;
-  justify-content: center;
-}
-
-
-.btn {
-  display: block;
-  width: 100%;
-  padding: 0.75rem;
-  font-size: 1rem;
-  cursor: pointer;
+/* Style pour l'input associé au label 'Genre' */
+#genre {
+    width: 60vw; /* Largeur maximale de l'input */
+    height: 50px; /* Hauteur de l'input */
+    border-radius: 15px; /* Rayon des bords de l'input */
+    padding: 10px; /* Paddings internes de l'input */
+    box-sizing: border-box; /* Inclut la marge et le padding dans largeur totale */
+    background-color: var(--bg-inverse); /* Couleur de fond de l'input */
 }
