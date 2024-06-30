@@ -44,7 +44,7 @@ a {
   padding: 0 10px;
   width: 14vw;
   cursor: pointer;
-  transition: opacity .5s, transform .5s, background .3s, color .3s;
+  transition: opacity .5s, transform .5s, background .3s, color .3s, border-radius .5s;
   color: var(--dark-bg);
   --pill-accent: var(--bg-inverse);
   background: color-mix(in srgb, var(--pill-accent) 90%, transparent);
@@ -55,11 +55,15 @@ a {
   max-height: 70px;
   max-width: 100px;
   border: var(--dark-bg) 1px solid;
+  font-weight: 400;
+  border-radius: 5px 5px 5px 5px;
 }
 
 .dropdown-profile-menu .dropdown li:hover {
   background-color: var(--purple);
   color: white;
+  border-radius: 0;
+  transition: background .3s, color .3s, border-radius .5s;
 }
 
 #toggle-menu:checked+label {
@@ -76,13 +80,6 @@ a {
   animation: showMenu .5s forwards;
 }
 
-#toggle-menu:checked~.dropdown a>li:nth-child(1) {
-  border-radius: 5px 5px 5px 5px;
-}
-
-#toggle-menu:checked~.dropdown li:last-child {
-  border-radius: 5px 5px 5px 5px;
-}
 
 #toggle-menu:checked~.dropdown a>li:nth-child(2) {
   animation-delay: .2s;
@@ -99,6 +96,7 @@ a {
 #toggle-menu:checked~.dropdown a>li:nth-child(5) {
   animation-delay: .8s;
 }
+
 
 @keyframes showMenu {
   from {

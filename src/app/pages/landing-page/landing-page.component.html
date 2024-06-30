@@ -16,9 +16,11 @@
                 pour créer, partager et
                 découvrir des projets musicaux exceptionnels.</p>
             <div class="cta-buttons">
-                <a href="/signup" class="btn" data-aos="flip-left" data-aos-delay="200"> <span>Inscrivez-vous
+                <a [routerLink]="['/signup']" class="btn" data-aos="flip-left" data-aos-delay="200">
+                    <span>Inscrivez-vous
                         gratuitement</span></a>
-                <a href="/search" class="btn-secondary" data-aos="flip-left"><span>Explorer les projets</span></a>
+                <a [routerLink]="['/search']" class="btn-secondary" data-aos="flip-left"><span>Explorer les
+                        projets</span></a>
             </div>
         </div>
     </div>
@@ -64,8 +66,8 @@
             dynamique de musiciens et de
             producteurs, pour créer, partager et découvrir des projets musicaux exceptionnels.</p>
         <div class="cta-buttons" data-aos="fade-up" data-aos-delay="500">
-            <a href="/search" class="btn-secondary"><span>Explorer les projets</span></a>
-            <a href="/signup" class="btn"> <span>Inscrivez-vous gratuitement</span></a>
+            <a [routerLink]="['/search']" class="btn-secondary"><span>Explorer les projets</span></a>
+            <a [routerLink]="['/signup']" class="btn"> <span>Inscrivez-vous gratuitement</span></a>
         </div>
     </div>
     <br>
