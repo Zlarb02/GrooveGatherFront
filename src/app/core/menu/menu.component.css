@@ -7,7 +7,6 @@
   width: 44px;
   display: flex;
   position: relative;
-  margin-top: 50px;
 }
 
 svg,
@@ -59,11 +58,8 @@ path {
 
 /* Style initial de la div à afficher/cacher */
 nav {
-  top: 1.8vh;
-  font-size: large;
-  color: white;
-  --pill-accent: var(--purple);
-  background: color-mix(in srgb, var(--pill-accent) 80%, transparent);
+  top: 2vh;
+  filter: contrast(130%);
   margin-top: 20px;
   border-radius: 8px;
   display: none;
@@ -71,20 +67,34 @@ nav {
   transition: opacity 2s ease-in-out;
 
   li {
+    --pill-accent: var(--bg-inverse);
+    background: color-mix(in srgb, var(--pill-accent) 90%, transparent);
     height: 9.5vh;
-    min-height: 100px;
+    min-height: 60px;
     max-height: 200px;
     padding: 0 20px;
     list-style: none;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: background 0.5s ease, color 0.3s ease;
+    color: var(--light-color);
+    font-size: 1rem;
+    border: var(--dark-bg) 1px solid;
+    border-radius: 8px;
   }
 }
-a{
-  color : var(--dark-color);
-  font-weight: 700;
 
+@media screen and (max-height: 800px) {
+  nav {
+    top: 1vh;
+  }
+}
+
+@media screen and (max-height: 500px) {
+  nav {
+    top: -2vh;
+  }
 }
 
 /* Lorsque le SVG a la classe active, change l'opacité de la div pour la rendre visible */
@@ -94,15 +104,13 @@ a{
   height: fit-content;
   opacity: 1;
   transition: opacity 2s ease-in-out;
-
 }
 
 .burger .ham.active .line {
-  stroke: var(--bg-inverse);
+  stroke: var(--light-color);
 }
 
-li:hover {
-
-  background-color: var(--blue);
-  color: var(--green);
+nav li:hover {
+  background-color: var(--purple);
+  color: var(--dark-color);
 }

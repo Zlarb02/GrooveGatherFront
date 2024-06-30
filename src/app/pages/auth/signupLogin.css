@@ -1,0 +1,105 @@
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 50vh;
+    overflow: hidden;
+    background-color: var(--bg);
+    padding: 3rem 0;
+}
+
+.login-container,
+.signup-container {
+    height: fit-content;
+    max-height: 55vh;
+    width: fit-content;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: var(--bg-inverse);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    overflow-y: scroll;
+}
+
+h2 {
+    text-align: center;
+    color: black;
+    margin-bottom: 1rem;
+}
+
+form,
+form>div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+label {
+    display: none;
+}
+
+input {
+    width: 100%;
+    border: 1px solid var(--bg);
+    border-radius: 12px;
+    font-size: 16px;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease;
+    color: black;
+}
+
+input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+input:focus+label,
+input:not(:placeholder-shown)+label {
+    top: -5px;
+    left: 10px;
+    font-size: 12px;
+}
+
+button {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+p {
+    text-align: center;
+    color: var(--lines);
+}

@@ -28,28 +28,46 @@
   position: absolute;
 }
 
+a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: fit-content;
+
+  border-radius: 0 0 5px 5px;
+}
+
 .dropdown-profile-menu .dropdown li {
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: 0 10px;
+  width: 14vw;
   cursor: pointer;
-  transition: opacity .5s, transform .5s, background .3s, color .3s;
-  color: white;
-  --pill-accent: var(--purple);
-  background: color-mix(in srgb, var(--pill-accent) 80%, transparent);
+  transition: opacity .5s, transform .5s, background .3s, color .3s, border-radius .5s;
+  color: var(--dark-bg);
+  --pill-accent: var(--bg-inverse);
+  background: color-mix(in srgb, var(--pill-accent) 90%, transparent);
+  filter: contrast(130%);
   text-align: center;
-  font-size: x-small;
-  height: 8vh;
+  height: 4vh;
+  min-height: 40px;
+  max-height: 70px;
+  max-width: 100px;
+  border: var(--dark-bg) 1px solid;
+  font-weight: 400;
+  border-radius: 5px 5px 5px 5px;
 }
 
 .dropdown-profile-menu .dropdown li:hover {
-  background-color: var(--blue);
-  color: var(--green);
+  background-color: var(--purple);
+  color: white;
+  border-radius: 0;
+  transition: background .3s, color .3s, border-radius .5s;
 }
 
 #toggle-menu:checked+label {
   background-color: var(--purple);
-  color: var(--bg-inverse);
 }
 
 /* Affiche le menu déroulant et anime les éléments lorsqu'on coche la checkbox */
@@ -60,33 +78,25 @@
 #toggle-menu:checked~.dropdown li {
   display: flex;
   animation: showMenu .5s forwards;
-
-  position: relative;
 }
 
-#toggle-menu:checked~.dropdown li:first-child {
-  border-radius: 5px 5px 0 0;
-}
 
-#toggle-menu:checked~.dropdown li:last-child {
-  border-radius: 0 0 5px 5px;
-}
-
-#toggle-menu:checked~.dropdown li:nth-child(2) {
+#toggle-menu:checked~.dropdown a>li:nth-child(2) {
   animation-delay: .2s;
 }
 
-#toggle-menu:checked~.dropdown li:nth-child(3) {
+#toggle-menu:checked~.dropdown a>li:nth-child(3) {
   animation-delay: .4s;
 }
 
-#toggle-menu:checked~.dropdown li:nth-child(4) {
+#toggle-menu:checked~.dropdown a>li:nth-child(4) {
   animation-delay: .6s;
 }
 
-#toggle-menu:checked~.dropdown li:nth-child(5) {
+#toggle-menu:checked~.dropdown a>li:nth-child(5) {
   animation-delay: .8s;
 }
+
 
 @keyframes showMenu {
   from {

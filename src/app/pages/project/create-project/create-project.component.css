@@ -55,5 +55,3 @@
     box-sizing: border-box; /* Inclut la marge et le padding dans largeur totale */
     background-color: var(--bg-inverse); /* Couleur de fond de l'input */
 }
-
-

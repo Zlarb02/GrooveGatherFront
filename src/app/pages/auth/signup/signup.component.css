@@ -1,0 +1,11 @@
+.signup-container button {
+    background-color: #28a745;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signup-container button:hover {
+    background-color: #218838;
+}
