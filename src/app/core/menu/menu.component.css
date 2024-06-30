@@ -104,7 +104,6 @@ nav {
   height: fit-content;
   opacity: 1;
   transition: opacity 2s ease-in-out;
-
 }
 
 .burger .ham.active .line {

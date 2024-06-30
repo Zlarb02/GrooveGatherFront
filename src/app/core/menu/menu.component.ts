@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
-import { AboutUsComponent } from '../../pages/about-us/about-us.component';
-import { HomeComponent } from '../../pages/home/home.component';
+// biome-ignore lint/style/useImportType: <explanation>
+import { Component, ViewChild, type ElementRef } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -11,5 +10,9 @@ import { RouterLink } from '@angular/router';
   styleUrl: './menu.component.css'
 })
 export class MenuComponent {
+  @ViewChild('ham') ham!: ElementRef;
 
+  closeMenu() {
+    this.ham.nativeElement.classList.remove('active');
+  }
 }
