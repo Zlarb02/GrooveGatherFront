@@ -1,23 +1,24 @@
 <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
-    <label for="nameProject">Nom du Projet</label>
-    <input id="nameProject" formControlName="nameProject" type="text" class="form-control">
+    <input id="nameProject" formControlName="nameProject" type="text" class="form-control" placeholder="Nom du Projet">
     <div *ngIf="myForm.get('nameProject')?.invalid && myForm.get('nameProject')?.touched" class="error">
       Le nom du projet est requis.
     </div>
   </div>
 
+
   <div class="form-group">
-    <label for="nameOwner">Nom du Propriétaire</label>
-    <input id="nameOwner" formControlName="nameOwner" type="text" class="form-control">
+    <input id="nameOwner" formControlName="nameOwner" type="text" class="form-control"
+      placeholder="Nom du Propriétaire">
     <div *ngIf="myForm.get('nameOwner')?.invalid && myForm.get('nameOwner')?.touched" class="error">
       Le nom du propriétaire est requis.
     </div>
   </div>
 
-  <div class="form-group">
-    <label for="genre">Genre</label>
-    <input id="genre" formControlName="genre" type="text" class="form-control">
+  <div class="genre-container">
+    <label for="genre" class="genre-label">Genreeeeeeee</label>
+    <input id="genre" placeholder="" formControlName="genre" type="text" class="form-control">
+
     <div *ngIf="myForm.get('genre')?.invalid && myForm.get('genre')?.touched" class="error">
       Le genre est requis.
     </div>
@@ -26,14 +27,14 @@
   <div class="form-group">
     <label for="description">Description</label>
     <div class="center-textarea">
-       <textarea id="description" formControlName="description" class="
+      <textarea id="description" formControlName="description" class="
    form-control"></textarea>
     </div>
     <div *ngIf="myForm.get('description')?.invalid && myForm.get('
    description')?.touched" class="error">
-       La description est requise.
+      La description est requise.
     </div>
-   </div>
+  </div>
 
   <button type="submit" [disabled]="myForm.invalid" class="btn btn-primary">Submit</button>
-</form> 
+</form>
