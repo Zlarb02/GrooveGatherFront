@@ -1,4 +1,16 @@
+.container{
+    max-height: 75vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; /* Ajoute un défilement fluide sur iOS */
+    display: flex;
+    flex-direction: column;
+    -webkit-overflow-scrolling: touch;
+  }
+
+
+
 .form-group {
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -24,6 +36,7 @@
     width: 60vw;
     height:40vh;
     border-radius: 10px;
+    background-color: var(--bg-inverse); 
    }
    input{
     width: 60vw; 
@@ -54,4 +67,14 @@
     padding: 10px; /* Paddings internes de l'input */
     box-sizing: border-box; /* Inclut la marge et le padding dans largeur totale */
     background-color: var(--bg-inverse); /* Couleur de fond de l'input */
+}
+
+
+button {
+    display: block;
+    margin: 0 auto; /* Centrer le bouton */
+  }
+
+  select{
+    color: var(--light-placeholder);
 }
