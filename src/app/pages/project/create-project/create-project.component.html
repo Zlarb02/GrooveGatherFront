@@ -1,40 +1,67 @@
-<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-  <div class="form-group">
-    <input id="nameProject" formControlName="nameProject" type="text" class="form-control" placeholder="Nom du Projet">
-    <div *ngIf="myForm.get('nameProject')?.invalid && myForm.get('nameProject')?.touched" class="error">
-      Le nom du projet est requis.
+<div class="container">
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <input id="nameProject" formControlName="nameProject" type="text" class="form-control" placeholder="Nom du Projet">
+      <div *ngIf="myForm.get('nameProject')?.invalid && myForm.get('nameProject')?.touched" class="error">
+        Le nom du projet est requis.
+      </div>
     </div>
-  </div>
 
-
-  <div class="form-group">
-    <input id="nameOwner" formControlName="nameOwner" type="text" class="form-control"
-      placeholder="Nom du Propriétaire">
-    <div *ngIf="myForm.get('nameOwner')?.invalid && myForm.get('nameOwner')?.touched" class="error">
-      Le nom du propriétaire est requis.
+    <div class="form-group">
+      <label for="genre">Genre</label>
+      <select id="genre" formControlName="genre" class="form-control">
+        <option value="" disabled selected>Choisissez un genre</option>
+        <option *ngFor="let genre of genresList" [value]="genre">{{ genre }}</option>
+      </select>
+      <div *ngIf="myForm.get('genre')?.invalid && myForm.get('genre')?.touched" class="error">
+        Le genre est requis.
+      </div>
     </div>
-  </div>
 
-  <div class="genre-container">
-    <label for="genre" class="genre-label">Genreeeeeeee</label>
-    <input id="genre" placeholder="" formControlName="genre" type="text" class="form-control">
-
-    <div *ngIf="myForm.get('genre')?.invalid && myForm.get('genre')?.touched" class="error">
-      Le genre est requis.
+    <div class="form-group">
+      <label for="usedSkill">Compétence utilisée</label>
+      <select id="usedSkill" (change)="addUsedSkill($event)" class="form-control">
+        <option value="" disabled selected>Choisissez une compétence</option>
+        <option *ngFor="let skill of skillNamesList" [value]="skill">{{ skill }}</option>
+      </select>
+      <div *ngIf="myForm.get('usedSkills')?.invalid && myForm.get('usedSkills')?.touched" class="error">
+        La compétence est requise.
+      </div>
+      <ul>
+        <li *ngFor="let skill of usedSkills.controls; let i = index">
+          {{ skill.value }} <button type="button" (click)="removeUsedSkill(i)">x</button>
+        </li>
+      </ul>
     </div>
-  </div>
 
-  <div class="form-group">
-    <label for="description">Description</label>
-    <div class="center-textarea">
-      <textarea id="description" formControlName="description" class="
-   form-control"></textarea>
+    <div class="form-group">
+      <label for="requestedSkill">Compétence demandée</label>
+      <select id="requestedSkill" (change)="addRequestedSkill($event)" class="form-control">
+        <option value="" disabled selected>Choisissez une compétence</option>
+        <option *ngFor="let skill of skillNamesList" [value]="skill">{{ skill }}</option>
+      </select>
+      <div *ngIf="myForm.get('requestedSkills')?.invalid && myForm.get('requestedSkills')?.touched" class="error">
+        La compétence est requise.
+      </div>
+      <ul>
+        <li *ngFor="let skill of requestedSkills.controls; let i = index">
+          {{ skill.value }} <button type="button" (click)="removeRequestedSkill(i)">x</button>
+        </li>
+      </ul>
     </div>
-    <div *ngIf="myForm.get('description')?.invalid && myForm.get('
-   description')?.touched" class="error">
-      La description est requise.
-    </div>
-  </div>
 
-  <button type="submit" [disabled]="myForm.invalid" class="btn btn-primary">Submit</button>
-</form>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <div class="center-textarea">
+        <textarea id="description" formControlName="description" class="form-control"></textarea>
+      </div>
+      <div *ngIf="myForm.get('description')?.invalid && myForm.get('description')?.touched" class="error">
+        La description est requise.
+      </div>
+    </div>
+
+    <div class="form-group button-group">
+      <button type="submit" [disabled]="myForm.invalid" class="btn btn-primary">Enregistrer</button>
+    </div>
+  </form>
+</div>
