@@ -1,6 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+// biome-ignore lint/style/useImportType: <explanation>
+import {
+  FormBuilder,
+  FormGroup,
+  FormArray,
+  FormControl,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { genresList } from '../../../shared/models/genres-list';
 import { SkillNamesList } from '../../../shared/models/skill-names-list';
 
@@ -40,14 +48,14 @@ export class CreateProjectComponent {
 
   addUsedSkill(event: Event) {
     const target = event.target as HTMLSelectElement;
-    if (target && target.value && !this.usedSkills.value.includes(target.value)) {
+    if (target?.value && !this.usedSkills.value.includes(target.value)) {
       this.usedSkills.push(new FormControl(target.value));
     }
   }
 
   addRequestedSkill(event: Event) {
     const target = event.target as HTMLSelectElement;
-    if (target && target.value && !this.requestedSkills.value.includes(target.value)) {
+    if (target?.value && !this.requestedSkills.value.includes(target.value)) {
       this.requestedSkills.push(new FormControl(target.value));
     }
   }
@@ -62,9 +70,9 @@ export class CreateProjectComponent {
 
   onSubmit() {
     if (this.myForm.valid) {
-      console.log(this.myForm.value);
+      console.table(this.myForm.value);
     } else {
-      console.log('Form is invalid');
+      console.table('Form is invalid');
     }
   }
 
