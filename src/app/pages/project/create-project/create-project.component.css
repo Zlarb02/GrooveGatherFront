@@ -5,19 +5,18 @@
     display: flex;
     flex-direction: column;
     -webkit-overflow-scrolling: touch;
-  }
-
-
+    gap: 10;
+}
 
 .form-group {
     overflow-y: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-   }
-   
-   /* Taille minimale pour les inputs */
-   input[type="text"], input[type="number"] {
+}
+
+/* Taille minimale pour les inputs */
+input[type="text"], input[type="number"] {
     min-width: 50%;
     height: 50px; /* Ajustez cette valeur selon vos besoins */
     max-width: 100%;
@@ -25,22 +24,34 @@
     padding: 10px;
     box-sizing: border-box;
     background-color: var(--bg-inverse);
-   }
-   
-   .error {
+}
+
+.error {
     color: red;
     margin-top: 5px;
-   }
-   
-   #description {
+}
+
+#nameProject {
+    color: var(--light-placeholder);
+}
+
+
+#description {
     width: 60vw;
-    height:40vh;
+    height: 40vh;
     border-radius: 10px;
     background-color: var(--bg-inverse); 
-   }
-   input{
+    text-align: center; /* Centrer le texte dans le textarea */
+}
+
+/* Centrer le texte du placeholder dans le textarea */
+textarea::placeholder {
+    text-align: center; /* Centrer le texte horizontalement */
+}
+
+input {
     width: 60vw; 
-   }
+}
 
 /* Style pour le label 'Genre' */
 .genre-label {
@@ -51,13 +62,11 @@
     height: auto; /* Permet à la taille du label de s'adapter à son contenu */
 }
 
-
 .genre-container {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-
 
 /* Style pour l'input associé au label 'Genre' */
 #genre {
@@ -69,12 +78,18 @@
     background-color: var(--bg-inverse); /* Couleur de fond de l'input */
 }
 
-
 button {
     display: block;
     margin: 0 auto; /* Centrer le bouton */
-  }
+}
 
-  select{
+select {
     color: var(--light-placeholder);
+}
+
+/* Style pour centrer le texte du label 'Description' */
+.description-label {
+    text-align: center; /* Centrer le texte horizontalement */
+    display: block; /* Assurez-vous que le label est un bloc */
+    width: 100%; /* Prendre toute la largeur disponible */
 }
