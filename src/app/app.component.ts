@@ -24,7 +24,15 @@ export class AppComponent implements OnInit {
 
   currentPageTitle = '';
 
-  user: User = { name: '', mail: '', picture: '', isConnected: false };
+  user: User = {
+    name: '', mail: '', picture: '',
+    id: -1,
+    password: '',
+    description: '',
+    role: -1,
+    subscription_level: -1,
+    genres: []
+  };
 
   private subscriptions: Subscription[] = [];
 

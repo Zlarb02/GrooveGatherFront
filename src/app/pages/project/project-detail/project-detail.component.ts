@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { ProjectService } from '../../../shared/services/project.service';
 // biome-ignore lint/style/useImportType: <explanation>
-import { Project } from '../../../shared/models/project.model';
 import { CommonModule } from '@angular/common';
+import type { Project } from '../../../shared/models/project.model';
 
 
 @Component({
@@ -14,14 +14,16 @@ import { CommonModule } from '@angular/common';
 })
 export class ProjectDetailComponent {
 
-  project : Project = {
-    name : 'PureKiffKick',
-    id : 1,
-    //genre : ['Hip-hop', 'Rap', 'Drill', 'Trap'],
-    genre: 'Hip hop',
-    description : 'Du lourd ',
-    date : '26-06-2024',
-    likes : 250
+  project: Project = {
+    name: 'PureKiffKick',
+    id: 1,
+    genres: ['Hip-hop', 'Rap', 'Jersey', 'Drill'],
+    description: 'Du lourd ',
+    date: '26-06-2024',
+    likes: 250,
+    color: "green",
+    presentSkills: ["Instrumental", "Rap", "Enregistrement", "Mixage en home studio"],
+    missingSkills: ["Mixage en studio professionnel", "Mastering en studio professionnel"],
   };
 
   projectService = inject(ProjectService);

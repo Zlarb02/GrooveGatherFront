@@ -19,32 +19,21 @@
       {{ project!.name }}
     </div>
     <div class="ag-courses-item_date-box">
-      <div
-        style="
+      <div style="
           display: flex;
           flex-direction: row;
           align-items: center;
           justify-content: space-between;
           width: 100%;
-        "
-      >
+        ">
         <div class="studio-button">
           <div class="studio-button-icon">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="22"
-              height="22"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="12" cy="12" r="10">Genre</circle>
             </svg>
           </div>
-          <div class="studio-button-label">{{ project.genre }}</div>
+          <div class="studio-button-label">{{ project.genres }}</div>
         </div>
         <span class="ag-courses-item_date">
           {{ project!.date }}
