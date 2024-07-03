@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-// biome-ignore lint/style/useImportType: <explanation>
 import {
   FormBuilder,
   FormGroup,
@@ -32,6 +31,7 @@ export class CreateProjectComponent {
       usedSkills: this.formBuilder.array([], Validators.required),
       requestedSkills: this.formBuilder.array([], Validators.required),
       description: ['', Validators.required],
+      color: ['', Validators.required],
       like: ['0'],
     });
 
@@ -48,14 +48,22 @@ export class CreateProjectComponent {
 
   addUsedSkill(event: Event) {
     const target = event.target as HTMLSelectElement;
-    if (target?.value && !this.usedSkills.value.includes(target.value)) {
+    if (
+      target &&
+      target.value &&
+      !this.usedSkills.value.includes(target.value)
+    ) {
       this.usedSkills.push(new FormControl(target.value));
     }
   }
 
   addRequestedSkill(event: Event) {
     const target = event.target as HTMLSelectElement;
-    if (target?.value && !this.requestedSkills.value.includes(target.value)) {
+    if (
+      target &&
+      target.value &&
+      !this.requestedSkills.value.includes(target.value)
+    ) {
       this.requestedSkills.push(new FormControl(target.value));
     }
   }
@@ -70,15 +78,15 @@ export class CreateProjectComponent {
 
   onSubmit() {
     if (this.myForm.valid) {
-      console.table(this.myForm.value);
+      console.log(this.myForm.value);
     } else {
-      console.table('Form is invalid');
+      console.log('Form is invalid');
     }
   }
 
   ecouter() {
     this.myForm.valueChanges.subscribe((value) => {
-      // console.log(value);
+      //console.log(value);
     });
   }
 
@@ -90,7 +98,16 @@ export class CreateProjectComponent {
       usedSkills: user.usedSkills,
       requestedSkills: user.requestedSkills,
       description: user.description,
+      color: user.color,
     });
+  }
+
+  selectColor(color: string) {
+    this.myForm.get('color')?.setValue(color);
+    document.querySelectorAll('.carre').forEach((element) => {
+      element.classList.remove('selected');
+    });
+    document.querySelector(`.carre.${color}`)?.classList.add('selected');
   }
 }
 
@@ -101,4 +118,5 @@ interface User {
   usedSkills: string[];
   requestedSkills: string[];
   description: string;
+  color: string;
 }
