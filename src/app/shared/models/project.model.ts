@@ -1,11 +1,14 @@
 import type { Genre } from "./genre";
+import type { skillName } from "./skill-name";
 
 export interface Project {
     id: number;
     name: string;
-    //genre: Genre[];
-    genre: string;
+    genres: Genre[];
+    color: string;
     description: string;
     date: string;
     likes: number;
+    presentSkills: skillName[];
+    missingSkills: skillName[];
 }
