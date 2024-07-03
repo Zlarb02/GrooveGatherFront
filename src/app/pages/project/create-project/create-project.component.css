@@ -1,26 +1,22 @@
-.container{
+.container {
     max-height: 75vh;
     overflow-y: auto;
-    -webkit-overflow-scrolling: touch; /* Ajoute un défilement fluide sur iOS */
     display: flex;
     flex-direction: column;
-    -webkit-overflow-scrolling: touch;
-    gap: 10;
+    -webkit-overflow-scrolling: touch; /* Pour un défilement fluide sur iOS */
 }
 
 .form-group {
-    overflow-y: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* Taille minimale pour les inputs */
-input[type="text"], input[type="number"] {
-    min-width: 50%;
-    height: 50px; /* Ajustez cette valeur selon vos besoins */
+input[type="text"], input[type="number"], #genre, #description {
+    width: 60vw; /* Largeur maximale des inputs */
     max-width: 100%;
-    border-radius: 15px;
+    height: 50px; /* Hauteur des inputs */
+    border-radius: 15px; /* Rayon des bords des inputs */
     padding: 10px;
     box-sizing: border-box;
     background-color: var(--bg-inverse);
@@ -31,51 +27,13 @@ input[type="text"], input[type="number"] {
     margin-top: 5px;
 }
 
-#nameProject {
-    color: var(--light-placeholder);
-}
-
-
 #description {
-    width: 60vw;
-    height: 40vh;
-    border-radius: 10px;
-    background-color: var(--bg-inverse); 
-    text-align: center; /* Centrer le texte dans le textarea */
+    height: 40vh; /* Hauteur du textarea */
+    text-align: center; /* Centrer le texte du textarea */
 }
 
-/* Centrer le texte du placeholder dans le textarea */
 textarea::placeholder {
-    text-align: center; /* Centrer le texte horizontalement */
-}
-
-input {
-    width: 60vw; 
-}
-
-/* Style pour le label 'Genre' */
-.genre-label {
-    display: flex;
-    justify-content: center; /* Centrer horizontalement */
-    align-items: center; /* Centrer verticalement */
-    width: min-content; /* Prend seulement autant d'espace que nécessaire */
-    height: auto; /* Permet à la taille du label de s'adapter à son contenu */
-}
-
-.genre-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-/* Style pour l'input associé au label 'Genre' */
-#genre {
-    width: 60vw; /* Largeur maximale de l'input */
-    height: 50px; /* Hauteur de l'input */
-    border-radius: 15px; /* Rayon des bords de l'input */
-    padding: 10px; /* Paddings internes de l'input */
-    box-sizing: border-box; /* Inclut la marge et le padding dans largeur totale */
-    background-color: var(--bg-inverse); /* Couleur de fond de l'input */
+    text-align: center; /* Centrer le texte du placeholder */
 }
 
 button {
@@ -84,12 +42,64 @@ button {
 }
 
 select {
-    color: var(--light-placeholder);
+    color: var(--light-placeholder); /* Couleur du texte des <select> */
 }
 
-/* Style pour centrer le texte du label 'Description' */
-.description-label {
+#nameProject {
+    color: var(--light-placeholder); /* Couleur du texte de l'input 'nameProject' */
+}
+
+#genre {
+    color: var(--light-placeholder); /* Couleur du texte pour le select 'genre' */
+}
+
+.genre-label, .description-label {
     text-align: center; /* Centrer le texte horizontalement */
     display: block; /* Assurez-vous que le label est un bloc */
     width: 100%; /* Prendre toute la largeur disponible */
+}
+
+.parentCarre {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+/* .parentCarre > div:first-child {
+    margin-left: 10vh;
+}
+
+.parentCarre > div:last-child {
+    margin-right: 10vh;
+} */
+
+.carre {
+    border-radius: 10px;
+    height: 5vh;
+    width: 5vh;
+    cursor: pointer;
+    row-gap: 5vh;
+}
+
+.carre:hover {
+    border: 2px solid white;
+}
+
+/* --orange: #f9b234;
+--green: #3ecd5e;
+--purple: #952aff;
+--blue: #4c49ea;
+--red: #e44002;
+--pink: #cd3e94; */
+
+.orange { background-color: var(--orange); }
+.green { background-color: var(--green); }
+.purple { background-color: var(--purple); }
+.blue { background-color: var(--blue); }
+.red { background-color: var(--red); } /* Correction de la couleur bleu marine */
+.pink { background-color: var(--pink); }
+
+.carre.selected {
+    border: 2px solid white;
 }

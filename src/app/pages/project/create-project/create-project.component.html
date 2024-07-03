@@ -1,7 +1,8 @@
 <div class="container">
   <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <input id="nameProject" formControlName="nameProject" type="text" class="form-control" placeholder="Nom du Projet">
+      <input id="nameProject" formControlName="nameProject" type="text" class="form-control"
+        placeholder="Nom du Projet">
       <div *ngIf="myForm.get('nameProject')?.invalid && myForm.get('nameProject')?.touched" class="error">
         Le nom du projet est requis.
       </div>
@@ -58,6 +59,22 @@
       </div>
       <div *ngIf="myForm.get('description')?.invalid && myForm.get('description')?.touched" class="error">
         La description est requise.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label style="display: none;" for="color">Couleur</label>
+      <div class="parentCarre">
+        <div class="carre orange" (click)="selectColor('orange')"></div>
+        <div class="carre green" (click)="selectColor('green')"></div>
+        <div class="carre purple" (click)="selectColor('purple')"></div>
+        <div class="carre blue" (click)="selectColor('blue')"></div>
+        <div class="carre red" (click)="selectColor('red')"></div>
+        <div class="carre pink" (click)="selectColor('pink')"></div>
+      </div>
+      <input id="color" formControlName="color" type="hidden">
+      <div *ngIf="myForm.get('color')?.invalid && myForm.get('color')?.touched" class="error">
+        La couleur est requise.
       </div>
     </div>
 
