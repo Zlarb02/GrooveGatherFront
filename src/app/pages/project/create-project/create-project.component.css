@@ -6,21 +6,27 @@
   -webkit-overflow-scrolling: touch; /* Pour un défilement fluide sur iOS */
 }
 
+
+
 .form-group {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  margin-bottom: 20px;
+  align-items: center;
+  justify-content: center; /* Ajouté pour centrer verticalement */
+  height: 100%; /* Ajouté pour prendre toute la hauteur disponible */
+  margin-bottom: 2vh;
 }
 
 .etiquette {
   display: block; /* Make sure the label is a block element */
   width: fit-content; /* Ensure the label takes the full width of its container */
-  text-align: center; /* Center the text inside the label */
+ /*  text-align: center; */ /* Center the text inside the label */
+ margin-right: 0.5vw;
+ border: none;
 }
 
-.genre {
-  margin-left: 1vw;
+#etiquetteGenre {
+  margin-left: 5vw;
 }
 
 input[type="text"], #genre {
@@ -37,12 +43,27 @@ input[type="text"], #genre {
   display: flex;
   flex-direction: row;
   margin-bottom: 2vh;
+  align-items: center;
 }
+
+/* center-textarea{
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+
+}  */
+
+
+textarea#description {
+  margin: 0 auto; /* Ajouté pour centrer horizontalement */
+}
+
+
 
 #description {
   width: 60vw; /* Largeur maximale des inputs */
   max-width: 100%;
-  height: 50px; /* Hauteur des inputs */
+  height: 33vh; /* Hauteur des inputs */
   border-radius: 15px; /* Rayon des bords des inputs */
   padding: 10px;
   box-sizing: border-box;
@@ -61,7 +82,7 @@ textarea::placeholder {
 
 button {
   display: block;
-  margin: 0 auto; /* Centrer le bouton */
+  margin:  auto; /* Centrer le bouton */
 }
 
 select {
@@ -73,9 +94,10 @@ select {
 }
 
 .genre-label, .description-label {
+
   text-align: center; /* Centrer le texte horizontalement */
   display: block; /* Assurez-vous que le label est un bloc */
-  width: 100%; /* Prendre toute la largeur disponible */
+  width:fit-content; /* Prendre toute la largeur disponible */
 }
 
 .parentCarre {
@@ -92,6 +114,8 @@ select {
   margin-right: 10vh;
 }
 
+
+
 .orange { background-color: var(--orange); }
 .green { background-color: var(--green); }
 .purple { background-color: var(--purple); }
@@ -103,6 +127,8 @@ select {
   border-radius: 10px;
   height: 5vh;
   width: 5vh;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
 }
 
 .carre:hover {
@@ -111,6 +137,23 @@ select {
 
 .carre.selected {
   border: 2px solid var(--light-placeholder);
+}
+
+.parentCouleur{
+
+display: flex;
+justify-content: center;
+align-items: center;
+
+}
+
+
+.couleur{
+  width:fit-content;
+display: flex;
+justify-content: center;
+align-items: center;
+
 }
 
 .form-control-container {
@@ -180,4 +223,24 @@ select {
   font-size: 16px;
   margin-left: 5px;
   cursor: pointer;
+}
+
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Ajouté pour centrer verticalement */
+  height: 100%; /* Ajouté pour prendre toute la hauteur disponible */
+}
+
+.center-textarea {
+  width: 100%; /* Ajouté pour prendre toute la largeur disponible */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.description-label, textarea#description {
+  text-align: center;
 }
