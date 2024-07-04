@@ -1,13 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  FormArray,
-  FormControl,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { genresList } from '../../../shared/models/genres-list';
 import { SkillNamesList } from '../../../shared/models/skill-names-list';
 
@@ -22,6 +15,8 @@ export class CreateProjectComponent {
   myForm: FormGroup;
   genresList = genresList;
   skillNamesList = SkillNamesList;
+  selectedUsedSkills: string[] = [];
+  selectedRequestedSkills: string[] = [];
 
   constructor(private formBuilder: FormBuilder) {
     this.myForm = this.formBuilder.group({
@@ -48,32 +43,38 @@ export class CreateProjectComponent {
 
   addUsedSkill(event: Event) {
     const target = event.target as HTMLSelectElement;
-    if (
-      target &&
-      target.value &&
-      !this.usedSkills.value.includes(target.value)
-    ) {
+    if (target && target.value && !this.selectedUsedSkills.includes(target.value)) {
+      this.selectedUsedSkills.push(target.value);
       this.usedSkills.push(new FormControl(target.value));
     }
+    target.value = ''; // Reset the select box
   }
 
   addRequestedSkill(event: Event) {
     const target = event.target as HTMLSelectElement;
-    if (
-      target &&
-      target.value &&
-      !this.requestedSkills.value.includes(target.value)
-    ) {
+    if (target && target.value && !this.selectedRequestedSkills.includes(target.value)) {
+      this.selectedRequestedSkills.push(target.value);
       this.requestedSkills.push(new FormControl(target.value));
+    }
+    target.value = ''; // Reset the select box
+  }
+
+  removeUsedSkill(skill: string) {
+    const index = this.selectedUsedSkills.indexOf(skill);
+    if (index !== -1) {
+      this.selectedUsedSkills.splice(index, 1);
+      const controlIndex = this.usedSkills.controls.findIndex(ctrl => ctrl.value === skill);
+      this.usedSkills.removeAt(controlIndex);
     }
   }
 
-  removeUsedSkill(index: number) {
-    this.usedSkills.removeAt(index);
-  }
-
-  removeRequestedSkill(index: number) {
-    this.requestedSkills.removeAt(index);
+  removeRequestedSkill(skill: string) {
+    const index = this.selectedRequestedSkills.indexOf(skill);
+    if (index !== -1) {
+      this.selectedRequestedSkills.splice(index, 1);
+      const controlIndex = this.requestedSkills.controls.findIndex(ctrl => ctrl.value === skill);
+      this.requestedSkills.removeAt(controlIndex);
+    }
   }
 
   onSubmit() {
@@ -100,6 +101,8 @@ export class CreateProjectComponent {
       description: user.description,
       color: user.color,
     });
+    this.selectedUsedSkills = user.usedSkills;
+    this.selectedRequestedSkills = user.requestedSkills;
   }
 
   selectColor(color: string) {
