@@ -149,6 +149,7 @@ select {
   border: var(--purple) solid;
   color: var(--purple);
   margin-right: 5px; /* Espace entre les compétences sélectionnées */
+  margin-bottom: 5px;
   display: flex;
   align-items: center;
 }
@@ -175,6 +176,7 @@ select {
   border: var(--red) solid;
   color: var(--red);
   margin-right: 5px; /* Espace entre les compétences sélectionnées */
+  margin-bottom: 5px;
   display: flex;
   align-items: center;
 }
@@ -214,6 +216,7 @@ select {
   border: var(--green) solid; /* Bordure de couleur verte pour les genres */
   color: var(--green); /* Texte de couleur verte pour les genres */
   margin-right: 5px; /* Espace entre les genres sélectionnés */
+  margin-bottom: 5px;
   display: flex;
   align-items: center;
 }
@@ -242,7 +245,6 @@ select option {
 .ligne1 {
   display: flex;
   align-items: top; /* Aligne les éléments au même niveau par rapport au top */
-
 }
 
 .form-group {
@@ -283,4 +285,32 @@ select option {
 .genre-label{
 
   margin-top: 3vh;
+}
+
+
+.selected-files {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 10px; /* Espace entre les compétences sélectionnées et le select */
+}
+
+.selected-files span {
+  background-color: #f0f0f0; /* Couleur de fond pour la compétence sélectionnée */
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: var(--pink) solid;
+  color: var(--pink);
+  margin-right: 5px; /* Espace entre les compétences sélectionnées */
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.selected-files button {
+  background: none;
+  border: none;
+  color: var(--pink);
+  font-size: 16px;
+  margin-left: 5px;
+  cursor: pointer;
 }
