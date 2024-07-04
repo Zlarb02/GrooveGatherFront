@@ -1,14 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-// biome-ignore lint/style/useImportType: <explanation>
-import {
-  FormBuilder,
-  FormGroup,
-  FormArray,
-  FormControl,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { genresList } from '../../../shared/models/genres-list';
 import { SkillNamesList } from '../../../shared/models/skill-names-list';
 
@@ -23,19 +15,24 @@ export class CreateProjectComponent {
   myForm: FormGroup;
   genresList = genresList;
   skillNamesList = SkillNamesList;
+  selectedGenres: string[] = [];
+  selectedUsedSkills: string[] = [];
+  selectedRequestedSkills: string[] = [];
 
   constructor(private formBuilder: FormBuilder) {
     this.myForm = this.formBuilder.group({
       nameProject: ['', Validators.required],
-      nameOwner: ['', Validators.required],
-      genre: ['', Validators.required],
+      genre: this.formBuilder.array([], Validators.required),
       usedSkills: this.formBuilder.array([], Validators.required),
       requestedSkills: this.formBuilder.array([], Validators.required),
       description: ['', Validators.required],
+      color: ['', Validators.required],
       like: ['0'],
     });
+  }
 
-    this.ecouter();
+  get genres(): FormArray {
+    return this.myForm.get('genre') as FormArray;
   }
 
   get usedSkills(): FormArray {
@@ -46,39 +43,71 @@ export class CreateProjectComponent {
     return this.myForm.get('requestedSkills') as FormArray;
   }
 
+  addGenre(event: Event) {
+    const target = event.target as HTMLSelectElement;
+    if (target && target.value && !this.selectedGenres.includes(target.value)) {
+      this.selectedGenres.push(target.value);
+      this.genres.push(new FormControl(target.value));
+    }
+    target.value = ''; // Reset the select box
+  }
+
+  removeGenre(genre: string) {
+    const index = this.selectedGenres.indexOf(genre);
+    if (index !== -1) {
+      this.selectedGenres.splice(index, 1);
+      const controlIndex = this.genres.controls.findIndex(ctrl => ctrl.value === genre);
+      this.genres.removeAt(controlIndex);
+    }
+  }
+
   addUsedSkill(event: Event) {
     const target = event.target as HTMLSelectElement;
-    if (target?.value && !this.usedSkills.value.includes(target.value)) {
+    if (target && target.value && !this.selectedUsedSkills.includes(target.value)) {
+      this.selectedUsedSkills.push(target.value);
       this.usedSkills.push(new FormControl(target.value));
+    }
+    target.value = ''; // Reset the select box
+  }
+
+  removeUsedSkill(skill: string) {
+    const index = this.selectedUsedSkills.indexOf(skill);
+    if (index !== -1) {
+      this.selectedUsedSkills.splice(index, 1);
+      const controlIndex = this.usedSkills.controls.findIndex(ctrl => ctrl.value === skill);
+      this.usedSkills.removeAt(controlIndex);
     }
   }
 
   addRequestedSkill(event: Event) {
     const target = event.target as HTMLSelectElement;
-    if (target?.value && !this.requestedSkills.value.includes(target.value)) {
+    if (target && target.value && !this.selectedRequestedSkills.includes(target.value)) {
+      this.selectedRequestedSkills.push(target.value);
       this.requestedSkills.push(new FormControl(target.value));
     }
+    target.value = ''; // Reset the select box
   }
 
-  removeUsedSkill(index: number) {
-    this.usedSkills.removeAt(index);
-  }
-
-  removeRequestedSkill(index: number) {
-    this.requestedSkills.removeAt(index);
+  removeRequestedSkill(skill: string) {
+    const index = this.selectedRequestedSkills.indexOf(skill);
+    if (index !== -1) {
+      this.selectedRequestedSkills.splice(index, 1);
+      const controlIndex = this.requestedSkills.controls.findIndex(ctrl => ctrl.value === skill);
+      this.requestedSkills.removeAt(controlIndex);
+    }
   }
 
   onSubmit() {
     if (this.myForm.valid) {
-      console.table(this.myForm.value);
+      console.log(this.myForm.value);
     } else {
-      console.table('Form is invalid');
+      console.log('Form is invalid');
     }
   }
 
   ecouter() {
     this.myForm.valueChanges.subscribe((value) => {
-      // console.log(value);
+      //console.log(value);
     });
   }
 
@@ -90,15 +119,27 @@ export class CreateProjectComponent {
       usedSkills: user.usedSkills,
       requestedSkills: user.requestedSkills,
       description: user.description,
+      color: user.color,
     });
+    this.selectedUsedSkills = user.usedSkills;
+    this.selectedRequestedSkills = user.requestedSkills;
+  }
+
+  selectColor(color: string) {
+    this.myForm.get('color')?.setValue(color);
+    document.querySelectorAll('.carre').forEach((element) => {
+      element.classList.remove('selected');
+    });
+    document.querySelector(`.carre.${color}`)?.classList.add('selected');
   }
 }
 
 interface User {
   nameProject: string;
   nameOwner: string;
-  genre: string;
+  genre: string[];
   usedSkills: string[];
   requestedSkills: string[];
   description: string;
+  color: string;
 }
