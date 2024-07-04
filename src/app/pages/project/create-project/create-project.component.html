@@ -1,14 +1,3 @@
-<div class="container">
-  <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-    <div class="ligne1">
-      <div class="form-group">
-        <label class="etiquette" for="nameProject">Nom du projet</label>
-        <input id="nameProject" formControlName="nameProject" type="text" class="form-control" placeholder="Nom du Projet">
-        <div *ngIf="myForm.get('nameProject')?.invalid && myForm.get('nameProject')?.touched" class="error">
-          Le nom du projet est requis.
-        </div>
-      </div>
-      
 <!--       <div class="form-group">
         <label class="etiquette" for="nameOwner">Nom du propriétaire</label>
         <input id="nameOwner" formControlName="nameOwner" type="text" class="form-control" placeholder="Nom du Propriétaire">
@@ -17,8 +6,23 @@
         </div>
       </div> -->
 
-      <div class="form-group">
-        <label class="etiquette" for="genre">Genre</label>
+
+
+<div class="container">
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <div class="ligne1">
+<!--       <div class="form-group"> -->
+        <label class="etiquette" for="nameProject">Nom du projet</label>
+        <input id="nameProject" formControlName="nameProject" type="text" class="form-control" placeholder="Nom du Projet">
+        <div *ngIf="myForm.get('nameProject')?.invalid && myForm.get('nameProject')?.touched" class="error">
+          Le nom du projet est requis.
+        </div>
+<!--       </div> -->
+      
+
+
+<!--       <div class="form-group"> -->
+        <label id="etiquetteGenre" class="etiquette" for="genre">Genre</label>
         <select id="genre" formControlName="genre" class="form-control">
           <option value="" disabled selected>Choisissez un genre</option>
           <option *ngFor="let genre of genresList" [value]="genre">{{ genre }}</option>
@@ -27,7 +31,7 @@
           Le genre est requis.
         </div>
       </div>
-    </div>
+<!--     </div> -->
 
     <div class="form-group">
       <label style="display:none" for="usedSkill">Compétence présente</label>
@@ -66,8 +70,8 @@
     </div>
 
     <div class="form-group">
-      <label style="display:none" for="description" class="description-label">Description</label>
       <div class="center-textarea">
+        <label for="description" class="description-label">Description</label>
         <textarea id="description" formControlName="description" class="form-control" placeholder="Entrez la description de votre projet"></textarea>
       </div>
       <div *ngIf="myForm.get('description')?.invalid && myForm.get('description')?.touched" class="error">
@@ -75,8 +79,9 @@
       </div>
     </div>
 
-    <div class="form-group">
+    <div class="parentCouleur">
       <label class="couleur" style="display:block;" for="color">Sélectionnez une couleur</label>
+    </div>
       <div class="parentCarre">
         <div class="carre orange" (click)="selectColor('orange')"></div>
         <div class="carre green" (click)="selectColor('green')"></div>
@@ -89,7 +94,7 @@
       <div *ngIf="myForm.get('color')?.invalid && myForm.get('color')?.touched" class="error">
         La couleur est requise.
       </div>
-    </div>
+    
 
     <div class="form-group button-group">
       <button type="submit" [disabled]="myForm.invalid" class="btn btn-primary">Enregistrer</button>
