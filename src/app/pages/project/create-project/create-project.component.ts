@@ -15,22 +15,24 @@ export class CreateProjectComponent {
   myForm: FormGroup;
   genresList = genresList;
   skillNamesList = SkillNamesList;
+  selectedGenres: string[] = [];
   selectedUsedSkills: string[] = [];
   selectedRequestedSkills: string[] = [];
 
   constructor(private formBuilder: FormBuilder) {
     this.myForm = this.formBuilder.group({
       nameProject: ['', Validators.required],
-      nameOwner: ['', Validators.required],
-      genre: ['', Validators.required],
+      genre: this.formBuilder.array([], Validators.required),
       usedSkills: this.formBuilder.array([], Validators.required),
       requestedSkills: this.formBuilder.array([], Validators.required),
       description: ['', Validators.required],
       color: ['', Validators.required],
       like: ['0'],
     });
+  }
 
-    this.ecouter();
+  get genres(): FormArray {
+    return this.myForm.get('genre') as FormArray;
   }
 
   get usedSkills(): FormArray {
@@ -39,6 +41,24 @@ export class CreateProjectComponent {
 
   get requestedSkills(): FormArray {
     return this.myForm.get('requestedSkills') as FormArray;
+  }
+
+  addGenre(event: Event) {
+    const target = event.target as HTMLSelectElement;
+    if (target && target.value && !this.selectedGenres.includes(target.value)) {
+      this.selectedGenres.push(target.value);
+      this.genres.push(new FormControl(target.value));
+    }
+    target.value = ''; // Reset the select box
+  }
+
+  removeGenre(genre: string) {
+    const index = this.selectedGenres.indexOf(genre);
+    if (index !== -1) {
+      this.selectedGenres.splice(index, 1);
+      const controlIndex = this.genres.controls.findIndex(ctrl => ctrl.value === genre);
+      this.genres.removeAt(controlIndex);
+    }
   }
 
   addUsedSkill(event: Event) {
@@ -50,15 +70,6 @@ export class CreateProjectComponent {
     target.value = ''; // Reset the select box
   }
 
-  addRequestedSkill(event: Event) {
-    const target = event.target as HTMLSelectElement;
-    if (target && target.value && !this.selectedRequestedSkills.includes(target.value)) {
-      this.selectedRequestedSkills.push(target.value);
-      this.requestedSkills.push(new FormControl(target.value));
-    }
-    target.value = ''; // Reset the select box
-  }
-
   removeUsedSkill(skill: string) {
     const index = this.selectedUsedSkills.indexOf(skill);
     if (index !== -1) {
@@ -66,6 +77,15 @@ export class CreateProjectComponent {
       const controlIndex = this.usedSkills.controls.findIndex(ctrl => ctrl.value === skill);
       this.usedSkills.removeAt(controlIndex);
     }
+  }
+
+  addRequestedSkill(event: Event) {
+    const target = event.target as HTMLSelectElement;
+    if (target && target.value && !this.selectedRequestedSkills.includes(target.value)) {
+      this.selectedRequestedSkills.push(target.value);
+      this.requestedSkills.push(new FormControl(target.value));
+    }
+    target.value = ''; // Reset the select box
   }
 
   removeRequestedSkill(skill: string) {
@@ -117,7 +137,7 @@ export class CreateProjectComponent {
 interface User {
   nameProject: string;
   nameOwner: string;
-  genre: string;
+  genre: string[];
   usedSkills: string[];
   requestedSkills: string[];
   description: string;

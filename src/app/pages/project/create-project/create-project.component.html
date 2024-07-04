@@ -1,37 +1,33 @@
-<!--       <div class="form-group">
-        <label class="etiquette" for="nameOwner">Nom du propriétaire</label>
-        <input id="nameOwner" formControlName="nameOwner" type="text" class="form-control" placeholder="Nom du Propriétaire">
-        <div *ngIf="myForm.get('nameOwner')?.invalid && myForm.get('nameOwner')?.touched" class="error">
-          Le nom du propriétaire est requis.
-        </div>
-      </div> -->
-
-
-
 <div class="container">
   <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
     <div class="ligne1">
-<!--       <div class="form-group"> -->
+      <div class="form-group">
         <label class="etiquette" for="nameProject">Nom du projet</label>
-        <input id="nameProject" formControlName="nameProject" type="text" class="form-control" placeholder="Nom du Projet">
+        <input id="nameProject" formControlName="nameProject" type="text" class="form-control"
+          placeholder="Nom du Projet">
         <div *ngIf="myForm.get('nameProject')?.invalid && myForm.get('nameProject')?.touched" class="error">
           Le nom du projet est requis.
         </div>
-<!--       </div> -->
-      
+      </div>
+    </div>
 
-
-<!--       <div class="form-group"> -->
-        <label id="etiquetteGenre" class="etiquette" for="genre">Genre</label>
-        <select id="genre" formControlName="genre" class="form-control">
+    <div class="form-group">
+      <label style="display:none" for="genre">Genre</label>
+      <div class="form-control-container">
+        <select id="genre" (change)="addGenre($event)" class="form-control">
           <option value="" disabled selected>Choisissez un genre</option>
           <option *ngFor="let genre of genresList" [value]="genre">{{ genre }}</option>
         </select>
-        <div *ngIf="myForm.get('genre')?.invalid && myForm.get('genre')?.touched" class="error">
-          Le genre est requis.
+        <div class="selected-genres">  <!-- fnklnklnk -->
+          <span *ngFor="let genre of selectedGenres">
+            {{ genre }} <button type="button" (click)="removeGenre(genre)">x</button>
+          </span>
         </div>
       </div>
-<!--     </div> -->
+      <div *ngIf="myForm.get('genre')?.invalid && myForm.get('genre')?.touched" class="error">
+        Le genre est requis.
+      </div>
+    </div>
 
     <div class="form-group">
       <label style="display:none" for="usedSkill">Compétence présente</label>
@@ -40,7 +36,7 @@
           <option value="" disabled selected>Ajoutez une compétence que vous avez utilisée dans votre projet.</option>
           <option *ngFor="let skill of skillNamesList" [value]="skill">{{ skill }}</option>
         </select>
-        <div class="selected-skills">
+        <div class="selected-skills">            <!-- fnklnklnk -->
           <span *ngFor="let skill of selectedUsedSkills">
             {{ skill }} <button type="button" (click)="removeUsedSkill(skill)">x</button>
           </span>
@@ -72,7 +68,8 @@
     <div class="form-group">
       <div class="center-textarea">
         <label for="description" class="description-label">Description</label>
-        <textarea id="description" formControlName="description" class="form-control" placeholder="Entrez la description de votre projet"></textarea>
+        <textarea id="description" formControlName="description" class="form-control"
+          placeholder="Entrez la description de votre projet"></textarea>
       </div>
       <div *ngIf="myForm.get('description')?.invalid && myForm.get('description')?.touched" class="error">
         La description est requise.
@@ -82,19 +79,18 @@
     <div class="parentCouleur">
       <label class="couleur" style="display:block;" for="color">Sélectionnez une couleur</label>
     </div>
-      <div class="parentCarre">
-        <div class="carre orange" (click)="selectColor('orange')"></div>
-        <div class="carre green" (click)="selectColor('green')"></div>
-        <div class="carre purple" (click)="selectColor('purple')"></div>
-        <div class="carre blue" (click)="selectColor('blue')"></div>
-        <div class="carre red" (click)="selectColor('red')"></div>
-        <div class="carre pink" (click)="selectColor('pink')"></div>
-      </div>
-      <input id="color" formControlName="color" type="hidden">
-      <div *ngIf="myForm.get('color')?.invalid && myForm.get('color')?.touched" class="error">
-        La couleur est requise.
-      </div>
-    
+    <div class="parentCarre">
+      <div class="carre orange" (click)="selectColor('orange')"></div>
+      <div class="carre green" (click)="selectColor('green')"></div>
+      <div class="carre purple" (click)="selectColor('purple')"></div>
+      <div class="carre blue" (click)="selectColor('blue')"></div>
+      <div class="carre red" (click)="selectColor('red')"></div>
+      <div class="carre pink" (click)="selectColor('pink')"></div>
+    </div>
+    <input id="color" formControlName="color" type="hidden">
+    <div *ngIf="myForm.get('color')?.invalid && myForm.get('color')?.touched" class="error">
+      La couleur est requise.
+    </div>
 
     <div class="form-group button-group">
       <button type="submit" [disabled]="myForm.invalid" class="btn btn-primary">Enregistrer</button>
