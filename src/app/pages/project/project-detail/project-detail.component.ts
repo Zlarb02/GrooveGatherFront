@@ -16,14 +16,13 @@ export class ProjectDetailComponent {
 
   project: Project = {
     name: 'PureKiffKick',
-    id: 1,
     genres: ['Hip-hop', 'Rap', 'Jersey', 'Drill'],
     description: 'Du lourd ',
     date: '26-06-2024',
     likes: 250,
     color: "green",
-    presentSkills: ["Instrumental", "Rap", "Enregistrement", "Mixage en home studio"],
-    missingSkills: ["Mixage en studio professionnel", "Mastering en studio professionnel"],
+    skillsPresent: ["Instrumental", "Rap", "Enregistrement", "Mixage en home studio"],
+    skillsMissing: ["Mixage en studio professionnel", "Mastering en studio professionnel"],
   };
 
   projectService = inject(ProjectService);
