@@ -35,7 +35,15 @@ export class AuthService {
 
   clearToken() {
     this._token.next('');
-    this._user.next({ name: '', mail: '', picture: '', isConnected: false });
+    this._user.next({
+      name: '', mail: '', picture: '',
+      id: -1,
+      password: '',
+      description: '',
+      role: -1,
+      subscription_level: -1,
+      genres: []
+    });
     localStorage.removeItem('token');
   }
 
@@ -47,14 +55,27 @@ export class AuthService {
           name: payload.name,
           mail: payload.email, // Adjust the payload property name if necessary
           picture: payload.picture,
-          isConnected: true
+          id: -1,
+          password: '',
+          description: '',
+          role: -1,
+          subscription_level: -1,
+          genres: []
         });
       } catch (e) {
         console.error('Invalid token format', e);
         this.clearToken(); // Clear token if parsing fails
       }
     } else {
-      this._user.next({ name: '', mail: '', picture: '', isConnected: false });
+      this._user.next({
+        name: '', mail: '', picture: '',
+        id: -1,
+        password: '',
+        description: '',
+        role: -1,
+        subscription_level: -1,
+        genres: []
+      });
     }
   }
 }
