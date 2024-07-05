@@ -1,5 +1,6 @@
 <div ngif="project" class="ag-courses_item">
-    <a [routerLink]="['/project', project!.id]" routerLinkActive="router-link-active" class="ag-courses-item_link">
+    <!-- project!.id needed -->
+    <a [routerLink]="['/project', project?.name]" routerLinkActive="router-link-active" class="ag-courses-item_link">
         <div class="ag-courses-item_bg" [class.bg-orange]="i % 6 === 0" [class.bg-green]="i % 6 === 1"
             [class.bg-red]="i % 6 === 2" [class.bg-purple]="i % 6 === 3" [class.bg-pink]="i % 6 === 4"
             [class.bg-blue]="i % 6 === 5"></div>
@@ -10,7 +11,7 @@
         <div class="ag-courses-item_date-box">
             <div
                 style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; width: 100% ">
-                <span>{{project!.genre}}</span>
+                <span>{{project!.genres}}</span>
                 <span class="ag-courses-item_date">
                     {{project!.date}}
                 </span>

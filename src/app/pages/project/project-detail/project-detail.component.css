@@ -1,47 +1,46 @@
 .studio-button {
-  z-index: 2;
-  position: absolute;
-  right: 16px;
-  display: flex;
-  align-items: center;
-  background: #68009d;
-  color: white;
-  padding: 8px 10px;
-  border-radius: 50px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
-  transition: 0.35s ease all;
-  overflow: hidden;
-  max-width: 22px;
+    z-index: 2;
+    position: absolute;
+    right: 16px;
+    display: flex;
+    align-items: center;
+    background: #68009d;
+    color: white;
+    padding: 8px 10px;
+    border-radius: 50px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    transition: 0.35s ease all;
+    overflow: hidden;
+    max-width: 55px;
 }
 
 .studio-button-icon {
-  position: relative;
-  top: 1px;
+    position: relative;
+    top: 1px;
 }
 
 .studio-button-label {
-  text-transform: uppercase;
-  white-space: nowrap;
-  padding: 0 8px;
-  opacity: 0;
-  transform: translateX(10px);
-  transition: 0.25s ease all;
+    text-transform: uppercase;
+    white-space: nowrap;
+    padding: 0 8px;
+    opacity: 0;
+    transform: translateX(10px);
+    transition: 0.25s ease all;
 }
 
 
-  .studio-button:hover {
+.studio-button:hover {
     max-width: 100%;
-  }
+}
 
-  .studio-button:hover
-  .studio-button-label {
+.studio-button:hover .studio-button-label {
     opacity: 1;
     transform: translateX(0);
     transition: 0.25s 0.1s ease-in opacity, 0.15s 0.1s cubic-bezier(.175, .885, .32, 1.275) transform;
-  }
+}
 
 
-  .ag-format-container {
+.ag-format-container {
     width: 1142px;
     margin: 0 auto;
 
