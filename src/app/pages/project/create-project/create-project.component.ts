@@ -1,6 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormArray,
+  FormControl,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { genresList } from '../../../shared/models/genres-list';
 import { SkillNamesList } from '../../../shared/models/skill-names-list';
 
@@ -18,6 +25,7 @@ export class CreateProjectComponent {
   selectedGenres: string[] = [];
   selectedUsedSkills: string[] = [];
   selectedRequestedSkills: string[] = [];
+  selectedFiles: File[] = []; 
 
   constructor(private formBuilder: FormBuilder) {
     this.myForm = this.formBuilder.group({
@@ -56,7 +64,9 @@ export class CreateProjectComponent {
     const index = this.selectedGenres.indexOf(genre);
     if (index !== -1) {
       this.selectedGenres.splice(index, 1);
-      const controlIndex = this.genres.controls.findIndex(ctrl => ctrl.value === genre);
+      const controlIndex = this.genres.controls.findIndex(
+        (ctrl) => ctrl.value === genre
+      );
       this.genres.removeAt(controlIndex);
     }
   }
@@ -74,7 +84,9 @@ export class CreateProjectComponent {
     const index = this.selectedUsedSkills.indexOf(skill);
     if (index !== -1) {
       this.selectedUsedSkills.splice(index, 1);
-      const controlIndex = this.usedSkills.controls.findIndex(ctrl => ctrl.value === skill);
+      const controlIndex = this.usedSkills.controls.findIndex(
+        (ctrl) => ctrl.value === skill
+      );
       this.usedSkills.removeAt(controlIndex);
     }
   }
@@ -92,14 +104,37 @@ export class CreateProjectComponent {
     const index = this.selectedRequestedSkills.indexOf(skill);
     if (index !== -1) {
       this.selectedRequestedSkills.splice(index, 1);
-      const controlIndex = this.requestedSkills.controls.findIndex(ctrl => ctrl.value === skill);
+      const controlIndex = this.requestedSkills.controls.findIndex(
+        (ctrl) => ctrl.value === skill
+      );
       this.requestedSkills.removeAt(controlIndex);
+    }
+  }
+
+  // Méthode pour gérer les changements de fichiers
+  handleFileChange(event: Event) {
+    const target = event.target as HTMLInputElement;
+    if (target.files && target.files.length > 0) {
+      for (let i = 0; i < target.files.length; i++) {
+        if (!this.selectedFiles.includes(target.files[i])) {
+          this.selectedFiles.push(target.files[i]);
+        }
+      }
+    }
+  }
+
+  // Méthode pour supprimer un fichier de la liste
+  removeFile(file: File) {
+    const index = this.selectedFiles.indexOf(file);
+    if (index !== -1) {
+      this.selectedFiles.splice(index, 1);
     }
   }
 
   onSubmit() {
     if (this.myForm.valid) {
       console.log(this.myForm.value);
+      console.log(this.selectedFiles); // Afficher les fichiers sélectionnés
     } else {
       console.log('Form is invalid');
     }
@@ -111,18 +146,18 @@ export class CreateProjectComponent {
     });
   }
 
-  update(user: User) {
+  update(project: Project) {
     this.myForm.setValue({
-      nameProject: user.nameProject,
-      nameOwner: user.nameOwner,
-      genre: user.genre,
-      usedSkills: user.usedSkills,
-      requestedSkills: user.requestedSkills,
-      description: user.description,
-      color: user.color,
+      nameProject: project.nameProject,
+      nameOwner: project.nameOwner,
+      genre: project.genre,
+      usedSkills: project.usedSkills,
+      requestedSkills: project.requestedSkills,
+      description: project.description,
+      color: project.color,
     });
-    this.selectedUsedSkills = user.usedSkills;
-    this.selectedRequestedSkills = user.requestedSkills;
+    this.selectedUsedSkills = project.usedSkills;
+    this.selectedRequestedSkills = project.requestedSkills;
   }
 
   selectColor(color: string) {
@@ -134,7 +169,7 @@ export class CreateProjectComponent {
   }
 }
 
-interface User {
+interface Project {
   nameProject: string;
   nameOwner: string;
   genre: string[];
