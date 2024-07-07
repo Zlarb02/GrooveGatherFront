@@ -1,24 +1,31 @@
-<div ngif="project" class="ag-courses_item">
+<div ngif="project" class="pj_item">
     <!-- project!.id needed -->
-    <a [routerLink]="['/project', project?.name]" routerLinkActive="router-link-active" class="ag-courses-item_link">
-        <div class="ag-courses-item_bg" [class.bg-orange]="i % 6 === 0" [class.bg-green]="i % 6 === 1"
-            [class.bg-red]="i % 6 === 2" [class.bg-purple]="i % 6 === 3" [class.bg-pink]="i % 6 === 4"
-            [class.bg-blue]="i % 6 === 5"></div>
+    <a [routerLink]="['/project', project?.name]" routerLinkActive="router-link-active" class="pj-item_link">
+        <div class="pj-item_bg" [class.bg-orange]="project?.color === 'orange'"
+            [class.bg-green]="project?.color === 'green'" [class.bg-red]="project?.color === 'red'"
+            [class.bg-purple]="project?.color === 'purple'" [class.bg-pink]="project?.color === 'pink'"
+            [class.bg-blue]="project?.color === 'blue'"></div>
 
-        <div class="ag-courses-item_title">
+        <div class="pj-item_title">
             {{project!.name}}
         </div>
-        <div class="ag-courses-item_date-box">
+        <div class="pj-item-box">
             <div
-                style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; width: 100% ">
+                style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; width: 100%;  font-size: 22px;">
                 <span>{{project!.genres}}</span>
-                <span class="ag-courses-item_date">
+                <span class="pj-item_date">
                     {{project!.date}}
                 </span>
             </div><br> <br>
-            <u>description</u>: <p>{{project!.description}}</p><br> <br>
-            likes: <span>{{project!.likes}}</span>
-
+            <u style="font-weight: 600; font-size: 21px;">Description </u>: <p>{{project!.description}}</p><br> <br>
+            <u style="font-weight: 600; font-size: 21px;">Compétences présente </u>: <p>{{project!.skillsPresent}}</p>
+            <br> <br>
+            <u style="font-weight: 600; font-size: 21px;">Compétences manquante </u>: <p>{{project!.skillsMissing}}</p>
+            <br> <br>
+            <div style="display: flex; flex-direction: row; align-items: center; justify-content: center; width: 100% ">
+                <i class="gg-remove"></i>
+                <p style="margin: 0 8px 0 8px">{{project!.likes}}</p><i class="gg-add"></i>
+            </div>
         </div>
     </a>
 </div>
