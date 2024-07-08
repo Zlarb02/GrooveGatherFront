@@ -1,17 +1,17 @@
-import { Component, inject } from '@angular/core';
-import { SearchBarComponent } from '../../core/search-bar/search-bar.component';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ProjectCardComponent } from '../../core/project-card/project-card.component';
-import { ProjectService } from '../../shared/services/project.service';
-import type { Project } from '../../shared/models/project.model';
 import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatAutocomplete, MatAutocompleteModule, MatOption } from '@angular/material/autocomplete';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { map, startWith } from 'rxjs';
+import { ProjectCardComponent } from '../../core/project-card/project-card.component';
+import { SearchBarComponent } from '../../core/search-bar/search-bar.component';
+import type { Genre } from '../../shared/models/genre';
+import { genresList } from '../../shared/models/genres-list';
+import type { Project } from '../../shared/models/project.model';
 import type { skillName } from '../../shared/models/skill-name';
 import { SkillNamesList } from '../../shared/models/skill-names-list';
-import { MatAutocomplete, MatOption, MatAutocompleteModule } from '@angular/material/autocomplete';
-import { map, startWith } from 'rxjs';
-import { genresList } from '../../shared/models/genres-list';
-import type { Genre } from '../../shared/models/genre';
+import { ProjectService } from '../../shared/services/project.service';
 
 interface Filter {
   value: skillName | Genre;
@@ -26,7 +26,7 @@ interface Filter {
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent {
-  searchPlaceholder = `Nom de projet, tag ou nom d'utilisateur`;
+  searchPlaceholder = "Nom de projet ou mot-clé";
 
   filters: Filter[] = [];
   skillsPossibles = SkillNamesList;

@@ -1952,4 +1952,130 @@ body {
     top: -2px
 }
 
+
+.gg-image {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 20px;
+    height: 16px;
+    overflow: hidden;
+    box-shadow: 0 0 0 2px;
+    border-radius: 2px
+}
+
+.gg-image::after,
+.gg-image::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    border: 2px solid
+}
+
+.gg-image::after {
+    transform: rotate(45deg);
+    border-radius: 3px;
+    width: 16px;
+    height: 16px;
+    top: 9px;
+    left: 6px
+}
+
+.gg-image::before {
+    width: 6px;
+    height: 6px;
+    border-radius: 100%;
+    top: 2px;
+    left: 2px
+}
+
+.gg-remove {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 22px;
+    height: 22px;
+    border: 2px solid;
+    border-radius: 22px
+}
+
+.gg-remove::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 10px;
+    height: 2px;
+    background: currentColor;
+    border-radius: 5px;
+    top: 8px;
+    left: 4px
+}
+
+.gg-details-less {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 20px;
+    height: 14px;
+    border: 2px solid transparent
+}
+
+.gg-details-less::after,
+.gg-details-less::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    height: 2px;
+    border-radius: 3px;
+    background: currentColor
+}
+
+.gg-details-less::before {
+    top: 2px;
+    width: 16px
+}
+
+.gg-details-less::after {
+    width: 10px;
+    bottom: 2px
+}
+
+.gg-details-more {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 20px;
+    height: 14px;
+    border: 2px solid transparent
+}
+
+.gg-details-more::after,
+.gg-details-more::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    height: 2px;
+    border-radius: 3px;
+    background: currentColor
+}
+
+.gg-details-more::before {
+    box-shadow: 0 4px 0 0;
+    top: 0;
+    width: 16px
+}
+
+.gg-details-more::after {
+    width: 10px;
+    bottom: 0
+}
+
 /* GG ICONS START BLOCK */
