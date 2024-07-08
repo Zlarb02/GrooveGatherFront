@@ -1,7 +1,9 @@
 <div id="search_page_container">
+    <span class="separation" style="margin:16px 0 0 0;"></span>
+    <span class="separation" style="border-color: rgba(240, 248, 255, 0); width: 100%; margin:0 0 16px 0;"></span>
     <form #searchForm="ngForm" (ngSubmit)="onSearch(searchForm)">
         <div class="search__container">
-            <input class="search__input" type="text" placeholder="placeholder">
+            <input class="search__input" type="text" [placeholder]="searchPlaceholder">
         </div>
         <ul *ngIf="filters.length > 0" class="active-filters">
             <ng-container *ngFor="let filter of filters; let i = index">
@@ -17,15 +19,12 @@
                 </li>
             </ng-container>
         </ul>
-
-
-
     </form>
-    <span class="separation"></span>
+    <span class="separation" style="border-color: rgba(240, 248, 255, 0); width: 100%; margin:0;"></span>
     <div class="choose-filters">
         <div class="choose-filters-title">
-            <h3 style="display: flex; width: 100%; justify-content: space-between;">
-                <p style="margin-left: 22vw">Filtrez</p>
+            <h3>
+                Filtrez
             </h3>
             <br>
             <br>
