@@ -13,7 +13,7 @@ import { AuthService } from '../../../shared/services/auth.service';
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent implements OnInit {
-  user!: User;
+  user!: User | null;
 
   authService = inject(AuthService);
   router: Router = inject(Router);

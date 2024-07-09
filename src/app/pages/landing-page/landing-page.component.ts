@@ -42,7 +42,7 @@ export class LandingPageComponent {
   enableAnimation = false;
 
   @Input()
-  user!: User;
+  user!: User | null;
   @Input()
   pageTitle!: string;
 

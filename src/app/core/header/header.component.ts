@@ -13,5 +13,5 @@ import { SearchBarComponent } from '../search-bar/search-bar.component';
 })
 export class HeaderComponent {
   @Input() pageTitle!: string;
-  @Input() user!: User;
+  @Input() user!: User | null;
 }
