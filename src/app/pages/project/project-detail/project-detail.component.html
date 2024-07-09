@@ -1,36 +1,46 @@
-<!-- <div class="Fond">
-  <div class="wrapper" *ngIf="project">
-    <h1>{{ project.name }}</h1>
-    <p>Genre: {{ project.genre }}</p>
-    <p>Date: {{ project.date }}</p>
-    <p>Description: {{ project.description }}</p>
-    <p>Likes: {{ project.likes }}</p>
-  </div>
-  <div class="comment-section"></div>
-</div> -->
+<div ngif="project" class="pj_item">
+  <a class="pj-item_link">
+    <div class="pj-item_bg bg-orange" [class.bg-orange]="project.color === 'orange'"
+      [class.bg-green]="project.color === 'green'" [class.bg-red]="project.color === 'red'"
+      [class.bg-purple]="project.color === 'purple'" [class.bg-pink]="project.color === 'pink'"
+      [class.bg-blue]="project.color === 'blue'"></div>
 
-<!-- ------------------------------------------- -->
-
-<div ngif="project" class="ag-courses_item">
-  <a class="ag-courses-item_link">
-    <div class="ag-courses-item_bg bg-orange"></div>
-
-    <div class="ag-courses-item_title">
-      {{ project!.name }}
+    <div class="pj-item_title">
+      {{ project.name }}
     </div>
-    <div class="ag-courses-item_date-box">
-      <div
-        style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; width: 100% ">
-        <span>{{project!.genres}}</span>
-        <span class="ag-courses-item_date">
-          {{project!.date}}
+    <div class="pj-item_box">
+      <div class="genre-date">
+        <span class="pj-item_genre">
+          <span *ngFor="let genre of project?.genres">
+            <button class="genre">{{genre}}</button>
+          </span>
         </span>
-      </div><br> <br>
-      <u>description</u>: <p>{{project!.description}}</p><br> <br>
-      <u>Compétences présente</u>: <p>{{project!.skillsPresent}}</p><br> <br>
-      <u>Compétences manquante</u>: <p>{{project!.skillsMissing}}</p><br> <br>
-      likes: <span>{{project!.likes}}</span>
+        <span class=" pj-item_date">
+          {{project.date}}
+        </span>
+      </div><br><br>
+      <div class="description"><u>Description</u>: <p>{{project.description}}</p><br><br></div>
+      <div class="pj-item_skills">
+        <div class="pj-item-skills-present">
+          <span style="font-weight: 400; font-size: 21px;">Déjà présent :</span>
+          <div class="present">
+            <span *ngFor="let skill of project?.skillsPresent">
+              <button class=" btn-present">{{skill}}</button>
+            </span>
+          </div>
+        </div>
+        <div class="pj-item-skills-miss">
 
+          <span style="font-weight: 400; font-size: 21px;">Manque :</span>
+          <div class="miss">
+            <span *ngFor="let skill of project?.skillsMissing">
+              <button class=" btn-miss">{{skill}}</button>
+            </span>
+          </div><br> <br>
+        </div>
+      </div>
+      <div>Likes: <span>{{project.likes}}</span></div>
     </div>
+
   </a>
 </div>

@@ -1,6 +1,6 @@
 <div ngif="project" class="pj_item">
     <!-- project!.id needed -->
-    <a [routerLink]="['/project', project?.name]" routerLinkActive="router-link-active" class="pj-item_link">
+    <a [routerLink]="['/project', project?.id]" routerLinkActive="router-link-active" class="pj-item_link">
         <div class="pj-item_bg" [class.bg-orange]="project?.color === 'orange'"
             [class.bg-green]="project?.color === 'green'" [class.bg-red]="project?.color === 'red'"
             [class.bg-purple]="project?.color === 'purple'" [class.bg-pink]="project?.color === 'pink'"
@@ -11,21 +11,42 @@
         </div>
         <div class="pj-item-box">
             <div
-                style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; width: 100%;  font-size: 22px;">
-                <span>{{project!.genres}}</span>
+                style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; width: 100%; font-size: 22px;">
+                <span>
+                    <span *ngFor="let genre of project?.genres; let isLast = last">
+                        {{genre}}{{isLast ? '' : ', '}}
+                    </span>
+                </span>
                 <span class="pj-item_date">
-                    {{project!.date}}
+                    {{project?.date}}
                 </span>
             </div><br> <br>
-            <u style="font-weight: 600; font-size: 21px;">Description </u>: <p>{{project!.description}}</p><br> <br>
-            <u style="font-weight: 600; font-size: 21px;">Compétences présente </u>: <p>{{project!.skillsPresent}}</p>
-            <br> <br>
-            <u style="font-weight: 600; font-size: 21px;">Compétences manquante </u>: <p>{{project!.skillsMissing}}</p>
-            <br> <br>
+            <u style="font-weight: 600; font-size: 21px;">Description</u>: <p>{{project?.description}}</p><br> <br>
+            <div class="pj-item_skills">
+                <div class="pj-item-skills-present">
+                    <span style="font-weight: 400; font-size: 21px;">Déjà présent :</span>
+                    <div>
+                        <span *ngFor="let skill of project?.skillsPresent; let isLast = last">
+                            <button class="btn-present">{{skill}}</button>
+                        </span>
+                    </div>
+                </div>
+                <div class="pj-item-skills-miss">
+
+                    <span style="font-weight: 400; font-size: 21px;">Manque :</span>
+                    <div>
+                        <span *ngFor="let skill of project?.skillsMissing; let isLast = last">
+                            <button class="btn-miss">{{skill}}</button>
+                        </span>
+                    </div><br> <br>
+                </div>
+            </div>
             <div style="display: flex; flex-direction: row; align-items: center; justify-content: center; width: 100% ">
                 <i class="gg-remove"></i>
-                <p style="margin: 0 8px 0 8px">{{project!.likes}}</p><i class="gg-add"></i>
+                <p style="margin: 0 8px 0 8px">{{project?.likes}}</p>
+                <i class="gg-add"></i>
             </div>
         </div>
+
     </a>
 </div>

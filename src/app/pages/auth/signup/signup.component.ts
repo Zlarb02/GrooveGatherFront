@@ -1,25 +1,38 @@
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { Subject } from 'rxjs';
 import type { User } from '../../../shared/models/user.model';
 import { AuthService } from '../../../shared/services/auth.service';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule, FormsModule],
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css', '../signupLogin.css']
 })
 export class SignupComponent {
-  user!: User;
+  user: User | null = {
+    email: "", password: "", repeatedPassword: "", role: 0, subscription_level: 0
+  };
+  responseMessage = '';
+  googleUserExist = false;
+
+  userExists$: Subject<boolean> = new Subject<boolean>();
 
   authService = inject(AuthService);
   router: Router = inject(Router);
+  http = inject(HttpClient);
 
   ngOnInit() {
-    // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
-    this.authService.user.subscribe(user => this.user = user);
+    this.authService.user.subscribe(user => {
+      if (user) {
+        this.user = user;
+      }
+    });
   }
 
   ngAfterViewInit() {
@@ -71,11 +84,81 @@ export class SignupComponent {
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   handleCredentialResponse(response: any) {
     this.authService.setToken(response.credential);
+    this.googleLogIn();
     this.router.navigate(['/search']);
   }
 
   signOut() {
     this.authService.clearToken();
     this.router.navigate(['/']);
+  }
+
+  onSubmit() {
+    this.postUser(false).then(() => {
+    });
+    this.router.navigate(['/search']);
+  }
+
+  googleLogIn() {
+    this.getGoogleUserWhereMailIs();
+    this.userExists$.subscribe(userExists => {
+      this.googleUserExist = userExists;
+      if (userExists) {
+        this.responseMessage = 'User already exists. Please login.';
+      } else {
+        this.postUser(true).then(() => {
+          this.authService.setUser(this.user);
+        });
+      }
+    });
+  }
+
+  getGoogleUserWhereMailIs() {
+    this.http.get(`https://groovegather-api.olprog-a.fr/api/v1/users/google?email=${this.user?.email}`).subscribe({
+      // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+      next: (response: any) => {
+        console.table('User already exists', response);
+        this.responseMessage = 'User exists';
+        this.userExists$.next(true);
+      },
+      error: (error) => {
+        if (error.status === 404) {
+          this.userExists$.next(false);
+        } else {
+          console.error('Error checking user existence', error);
+          this.responseMessage = `Error checking user existence: ${error.message}`;
+        }
+      },
+      complete: () => {
+        console.table('Request completed');
+      }
+    });
+  }
+
+  postUser(isGoogle: boolean): Promise<void> {
+    let url = 'https://groovegather-api.olprog-a.fr/api/v1/users';
+    if (isGoogle) {
+      url += '?isGoogle=true';
+    }
+    return new Promise((resolve, reject) => {
+      this.http.post(url, this.user).subscribe({
+        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+        next: (response: any) => {
+          console.table('User successfully logged in', response);
+          this.responseMessage = 'User successfully logged in';
+
+          this.authService.setUser(response);
+          resolve();
+        },
+        error: (error) => {
+          console.error('Error logging in user', error);
+          this.responseMessage = `Error logging in user: ${error.message}`;
+          reject();
+        },
+        complete: () => {
+          console.table('Request completed');
+        }
+      });
+    });
   }
 }
