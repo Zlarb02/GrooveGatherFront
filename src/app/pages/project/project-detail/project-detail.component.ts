@@ -15,19 +15,25 @@ import type { Project } from '../../../shared/models/project.model';
 export class ProjectDetailComponent {
 
   project: Project = {
-    name: 'PureKiffKick',
-    genres: ['Hip-hop', 'Rap', 'Jersey', 'Drill'],
-    description: 'Du lourd ',
-    date: '26-06-2024',
-    likes: 250,
-    color: "green",
-    skillsPresent: ["Instrumental", "Rap", "Enregistrement", "Mixage en home studio"],
-    skillsMissing: ["Mixage en studio professionnel", "Mastering en studio professionnel"],
+    name: "404 Not Found",
+    genres: ["Jazz"],
+    color: "red",
+    description: "Il n'y a pas de réel projet ici désolé !",
+    date: "Now",
+    likes: 9999999,
+    skillsPresent: ["Piano", "Batterie"],
+    skillsMissing: ["Basse", "Composition"],
+    id: 0
   };
+
+  id!: number;
 
   projectService = inject(ProjectService);
 
-
-
-
+  ngOnInit() {
+    this.id = Number(window.location.href.split('/').pop());
+    this.projectService.getProjectById(this.id).subscribe((project) => {
+      this.project = project;
+    });
+  }
 }

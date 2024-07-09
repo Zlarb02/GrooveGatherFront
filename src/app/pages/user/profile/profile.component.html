@@ -1,16 +1,17 @@
 <div class="container">
-    <img [src]="user.picture" alt="User's profile">
+    <img [src]="user?.picture" alt="User's profile">
     <button class="edit-btn edit-picture" (click)="editPicture()">
         <i class="gg-image picture-gg"></i>
     </button>
-    <h2>{{ user.name }}</h2>
+    <h2>{{ user?.name }}</h2>
     <button class="edit-btn edit-name" (click)="editName()">
         <i class="gg-pen name-gg"></i>
     </button>
-    {{ user.mail }}
+    <span class="mail">{{ user?.email }}</span>
     <button class="edit-btn edit-mail" (click)="editEmail()">
         <i class="gg-pen mail-gg"></i>
     </button>
     <button class="change-password-btn" (click)="changePassword()">Modifier le mot de passe</button>
     <button class="deco-btn" (click)="signOut()">Se déconnecter</button>
+    <button class="delete-btn" (click)="signOut()">Supprimer le compte <i class="gg-trash"></i></button>
 </div>
