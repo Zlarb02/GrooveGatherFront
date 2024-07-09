@@ -11,10 +11,7 @@ margin-top: 2vh;
 margin-right: 2vw; 
 } 
 
-select {
-  margin-bottom: 2vh;
-  margin-top: 2vh;
-}
+
 
 
 
@@ -72,9 +69,7 @@ button {
   margin: auto; /* Centrer le bouton */
 }
 
-select {
-  color: var(--light-placeholder); /* Couleur du texte des <select> */
-}
+
 
 #nameProject {
   color: var(--light-placeholder); /* Le texte de l'input 'nameProject' sera vert */
@@ -230,11 +225,15 @@ select {
   cursor: pointer;
 }
 
+
 select {
+  margin-bottom: 2vh;
+  margin-top: 2vh;
   width: auto; /* La largeur s'ajuste automatiquement au contenu */
   display: inline-block; /* Assurez-vous que le select est un bloc en ligne */
   padding-right: 1.5em; /* Pour ajouter de l'espace pour la flèche de sélection */
   text-align-last: center; /* Centrer le texte */
+  color: var(--light-placeholder);
 }
 
 select option {
@@ -244,6 +243,7 @@ select option {
 
 .ligne1 {
   display: flex;
+  flex-direction: row;
   align-items: top; /* Aligne les éléments au même niveau par rapport au top */
 }
 
