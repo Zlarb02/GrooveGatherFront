@@ -1,11 +1,12 @@
-import { Component, Input, input } from '@angular/core';
-import type { Project } from '../../shared/models/project.model';
+import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import type { Project } from '../../shared/models/project.model';
 
 @Component({
   selector: 'app-project-card',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, CommonModule],
   templateUrl: './project-card.component.html',
   styleUrl: './project-card.component.css'
 })

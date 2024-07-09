@@ -24,8 +24,8 @@ export class AppComponent implements OnInit {
 
   currentPageTitle = '';
 
-  user: User = {
-    name: '', mail: '', picture: '',
+  user: User | null = {
+    name: '', email: '', picture: '',
     id: -1,
     password: '',
     description: '',
@@ -65,7 +65,7 @@ export class AppComponent implements OnInit {
     switch (pageTitle) {
       case '/':
         this.currentPageTitle = '';
-        if (this.user.name) {
+        if (this.user?.name) {
 
           this.router.navigate(['/search']);
         } else {
@@ -74,7 +74,7 @@ export class AppComponent implements OnInit {
         break;
       case '/home':
         this.currentPageTitle = '';
-        if (this.user.name) {
+        if (this.user?.name) {
           this.router.navigate(['/profile']);
         }
         break;
@@ -101,19 +101,19 @@ export class AppComponent implements OnInit {
         break;
       case '/create-project':
         this.currentPageTitle = 'Créer un projet';
-        if (!this.user.name) {
+        if (!this.user?.name) {
           this.router.navigate(['/login']);
         }
         break;
       case '/notification':
         this.currentPageTitle = 'Notifications';
-        if (!this.user.name) {
+        if (!this.user?.name) {
           this.router.navigate(['/login']);
         }
         break;
       case '/messages':
         this.currentPageTitle = 'Messagerie';
-        if (!this.user.name) {
+        if (!this.user?.name) {
           this.router.navigate(['/login']);
         }
         break;
