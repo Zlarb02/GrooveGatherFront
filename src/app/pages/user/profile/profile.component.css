@@ -32,8 +32,8 @@ h2 {
 }
 
 .edit-mail {
-    left: 130px;
-    top: calc(-40px - 6vh);
+    left: 110px;
+    top: calc(-50px - 7vh);
 }
 
 .edit-name {
@@ -106,4 +106,8 @@ button {
 
 button:hover {
     background-color: var(--primary-color-dark);
+}
+
+.valid-btn {
+    background-color: var(--green);
 }

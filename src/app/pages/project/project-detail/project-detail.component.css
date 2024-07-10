@@ -271,6 +271,12 @@
 
 
 
+.like-icon {
+    width: 24px;
+    height: 24px;
+}
+
+
 @keyframes colorGradient {
     0% {
         background-position: 0% 100%;

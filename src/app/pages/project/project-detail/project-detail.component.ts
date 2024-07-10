@@ -28,6 +28,8 @@ export class ProjectDetailComponent {
 
   id!: number;
 
+  isLiked = false;
+
   projectService = inject(ProjectService);
 
   ngOnInit() {
@@ -35,5 +37,15 @@ export class ProjectDetailComponent {
     this.projectService.getProjectById(this.id).subscribe((project) => {
       this.project = project;
     });
+  }
+
+  likeProject() {
+    this.isLiked = !this.isLiked;
+    this.project.likes++;
+  }
+
+  unlikeProject() {
+    this.isLiked = !this.isLiked;
+    this.project.likes--;
   }
 }
