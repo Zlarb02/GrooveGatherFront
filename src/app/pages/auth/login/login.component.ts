@@ -142,7 +142,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   postUser(isGoogle: boolean): Promise<void> {
-    let url = 'https://groovegather-api.olprog-a.fr/api/v1/users';
+    let url = 'https://groovegather-api.olprog-a.fr/api/v1/users?isLogin=true';
     if (isGoogle) {
       url += '?isGoogle=true';
     }
