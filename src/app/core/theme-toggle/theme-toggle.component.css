@@ -6,7 +6,7 @@
 /* Style du label */
 .toggle-label {
     position: relative;
-    width: 120px;
+    width: 106px;
     height: 40px;
     background-color: var(--bg);
     color: var(--color);

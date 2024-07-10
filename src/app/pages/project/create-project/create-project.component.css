@@ -3,24 +3,46 @@
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  -webkit-overflow-scrolling: touch; /* Pour un défilement fluide sur iOS */
+  -webkit-overflow-scrolling: touch;
+  /* Pour un défilement fluide sur iOS */
 }
 
-#nameProject{
-margin-top: 2vh;
-margin-right: 2vw; 
-} 
+.ligne1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Aligne les éléments au même niveau par rapport au top */
+}
+
+#nameProject {
+  margin-top: 2vh;
+  margin-right: 2vw;
+}
 
 select {
   margin-bottom: 2vh;
   margin-top: 2vh;
+  max-width: 80vw;
+}
+
+#genre {
+  background-color: var(--purple);
+}
+
+#usedSkills {
+  background-color: var(--green);
+}
+
+#requestedSkills {
+  background-color: var(--red);
 }
 
 
-
 .etiquette {
-  display: block; /* Make sure the label is a block element */
-  width: fit-content; /* Ensure the label takes the full width of its container */
+  display: block;
+  /* Make sure the label is a block element */
+  width: fit-content;
+  /* Ensure the label takes the full width of its container */
   margin-right: 1vw;
   margin-top: 2.8vh;
   border: none;
@@ -33,10 +55,14 @@ select {
 
 
 
-input[type="text"], #genre {
-  width: 35vw; /* Largeur maximale des inputs */
-  height: 50px; /* Hauteur des inputs */
-  border-radius: 15px; /* Rayon des bords des inputs */
+input[type="text"],
+#genre {
+  width: 35vw;
+  /* Largeur maximale des inputs */
+  height: 50px;
+  /* Hauteur des inputs */
+  border-radius: 15px;
+  /* Rayon des bords des inputs */
   padding: 10px;
   box-sizing: border-box;
   background-color: var(--bg-inverse);
@@ -44,18 +70,23 @@ input[type="text"], #genre {
 }
 
 textarea#description {
-  margin: 0 auto; /* Ajouté pour centrer horizontalement */
+  margin: 0 auto;
+  /* Ajouté pour centrer horizontalement */
 }
 
 #description {
-  width: 60vw; /* Largeur maximale des inputs */
+  width: 60vw;
+  /* Largeur maximale des inputs */
   max-width: 100%;
-  height: 33vh; /* Hauteur des inputs */
-  border-radius: 15px; /* Rayon des bords des inputs */
+  height: 33vh;
+  /* Hauteur des inputs */
+  border-radius: 15px;
+  /* Rayon des bords des inputs */
   padding: 10px;
   box-sizing: border-box;
   background-color: var(--bg-inverse);
-  text-align: center; /* Centrer le texte du textarea */
+  text-align: center;
+  /* Centrer le texte du textarea */
 }
 
 .error {
@@ -64,48 +95,74 @@ textarea#description {
 }
 
 textarea::placeholder {
-  text-align: center; /* Centrer le texte du placeholder */
+  text-align: center;
+  /* Centrer le texte du placeholder */
 }
 
 button {
   display: block;
-  margin: auto; /* Centrer le bouton */
+  margin: auto;
+  /* Centrer le bouton */
 }
 
 select {
-  color: var(--light-placeholder); /* Couleur du texte des <select> */
+  color: var(--light-placeholder);
+  /* Couleur du texte des <select> */
 }
 
 #nameProject {
-  color: var(--light-placeholder); /* Le texte de l'input 'nameProject' sera vert */
+  color: var(--light-placeholder);
+  /* Le texte de l'input 'nameProject' sera vert */
 }
 
-.genre-label, .description-label {
-  text-align: center; /* Centrer le texte horizontalement */
-  display: block; /* Assurez-vous que le label est un bloc */
-  width: fit-content; /* Prendre toute la largeur disponible */
+.genre-label,
+.description-label {
+  text-align: center;
+  /* Centrer le texte horizontalement */
+  display: block;
+  /* Assurez-vous que le label est un bloc */
+  width: fit-content;
+  /* Prendre toute la largeur disponible */
 }
 
 .parentCarre {
   display: flex;
-  flex-direction: row; /* Corrected from 'line' to 'row' */
+  flex-direction: row;
+  /* Corrected from 'line' to 'row' */
   justify-content: space-between;
 }
 
-.parentCarre > div:first-child {
+.parentCarre>div:first-child {
   margin-left: 10vh;
 }
 
-.parentCarre > div:last-child {
+.parentCarre>div:last-child {
   margin-right: 10vh;
 }
 
-.orange { background-color: var(--orange); }
-.green { background-color: var(--green); }
-.purple { background-color: var(--purple); }
-.blue { background-color: var(--blue); }
-.red { background-color: var(--red); }
-.pink { background-color: var(--pink); }
+.orange {
+  background-color: var(--orange);
+}
+
+.green {
+  background-color: var(--green);
+}
+
+.purple {
+  background-color: var(--purple);
+}
+
+.blue {
+  background-color: var(--blue);
+}
+
+.red {
+  background-color: var(--red);
+}
+
+.pink {
+  background-color: var(--pink);
+}
 
 .carre {
   border-radius: 10px;
@@ -139,16 +196,19 @@ select {
 .selected-skills {
   display: flex;
   flex-wrap: wrap;
-  margin-left: 10px; /* Espace entre les compétences sélectionnées et le select */
+  margin-left: 10px;
+  /* Espace entre les compétences sélectionnées et le select */
 }
 
 .selected-skills span {
-  background-color: #f0f0f0; /* Couleur de fond pour la compétence sélectionnée */
+  background-color: #f0f0f0;
+  /* Couleur de fond pour la compétence sélectionnée */
   padding: 5px 10px;
   border-radius: 5px;
   border: var(--purple) solid;
   color: var(--purple);
-  margin-right: 5px; /* Espace entre les compétences sélectionnées */
+  margin-right: 5px;
+  /* Espace entre les compétences sélectionnées */
   margin-bottom: 5px;
   display: flex;
   align-items: center;
@@ -166,16 +226,19 @@ select {
 .selected-skills2 {
   display: flex;
   flex-wrap: wrap;
-  margin-left: 10px; /* Espace entre les compétences sélectionnées et le select */
+  margin-left: 10px;
+  /* Espace entre les compétences sélectionnées et le select */
 }
 
 .selected-skills2 span {
-  background-color: #f0f0f0; /* Couleur de fond pour la compétence sélectionnée */
+  background-color: #f0f0f0;
+  /* Couleur de fond pour la compétence sélectionnée */
   padding: 5px 10px;
   border-radius: 5px;
   border: var(--red) solid;
   color: var(--red);
-  margin-right: 5px; /* Espace entre les compétences sélectionnées */
+  margin-right: 5px;
+  /* Espace entre les compétences sélectionnées */
   margin-bottom: 5px;
   display: flex;
   align-items: center;
@@ -191,13 +254,15 @@ select {
 }
 
 .center-textarea {
-  width: 100%; /* Ajouté pour prendre toute la largeur disponible */
+  width: 100%;
+  /* Ajouté pour prendre toute la largeur disponible */
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.description-label, textarea#description {
+.description-label,
+textarea#description {
   text-align: center;
   margin-bottom: 1vh;
   margin-top: 1vh
@@ -206,16 +271,21 @@ select {
 .selected-genres {
   display: flex;
   flex-wrap: wrap;
-  margin-left: 10px; /* Espace entre les genres sélectionnés et le select */
+  margin-left: 10px;
+  /* Espace entre les genres sélectionnés et le select */
 }
 
 .selected-genres span {
-  background-color: #f0f0f0; /* Couleur de fond pour le genre sélectionné */
+  background-color: #f0f0f0;
+  /* Couleur de fond pour le genre sélectionné */
   padding: 5px 10px;
   border-radius: 5px;
-  border: var(--green) solid; /* Bordure de couleur verte pour les genres */
-  color: var(--green); /* Texte de couleur verte pour les genres */
-  margin-right: 5px; /* Espace entre les genres sélectionnés */
+  border: var(--green) solid;
+  /* Bordure de couleur verte pour les genres */
+  color: var(--green);
+  /* Texte de couleur verte pour les genres */
+  margin-right: 5px;
+  /* Espace entre les genres sélectionnés */
   margin-bottom: 5px;
   display: flex;
   align-items: center;
@@ -224,65 +294,76 @@ select {
 .selected-genres button {
   background: none;
   border: none;
-  color: var(--green); /* Couleur du texte pour le bouton de suppression */
+  color: var(--green);
+  /* Couleur du texte pour le bouton de suppression */
   font-size: 16px;
   margin-left: 5px;
   cursor: pointer;
 }
 
 select {
-  width: auto; /* La largeur s'ajuste automatiquement au contenu */
-  display: inline-block; /* Assurez-vous que le select est un bloc en ligne */
-  padding-right: 1.5em; /* Pour ajouter de l'espace pour la flèche de sélection */
-  text-align-last: center; /* Centrer le texte */
+  width: auto;
+  /* La largeur s'ajuste automatiquement au contenu */
+  display: inline-block;
+  /* Assurez-vous que le select est un bloc en ligne */
+  padding-right: 1.5em;
+  /* Pour ajouter de l'espace pour la flèche de sélection */
+  text-align-last: center;
+  /* Centrer le texte */
 }
 
 select option {
-  width: auto; /* La largeur de l'option s'ajuste automatiquement au contenu */
-  text-align: left; /* Alignement à gauche pour les options */
+  width: auto;
+  /* La largeur de l'option s'ajuste automatiquement au contenu */
+  text-align: left;
+  /* Alignement à gauche pour les options */
 }
 
-.ligne1 {
-  display: flex;
-  align-items: top; /* Aligne les éléments au même niveau par rapport au top */
-}
 
 .form-group {
   flex: 1;
   display: flex;
-  flex-direction: column; /* Changez de row à column pour aligner verticalement */
-  align-items: flex-start; /* Aligne les éléments au début horizontalement */
-  margin-right: 1vw; /* Espacement entre les champs */
+  flex-direction: column;
+  /* Changez de row à column pour aligner verticalement */
+  align-items: flex-start;
+  /* Aligne les éléments au début horizontalement */
+  margin-right: 1vw;
+  /* Espacement entre les champs */
 }
 
 .form-group label {
-  margin-bottom: 5px; /* Espacement sous le label */
+  margin-bottom: 5px;
+  /* Espacement sous le label */
 }
 
 .form-control-container {
   display: flex;
   align-items: center;
-  flex-wrap: wrap; /* Pour permettre aux éléments de passer à la ligne suivante si nécessaire */
+  flex-wrap: wrap;
+  /* Pour permettre aux éléments de passer à la ligne suivante si nécessaire */
 }
 
 .selected-genres {
   display: flex;
   flex-wrap: wrap;
-  margin-left: 10px; /* Espace entre les genres sélectionnés et le select */
+  margin-left: 10px;
+  /* Espace entre les genres sélectionnés et le select */
 }
 
 .selected-genres span {
-  background-color: #f0f0f0; /* Couleur de fond pour la compétence sélectionnée */
+  background-color: #f0f0f0;
+  /* Couleur de fond pour la compétence sélectionnée */
   padding: 5px 10px;
   border-radius: 5px;
   border: var(--green) solid;
   color: var(--green);
-  margin-right: 5px; /* Espace entre les genres sélectionnés */
+  margin-right: 5px;
+  /* Espace entre les genres sélectionnés */
   display: flex;
   align-items: center;
 }
 
-.genre-label{
+.genre-label {
 
   margin-top: 3vh;
 }
@@ -291,16 +372,19 @@ select option {
 .selected-files {
   display: flex;
   flex-wrap: wrap;
-  margin-left: 10px; /* Espace entre les compétences sélectionnées et le select */
+  margin-left: 10px;
+  /* Espace entre les compétences sélectionnées et le select */
 }
 
 .selected-files span {
-  background-color: #f0f0f0; /* Couleur de fond pour la compétence sélectionnée */
+  background-color: #f0f0f0;
+  /* Couleur de fond pour la compétence sélectionnée */
   padding: 5px 10px;
   border-radius: 5px;
   border: var(--pink) solid;
   color: var(--pink);
-  margin-right: 5px; /* Espace entre les compétences sélectionnées */
+  margin-right: 5px;
+  /* Espace entre les compétences sélectionnées */
   margin-bottom: 5px;
   display: flex;
   align-items: center;

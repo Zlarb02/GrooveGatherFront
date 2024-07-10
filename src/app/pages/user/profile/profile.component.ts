@@ -30,6 +30,8 @@ export class ProfileComponent implements OnInit {
   confirmPassword = '';
 
   http = inject(HttpClient);
+  isChangePictureModalOpen = false;
+  newPicture = "";
 
 
   ngOnInit() {
@@ -128,9 +130,38 @@ export class ProfileComponent implements OnInit {
     ).subscribe();
   }
 
+  openChangePictureModal() {
+    this.isChangePictureModalOpen = true;
+  }
+
+  closeChangePictureModal() {
+    this.isChangePictureModalOpen = false;
+  }
+
+  updatePreview() {
+    // Cette méthode met à jour l'aperçu de l'image lorsque l'utilisateur saisit un lien
+  }
+
+  changePicture() {
+    this.http.patch<User>(`https://groovegather-api.olprog-a.fr/api/v1/users?id=${this.user?.id}`, {
+      picture: this.newPicture
+    }).pipe(
+      tap(response => {
+        // biome-ignore lint/suspicious/noConsoleLog: <explanation>
+        console.log('Picture updated successfully', response);
+        this.authService.setUser(response);
+        this.closeChangePictureModal();
+      }),
+      catchError(error => {
+        console.error('Error updating picture', error);
+        alert('Failed to update picture. Please try again.');
+        return throwError(error);
+      })
+    ).subscribe();
+  }
+
   deleteAccount() {
     // biome-ignore lint/suspicious/noConsoleLog: <explanation>
     console.log('Delete account');
-    // Logique pour supprimer le compte
   }
 }

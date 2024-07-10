@@ -1,6 +1,6 @@
 <div class="container">
     <img [src]="user?.picture" alt="User's profile">
-    <button class="edit-btn edit-picture" (click)="editPicture()">
+    <button class="edit-btn edit-picture" (click)="openChangePictureModal()">
         <i class="gg-image picture-gg"></i>
     </button>
     <h2 *ngIf="!isEditName">{{ user?.name }}</h2>
@@ -26,7 +26,7 @@
     <button class="delete-btn" (click)="deleteAccount()">Supprimer le compte <i class="gg-trash"></i></button>
 </div>
 
-<!-- Modal -->
+<!-- Change Password Modal -->
 <div id="changePasswordModal" class="modal" [ngClass]="{'show': isChangePasswordModalOpen}">
     <div class="modal-content">
         <br>
@@ -39,6 +39,25 @@
         <br>
         <div style="display: flex; flex-direction: row; justify-content: space-around;">
             <button (click)="changePassword()"
+                style="border: 1px solid var(--lines); background-color: var(--light-bg); color: var(--light-color);">Valider</button>
+        </div>
+    </div>
+</div>
+
+<!-- Change Picture Modal -->
+<div id="changePictureModal" class="modal" [ngClass]="{'show': isChangePictureModalOpen}">
+    <div class="modal-content">
+        <br>
+        <span class="close" (click)="closeChangePictureModal()"><i class="gg-close"></i></span>
+        <h2>Changer l'image de profil</h2>
+        <div style="display: flex; flex-direction: column; align-items: center; gap:10px;">
+            <input type="text" [(ngModel)]="newPicture" placeholder="Lien de la nouvelle image"
+                (input)="updatePreview()">
+            <img *ngIf="newPicture" [src]="newPicture" alt="Preview" class="image-preview">
+        </div>
+        <br>
+        <div style="display: flex; flex-direction: row; justify-content: space-around;">
+            <button (click)="changePicture()"
                 style="border: 1px solid var(--lines); background-color: var(--light-bg); color: var(--light-color);">Valider</button>
         </div>
     </div>
