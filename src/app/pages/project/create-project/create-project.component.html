@@ -7,7 +7,7 @@
       </div>
       <div class="form-group">
         <div class="ligne1">
-          <label style="display:none;"  class="genre-label sr-only" for="genre">Genre</label>
+          <label style="display:none;" class="genre-label sr-only" for="genre">Genre</label>
           <div class="form-control-container">
             <select id="genre" (change)="addGenre($event)" class="form-control">
               <option value="" disabled selected>Choisissez un genre</option>
@@ -55,7 +55,7 @@
     </div>
 
     <div class="form-group">
-      <label style="display:none;"  class="sr-only" for="requestedSkill">Compétence manquante</label>
+      <label style="display:none;" class="sr-only" for="requestedSkill">Compétence manquante</label>
       <div class="form-control-container">
         <select id="requestedSkill" (change)="addRequestedSkill($event)" class="form-control">
           <option value="" disabled selected>
@@ -89,9 +89,9 @@
     </div>
 
     <div class="form-group">
-      <label style="display:none;"  class="sr-only" for="fileInput">Liste de fichiers présents dans le projet</label>
+      <label style="display:none;" class="sr-only" for="fileInput">Liste de fichiers présents dans le projet</label>
       <div class="form-control-container">
-        <input class="sr-only" style="display:none;"  type="file" id="fileInput" accept=".txt,.pdf,.doc,.docx"
+        <input class="sr-only" style="display:none;" type="file" id="fileInput" accept=".mp3,.wav,.flac,.txt"
           (change)="handleFileChange($event)" />
         <label for="fileInput" class="custom-file-label">Cliquer pour ajouter un fichier</label>
         <div class="selected-files" *ngIf="selectedFiles.length > 0">
