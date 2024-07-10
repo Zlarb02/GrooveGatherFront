@@ -33,17 +33,17 @@ h2 {
 
 .edit-mail {
     left: 130px;
-    top: calc(-40px - 9vh);
+    top: calc(-40px - 6vh);
 }
 
 .edit-name {
     left: 110px;
-    top: -11vh;
+    top: -7vh;
 }
 
 
 .edit-picture {
-    background-color: #ffa82668;
+    background-color: #ffa8268e;
     left: 35px;
 }
 

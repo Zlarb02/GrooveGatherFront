@@ -96,7 +96,6 @@ export class SignupComponent {
   onSubmit() {
     this.postUser(false).then(() => {
     });
-    this.router.navigate(['/search']);
   }
 
   googleLogIn() {
@@ -149,6 +148,8 @@ export class SignupComponent {
 
           this.authService.setUser(response);
           resolve();
+
+          this.router.navigate(['/search']);
         },
         error: (error) => {
           console.error('Error logging in user', error);

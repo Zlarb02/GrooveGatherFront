@@ -103,7 +103,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
   onSubmit() {
     this.postUser(false).then(() => {
     });
-    this.router.navigate(['/search']);
   }
 
   googleLogIn() {
@@ -143,7 +142,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   postUser(isGoogle: boolean): Promise<void> {
-    let url = 'https://groovegather-api.olprog-a.fr/api/v1/users';
+    let url = 'https://groovegather-api.olprog-a.fr/api/v1/users?isLogin=true';
     if (isGoogle) {
       url += '?isGoogle=true';
     }
@@ -156,6 +155,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
           this.authService.setUser(response);
           resolve();
+
+          this.router.navigate(['/search']);
         },
         error: (error) => {
           console.error('Error logging in user', error);
