@@ -253,8 +253,7 @@ select {
 /* search bar start */
 .search__container {
     padding-top: 8px;
-    margin-left: 29%;
-    z-index: 2 !important;
+    margin-left: 29%
 }
 
 .search__title {
@@ -282,8 +281,7 @@ select {
     border: 1px solid var(--lines);
     transition: all 250ms ease-in-out;
     backface-visibility: hidden;
-    transform-style: preserve-3d;
-    z-index: 2 !important;
+    transform-style: preserve-3d
 }
 
 .search__input::placeholder {
@@ -322,8 +320,7 @@ body.inverse .search__container {
     display: flex;
     flex-direction: column;
     justify-content: center;
-
-    z-index: 2 !important;
+    width: 100vw;
 }
 
 @media (min-width: 1025px) {
@@ -339,8 +336,6 @@ body.inverse .search__container {
 
         .project-card {
             max-width: 33%;
-
-            z-index: 2 !important;
         }
     }
 }
