@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
 // biome-ignore lint/style/useImportType: <explanation>
-import { Component, OnInit, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, type OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { catchError, tap, throwError } from 'rxjs';
 import type { User } from '../../../shared/models/user.model';
 import { AuthService } from '../../../shared/services/auth.service';
 
@@ -20,11 +22,21 @@ export class ProfileComponent implements OnInit {
   router: Router = inject(Router);
   isEditName = false;
   isEditEmail = false;
+  nameInput = this.user?.name;
+  mailInput = this.user?.email;
+
+  isChangePasswordModalOpen = false;
+  newPassword = '';
+  confirmPassword = '';
+
+  http = inject(HttpClient);
 
 
   ngOnInit() {
     // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
     this.authService.user.subscribe(value => this.user = value);
+    this.nameInput = this.user?.name;
+    this.mailInput = this.user?.email;
   }
 
   signOut() {
@@ -39,46 +51,86 @@ export class ProfileComponent implements OnInit {
   }
 
   editName() {
-    // biome-ignore lint/suspicious/noConsoleLog: <explanation>
-    console.log('Edit name');
-    // Logique pour éditer le nom
-
     this.isEditName = true;
   }
 
   validateName() {
-    // Logique pour valider le nom
-    // biome-ignore lint/suspicious/noConsoleLog: <explanation>
-    console.log('Validate name');
-
-    this.isEditName = false;
+    this.http.patch<User>(`https://groovegather-api.olprog-a.fr/api/v1/users?id=${this.user?.id}`, {
+      name: this.nameInput
+    }).pipe(
+      tap(response => {
+        // biome-ignore lint/suspicious/noConsoleLog: <explanation>
+        console.log('Name updated successfully', response);
+        // Mettre à jour les informations de l'utilisateur dans AuthService
+        this.authService.setUser(response);
+        this.isEditName = false;
+      }),
+      catchError(error => {
+        console.error('Error updating name', error);
+        alert('Failed to update name. Please try again.');
+        return throwError(error);
+      })
+    ).subscribe();
   }
 
   editEmail() {
-    // Logique pour éditer l'email
-    // biome-ignore lint/suspicious/noConsoleLog: <explanation>
-    console.log('Edit email');
-
     this.isEditEmail = true;
   }
 
   validateEmail() {
-    // Logique pour valider l'email
-    // biome-ignore lint/suspicious/noConsoleLog: <explanation>
-    console.log('Validate email');
+    this.http.patch(`https://groovegather-api.olprog-a.fr/api/v1/users?id=${this.user?.id}`, {
+      email: this.mailInput
+    }).pipe(
+      tap(response => {
+        // biome-ignore lint/suspicious/noConsoleLog: <explanation>
+        console.log('Email updated successfully', response);
+        // Récupérer les nouvelles valeurs depuis le backend
+        const updatedUser: User = response as User;
+        this.authService.setUser(updatedUser);
+        this.isEditEmail = false;
+      }),
+      catchError(error => {
+        console.error('Error updating email', error);
+        alert('Failed to update email. Please try again.');
+        return throwError(error);
+      })
+    ).subscribe();
+  }
 
-    this.isEditEmail = false;
+  openChangePasswordModal() {
+    this.isChangePasswordModalOpen = true;
+  }
+
+  closeChangePasswordModal() {
+    this.isChangePasswordModalOpen = false;
   }
 
   changePassword() {
-    // Logique pour changer le mot de passe
-    // biome-ignore lint/suspicious/noConsoleLog: <explanation>
-    console.log('Change password');
+    if (this.newPassword !== this.confirmPassword) {
+      alert('Les mots de passe ne correspondent pas.');
+      return;
+    }
+
+    this.http.patch(`https://groovegather-api.olprog-a.fr/api/v1/users?id=${this.user?.id}`, {
+      "password": `${this.newPassword}`,
+      "repeatedPassword": `${this.confirmPassword}`
+    }).pipe(
+      tap(response => {
+        // biome-ignore lint/suspicious/noConsoleLog: <explanation>
+        console.log('Password changed successfully', response);
+        this.closeChangePasswordModal();
+      }),
+      catchError(error => {
+        console.error('Error changing password', error);
+        alert('Failed to change password. Please try again.');
+        return throwError(error);
+      })
+    ).subscribe();
   }
 
   deleteAccount() {
-    // Logique pour supprimer le compte
     // biome-ignore lint/suspicious/noConsoleLog: <explanation>
     console.log('Delete account');
+    // Logique pour supprimer le compte
   }
 }

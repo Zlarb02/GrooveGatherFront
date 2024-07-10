@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+// biome-ignore lint/style/useImportType: <explanation>
 import {
-  FormBuilder,
-  FormGroup,
   FormArray,
+  FormBuilder,
   FormControl,
+  FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
@@ -25,7 +26,7 @@ export class CreateProjectComponent {
   selectedGenres: string[] = [];
   selectedUsedSkills: string[] = [];
   selectedRequestedSkills: string[] = [];
-  selectedFiles: File[] = []; 
+  selectedFiles: File[] = [];
 
   constructor(private formBuilder: FormBuilder) {
     this.myForm = this.formBuilder.group({
@@ -53,7 +54,7 @@ export class CreateProjectComponent {
 
   addGenre(event: Event) {
     const target = event.target as HTMLSelectElement;
-    if (target && target.value && !this.selectedGenres.includes(target.value)) {
+    if (target?.value && !this.selectedGenres.includes(target.value)) {
       this.selectedGenres.push(target.value);
       this.genres.push(new FormControl(target.value));
     }
@@ -73,7 +74,7 @@ export class CreateProjectComponent {
 
   addUsedSkill(event: Event) {
     const target = event.target as HTMLSelectElement;
-    if (target && target.value && !this.selectedUsedSkills.includes(target.value)) {
+    if (target?.value && !this.selectedUsedSkills.includes(target.value)) {
       this.selectedUsedSkills.push(target.value);
       this.usedSkills.push(new FormControl(target.value));
     }
@@ -93,7 +94,7 @@ export class CreateProjectComponent {
 
   addRequestedSkill(event: Event) {
     const target = event.target as HTMLSelectElement;
-    if (target && target.value && !this.selectedRequestedSkills.includes(target.value)) {
+    if (target?.value && !this.selectedRequestedSkills.includes(target.value)) {
       this.selectedRequestedSkills.push(target.value);
       this.requestedSkills.push(new FormControl(target.value));
     }
@@ -133,9 +134,12 @@ export class CreateProjectComponent {
 
   onSubmit() {
     if (this.myForm.valid) {
+      // biome-ignore lint/suspicious/noConsoleLog: <explanation>
       console.log(this.myForm.value);
+      // biome-ignore lint/suspicious/noConsoleLog: <explanation>
       console.log(this.selectedFiles); // Afficher les fichiers sélectionnés
     } else {
+      // biome-ignore lint/suspicious/noConsoleLog: <explanation>
       console.log('Form is invalid');
     }
   }
@@ -162,6 +166,7 @@ export class CreateProjectComponent {
 
   selectColor(color: string) {
     this.myForm.get('color')?.setValue(color);
+    // biome-ignore lint/complexity/noForEach: <explanation>
     document.querySelectorAll('.carre').forEach((element) => {
       element.classList.remove('selected');
     });
