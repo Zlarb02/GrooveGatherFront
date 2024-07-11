@@ -1,21 +1,21 @@
 <div class="container">
   <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
     <div class="ligne1">
-      <label class="etiquette" for="nameProject">Nom du projet</label>
       <input id="nameProject" formControlName="nameProject" type="text" class="form-control"
         placeholder="Nom du Projet" />
       <div *ngIf="myForm.get('nameProject')?.invalid && myForm.get('nameProject')?.touched" class="error">
         Le nom du projet est requis.
       </div>
+
       <div class="form-group">
-        <label class="genre-label" style="display:none" for="genre">Genre</label>
+        <label class="genre-label" for="genre">Genre</label>
         <div class="form-control-container">
-          <select id="genre" (change)="addGenre($event)" class="form-control">
-            <option value="" disabled selected>Choisissez un genre</option>
-            <option *ngFor="let genre of genresList" [value]="genre">
+          <input type="text" formControlName="genre" placeholder="Genre" [matAutocomplete]="autoGenre" />
+          <mat-autocomplete #autoGenre="matAutocomplete">
+            <mat-option *ngFor="let genre of genresList" [value]="genre">
               {{ genre }}
-            </option>
-          </select>
+            </mat-option>
+          </mat-autocomplete>
           <div class="selected-genres">
             <span *ngFor="let genre of selectedGenres">
               {{ genre }}
@@ -30,16 +30,15 @@
     </div>
 
     <div class="form-group">
-      <label style="display:none" for="usedSkill">Compétence présente</label>
+      <label for="usedSkill">Compétence présente</label>
       <div class="form-control-container">
-        <select id="usedSkill" (change)="addUsedSkill($event)" class="form-control">
-          <option value="" disabled selected>
-            Ajoutez une compétence que vous avez utilisée dans votre projet.
-          </option>
-          <option *ngFor="let skill of skillNamesList" [value]="skill">
+        <input type="text" formControlName="usedSkill" placeholder="Compétence utilisée"
+          [matAutocomplete]="autoSkill" />
+        <mat-autocomplete #autoSkill="matAutocomplete">
+          <mat-option *ngFor="let skill of skillNamesList" [value]="skill">
             {{ skill }}
-          </option>
-        </select>
+          </mat-option>
+        </mat-autocomplete>
         <div class="selected-skills">
           <span *ngFor="let skill of selectedUsedSkills">
             {{ skill }}
@@ -47,22 +46,21 @@
           </span>
         </div>
       </div>
-      <div *ngIf="myForm.get('usedSkills')?.invalid && myForm.get('usedSkills')?.touched" class="error">
+      <div *ngIf="myForm.get('usedSkill')?.invalid && myForm.get('usedSkill')?.touched" class="error">
         La compétence est requise.
       </div>
     </div>
 
     <div class="form-group">
-      <label style="display:none" for="requestedSkill">Compétence manquante</label>
+      <label for="requestedSkill">Compétence manquante</label>
       <div class="form-control-container">
-        <select id="requestedSkill" (change)="addRequestedSkill($event)" class="form-control">
-          <option value="" disabled selected>
-            Ajoutez une compétence dont vous avez besoin dans votre projet
-          </option>
-          <option *ngFor="let skill of skillNamesList" [value]="skill">
+        <input type="text" formControlName="requestedSkill" placeholder="Compétence manquante"
+          [matAutocomplete]="autoSkillMissing" />
+        <mat-autocomplete #autoSkillMissing="matAutocomplete">
+          <mat-option *ngFor="let skill of skillNamesList" [value]="skill">
             {{ skill }}
-          </option>
-        </select>
+          </mat-option>
+        </mat-autocomplete>
         <div class="selected-skills2">
           <span *ngFor="let skill of selectedRequestedSkills">
             {{ skill }}
@@ -70,10 +68,7 @@
           </span>
         </div>
       </div>
-      <div *ngIf="
-          myForm.get('requestedSkills')?.invalid &&
-          myForm.get('requestedSkills')?.touched
-        " class="error">
+      <div *ngIf="myForm.get('requestedSkill')?.invalid && myForm.get('requestedSkill')?.touched" class="error">
         La compétence est requise.
       </div>
     </div>
@@ -90,10 +85,9 @@
     </div>
 
     <div class="form-group">
-      <label style="display:none" for="fileInput">Liste de fichiers présents dans le projet</label>
+      <label for="fileInput">Liste de fichiers présents dans le projet</label>
       <div class="form-control-container">
-        <input style="display:none" type="file" id="fileInput" accept=".txt,.pdf,.doc,.docx"
-          (change)="handleFileChange($event)" />
+        <input type="file" id="fileInput" accept=".txt,.pdf,.doc,.docx" (change)="handleFileChange($event)" />
         <label for="fileInput" class="custom-file-label">Cliquer pour ajouter un fichier</label>
         <div class="selected-files" *ngIf="selectedFiles.length > 0">
           <span *ngFor="let file of selectedFiles">
@@ -103,13 +97,8 @@
       </div>
     </div>
 
-
-
-
-
-
     <div class="parentCouleur">
-      <label class="couleur" style="display:block;" for="color">Sélectionnez une couleur</label>
+      <label class="couleur" for="color">Sélectionnez une couleur</label>
     </div>
     <div class="parentCarre">
       <div class="carre orange" (click)="selectColor('orange')"></div>

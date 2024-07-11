@@ -9,13 +9,14 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { MatAutocomplete, MatAutocompleteModule, MatOption } from '@angular/material/autocomplete';
 import { genresList } from '../../../shared/models/genres-list';
 import { SkillNamesList } from '../../../shared/models/skill-names-list';
 
 @Component({
   selector: 'app-create-project',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, MatAutocomplete, MatOption, MatAutocompleteModule],
   templateUrl: './create-project.component.html',
   styleUrls: ['./create-project.component.css'],
 })
