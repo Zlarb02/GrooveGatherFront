@@ -1,133 +1,110 @@
 <div class="container">
   <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
     <div class="ligne1">
-      <label class="etiquette" for="nameProject">Nom du projet</label>
-      <input id="nameProject" formControlName="nameProject" type="text" class="form-control"
-        placeholder="Nom du Projet" />
-      <div *ngIf="myForm.get('nameProject')?.invalid && myForm.get('nameProject')?.touched" class="error">
+      <input id="nameProject" formControlName="name" type="text" class="form-control" placeholder="Nom du Projet" />
+      <div *ngIf="myForm.get('name')?.invalid && myForm.get('name')?.touched" class="error">
         Le nom du projet est requis.
       </div>
       <div class="form-group">
-        <label class="genre-label" style="display:none" for="genre">Genre</label>
+        <label class="genre-label sr-only" for="genre">Genre</label>
         <div class="form-control-container">
           <select id="genre" (change)="addGenre($event)" class="form-control">
             <option value="" disabled selected>Choisissez un genre</option>
-            <option *ngFor="let genre of genresList" [value]="genre">
+            <option *ngFor="let genre of genresList; trackBy: trackByFn" [value]="genre">
               {{ genre }}
             </option>
           </select>
           <div class="selected-genres">
-            <span *ngFor="let genre of selectedGenres">
+            <span *ngFor="let genre of selectedGenres; trackBy: trackByFn">
               {{ genre }}
               <button type="button" (click)="removeGenre(genre)">x</button>
             </span>
           </div>
         </div>
-        <div *ngIf="myForm.get('genre')?.invalid && myForm.get('genre')?.touched" class="error">
+        <div *ngIf="myForm.get('genres')?.invalid && myForm.get('genres')?.touched" class="error">
           Le genre est requis.
         </div>
       </div>
     </div>
 
     <div class="form-group">
-      <label style="display:none" for="usedSkill">Compétence présente</label>
+      <label class="sr-only" for="usedSkill">Compétence présente</label>
       <div class="form-control-container">
         <select id="usedSkill" (change)="addUsedSkill($event)" class="form-control">
           <option value="" disabled selected>
-            Ajoutez une compétence que vous avez utilisée dans votre projet.
+            Ajoutez une compétence que vous avez
+            utilisée dans votre projet.
           </option>
-          <option *ngFor="let skill of skillNamesList" [value]="skill">
+          <option *ngFor="let skill of skillNamesList; trackBy: trackByFn" [value]="skill">
             {{ skill }}
           </option>
         </select>
         <div class="selected-skills">
-          <span *ngFor="let skill of selectedUsedSkills">
+          <span *ngFor="let skill of selectedUsedSkills; trackBy: trackByFn">
             {{ skill }}
             <button type="button" (click)="removeUsedSkill(skill)">x</button>
           </span>
         </div>
       </div>
-      <div *ngIf="myForm.get('usedSkills')?.invalid && myForm.get('usedSkills')?.touched" class="error">
+      <div *ngIf="myForm.get('skillsPresent')?.invalid && myForm.get('skillsPresent')?.touched" class="error">
         La compétence est requise.
       </div>
     </div>
 
     <div class="form-group">
-      <label style="display:none" for="requestedSkill">Compétence manquante</label>
+      <label class="sr-only" for="requestedSkill">Compétence manquante</label>
       <div class="form-control-container">
         <select id="requestedSkill" (change)="addRequestedSkill($event)" class="form-control">
           <option value="" disabled selected>
-            Ajoutez une compétence dont vous avez besoin dans votre projet
+            Ajoutez une compétence dont vous avez besoin.
           </option>
-          <option *ngFor="let skill of skillNamesList" [value]="skill">
+          <option *ngFor="let skill of skillNamesList; trackBy: trackByFn" [value]="skill">
             {{ skill }}
           </option>
         </select>
-        <div class="selected-skills2">
-          <span *ngFor="let skill of selectedRequestedSkills">
+        <div class="selected-skills">
+          <span *ngFor="let skill of selectedRequestedSkills; trackBy: trackByFn">
             {{ skill }}
             <button type="button" (click)="removeRequestedSkill(skill)">x</button>
           </span>
         </div>
       </div>
-      <div *ngIf="
-          myForm.get('requestedSkills')?.invalid &&
-          myForm.get('requestedSkills')?.touched
-        " class="error">
+      <div *ngIf="myForm.get('skillsMissing')?.invalid && myForm.get('skillsMissing')?.touched" class="error">
         La compétence est requise.
       </div>
     </div>
 
     <div class="form-group">
-      <div class="center-textarea">
-        <label for="description" class="description-label">Description</label>
-        <textarea id="description" formControlName="description" class="form-control"
-          placeholder="Entrez la description de votre projet"></textarea>
-      </div>
+      <label class="sr-only" for="description">Description</label>
+      <textarea id="description" formControlName="description" class="form-control" placeholder="Description"></textarea>
       <div *ngIf="myForm.get('description')?.invalid && myForm.get('description')?.touched" class="error">
         La description est requise.
       </div>
     </div>
 
     <div class="form-group">
-      <label style="display:none" for="fileInput">Liste de fichiers présents dans le projet</label>
-      <div class="form-control-container">
-        <input style="display:none" type="file" id="fileInput" accept=".txt,.pdf,.doc,.docx"
-          (change)="handleFileChange($event)" />
-        <label for="fileInput" class="custom-file-label">Cliquer pour ajouter un fichier</label>
-        <div class="selected-files" *ngIf="selectedFiles.length > 0">
-          <span *ngFor="let file of selectedFiles">
-            {{ file.name }} <button type="button" (click)="removeFile(file)">x</button>
-          </span>
-        </div>
+      <label for="color">Couleur</label>
+      <div class="color-picker">
+        <div *ngFor="let color of ['red', 'blue', 'green', 'yellow']" class="carre" [class]="color" (click)="selectColor(color)"></div>
       </div>
     </div>
 
-
-
-
-
-
-    <div class="parentCouleur">
-      <label class="couleur" style="display:block;" for="color">Sélectionnez une couleur</label>
+    <div class="form-group">
+      <label class="sr-only" for="date">Date</label>
+      <input id="date" formControlName="date" type="date" class="form-control" placeholder="Date" />
     </div>
-    <div class="parentCarre">
-      <div class="carre orange" (click)="selectColor('orange')"></div>
-      <div class="carre green" (click)="selectColor('green')"></div>
-      <div class="carre purple" (click)="selectColor('purple')"></div>
-      <div class="carre blue" (click)="selectColor('blue')"></div>
-      <div class="carre red" (click)="selectColor('red')"></div>
-      <div class="carre pink" (click)="selectColor('pink')"></div>
-    </div>
-    <input id="color" formControlName="color" type="hidden" />
-    <div *ngIf="myForm.get('color')?.invalid && myForm.get('color')?.touched" class="error">
-      La couleur est requise.
+a
+    <div class="form-group">
+      <label for="file">Ajouter des fichiers</label>
+      <input id="file" type="file" (change)="handleFileChange($event)" multiple />
+      <div class="selected-files">
+        <span *ngFor="let file of selectedFiles; trackBy: trackByFn">
+          {{ file.name }}
+          <button type="button" (click)="removeFile(file)">x</button>
+        </span>
+      </div>
     </div>
 
-    <div class="form-group button-group">
-      <button type="submit" [disabled]="myForm.invalid" class="btn btn-primary">
-        Enregistrer
-      </button>
-    </div>
+    <button type="submit" [disabled]="myForm.invalid">Envoyer</button>
   </form>
 </div>
