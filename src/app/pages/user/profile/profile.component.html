@@ -55,6 +55,12 @@
                 (input)="updatePreview()">
             <img *ngIf="newPicture" [src]="newPicture" alt="Preview" class="image-preview">
         </div>
+        <div class="avatar__list">
+            <button type="button" (click)="selectAvatar(avatar.url)" class="avatar__list__button"
+                *ngFor="let avatar of avatars">
+                <img class="avatar__list__image" [src]="avatar.url" alt="Avatar">
+            </button>
+        </div>
         <br>
         <div style="display: flex; flex-direction: row; justify-content: space-around;">
             <button (click)="changePicture()"

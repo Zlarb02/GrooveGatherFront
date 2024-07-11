@@ -31,7 +31,24 @@ export class ProfileComponent implements OnInit {
 
   http = inject(HttpClient);
   isChangePictureModalOpen = false;
-  newPicture = "";
+  newPicture = '';
+
+  avatars = [
+    { url: 'https://cdn.pixabay.com/photo/2024/06/25/19/44/man-8853455_1280.png' },
+    { url: 'https://cdn.pixabay.com/photo/2024/06/10/22/40/ai-generated-8821554_1280.png' },
+    { url: 'https://cdn.pixabay.com/photo/2024/06/10/22/40/ai-generated-8821552_1280.png' },
+    { url: 'https://cdn.pixabay.com/photo/2024/06/15/01/51/david-8830880_1280.png' },
+    { url: 'https://cdn.pixabay.com/photo/2024/05/26/21/03/ai-generated-8789500_1280.png' },
+    { url: 'https://cdn.pixabay.com/photo/2024/06/30/19/58/ai-generated-8863878_1280.png' },
+    { url: 'https://cdn.pixabay.com/photo/2024/06/30/19/59/ai-generated-8863879_1280.png' },
+    { url: 'https://cdn.pixabay.com/photo/2024/07/03/19/26/vincent-van-gogh-8870776_1280.png' },
+    { url: 'https://cdn.pixabay.com/photo/2024/07/03/19/36/mona-lisa-8870805_1280.png' },
+    { url: 'https://cdn.pixabay.com/photo/2024/06/30/19/57/ai-generated-8863876_1280.png' },
+    { url: 'https://cdn.pixabay.com/photo/2024/06/30/19/57/ai-generated-8863877_1280.png' },
+    { url: 'https://cdn.pixabay.com/photo/2024/06/22/20/09/ai-generated-8846960_1280.png' },
+    { url: 'https://cdn.pixabay.com/photo/2024/06/22/20/10/ai-generated-8846961_1280.png' }
+  ];
+
 
 
   ngOnInit() {
@@ -142,18 +159,19 @@ export class ProfileComponent implements OnInit {
     // Cette méthode met à jour l'aperçu de l'image lorsque l'utilisateur saisit un lien
   }
 
+  selectAvatar(url: string) {
+    this.newPicture = url;
+  }
+
   changePicture() {
     this.http.patch<User>(`https://groovegather-api.olprog-a.fr/api/v1/users?id=${this.user?.id}`, {
       picture: this.newPicture
     }).pipe(
       tap(response => {
-        // biome-ignore lint/suspicious/noConsoleLog: <explanation>
-        console.log('Picture updated successfully', response);
         this.authService.setUser(response);
         this.closeChangePictureModal();
       }),
       catchError(error => {
-        console.error('Error updating picture', error);
         alert('Failed to update picture. Please try again.');
         return throwError(error);
       })
@@ -165,3 +183,4 @@ export class ProfileComponent implements OnInit {
     console.log('Delete account');
   }
 }
+

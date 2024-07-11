@@ -44,7 +44,7 @@
                 <input type="text" style="--pill-accent: var(--purple);" [formControl]="genreControl"
                     [matAutocomplete]="autoGenre" (keydown)="onKeydown($event)">
                 <mat-autocomplete #autoGenre="matAutocomplete">
-                    <mat-option *ngFor="let genre of genres" [value]="genre">
+                    <mat-option *ngFor="let genre of filteredGenres" [value]="genre">
                         {{genre}}
                     </mat-option>
                 </mat-autocomplete>
