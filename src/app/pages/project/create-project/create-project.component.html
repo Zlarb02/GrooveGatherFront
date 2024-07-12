@@ -1,40 +1,40 @@
 <div class="container">
   <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
     <div class="ligne1">
-      <input id="nameProject" formControlName="nameProject" type="text" class="form-control"
-        placeholder="Nom du Projet" />
-      <div *ngIf="myForm.get('nameProject')?.invalid && myForm.get('nameProject')?.touched" class="error">
+      <input id="nameProject" formControlName="name" type="text" class="form-control" placeholder="Nom du Projet" />
+      <div *ngIf="myForm.get('name')?.invalid && myForm.get('name')?.touched" class="error">
         Le nom du projet est requis.
       </div>
-
       <div class="form-group">
-        <label class="genre-label" for="genre">Genre</label>
-        <div class="form-control-container">
-          <input type="text" formControlName="genre" placeholder="Genre" [matAutocomplete]="autoGenre" />
-          <mat-autocomplete #autoGenre="matAutocomplete">
-            <mat-option *ngFor="let genre of genresList" [value]="genre">
-              {{ genre }}
-            </mat-option>
-          </mat-autocomplete>
-          <div class="selected-genres">
-            <span *ngFor="let genre of selectedGenres">
-              {{ genre }}
-              <button type="button" (click)="removeGenre(genre)">x</button>
-            </span>
+        <div class="ligne1">
+          <label style="display:none;" class="genre-label " for="genre">Genre</label>
+          <div class="form-control-container">
+            <input type="text" placeholder="Genre" [matAutocomplete]="autoGenre" id="genre" class="form-control" />
+            <mat-autocomplete #autoGenre="matAutocomplete" (optionSelected)="addGenre($event)">
+              <mat-option *ngFor=" let genre of genresList" [value]="genre">
+                {{ genre }}
+              </mat-option>
+            </mat-autocomplete>
+            <div class="selected-genres">
+              <span *ngFor="let genre of selectedGenres">
+                {{ genre }}
+                <button type="button" (click)="removeGenre(genre)">x</button>
+              </span>
+            </div>
           </div>
         </div>
-        <div *ngIf="myForm.get('genre')?.invalid && myForm.get('genre')?.touched" class="error">
+        <div *ngIf="myForm.get('genres')?.invalid && myForm.get('genres')?.touched" class="error">
           Le genre est requis.
         </div>
       </div>
     </div>
 
     <div class="form-group">
-      <label for="usedSkill">Compétence présente</label>
+      <label style="display: none;" class="" for="usedSkill">Compétence présente</label>
       <div class="form-control-container">
-        <input type="text" formControlName="usedSkill" placeholder="Compétence utilisée"
-          [matAutocomplete]="autoSkill" />
-        <mat-autocomplete #autoSkill="matAutocomplete">
+        <input type="text" placeholder="Compétence utilisée" [matAutocomplete]="autoSkill" id="usedSkill"
+          class="form-control" />
+        <mat-autocomplete #autoSkill="matAutocomplete" (optionSelected)="addUsedSkill($event)">
           <mat-option *ngFor="let skill of skillNamesList" [value]="skill">
             {{ skill }}
           </mat-option>
@@ -46,17 +46,17 @@
           </span>
         </div>
       </div>
-      <div *ngIf="myForm.get('usedSkill')?.invalid && myForm.get('usedSkill')?.touched" class="error">
+      <div *ngIf="myForm.get('skillsPresent')?.invalid && myForm.get('skillsPresent')?.touched" class="error">
         La compétence est requise.
       </div>
     </div>
 
     <div class="form-group">
-      <label for="requestedSkill">Compétence manquante</label>
+      <label style="display:none;" class="" for="requestedSkill">Compétence manquante</label>
       <div class="form-control-container">
-        <input type="text" formControlName="requestedSkill" placeholder="Compétence manquante"
-          [matAutocomplete]="autoSkillMissing" />
-        <mat-autocomplete #autoSkillMissing="matAutocomplete">
+        <input type="text" placeholder="Compétence manquante" [matAutocomplete]="autoSkillMissing" id="requestedSkill"
+          class=" form-control" />
+        <mat-autocomplete #autoSkillMissing="matAutocomplete" (optionSelected)="addRequestedSkill($event)">
           <mat-option *ngFor="let skill of skillNamesList" [value]="skill">
             {{ skill }}
           </mat-option>
@@ -68,7 +68,7 @@
           </span>
         </div>
       </div>
-      <div *ngIf="myForm.get('requestedSkill')?.invalid && myForm.get('requestedSkill')?.touched" class="error">
+      <div *ngIf="myForm.get('skillsMissing')?.invalid && myForm.get('skillsMissing')?.touched" class="error">
         La compétence est requise.
       </div>
     </div>
@@ -85,9 +85,10 @@
     </div>
 
     <div class="form-group">
-      <label for="fileInput">Liste de fichiers présents dans le projet</label>
+      <label style="display:none;" class="" for="fileInput">Liste de fichiers présents dans le projet</label>
       <div class="form-control-container">
-        <input type="file" id="fileInput" accept=".txt,.pdf,.doc,.docx" (change)="handleFileChange($event)" />
+        <input class="" style="display:none;" type="file" id="fileInput" accept=".mp3,.wav,.flac,.txt"
+          (change)="handleFileChange($event)" />
         <label for="fileInput" class="custom-file-label">Cliquer pour ajouter un fichier</label>
         <div class="selected-files" *ngIf="selectedFiles.length > 0">
           <span *ngFor="let file of selectedFiles">

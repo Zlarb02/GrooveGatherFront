@@ -84,6 +84,9 @@ export class AppComponent implements OnInit {
       case '/landing-page':
         this.currentPageTitle = " ";
         break;
+      case '/best-practices':
+        this.currentPageTitle = 'Bonnes pratiques';
+        break;
       case '/signup':
         this.currentPageTitle = "S'inscrire";
         break;
