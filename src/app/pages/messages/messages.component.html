@@ -1,1 +1,10 @@
-<p>messages works!</p>
+<h1>WAV to MP3 Converter</h1>
+<input type="file" id="fileInput" accept=".wav,.flac" />
+<button (click)="uploadFile()">Convert</button>
+<div id="links" style="display: none">
+    <p>Download Links:</p>
+    <a id="wavLink" href="#" target="_blank">Download Original</a>
+    <a id="mp3Link" href="#" target="_blank">Download Converted MP3</a>
+    <audio id="mp3Audio" src="#" controls></audio>
+</div>
+<audio controls id="audioPlayer" style="display: none"></audio>

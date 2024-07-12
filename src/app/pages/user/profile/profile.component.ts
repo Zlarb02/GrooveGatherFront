@@ -179,8 +179,7 @@ export class ProfileComponent implements OnInit {
   }
 
   deleteAccount() {
-    // biome-ignore lint/suspicious/noConsoleLog: <explanation>
-    console.log('Delete account');
+    this.http.delete(`https://groovegather-api.olprog-a.fr/api/v1/users?id=${this.user?.id}`)
   }
 }
 
