@@ -4,12 +4,31 @@
 @import '@angular/material/prebuilt-themes/pink-bluegrey.css';
 @import '@angular/material/prebuilt-themes/purple-green.css';
 
+@font-face {
+    font-family: 'SketchChalk';
+    src: url('./assets/fonts/SketchChalk-vnveO.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 * {
     margin: 0;
     padding: 0;
     font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
         Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
         "Segoe UI Symbol";
+}
+
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    --accent: var(--color);
+    background: color-mix(in srgb, var(--accent) 45%, transparent);
+    border: 1px solid var(--accent);
 }
 
 :root {
@@ -118,6 +137,18 @@ body {
     --light-lines: #7f7f7f;
     --light-placeholder: darkgrey;
 
+    --light-button: var(--orange);
+    --dark-button: var(--purple);
+
+    --light-edit-button: #a350f79b;
+    --dark-edit-button: #ffa8269c;
+
+    --light-edit-picture: #ba7bf98d;
+    --dark-edit-picture: #ffa8268e;
+
+    --light-linear-gradient: linear-gradient(-45deg, #FFE57F, #FFA726, #81D4FA, #4FC3F7);
+    --dark-linear-gradient: linear-gradient(-45deg, #cc39bd, #9a32c0, #1d8db3, #1cb38f);
+
     --light-link: var(--pink);
     --dark-link: var(--orange);
     --light-colored: var(--orange);
@@ -153,12 +184,20 @@ body {
         --user-preferred-color: var(--dark-color);
         --user-preferred-link: var(--dark-link);
         --user-preferred-colored: var(--dark-colored);
+        --user-preferred-linear-gradient: var(--dark-linear-gradient);
+        --user-preferred-button: var(--dark-button);
+        --user-preferred-edit-button: var(--dark-edit-button);
+        --user-preferred-edit-picture: var(--dark-edit-picture);
         /* Update other variables for user-preferred dark theme */
 
         --user-inverse-bg: var(--light-bg);
         --user-inverse-color: var(--light-color);
         --user-inverse-link: var(--light-link);
         --user-inverse-colored: var(--light-colored);
+        --user-inverse-linear-gradient: var(--light-linear-gradient);
+        --user-inverse-button: var(--light-button);
+        --user-inverse-edit-button: var(--light-edit-button);
+        --user-inverse-edit-picture: var(--light-edit-picture);
     }
 }
 
@@ -168,12 +207,20 @@ body {
         --user-preferred-color: var(--light-color);
         --user-preferred-link: var(--light-link);
         --user-preferred-colored: var(--light-colored);
+        --user-preferred-linear-gradient: var(--light-linear-gradient);
+        --user-preferred-button: var(--light-button);
+        --user-preferred-edit-button: var(--light-edit-button);
+        --user-preferred-edit-picture: var(--light-edit-picture);
         /* Update other variables for user-preferred light theme */
 
         --user-inverse-bg: var(--dark-bg);
         --user-inverse-color: var(--dark-color);
         --user-inverse-link: var(--dark-link);
         --user-inverse-colored: var(--dark-colored);
+        --user-inverse-linear-gradient: var(--dark-linear-gradient);
+        --user-inverse-button: var(--dark-button);
+        --user-inverse-edit-button: var(--dark-edit-button);
+        --user-inverse-edit-picture: var(--dark-edit-picture);
     }
 }
 
@@ -186,6 +233,10 @@ body {
     --color: var(--user-preferred-color);
     --link: var(--user-preferred-link);
     --colored: var(--user-preferred-colored);
+    --linear-gradient: var(--user-preferred-linear-gradient);
+    --button: var(--user-preferred-button);
+    --edit-button: var(--user-preferred-edit-button);
+    --edit-picture: var(--user-preferred-edit-picture);
     --bg-inverse: lightgrey;
     --orange: #f9b234;
     --green: #3ecd5e;

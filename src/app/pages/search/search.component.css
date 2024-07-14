@@ -163,15 +163,15 @@ select {
     visibility: hidden;
     max-height: 0;
     overflow: hidden;
-    transition: opacity 6s ease-out, visibility 21s ease-out, max-height 12s ease-out;
+    transition: opacity 3s ease-out, visibility 0s linear 3s, max-height 1s ease-out;
 }
 
 /* Display the form when hovering over the parent div */
 .choose-filters:hover #filters {
     opacity: 1;
     visibility: visible;
-    max-height: 2000px;
-    transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out, max-height 8s ease-out;
+    max-height: 150px;
+    transition: opacity 1s ease-in-out, visibility 0s linear 0s, max-height 1s ease-out;
 }
 
 .choose-filters-title {

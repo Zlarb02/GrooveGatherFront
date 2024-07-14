@@ -45,7 +45,7 @@ a {
   width: 14vw;
   cursor: pointer;
   transition: opacity .5s, transform .5s, background .3s, color .3s, border-radius .5s;
-  color: var(--dark-bg);
+  color: var(--light-color);
   --pill-accent: var(--bg-inverse);
   background: color-mix(in srgb, var(--pill-accent) 90%, transparent);
   filter: contrast(130%);
@@ -60,14 +60,14 @@ a {
 }
 
 .dropdown-profile-menu .dropdown li:hover {
-  background-color: var(--purple);
-  color: white;
+  background-color: var(--button);
+  color: var(--color);
   border-radius: 0;
   transition: background .3s, color .3s, border-radius .5s;
 }
 
 #toggle-menu:checked+label {
-  background-color: var(--purple);
+  background-color: var(--button);
 }
 
 /* Affiche le menu déroulant et anime les éléments lorsqu'on coche la checkbox */

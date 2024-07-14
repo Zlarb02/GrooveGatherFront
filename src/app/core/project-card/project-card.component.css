@@ -12,14 +12,31 @@
     padding: 30px 20px;
     overflow: hidden;
     position: relative;
-    background-color: var(--bg-inverse);
+    background: var(--linear-gradient);
+    background-size: 180%;
+    animation: gradient 15s ease infinite;
     opacity: 80%;
 }
+
+@keyframes gradient {
+    0% {
+        background-position: 10% 50%;
+    }
+
+    50% {
+        background-position: 40% 50%;
+    }
+
+    100% {
+        background-position: 10% 50%;
+    }
+}
+
 
 .pj-item_link:hover,
 .pj-item_link:hover .pj-item_date {
     text-decoration: none;
-    color: black;
+    color: var(--color);
 }
 
 .pj-item_link:hover .pj-item_bg {
@@ -32,15 +49,22 @@
     min-height: 87px;
     margin: 0 0 25px;
     overflow: hidden;
-    font-weight: 1000;
+    font-family: 'SketchChalk', sans-serif;
+    font-weight: 500;
     font-size: 55px;
-    color: black;
+    color: var(--color);
     background: radial-gradient(circle, var(--red), var(--light-color));
     background-clip: text;
     color: transparent;
     animation: colorGradient 4s linear infinite;
-    background-size: 250% 300%;
+    background-size: 1500% 1500%;
     position: relative;
+    filter: brightness(80%);
+    transition: background 2s ease;
+}
+
+.pj-item_link:hover .pj-item_title {
+    transition: background 2s ease;
 }
 
 @keyframes colorGradient {
@@ -67,7 +91,7 @@
 
 .pj-item-box {
     font-size: 18px;
-    color: black;
+    color: var(--color);
     font-size: 18px;
     /* Duplicate rule, kept for clarity */
     position: relative;
@@ -94,32 +118,26 @@
 
 .bg-orange {
     background-color: var(--orange);
-    color: var(--orange);
 }
 
 .bg-green {
     background-color: var(--green);
-    color: var(--green);
 }
 
 .bg-red {
     background-color: var(--red);
-    color: var(--red);
 }
 
 .bg-purple {
     background-color: var(--purple);
-    color: var(--purple);
 }
 
 .bg-pink {
     background-color: var(--pink);
-    color: var(--pink);
 }
 
 .bg-blue {
     background-color: var(--blue);
-    color: var(--blue);
 }
 
 .bg-orange+.pj-item_title {
@@ -127,17 +145,18 @@
     background-clip: text;
     color: transparent;
     animation: colorGradient 4s linear infinite;
-    background-size: 250% 300%;
-    filter: brightness(80%);
+    background-size: 1500% 1500%;
+    transition: background 2s ease;
 }
+
 
 .bg-green+.pj-item_title {
     background: radial-gradient(circle, var(--red), var(--light-color));
     background-clip: text;
     color: transparent;
     animation: colorGradient 4s linear infinite;
-    background-size: 250% 300%;
-    filter: brightness(80%);
+    background-size: 1500% 1500%;
+    transition: background 2s ease;
 }
 
 .bg-red+.pj-item_title {
@@ -145,47 +164,91 @@
     background-clip: text;
     color: transparent;
     animation: colorGradient 4s linear infinite;
-    background-size: 250% 300%;
-    filter: brightness(40%);
+    background-size: 1500% 1500%;
+    transition: background 2s ease;
+    filter: brightness(60%)
+}
+
+.pj-item_link:hover .bg-red+.pj-item_title {
+    background: radial-gradient(circle, var(--green), var(--light-color));
+    background-clip: text;
+    color: transparent;
+    animation: colorGradient 4s linear infinite;
+    background-size: 1500% 1500%;
+    transition: background 2s ease;
+    filter: brightness(45%)
 }
 
 .bg-purple+.pj-item_title {
-    background: radial-gradient(circle, var(--light-color), var(--orange));
+    background: radial-gradient(circle, var(--blue), var(--light-color));
     background-clip: text;
     color: transparent;
     animation: colorGradient 4s linear infinite;
-    background-size: 250% 300%;
-    filter: brightness(30%);
+    background-size: 1500% 1500%;
+    transition: background 2s ease;
+    filter: brightness(60%);
+}
+
+.pj-item_link:hover .bg-purple+.pj-item_title {
+    background: radial-gradient(circle, var(--dark-color), var(--orange));
+    background-clip: text;
+    animation: colorGradient 4s linear infinite;
+    background-size: 1500% 1500%;
+    transition: background 2s ease;
+    filter: brightness(120%);
 }
 
 .bg-pink+.pj-item_title {
-    background: radial-gradient(circle, var(--light-color), var(--purple));
+    background: radial-gradient(circle, var(--pink), var(--light-color));
     background-clip: text;
     color: transparent;
     animation: colorGradient 4s linear infinite;
-    background-size: 250% 300%;
+    background-size: 1500% 1500%;
+    transition: background 2s ease;
     filter: brightness(70%);
 }
 
+.pj-item_link:hover .bg-pink+.pj-item_title {
+    background: radial-gradient(circle, var(--orange), var(--dark-color));
+    background-clip: text;
+    animation: colorGradient 4s linear infinite;
+    background-size: 1500% 1500%;
+    transition: background 2s ease;
+    filter: brightness(120%);
+}
+
 .bg-blue+.pj-item_title {
-    background: radial-gradient(circle, var(--light-color), var(--orange));
+    background: radial-gradient(circle, var(--purple), var(--light-color));
     background-clip: text;
     color: transparent;
     animation: colorGradient 4s linear infinite;
-    background-size: 250% 300%;
-    filter: brightness(30%);
+    background-size: 1500% 1500%;
+    transition: background 2s ease;
+    filter: brightness(60%);
+}
+
+.pj-item_link:hover .bg-blue+.pj-item_title {
+    background: radial-gradient(circle, var(--orange), var(--dark-color));
+    background-clip: text;
+    animation: colorGradient 4s linear infinite;
+    background-size: 1500% 1500%;
+    transition: background 2s ease;
+    filter: brightness(120%);
 }
 
 .pj-item_skills {
+    width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    gap: 15px;
 }
 
 .pj-item-skills-present,
 .pj-item-skills-miss {
     display: flex;
     flex-direction: column;
+    gap: 8px;
 }
 
 .btn-present {
@@ -208,9 +271,9 @@
     text-decoration: none;
     max-width: 100%;
     min-width: 10vw;
-    height: 30px;
+    height: max-content;
     margin: 0 8px 8px 0;
-    color: var(--light-color);
+    color: var(--color);
 }
 
 .btn-miss {
@@ -233,9 +296,9 @@
     text-decoration: none;
     max-width: 100%;
     min-width: 10vw;
-    height: 30px;
+    height: max-content;
     margin: 0 8px 8px 0;
-    color: var(--light-color);
+    color: var(--color);
 }
 
 .btn-genre {
@@ -258,14 +321,15 @@
     text-decoration: none;
     max-width: 100%;
     min-width: 10vw;
-    height: 30px;
+    height: max-content;
     margin: 0 8px 8px 0;
-    color: var(--light-color);
+    color: var(--color);
 }
 
 .like-icon {
     width: 24px;
     height: 24px;
+    color: var(--color)
 }
 
 @media only screen and (max-width: 979px) {
@@ -275,7 +339,9 @@
     }
 
     .pj-item_title {
-        font-size: 24px;
+        min-height: 72px;
+        line-height: 1;
+        font-size: 34px;
     }
 }
 
@@ -294,7 +360,7 @@
     .pj-item_title {
         min-height: 72px;
         line-height: 1;
-        font-size: 24px;
+        font-size: 34px;
     }
 
     .pj-item_link {
@@ -304,4 +370,16 @@
     .pj-item-box {
         font-size: 16px;
     }
+
+    .pj-item_link {
+        display: block;
+        padding: 30px 20px;
+        overflow: hidden;
+        position: relative;
+        background: var(--linear-gradient);
+        background-size: 660%;
+        animation: gradient 15s ease infinite;
+        opacity: 80%;
+    }
+
 }

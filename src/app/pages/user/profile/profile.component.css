@@ -3,16 +3,30 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    gap: 4vh;
+    gap: 2vh;
     height: 66vh;
     overflow-y: scroll;
     --ggs: 0.9;
-    padding: 2vh 0;
-    border: 3px solid var(--lines);
-    margin: 2vh 10vw;
-    border-radius: 50px;
-    background-color: var(--bg-inverse);
-    color: var(--light-color);
+    padding-top: 2vh;
+    margin: 2vh 5vw;
+    border-radius: 28px;
+    background: var(--linear-gradient);
+    background-size: 120%;
+    animation: gradient 15s ease infinite;
+    color: var(--color);
+}
+
+
+@media screen and (min-width: 500px) {
+    .container {
+        margin: 2vh 15vw;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .container {
+        margin: 2vh 30vw;
+    }
 }
 
 img {
@@ -21,9 +35,8 @@ img {
 
 .edit-btn {
     position: relative;
-    top: -8vh;
-    background-color: #ffa8269c;
-    padding: 0.5rem 1rem;
+    background-color: var(--edit-button);
+    padding: 1rem;
     cursor: pointer;
     border-radius: 5px;
     transition: background-color 0.3s ease;
@@ -50,16 +63,17 @@ h2 {
 }
 
 .edit-mail {
-    top: calc(-30px - 7vh);
+    top: calc(-30px - 6vh);
 }
 
 .edit-name {
-    top: -7vh;
+    top: -6vh;
 }
 
 .edit-picture {
-    background-color: #ffa8268e;
+    background-color: var(--edit-picture);
     left: 35px;
+    top: -5vh;
 }
 
 i {
@@ -73,9 +87,9 @@ img {
 }
 
 .change-password-btn {
-    background-color: var(--primary-color);
+    background-color: transparent;
     border: none;
-    color: var(--light-color);
+    color: var(--color);
     padding: 0.5rem 1rem;
     cursor: pointer;
     border-radius: 5px;
@@ -91,14 +105,16 @@ img {
 
 .change-password-btn:hover,
 .deco-btn:hover {
-    background-color: var(--orange);
-    color: var(--light-color);
+    background-color: var(--edit-button);
+    color: var(--color);
 }
 
 .delete-btn {
     position: relative;
     top: -10vh;
-    color: var(--red);
+    color: rgb(244, 80, 9);
+    font-size: 1.5rem;
+    font-weight: 600;
 }
 
 .delete-btn:hover {
@@ -113,11 +129,12 @@ img {
 button {
     background-color: transparent;
     border: none;
-    color: var(--light-color);
-    padding: 0.5rem 1rem;
+    color: var(--color);
+    padding: 0 1rem;
     cursor: pointer;
     border-radius: 5px;
     transition: background-color 0.3s ease;
+    font-weight: 700;
 }
 
 button:hover {
@@ -136,32 +153,67 @@ button:hover {
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
 }
 
 .modal.show {
     display: block;
 }
 
-#changePictureModal {
-    height: 75vh;
-    margin: 15vh 0;
-}
+
 
 .modal-content {
-    background-color: var(--bg-inverse);
-    color: var(--light-color);
-    margin: 30vh auto;
+    max-height: 60vh;
+    color: var(--color);
+    margin: 4vh auto;
     padding: 20px;
     border: 1px solid var(--lines);
     border-radius: 15px;
-    width: 80%;
+    width: 60vw;
     max-width: 500px;
     text-align: center;
+    position: fixed;
+    left: 20vw;
+    background-color: var(--bg);
+}
+
+#changePictureModal {
+    height: 75vh;
+    margin: 15vh 0;
+    min-height: 300px;
+}
+
+.change-picture {
+    background: var(--linear-gradient);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+}
+
+.change-password {
+    top: 20vh;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.avatar__list {
+    max-height: 100px;
+    border: 1px solid black;
+    overflow: scroll;
 }
 
 .close {
-    color: var(--light-color);
+    color: var(--color);
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -169,14 +221,14 @@ button:hover {
 
 .close:hover,
 .close:focus {
-    color: var(--light-color);
+    color: var(--color);
     text-decoration: none;
     cursor: pointer;
 }
 
 input {
     background-color: var(--light-bg);
-    color: var(--light-color);
+    color: var(--color);
     width: 240px;
 }
 

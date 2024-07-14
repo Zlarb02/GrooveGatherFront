@@ -30,11 +30,19 @@ export class ThemeService {
       root.style.setProperty('--color', 'var(--user-inverse-color)');
       root.style.setProperty('--link', 'var(--user-inverse-link)');
       root.style.setProperty('--colored', 'var(--user-inverse-colored)');
+      root.style.setProperty('--linear-gradient', 'var(--user-inverse-linear-gradient)');
+      root.style.setProperty('--button', 'var(--user-inverse-button)');
+      root.style.setProperty('--edit-button', 'var(--user-inverse-edit-button)');
+      root.style.setProperty('--edit-picture', 'var(--user-inverse-edit-picture)');
     } else {
       root.style.setProperty('--bg', 'var(--user-preferred-bg)');
       root.style.setProperty('--color', 'var(--user-preferred-color)');
       root.style.setProperty('--link', 'var(--user-preferred-link)');
       root.style.setProperty('--colored', 'var(--user-preferred-colored)');
+      root.style.setProperty('--linear-gradient', 'var(--user-preferred-linear-gradient)');
+      root.style.setProperty('--button', 'var(--user-preferred-button)');
+      root.style.setProperty('--edit-button', 'var(--user-preferred-edit-button)');
+      root.style.setProperty('--edit-picture', 'var(--user-preferred-edit-picture)');
     }
   }
 }
