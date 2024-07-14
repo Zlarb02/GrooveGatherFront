@@ -3,17 +3,21 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 50vh;
+    height: 66vh;
     overflow: hidden;
     background-color: var(--bg);
-    padding: 3rem 0;
 }
 
 .login-container,
 .signup-container {
     height: fit-content;
-    max-height: 55vh;
+    justify-content: center;
+    min-height: 45vh;
+    max-height: 66vh;
     width: fit-content;
+    min-width: 30vw;
+    max-width: 90vw;
+    margin: 20px;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -88,11 +92,12 @@ button:hover {
 }
 
 a {
-    color: #007bff;
+    color: #0033ff;
     text-decoration: none;
     display: block;
     text-align: center;
     margin-top: 15px;
+    font-size: 19px;
 }
 
 a:hover {
@@ -101,5 +106,6 @@ a:hover {
 
 p {
     text-align: center;
-    color: var(--lines);
+    color: rgba(41, 40, 40, 0.914);
+    font-size: 19px;
 }

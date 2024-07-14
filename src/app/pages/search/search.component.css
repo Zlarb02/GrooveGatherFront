@@ -11,9 +11,27 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    max-height: 70vh;
+    max-height: 75vh;
     overflow: hidden;
     overflow-y: scroll;
+    background: transparent;
+    background-size: 120%;
+    animation: gradient 15s ease infinite;
+    color: var(--color);
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 10% 50%;
+    }
+
+    50% {
+        background-position: 40% 50%;
+    }
+
+    100% {
+        background-position: 10% 50%;
+    }
 }
 
 .active-filters {
@@ -34,7 +52,7 @@
 
 .active-filters>li {
     align-items: center;
-    border: 1px solid var(--lines);
+    border: 1px solid var(--bg);
     display: flex;
     justify-content: center;
     --pill-accent: var(--orange);
@@ -98,7 +116,7 @@
     background: var(--bg);
     color: var(--color);
     padding: 0.7rem;
-    border: var(--lines) 1px solid;
+    border: var(--bg) 1px solid;
     border-radius: 2.75rem;
     font-size: 0.875rem;
     font-style: normal;
@@ -143,7 +161,7 @@ select {
 
 .separation {
     width: 50%;
-    border-top: 1px solid var(--lines);
+    border-top: 1px solid var(--bg);
     margin: 16px 0;
 }
 
@@ -166,8 +184,7 @@ select {
     transition: opacity 3s ease-out, visibility 0s linear 3s, max-height 1s ease-out;
 }
 
-/* Display the form when hovering over the parent div */
-.choose-filters:hover #filters {
+.choose-filters #filters {
     opacity: 1;
     visibility: visible;
     max-height: 150px;
@@ -201,7 +218,7 @@ select {
     display: flex;
     align-items: center;
     justify-self: center;
-    border: var(--lines) 1px solid;
+    border: var(--bg) 1px solid;
     border-radius: 0.25rem 1rem 1rem 0.25rem;
     padding-inline: 0.75rem;
     padding-block: 0.375rem;
@@ -267,39 +284,29 @@ select {
     height: 5vh;
     translate: -20%;
     padding: 12px 24px;
-    background-color: transparent;
     transition: transform 250ms ease-in-out;
     font-size: 14px;
     line-height: 18px;
-    color: var(--color);
-    background-color: transparent;
+    color: var(--light-color);
+    background-color: var(--glass);
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z' fill='%23777777'/%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-size: 18px 18px;
     background-position: 95% center;
     border-radius: 50px;
-    border: 1px solid var(--lines);
+    border: 1px solid var(--bg);
     transition: all 250ms ease-in-out;
     backface-visibility: hidden;
     transform-style: preserve-3d
 }
 
 .search__input::placeholder {
-    color: rgba(87, 87, 86, 0.8);
+    color: rgb(87, 87, 86);
     text-transform: uppercase;
     letter-spacing: 1.5px;
 }
 
-.search__input:hover,
-.search__input:focus {
-    width: 92vw;
-    padding: 12px 0;
-    outline: 0;
-    border: 1px solid transparent;
-    border-bottom: 1px solid var(--lines);
-    border-radius: 0;
-    background-position: 100% center;
-}
+
 
 body.inverse .search__container {
     display: none;
@@ -323,6 +330,20 @@ body.inverse .search__container {
     width: 100vw;
 }
 
+@media (min-width:420px) {
+    .projects-container {
+        width: 80vw;
+    }
+
+}
+
+@media (min-width: 540px) {
+    .projects-container {
+        width: 60vw;
+    }
+}
+
+
 @media (min-width: 1025px) {
 
 
@@ -333,6 +354,7 @@ body.inverse .search__container {
     .projects-container {
         flex-direction: row;
         flex-wrap: wrap;
+        width: 100%;
 
         .project-card {
             max-width: 33%;
@@ -340,6 +362,10 @@ body.inverse .search__container {
     }
 }
 
+
+.project-card {
+    z-index: 1 !important;
+}
 
 /* desktop end */
 

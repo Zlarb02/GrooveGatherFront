@@ -24,28 +24,28 @@
     <div class="choose-filters">
         <div class="choose-filters-title">
             <h3>
-                Filtrez
+                <u>Filtrez</u>
             </h3>
             <br>
             <br>
         </div>
         <form id="filters" #filtersForm="ngForm" (ngSubmit)="onSelectFilters(filters)">
 
-            <div class="filter-select"> Compétence déjà présente dans le projet :
-                <input type="text" style="--pill-accent: var(--green);" [formControl]="skillControlPresent"
-                    [matAutocomplete]="autoSkill" (keydown)="onKeydown($event)">
-                <mat-autocomplete #autoSkill="matAutocomplete">
-                    <mat-option *ngFor="let skill of filteredSkills" [value]="skill">
-                        {{skill}}
-                    </mat-option>
-                </mat-autocomplete>
-            </div>
             <div class="filter-select"> Genre musical :
                 <input type="text" style="--pill-accent: var(--purple);" [formControl]="genreControl"
                     [matAutocomplete]="autoGenre" (keydown)="onKeydown($event)">
                 <mat-autocomplete #autoGenre="matAutocomplete">
                     <mat-option *ngFor="let genre of filteredGenres" [value]="genre">
                         {{genre}}
+                    </mat-option>
+                </mat-autocomplete>
+            </div>
+            <div class="filter-select"> Compétence déjà présente dans le projet :
+                <input type="text" style="--pill-accent: var(--green);" [formControl]="skillControlPresent"
+                    [matAutocomplete]="autoSkill" (keydown)="onKeydown($event)">
+                <mat-autocomplete #autoSkill="matAutocomplete">
+                    <mat-option *ngFor="let skill of filteredSkills" [value]="skill">
+                        {{skill}}
                     </mat-option>
                 </mat-autocomplete>
             </div>
@@ -120,8 +120,8 @@
         </div>
 
         <br>
-        <div class="projects-container">
-            <app-project-card class="project-card"
+        <div class="projects-container" style="position: relative; z-index: 1 !important;">
+            <app-project-card class="project-card" style="position: relative; z-index: 1 !important;"
                 *ngFor="let project of projects | paginate: { itemsPerPage: itemsPerPage, currentPage: p }; index as i"
                 [project]="project" [i]="i" [class.bg-orange]="i % 6 === 0" [class.bg-green]="i % 6 === 1"
                 [class.bg-red]="i % 6 === 2" [class.bg-purple]="i % 6 === 3" [class.bg-pink]="i % 6 === 4"

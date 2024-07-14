@@ -13,8 +13,8 @@
 
 .page-container {
     height: 75vh;
-    background-color: var(--bg);
+    background: transparent;
     color: var(--color);
     overflow: hidden;
-    z-index: 2 !important;
+    z-index: 1 !important;
 }

@@ -46,7 +46,7 @@ a {
   cursor: pointer;
   transition: opacity .5s, transform .5s, background .3s, color .3s, border-radius .5s;
   color: var(--light-color);
-  --pill-accent: var(--bg-inverse);
+  --pill-accent: var(--bg-inverse-or-glass);
   background: color-mix(in srgb, var(--pill-accent) 90%, transparent);
   filter: contrast(130%);
   text-align: center;

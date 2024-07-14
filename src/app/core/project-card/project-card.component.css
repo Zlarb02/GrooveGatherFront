@@ -12,37 +12,21 @@
     padding: 30px 20px;
     overflow: hidden;
     position: relative;
-    background: var(--linear-gradient);
-    background-size: 180%;
-    animation: gradient 15s ease infinite;
-    opacity: 80%;
-}
-
-@keyframes gradient {
-    0% {
-        background-position: 10% 50%;
-    }
-
-    50% {
-        background-position: 40% 50%;
-    }
-
-    100% {
-        background-position: 10% 50%;
-    }
+    background: var(--bg-inverse);
 }
 
 
 .pj-item_link:hover,
 .pj-item_link:hover .pj-item_date {
     text-decoration: none;
-    color: var(--color);
+    color: var(--light-color);
 }
 
 .pj-item_link:hover .pj-item_bg {
     -webkit-transform: scale(10);
     -ms-transform: scale(10);
     transform: scale(10);
+    opacity: 25%;
 }
 
 .pj-item_title {
@@ -51,8 +35,7 @@
     overflow: hidden;
     font-family: 'SketchChalk', sans-serif;
     font-weight: 500;
-    font-size: 55px;
-    color: var(--color);
+    font-size: 35px;
     background: radial-gradient(circle, var(--red), var(--light-color));
     background-clip: text;
     color: transparent;
@@ -61,6 +44,7 @@
     position: relative;
     filter: brightness(80%);
     transition: background 2s ease;
+    word-wrap: break-word;
 }
 
 .pj-item_link:hover .pj-item_title {
@@ -91,7 +75,7 @@
 
 .pj-item-box {
     font-size: 18px;
-    color: var(--color);
+    color: var(--light-color);
     font-size: 18px;
     /* Duplicate rule, kept for clarity */
     position: relative;
@@ -114,6 +98,7 @@
     -webkit-transition: all .5s ease;
     -o-transition: all .5s ease;
     transition: all .5s ease;
+    opacity: 55%;
 }
 
 .bg-orange {
@@ -273,7 +258,7 @@
     min-width: 10vw;
     height: max-content;
     margin: 0 8px 8px 0;
-    color: var(--color);
+    color: var(--light-color);
 }
 
 .btn-miss {
@@ -298,7 +283,7 @@
     min-width: 10vw;
     height: max-content;
     margin: 0 8px 8px 0;
-    color: var(--color);
+    color: var(--light-color);
 }
 
 .btn-genre {
@@ -323,13 +308,13 @@
     min-width: 10vw;
     height: max-content;
     margin: 0 8px 8px 0;
-    color: var(--color);
+    color: var(--light-color);
 }
 
 .like-icon {
     width: 24px;
     height: 24px;
-    color: var(--color)
+    color: var(--light-color)
 }
 
 @media only screen and (max-width: 979px) {
@@ -376,7 +361,6 @@
         padding: 30px 20px;
         overflow: hidden;
         position: relative;
-        background: var(--linear-gradient);
         background-size: 660%;
         animation: gradient 15s ease infinite;
         opacity: 80%;

@@ -45,18 +45,42 @@ body {
     align-items: center;
     height: 100vh;
     overflow: hidden;
+    background: var(--bg);
+    background-size: 120%;
+    animation: gradient 15s ease infinite;
 }
 
-.ngx-pagination a {
+@keyframes gradient {
+    0% {
+        background-position: 10% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 10% 50%;
+    }
+}
+
+.ngx-pagination a,
+.current,
+.ngx-pagination a:hover {
     color: var(--color) !important
 }
 
 .current {
-    background-color: var(--lines) !important
+    background-color: var(--button) !important
 }
 
 .ngx-pagination a:hover {
-    background-color: var(--bg) !important
+    background-color: color-mix(in srgb, var(--button) 50%, transparent) !important
+}
+
+.pagination-previous,
+.pagination-next {
+    color: var(--button) !important
 }
 
 a,
@@ -92,7 +116,6 @@ input,
 label,
 select {
     --pill-accent: var(--lines);
-    background: color-mix(in srgb, var(--pill-accent) 5%, transparent);
     transition: background 0.3s ease;
     border: var(--pill-accent) 1px solid;
     display: flex;
@@ -109,7 +132,7 @@ select {
     text-decoration: none;
     text-align: center;
     color: var(--color);
-    background-color: var(--bg);
+    background: color-mix(in srgb, var(--pill-accent) 25%, transparent);
     cursor: pointer;
     padding-right: 10px;
 }
@@ -118,7 +141,7 @@ button:hover,
 input:hover,
 label:hover,
 select:hover {
-    background: color-mix(in srgb, var(--pill-accent) 20%, transparent);
+    background: color-mix(in srgb, var(--pill-accent) 50%, transparent);
 }
 
 /* COLORS START BLOCK */
@@ -136,6 +159,10 @@ body {
     --light-pink: #f8d0e8;
     --light-lines: #7f7f7f;
     --light-placeholder: darkgrey;
+
+    --glass: rgba(255, 255, 255, 0.2);
+
+    --thick-glass: rgba(255, 255, 255, 0.9);
 
     --light-button: var(--orange);
     --dark-button: var(--purple);
@@ -228,7 +255,10 @@ body {
 body {
     height: 100vh;
     width: 100vw;
-    background-color: var(--bg);
+    --sober-bg: var(--user-preferred-bg);
+    --sober-color: var(--user-preferred-color);
+    --colored-bg: var(--user-preferred-linear-gradient);
+    --colored-color: var(--light-color);
     --bg: var(--user-preferred-bg);
     --color: var(--user-preferred-color);
     --link: var(--user-preferred-link);
@@ -237,6 +267,8 @@ body {
     --button: var(--user-preferred-button);
     --edit-button: var(--user-preferred-edit-button);
     --edit-picture: var(--user-preferred-edit-picture);
+    --sober-bg-inverse: lightgrey;
+    --colored-bg-inverse: var(--glass);
     --bg-inverse: lightgrey;
     --orange: #f9b234;
     --green: #3ecd5e;
