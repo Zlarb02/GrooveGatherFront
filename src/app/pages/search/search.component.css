@@ -11,7 +11,9 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    max-height: 75vh;
+    max-height: 100vh;
+    padding-top: 13vh;
+    padding-bottom: 15vh;
     overflow: hidden;
     overflow-y: scroll;
     background: transparent;
@@ -161,7 +163,7 @@ select {
 
 .separation {
     width: 50%;
-    border-top: 1px solid var(--bg);
+    border-top: 1px solid transparent;
     margin: 16px 0;
 }
 
@@ -214,11 +216,17 @@ select {
     }
 }
 
-.sortBy {
+.sortBy:hover {
+    --pill-accent: var(--bg-or-glass);
+    background: color-mix(in srgb, var(--pill-accent) 50%, var(--colored));
+}
+
+.sortBy,
+.perPage {
     display: flex;
     align-items: center;
     justify-self: center;
-    border: var(--bg) 1px solid;
+    border: var(--colored) 1px solid;
     border-radius: 0.25rem 1rem 1rem 0.25rem;
     padding-inline: 0.75rem;
     padding-block: 0.375rem;
@@ -232,6 +240,16 @@ select {
     color: var(--color);
     background-color: var(--bg);
     cursor: pointer;
+}
+
+#sort:hover {
+    --pill-accent: var(--bg-or-glass);
+    background: color-mix(in srgb, var(--pill-accent) 50%, var(--colored));
+}
+
+#itemsPerPage:hover {
+    --pill-accent: var(--bg-or-glass);
+    background: color-mix(in srgb, var(--pill-accent) 50%, var(--colored));
 }
 
 .sort-icon {
@@ -360,11 +378,6 @@ body.inverse .search__container {
             max-width: 33%;
         }
     }
-}
-
-
-.project-card {
-    z-index: 1 !important;
 }
 
 /* desktop end */

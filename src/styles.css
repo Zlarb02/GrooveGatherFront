@@ -115,7 +115,7 @@ button,
 input,
 label,
 select {
-    --pill-accent: var(--lines);
+    --pill-accent: var(--colored);
     transition: background 0.3s ease;
     border: var(--pill-accent) 1px solid;
     display: flex;
@@ -161,6 +161,8 @@ body {
     --light-placeholder: darkgrey;
 
     --glass: rgba(255, 255, 255, 0.2);
+    --glass-darker: rgba(83, 83, 83, 0.118);
+    --glass-dark: rgba(198, 196, 196, 0.242);
 
     --thick-glass: rgba(255, 255, 255, 0.9);
 

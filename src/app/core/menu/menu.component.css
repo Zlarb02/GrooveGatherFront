@@ -58,7 +58,7 @@ path {
 
 /* Style initial de la div à afficher/cacher */
 nav {
-  top: 2vh;
+  top: -3vh;
   filter: contrast(130%);
   margin-top: 20px;
   border-radius: 8px;
@@ -73,6 +73,7 @@ nav {
     height: 9.5vh;
     min-height: 60px;
     max-height: 200px;
+    width: 130px;
     padding: 0 20px;
     list-style: none;
     display: flex;
@@ -85,11 +86,6 @@ nav {
   }
 }
 
-@media screen and (max-height: 800px) {
-  nav {
-    top: 1vh;
-  }
-}
 
 @media screen and (max-height: 500px) {
   nav {

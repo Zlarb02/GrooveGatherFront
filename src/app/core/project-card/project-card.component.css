@@ -3,8 +3,11 @@
     flex-basis: calc(33.33333% - 30px);
     margin: 0 15px 30px;
     overflow: hidden;
-    border-radius: 28px;
     filter: contrast(130%);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
 }
 
 .pj-item_link {
@@ -12,7 +15,7 @@
     padding: 30px 20px;
     overflow: hidden;
     position: relative;
-    background: var(--bg-inverse);
+    background: color-mix(in srgb, var(--bg-inverse) 80%, transparent);
 }
 
 

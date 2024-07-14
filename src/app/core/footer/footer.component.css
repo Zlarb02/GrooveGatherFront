@@ -2,7 +2,8 @@ footer {
     position: absolute;
     bottom: 0;
     width: 95vw;
-    margin: 0.9vh 2.5vw;
+    margin-bottom: 1.5vh;
+    margin-left: 2.5vw;
     z-index: 10;
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -17,6 +18,7 @@ ul {
     align-items: center;
     height: 8vh;
     background-color: var(--bg);
+    background: color-mix(in srgb, var(--bg) 70%, var(--glass-darker));
     color: var(--color);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -31,7 +33,7 @@ li {
 }
 
 .create-project {
-    margin-bottom: 2vh;
+    margin-bottom: 1.2vh;
 }
 
 @media (min-width: 1025px) {
