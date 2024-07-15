@@ -2,20 +2,31 @@ body {
     background: var(--light-linear-gradient);
 }
 
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 15px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    --accent: white;
+    background: color-mix(in srgb, var(--accent) 45%, transparent);
+    border: 1px solid var(--accent);
+}
+
 .bg-landig {
     position: fixed;
-    padding-top: 12vh;
     width: 100%;
     z-index: -1;
     background: url(../../../assets/images/photos/pexels-ketut-subiyanto-4559959.jpg) center / cover no-repeat;
-    height: 90vh;
+    height: 100vh;
 }
 
 .landing-page {
     position: relative;
     z-index: 2;
     text-align: center;
-    height: 90vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
