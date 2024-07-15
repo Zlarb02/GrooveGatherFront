@@ -18,7 +18,7 @@ ul {
     align-items: center;
     height: 8vh;
     background-color: var(--bg);
-    background: color-mix(in srgb, var(--bg) 70%, var(--glass-darker));
+    background: color-mix(in srgb, var(--bg) 90%, var(--glass-darker));
     color: var(--color);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);

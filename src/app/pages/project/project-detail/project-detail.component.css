@@ -33,7 +33,7 @@
 .pj-item_link {
     display: block;
     position: relative;
-    background: color-mix(in srgb, var(--bg-inverse) 80%, transparent);
+    background: color-mix(in srgb, var(--light-bg) 60%, var(--glass-darker));
     background-size: 200%;
     animation: gradient 15s ease infinite;
     height: fit-content;
@@ -410,7 +410,13 @@
     }
 
     .pj-item_title {
-        font-size: 55px;
+        font-size: 60px;
+    }
+}
+
+@media screen and (min-width: 1079px) {
+    .pj-item_title {
+        font-size: 90px;
     }
 }
 
