@@ -179,18 +179,6 @@ select {
     flex-wrap: wrap;
     justify-content: center;
     gap: 1vw;
-    opacity: 0;
-    visibility: hidden;
-    max-height: 0;
-    overflow: hidden;
-    transition: opacity 3s ease-out, visibility 0s linear 3s, max-height 1s ease-out;
-}
-
-.choose-filters #filters {
-    opacity: 1;
-    visibility: visible;
-    max-height: 150px;
-    transition: opacity 1s ease-in-out, visibility 0s linear 0s, max-height 1s ease-out;
 }
 
 .choose-filters-title {
