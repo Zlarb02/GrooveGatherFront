@@ -58,7 +58,7 @@ path {
 
 /* Style initial de la div à afficher/cacher */
 nav {
-  top: 2vh;
+  top: -3vh;
   filter: contrast(130%);
   margin-top: 20px;
   border-radius: 8px;
@@ -67,29 +67,25 @@ nav {
   transition: opacity 2s ease-in-out;
 
   li {
-    --pill-accent: var(--bg-inverse);
+    color: var(--light-color);
+    --pill-accent: var(--bg-inverse-or-glass);
     background: color-mix(in srgb, var(--pill-accent) 90%, transparent);
     height: 9.5vh;
     min-height: 60px;
     max-height: 200px;
+    width: 130px;
     padding: 0 20px;
     list-style: none;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: background 0.5s ease, color 0.3s ease;
-    color: var(--light-color);
     font-size: 1rem;
     border: var(--dark-bg) 1px solid;
     border-radius: 8px;
   }
 }
 
-@media screen and (max-height: 800px) {
-  nav {
-    top: 1vh;
-  }
-}
 
 @media screen and (max-height: 500px) {
   nav {
@@ -111,6 +107,6 @@ nav {
 }
 
 nav li:hover {
-  background-color: var(--purple);
-  color: var(--dark-color);
+  background-color: var(--button);
+  color: var(--color);
 }

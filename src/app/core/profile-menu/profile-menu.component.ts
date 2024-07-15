@@ -5,12 +5,13 @@ import { Component, ElementRef, Input, ViewChild, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import type { User } from '../../shared/models/user.model';
 import { AuthService } from '../../shared/services/auth.service';
+import { SoberGlassToggleComponent } from '../sober-glass-toggle/sober-glass-toggle.component';
 import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
 
 @Component({
   selector: 'app-profile-menu',
   standalone: true,
-  imports: [CommonModule, ThemeToggleComponent, RouterLink],
+  imports: [CommonModule, ThemeToggleComponent, RouterLink, SoberGlassToggleComponent],
   templateUrl: './profile-menu.component.html',
   styleUrl: './profile-menu.component.css'
 })

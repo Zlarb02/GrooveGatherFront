@@ -1,10 +1,36 @@
-<h1>WAV to MP3 Converter</h1>
-<input type="file" id="fileInput" accept=".wav,.flac" />
-<button (click)="uploadFile()">Convert</button>
-<div id="links" style="display: none">
-    <p>Download Links:</p>
-    <a id="wavLink" href="#" target="_blank">Download Original</a>
-    <a id="mp3Link" href="#" target="_blank">Download Converted MP3</a>
-    <audio id="mp3Audio" src="#" controls></audio>
-</div>
-<audio controls id="audioPlayer" style="display: none"></audio>
+<div class="page">
+    <div class="container">
+        <div class="notif">
+            <h2>Notification 1</h2>
+            <p>Machin vous a envoyé une demande de collaboration.</p>
+        </div>
+        <div class="notif">
+            <h2>Notification 2</h2>
+            <p>Truc vous a envoyé un message.</p>
+        </div>
+        <div class="notif">
+            <h2>Notification 3</h2>
+            <p>Bidule a liké le project intel.</p>
+        </div>
+        <div class="notif">
+            <h2>Notification 4</h2>
+            <p>Machin truc bidule a refusé votre demande de collaboration.</p>
+        </div>
+        <div class="notif">
+            <h2>Notification 5</h2>
+            <p>Intel à ajouter un fichier à Truc Bidule Project</p>
+        </div>
+        <div class="notif">
+
+            <h1>WAV to MP3 Converter</h1>
+            <input type="file" id="fileInput" accept=".wav,.flac" />
+            <button (click)="uploadFile()">Convert</button>
+            <div id="links" style="display: none">
+                <p>Download Links:</p>
+                <a id="wavLink" href="#" target="_blank">Download Original</a>
+                <a id="mp3Link" href="#" target="_blank">Download Converted MP3</a>
+                <audio id="mp3Audio" src="#" controls></audio>
+            </div>
+            <audio controls id="audioPlayer" style="display: none"></audio>
+        </div>
+    </div>

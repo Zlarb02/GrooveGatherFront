@@ -1,0 +1,39 @@
+.page {
+    height: 78vh;
+    padding-top: 12vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 72vh;
+    overflow-y: scroll;
+    --ggs: 0.9;
+    padding-top: 2vh;
+    margin: 2vh 5vw;
+    border-radius: 18px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: color-mix(in srgb, var(--light-bg) 40%, var(--glass-darker));
+}
+
+.notif {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+    gap: 2vh;
+    width: fit-content;
+    --ggs: 0.9;
+    padding: 2vh;
+    margin: 2vh 5vw;
+    border-radius: 18px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: var(--bg-or-glass)
+}

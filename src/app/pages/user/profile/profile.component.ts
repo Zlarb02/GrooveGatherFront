@@ -43,10 +43,6 @@ export class ProfileComponent implements OnInit {
     { url: 'https://cdn.pixabay.com/photo/2024/06/30/19/59/ai-generated-8863879_1280.png' },
     { url: 'https://cdn.pixabay.com/photo/2024/07/03/19/26/vincent-van-gogh-8870776_1280.png' },
     { url: 'https://cdn.pixabay.com/photo/2024/07/03/19/36/mona-lisa-8870805_1280.png' },
-    { url: 'https://cdn.pixabay.com/photo/2024/06/30/19/57/ai-generated-8863876_1280.png' },
-    { url: 'https://cdn.pixabay.com/photo/2024/06/30/19/57/ai-generated-8863877_1280.png' },
-    { url: 'https://cdn.pixabay.com/photo/2024/06/22/20/09/ai-generated-8846960_1280.png' },
-    { url: 'https://cdn.pixabay.com/photo/2024/06/22/20/10/ai-generated-8846961_1280.png' }
   ];
 
 

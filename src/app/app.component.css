@@ -1,20 +1,17 @@
 /* allow only scroll y on page-container for router outlet  */
 
 /*      header + page-container + footer =    100vh     */
-/*        15   +       75       +   10   =    100       */
+/*        12   +       79.1       +   8.9   =    100       */
 .app-container {
     height: 100vh;
     width: 100vw;
 }
 
-.app-landing-page {
-    top: 15vh
-}
-
 .page-container {
-    height: 75vh;
-    background-color: var(--bg);
+    height: 100vh;
+    margin-top: -12vh;
+    background: transparent;
     color: var(--color);
     overflow: hidden;
-    z-index: 2 !important;
+    z-index: 1 !important;
 }

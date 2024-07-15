@@ -1,8 +1,9 @@
 <header>
 
-    <app-menu class="app-menu"></app-menu>
+    <app-menu class="app-menu" style="position: inherit; z-index: 10;"></app-menu>
     <h2> {{pageTitle}}</h2>
     <app-search-bar class="search-bar"></app-search-bar>
-    <app-profile-menu class="app-profile-menu" [user]="user"></app-profile-menu>
+    <app-profile-menu class="app-profile-menu" [user]="user"
+        style="position: relative; z-index: 10;"></app-profile-menu>
 
 </header>

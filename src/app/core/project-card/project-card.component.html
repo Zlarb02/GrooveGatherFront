@@ -11,20 +11,21 @@
         </div>
         <div class="pj-item-box">
             <div
-                style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; width: 100%; font-size: 22px;">
+                style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; width: 100%;">
                 <span>
                     <span *ngFor="let genre of project?.genres" style="display: inline-block;">
                         <button class="btn-genre">{{genre}}</button>
                     </span>
-                </span>
+                </span><br>
                 <span class="pj-item_date">
                     {{project?.date}}
                 </span>
             </div><br> <br>
-            <u style="font-weight: 600; font-size: 21px;">Description</u>: <p>{{project?.description}}</p><br> <br>
+            <u style="font-weight: 600; font-size: 1.2em;">Description</u>: <p
+                style="font-size: 1.1em; font-weight: 400; padding:10px;">{{project?.description}}</p><br> <br>
             <div class="pj-item_skills">
                 <div class="pj-item-skills-present">
-                    <span style="font-weight: 400; font-size: 21px;">Déjà présent :</span>
+                    <span style="font-weight: 400; font-size: 1.2em;">Déjà présent :</span>
                     <div>
                         <span *ngFor="let skill of project?.skillsPresent">
                             <button class="btn-present">{{skill}}</button>
@@ -33,7 +34,7 @@
                 </div>
                 <div class="pj-item-skills-miss">
 
-                    <span style="font-weight: 400; font-size: 21px;">Manque :</span>
+                    <span style="font-weight: 400; font-size: 1.2em;">Manque :</span>
                     <div>
                         <span *ngFor="let skill of project?.skillsMissing">
                             <button class="btn-miss">{{skill}}</button>
@@ -50,7 +51,7 @@
                     <g id="SVGRepo_iconCarrier">
                         <path fill-rule="evenodd" clip-rule="evenodd"
                             d="M15.0501 7.04419C15.4673 5.79254 14.5357 4.5 13.2163 4.5C12.5921 4.5 12.0062 4.80147 11.6434 5.30944L8.47155 9.75H5.85748L5.10748 10.5V18L5.85748 18.75H16.8211L19.1247 14.1428C19.8088 12.7747 19.5406 11.1224 18.4591 10.0408C17.7926 9.37439 16.8888 9 15.9463 9H14.3981L15.0501 7.04419ZM9.60751 10.7404L12.864 6.1813C12.9453 6.06753 13.0765 6 13.2163 6C13.5118 6 13.7205 6.28951 13.627 6.56984L12.317 10.5H15.9463C16.491 10.5 17.0133 10.7164 17.3984 11.1015C18.0235 11.7265 18.1784 12.6814 17.7831 13.472L15.8941 17.25H9.60751V10.7404ZM8.10751 17.25H6.60748V11.25H8.10751V17.25Z"
-                            fill="#080341"></path>
+                            fill="var(--light-color)"></path>
                     </g>
                 </svg>
             </div>

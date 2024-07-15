@@ -3,17 +3,36 @@ header {
   align-items: center;
   justify-content: space-between;
   background-color: var(--bg);
+  background: color-mix(in srgb, var(--bg) 90%, var(--glass-darker));
   color: var(--color);
-  height: 15vh;
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  color: var(--color);
+  margin-top: 1.5vh;
+  height: 10.5vh;
   width: 95vw;
   margin-left: 2.5vw;
-  border-bottom: 1px solid var(--lines);
+
+
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+
+
+  z-index: 5;
+  position: relative;
+
 }
 
 h2 {
   display: flex;
   align-items: center;
   gap: 2rem;
+  margin-left: 20px;
 }
 
 .search-bar {

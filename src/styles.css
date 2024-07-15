@@ -4,12 +4,31 @@
 @import '@angular/material/prebuilt-themes/pink-bluegrey.css';
 @import '@angular/material/prebuilt-themes/purple-green.css';
 
+@font-face {
+    font-family: 'SketchChalk';
+    src: url('./assets/fonts/SketchChalk-vnveO.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 * {
     margin: 0;
     padding: 0;
     font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
         Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
         "Segoe UI Symbol";
+}
+
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    --accent: var(--color);
+    background: color-mix(in srgb, var(--accent) 45%, transparent);
+    border: 1px solid var(--accent);
 }
 
 :root {
@@ -26,18 +45,42 @@ body {
     align-items: center;
     height: 100vh;
     overflow: hidden;
+    background: var(--bg);
+    background-size: 120%;
+    animation: gradient 15s ease infinite;
 }
 
-.ngx-pagination a {
+@keyframes gradient {
+    0% {
+        background-position: 10% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 10% 50%;
+    }
+}
+
+.ngx-pagination a,
+.current,
+.ngx-pagination a:hover {
     color: var(--color) !important
 }
 
 .current {
-    background-color: var(--lines) !important
+    background-color: var(--button) !important
 }
 
 .ngx-pagination a:hover {
-    background-color: var(--bg) !important
+    background-color: color-mix(in srgb, var(--button) 50%, transparent) !important
+}
+
+.pagination-previous,
+.pagination-next {
+    color: var(--button) !important
 }
 
 a,
@@ -72,8 +115,7 @@ button,
 input,
 label,
 select {
-    --pill-accent: var(--lines);
-    background: color-mix(in srgb, var(--pill-accent) 5%, transparent);
+    --pill-accent: var(--colored);
     transition: background 0.3s ease;
     border: var(--pill-accent) 1px solid;
     display: flex;
@@ -90,7 +132,7 @@ select {
     text-decoration: none;
     text-align: center;
     color: var(--color);
-    background-color: var(--bg);
+    background: color-mix(in srgb, var(--pill-accent) 25%, transparent);
     cursor: pointer;
     padding-right: 10px;
 }
@@ -99,7 +141,7 @@ button:hover,
 input:hover,
 label:hover,
 select:hover {
-    background: color-mix(in srgb, var(--pill-accent) 20%, transparent);
+    background: color-mix(in srgb, var(--pill-accent) 50%, transparent);
 }
 
 /* COLORS START BLOCK */
@@ -117,6 +159,24 @@ body {
     --light-pink: #f8d0e8;
     --light-lines: #7f7f7f;
     --light-placeholder: darkgrey;
+
+    --glass: rgba(255, 255, 255, 0.2);
+    --glass-darker: rgba(83, 83, 83, 0.118);
+    --glass-dark: rgba(198, 196, 196, 0.242);
+
+    --thick-glass: rgba(255, 255, 255, 0.9);
+
+    --light-button: var(--orange);
+    --dark-button: var(--purple);
+
+    --light-edit-button: #a350f79b;
+    --dark-edit-button: #ffa8269c;
+
+    --light-edit-picture: #ba7bf98d;
+    --dark-edit-picture: #ffa8268e;
+
+    --light-linear-gradient: linear-gradient(-45deg, #FFE57F, #FFA726, #81D4FA, #4FC3F7);
+    --dark-linear-gradient: linear-gradient(-45deg, #cc39bd, #9a32c0, #1d8db3, #1cb38f);
 
     --light-link: var(--pink);
     --dark-link: var(--orange);
@@ -153,12 +213,20 @@ body {
         --user-preferred-color: var(--dark-color);
         --user-preferred-link: var(--dark-link);
         --user-preferred-colored: var(--dark-colored);
+        --user-preferred-linear-gradient: var(--dark-linear-gradient);
+        --user-preferred-button: var(--dark-button);
+        --user-preferred-edit-button: var(--dark-edit-button);
+        --user-preferred-edit-picture: var(--dark-edit-picture);
         /* Update other variables for user-preferred dark theme */
 
         --user-inverse-bg: var(--light-bg);
         --user-inverse-color: var(--light-color);
         --user-inverse-link: var(--light-link);
         --user-inverse-colored: var(--light-colored);
+        --user-inverse-linear-gradient: var(--light-linear-gradient);
+        --user-inverse-button: var(--light-button);
+        --user-inverse-edit-button: var(--light-edit-button);
+        --user-inverse-edit-picture: var(--light-edit-picture);
     }
 }
 
@@ -168,12 +236,20 @@ body {
         --user-preferred-color: var(--light-color);
         --user-preferred-link: var(--light-link);
         --user-preferred-colored: var(--light-colored);
+        --user-preferred-linear-gradient: var(--light-linear-gradient);
+        --user-preferred-button: var(--light-button);
+        --user-preferred-edit-button: var(--light-edit-button);
+        --user-preferred-edit-picture: var(--light-edit-picture);
         /* Update other variables for user-preferred light theme */
 
         --user-inverse-bg: var(--dark-bg);
         --user-inverse-color: var(--dark-color);
         --user-inverse-link: var(--dark-link);
         --user-inverse-colored: var(--dark-colored);
+        --user-inverse-linear-gradient: var(--dark-linear-gradient);
+        --user-inverse-button: var(--dark-button);
+        --user-inverse-edit-button: var(--dark-edit-button);
+        --user-inverse-edit-picture: var(--dark-edit-picture);
     }
 }
 
@@ -181,11 +257,20 @@ body {
 body {
     height: 100vh;
     width: 100vw;
-    background-color: var(--bg);
+    --sober-bg: var(--user-preferred-bg);
+    --sober-color: var(--user-preferred-color);
+    --colored-bg: var(--user-preferred-linear-gradient);
+    --colored-color: var(--light-color);
     --bg: var(--user-preferred-bg);
     --color: var(--user-preferred-color);
     --link: var(--user-preferred-link);
     --colored: var(--user-preferred-colored);
+    --linear-gradient: var(--user-preferred-linear-gradient);
+    --button: var(--user-preferred-button);
+    --edit-button: var(--user-preferred-edit-button);
+    --edit-picture: var(--user-preferred-edit-picture);
+    --sober-bg-inverse: lightgrey;
+    --colored-bg-inverse: var(--glass);
     --bg-inverse: lightgrey;
     --orange: #f9b234;
     --green: #3ecd5e;

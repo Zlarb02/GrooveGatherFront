@@ -1,13 +1,20 @@
 main {
   text-align: center;
   overflow-y: scroll;
-  height: 75vh;
+  height: 115vh;
+  padding-top: 15vh;
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-weight: 600;
 }
 
 h3 {
   margin-bottom: 20px;
   padding-top: 3vh;
   padding-bottom: 3vh;
+  font-weight: 500;
 }
 
 img {
@@ -27,12 +34,20 @@ img {
 .btn-signup,
 .btn-login {
   color: var(--color);
-  border: var(--orange) 2px solid;
-  border-radius: 6px;
+  border: var(--colored) 2px solid;
+  border-radius: 12px;
   padding: 18px;
   font-size: 18px;
   font-weight: 400;
 
-  --pill-accent: var(--orange);
-  background: color-mix(in srgb, var(--pill-accent) 5%, transparent);
+  --pill-accent: var(--bg-or-glass);
+  background: color-mix(in srgb, var(--pill-accent) 50%, var(--colored));
+}
+
+a {
+  font-size: 0.9em;
+  background-color: var(--glass-darker);
+
+  border-radius: 12px;
+  padding: 18px;
 }
