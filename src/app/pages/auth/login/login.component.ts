@@ -106,21 +106,17 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   googleLogIn() {
-    this.getGoogleUserWhereMailIs();
+    this.getByMail();
     this.userExists$.subscribe(userExists => {
       this.googleUserExist = userExists;
-      if (userExists) {
-        this.responseMessage = 'User already exists. Please login.';
-      } else {
-        this.postUser(true).then(() => {
-          this.authService.setUser(this.user);
-        });
-      }
+      this.postUser(true).then(() => {
+        this.authService.setUser(this.user);
+      });
     });
   }
 
-  getGoogleUserWhereMailIs() {
-    this.http.get(`https://groovegather-api.olprog-a.fr/api/v1/users/google?email=${this.user?.email}`).subscribe({
+  getByMail() {
+    this.http.get(`https://groovegather-api.olprog-a.fr/api/v1/users/user?email=${this.user?.email}`).subscribe({
       // biome-ignore lint/suspicious/noExplicitAny: <explanation>
       next: (response: any) => {
         console.table('User already exists', response);
@@ -142,21 +138,17 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   postUser(isGoogle: boolean): Promise<void> {
-    let url = 'https://groovegather-api.olprog-a.fr/api/v1/users?isLogin=true';
-    if (isGoogle) {
-      url += '?isGoogle=true';
-    }
+    const url = 'http://localhost:8080/api/v1/users/login';
     return new Promise((resolve, reject) => {
       this.http.post(url, this.user).subscribe({
         // biome-ignore lint/suspicious/noExplicitAny: <explanation>
         next: (response: any) => {
           console.table('User successfully logged in', response);
           this.responseMessage = 'User successfully logged in';
-
-          this.authService.setUser(response);
+          if (this.user) {
+            this.authService.fetchUserInfo(this.user.email);
+          } // Fetch user info after successful login
           resolve();
-
-          this.router.navigate(['/search']);
         },
         error: (error) => {
           console.error('Error logging in user', error);

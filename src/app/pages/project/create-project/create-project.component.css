@@ -25,7 +25,7 @@
 
   input {
     width: 80vw;
-    color: var(-- -color);
+    color: var(--color);
   }
 
   /* Aligne les éléments au même niveau par rapport au top */
