@@ -4,6 +4,7 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { Subject } from 'rxjs';
+import { Api } from '../../../shared/models/api';
 import type { User } from '../../../shared/models/user.model';
 import { AuthService } from '../../../shared/services/auth.service';
 
@@ -23,9 +24,13 @@ export class SignupComponent {
 
   userExists$: Subject<boolean> = new Subject<boolean>();
 
+
+
   authService = inject(AuthService);
   router: Router = inject(Router);
   http = inject(HttpClient);
+  api = new Api();
+  baseUrl = this.api.prod;
 
   ngOnInit() {
     this.authService.user.subscribe(user => {
@@ -84,54 +89,20 @@ export class SignupComponent {
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   handleCredentialResponse(response: any) {
     this.authService.setToken(response.credential);
-    this.googleLogIn();
-    this.router.navigate(['/search']);
+    this.authService.fetchUserInfoFromGoogleToken(response.credential); // Utiliser le token Google comme password pour le fetch
   }
-
   signOut() {
     this.authService.clearToken();
     this.router.navigate(['/']);
   }
 
   onSubmit() {
-    this.postUser(false).then(() => {
+    this.postUser().then(() => {
     });
   }
 
-  googleLogIn() {
-    this.getByMail();
-    this.userExists$.subscribe(userExists => {
-      this.googleUserExist = userExists;
-      this.postUser(true).then(() => {
-        this.authService.setUser(this.user);
-      });
-    });
-  }
-
-  getByMail() {
-    this.http.get(`https://groovegather-api.olprog-a.fr/api/v1/users/user?email=${this.user?.email}`).subscribe({
-      // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-      next: (response: any) => {
-        console.table('User already exists', response);
-        this.responseMessage = 'User exists';
-        this.userExists$.next(true);
-      },
-      error: (error) => {
-        if (error.status === 404) {
-          this.userExists$.next(false);
-        } else {
-          console.error('Error checking user existence', error);
-          this.responseMessage = `Error checking user existence: ${error.message}`;
-        }
-      },
-      complete: () => {
-        console.table('Request completed');
-      }
-    });
-  }
-
-  postUser(isGoogle: boolean): Promise<void> {
-    const url = 'http://localhost:8080/api/v1/users/register';
+  postUser(): Promise<void> {
+    const url = `${this.baseUrl}/users/register`;
 
     return new Promise((resolve, reject) => {
       this.http.post(url, this.user, { withCredentials: false }).subscribe({
@@ -140,7 +111,29 @@ export class SignupComponent {
           console.table('User successfully logged in', response);
           this.responseMessage = 'User successfully logged in';
 
-          this.authService.setUser(response);
+
+          const url = `${this.baseUrl}/users/login`;
+
+          this.http.post(url, this.user, { withCredentials: false }).subscribe({
+            // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+            next: (response: any) => {
+              console.table('User successfully logged in', response);
+              this.responseMessage = 'User successfully logged in';
+              if (this.user) {
+                this.authService.fetchUserInfo(this.user.email);
+              }
+              resolve();
+            },
+            error: (error) => {
+              console.error('Error logging in user', error);
+              this.responseMessage = `Error logging in user: ${error.message}`;
+              reject();
+            },
+            complete: () => {
+              console.table('Request completed');
+            }
+          });
+
           resolve();
 
           this.router.navigate(['/search']);

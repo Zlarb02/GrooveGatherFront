@@ -92,7 +92,7 @@ button:hover {
 }
 
 a {
-    color: #0033ff;
+    color: var(--color-on-bg);
     text-decoration: none;
     display: block;
     text-align: center;
@@ -106,6 +106,6 @@ a:hover {
 
 p {
     text-align: center;
-    color: rgba(41, 40, 40, 0.914);
+    color: var(--color-on-bg);
     font-size: 19px;
 }

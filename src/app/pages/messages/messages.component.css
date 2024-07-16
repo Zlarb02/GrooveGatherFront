@@ -16,8 +16,8 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    background: color-mix(in srgb, var(--light-bg) 40%, var(--glass-darker));
+    border: 1px solid rgba(130, 130, 130, 0.3);
+    background: color-mix(in srgb, var(--light-bg) 1%, var(--bg-or-glass));
 }
 
 .notif {
@@ -31,10 +31,11 @@
     padding: 2vh;
     margin: 2vh 5vw;
     border-radius: 18px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(130, 130, 130, 0.1);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(106, 106, 106, 0.3);
 
-    background: var(--bg-or-glass)
+    background: color-mix(in srgb, var(--bg-or-glass) 50%, transparent);
+    color: var(--color-on-glass);
 }

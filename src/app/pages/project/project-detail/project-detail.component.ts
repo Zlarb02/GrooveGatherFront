@@ -27,16 +27,20 @@ export class ProjectDetailComponent {
   };
 
   id!: number;
+  name!: string | undefined;
 
   isLiked = false;
 
   projectService = inject(ProjectService);
 
   ngOnInit() {
-    this.id = Number(window.location.href.split('/').pop());
-    this.projectService.getProjectById(this.id).subscribe((project) => {
-      this.project = project;
-    });
+    const decoded = decodeURIComponent(String(window.location.href));
+    this.name = String(decoded).split('/').pop();
+    if (this.name) {
+      this.projectService.getProjectByName(this.name).subscribe((project) => {
+        this.project = project;
+      });
+    }
   }
 
   likeProject() {

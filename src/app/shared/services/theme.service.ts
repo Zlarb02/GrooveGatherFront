@@ -50,13 +50,17 @@ export class ThemeService {
       root.style.setProperty('--bg-or-glass', 'var(--user-inverse-bg)');
 
       root.style.setProperty('--color', 'var(--user-inverse-color)');
+      root.style.setProperty('--color-on-glass', 'var(--user-inverse-color)');
+      root.style.setProperty('--color-on-bg', 'var(--light-color)');
 
       root.style.setProperty('--bg-inverse', 'var(--sober-bg-inverse)');
       root.style.setProperty('--bg-inverse-or-glass', 'var(--sober-bg-inverse)');
 
       root.style.setProperty('--colored', 'var(--user-inverse-colored)');
-
       root.style.setProperty('--link', 'var(--user-inverse-link)');
+
+      root.style.setProperty('--title-brightness', '80%');
+
       root.style.setProperty('--linear-gradient', 'var(--user-inverse-linear-gradient)');
       root.style.setProperty('--button', 'var(--user-inverse-button)');
       root.style.setProperty('--edit-button', 'var(--user-inverse-edit-button)');
@@ -69,13 +73,17 @@ export class ThemeService {
       root.style.setProperty('--bg-or-glass', 'var(--user-preferred-bg)');
 
       root.style.setProperty('--color', 'var(--user-preferred-color)');
+      root.style.setProperty('--color-on-glass', 'var(--user-preferred-color)');
+      root.style.setProperty('--color-on-bg', 'var(--light-color)');
 
       root.style.setProperty('--bg-inverse', 'var(--sober-bg-inverse)');
       root.style.setProperty('--bg-inverse-or-glass', 'var(--sober-bg-inverse)');
 
       root.style.setProperty('--colored', 'var(--user-preferred-colored)');
-
       root.style.setProperty('--link', 'var(--user-preferred-link)');
+
+      root.style.setProperty('--title-brightness', '80%');
+
       root.style.setProperty('--linear-gradient', 'var(--user-preferred-linear-gradient)');
       root.style.setProperty('--button', 'var(--user-preferred-button)');
       root.style.setProperty('--edit-button', 'var(--user-preferred-edit-button)');
@@ -90,7 +98,9 @@ export class ThemeService {
       root.style.setProperty('--bg', 'var(--user-inverse-linear-gradient)');
       root.style.setProperty('--bg-or-glass', 'var(--glass)');
 
-      root.style.setProperty('--color', 'var(--light-color)');
+      root.style.setProperty('--color', 'var(--user-inverse-color)');
+      root.style.setProperty('--color-on-glass', 'var(--user-inverse-color)');
+      root.style.setProperty('--color-on-bg', 'var(--user-inverse-color)');
 
       root.style.setProperty('--bg-inverse', 'var(--colored-bg-inverse)');
       root.style.setProperty('--bg-inverse-or-glass', 'var(--thick-glass)');
@@ -98,7 +108,9 @@ export class ThemeService {
       root.style.setProperty('--colored', 'var(--glass)');
       root.style.setProperty('--link', 'var(--color)');
 
-      root.style.setProperty('--linear-gradient', 'var(--user-preferred-linear-gradient)');
+      root.style.setProperty('--title-brightness', '80%');
+
+      root.style.setProperty('--linear-gradient', 'var(--user-inverse-linear-gradient)');
       root.style.setProperty('--button', 'var(--user-preferred-button)');
       root.style.setProperty('--edit-button', 'var(--user-preferred-edit-button)');
       root.style.setProperty('--edit-picture', 'var(--user-preferred-edit-picture)');;
@@ -106,11 +118,14 @@ export class ThemeService {
     else if (this.isGlassMorphism) {
       console.table('Glass morphisme-préféré');
 
-      root.style.setProperty('--bg', 'var(--user-preferred-bg)');
+
+      root.style.setProperty('--sober-bg', 'var(--user-preferred-bg)');
       root.style.setProperty('--bg', 'var(--user-preferred-linear-gradient)');
       root.style.setProperty('--bg-or-glass', 'var(--glass)');
 
-      root.style.setProperty('--color', 'var(--light-color)');
+      root.style.setProperty('--color', 'var(--user-preferred-color)');
+      root.style.setProperty('--color-on-glass', 'var(--user-inverse-color)');
+      root.style.setProperty('--color-on-bg', 'var(--user-preferred-color)');
 
       root.style.setProperty('--bg-inverse', 'var(--colored-bg-inverse)');
       root.style.setProperty('--bg-inverse-or-glass', 'var(--thick-glass)');
@@ -118,7 +133,9 @@ export class ThemeService {
       root.style.setProperty('--colored', 'var(--glass)');
       root.style.setProperty('--link', 'var(--color)');
 
-      root.style.setProperty('--linear-gradient', 'var(--user-inverse-linear-gradient)');
+      root.style.setProperty('--title-brightness', '300%');
+
+      root.style.setProperty('--linear-gradient', 'var(--user-preferred-linear-gradient)');
       root.style.setProperty('--button', 'var(--user-inverse-button)');
       root.style.setProperty('--edit-button', 'var(--user-inverse-edit-button)');
       root.style.setProperty('--edit-picture', 'var(--user-inverse-edit-picture)');

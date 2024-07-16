@@ -69,8 +69,6 @@
 }
 
 
-
-
 .pj-item_skills {
     width: 100%;
     display: flex;
@@ -458,5 +456,9 @@
         filter: none;
 
         transition: none;
+    }
+
+    span {
+        color: var(--light-color);
     }
 }

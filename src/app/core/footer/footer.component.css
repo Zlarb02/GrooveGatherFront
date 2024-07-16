@@ -41,3 +41,15 @@ li {
         border: none;
     }
 }
+
+@media (max-height: 620px) {
+    ul {
+        height: 11vh;
+    }
+}
+
+@media (max-height: 430px) {
+    ul {
+        height: 15vh;
+    }
+}

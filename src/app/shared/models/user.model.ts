@@ -8,7 +8,7 @@ export interface User {
     password: string,
     repeatedPassword?: string,
     description?: string,
-    role: number,
-    subscription_level: number
+    role?: number,
+    subscription_level?: number
     genres?: Genre[]
 }

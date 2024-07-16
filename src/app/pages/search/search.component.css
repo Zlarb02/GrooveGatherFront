@@ -206,7 +206,7 @@ select {
 
 .sortBy:hover {
     --pill-accent: var(--bg-or-glass);
-    background: color-mix(in srgb, var(--pill-accent) 50%, var(--colored));
+    background: color-mix(in srgb, var(--pill-accent) 20%, var(--colored));
 }
 
 .sortBy,
@@ -226,18 +226,18 @@ select {
     text-decoration: none;
     text-align: center;
     color: var(--color);
-    background-color: var(--bg);
     cursor: pointer;
+
 }
 
 #sort:hover {
     --pill-accent: var(--bg-or-glass);
-    background: color-mix(in srgb, var(--pill-accent) 50%, var(--colored));
+    background: color-mix(in srgb, var(--pill-accent) 20%, var(--colored));
 }
 
 #itemsPerPage:hover {
     --pill-accent: var(--bg-or-glass);
-    background: color-mix(in srgb, var(--pill-accent) 50%, var(--colored));
+    background: color-mix(in srgb, var(--pill-accent) 20%, var(--colored));
 }
 
 .sort-icon {
@@ -303,11 +303,11 @@ select {
     border: 1px solid var(--bg);
     transition: all 250ms ease-in-out;
     backface-visibility: hidden;
-    transform-style: preserve-3d
+    transform-style: preserve-3d;
 }
 
 .search__input::placeholder {
-    color: rgb(87, 87, 86);
+    color: var(--placeholder);
     text-transform: uppercase;
     letter-spacing: 1.5px;
 }
@@ -452,4 +452,14 @@ body.inverse .search__container {
 .page-controls ::ng-deep .ngx-pagination .disabled {
     font-size: 16px;
     /* Modifiez cette valeur selon vos besoins */
+}
+
+.page-controls-up {
+    margin-top: 30px;
+}
+
+@media (min-width: 730px) {
+    .page-controls-up {
+        margin-top: -28px;
+    }
 }

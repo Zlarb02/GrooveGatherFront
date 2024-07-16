@@ -37,6 +37,8 @@
 
 html {
     overflow: hidden;
+    width: 100vw;
+    height: 100vh;
 }
 
 body {
@@ -46,8 +48,8 @@ body {
     height: 100vh;
     overflow: hidden;
     background: var(--bg);
-    background-size: 120%;
-    animation: gradient 15s ease infinite;
+    background-size: 360%;
+    animation: gradient 10s ease-in-out infinite;
 }
 
 @keyframes gradient {
@@ -158,7 +160,7 @@ body {
     --light-red: #ffb3b3;
     --light-pink: #f8d0e8;
     --light-lines: #7f7f7f;
-    --light-placeholder: darkgrey;
+    --light-placeholder: rgba(82, 82, 82, 0.896);
 
     --glass: rgba(255, 255, 255, 0.2);
     --glass-darker: rgba(83, 83, 83, 0.118);
@@ -175,8 +177,10 @@ body {
     --light-edit-picture: #ba7bf98d;
     --dark-edit-picture: #ffa8268e;
 
-    --light-linear-gradient: linear-gradient(-45deg, #FFE57F, #FFA726, #81D4FA, #4FC3F7);
-    --dark-linear-gradient: linear-gradient(-45deg, #cc39bd, #9a32c0, #1d8db3, #1cb38f);
+    --light-linear-gradient: linear-gradient(-45deg, #FFECB3, #FFB74D, #B3E5FC, #81D4FA);
+
+    --dark-linear-gradient: linear-gradient(-45deg, #9b2c91, #73258d, #135f76, #136d60);
+
 
     --light-link: var(--pink);
     --dark-link: var(--orange);
@@ -201,7 +205,7 @@ body {
     /* Rose vif */
     --dark-lines: #555555;
     /* Gris pour les lignes */
-    --dark-placeholder: #757575;
+    --dark-placeholder: #9b9999d8;
     /* Gris pour les placeholders */
 }
 
@@ -217,6 +221,7 @@ body {
         --user-preferred-button: var(--dark-button);
         --user-preferred-edit-button: var(--dark-edit-button);
         --user-preferred-edit-picture: var(--dark-edit-picture);
+        --user-preferred-placeholder: var(--dark-placeholder);
         /* Update other variables for user-preferred dark theme */
 
         --user-inverse-bg: var(--light-bg);
@@ -227,6 +232,7 @@ body {
         --user-inverse-button: var(--light-button);
         --user-inverse-edit-button: var(--light-edit-button);
         --user-inverse-edit-picture: var(--light-edit-picture);
+        --user-inverse-placeholder: var(--light-placeholder);
     }
 }
 
@@ -240,6 +246,7 @@ body {
         --user-preferred-button: var(--light-button);
         --user-preferred-edit-button: var(--light-edit-button);
         --user-preferred-edit-picture: var(--light-edit-picture);
+        --user-preferred-placeholder: var(--light-placeholder);
         /* Update other variables for user-preferred light theme */
 
         --user-inverse-bg: var(--dark-bg);
@@ -250,6 +257,7 @@ body {
         --user-inverse-button: var(--dark-button);
         --user-inverse-edit-button: var(--dark-edit-button);
         --user-inverse-edit-picture: var(--dark-edit-picture);
+        --user-inverse-placeholder: var(--dark-placeholder);
     }
 }
 
@@ -279,7 +287,7 @@ body {
     --red: #e44002;
     --pink: #cd3e94;
     --lines: #7f7f7f;
-    --placeholder: darkgrey;
+    --placeholder: color-mix(in srgb, var(--color) 60%, transparent);
 }
 
 /* Transition style */
