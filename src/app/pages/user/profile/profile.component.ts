@@ -5,6 +5,7 @@ import { Component, type OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { catchError, tap, throwError } from 'rxjs';
+import { Api } from '../../../shared/models/api';
 import type { User } from '../../../shared/models/user.model';
 import { AuthService } from '../../../shared/services/auth.service';
 
@@ -32,6 +33,10 @@ export class ProfileComponent implements OnInit {
   http = inject(HttpClient);
   isChangePictureModalOpen = false;
   newPicture = '';
+
+
+  api = new Api();
+  baseUrl = this.api.prod;
 
   avatars = [
     { url: 'https://cdn.pixabay.com/photo/2024/06/25/19/44/man-8853455_1280.png' },
@@ -70,9 +75,9 @@ export class ProfileComponent implements OnInit {
   }
 
   validateName() {
-    this.http.patch<User>(`https://groovegather-api.olprog-a.fr/api/v1/users?id=${this.user?.id}`, {
+    this.http.patch<User>(`${this.baseUrl}/users?id=${this.user?.id}`, {
       name: this.nameInput
-    }).pipe(
+    }, { withCredentials: true }).pipe(
       tap(response => {
         // biome-ignore lint/suspicious/noConsoleLog: <explanation>
         console.log('Name updated successfully', response);
@@ -93,9 +98,9 @@ export class ProfileComponent implements OnInit {
   }
 
   validateEmail() {
-    this.http.patch(`https://groovegather-api.olprog-a.fr/api/v1/users?id=${this.user?.id}`, {
+    this.http.patch(`${this.baseUrl}/users?id=${this.user?.id}`, {
       email: this.mailInput
-    }).pipe(
+    }, { withCredentials: true }).pipe(
       tap(response => {
         // biome-ignore lint/suspicious/noConsoleLog: <explanation>
         console.log('Email updated successfully', response);
@@ -126,10 +131,10 @@ export class ProfileComponent implements OnInit {
       return;
     }
 
-    this.http.patch(`https://groovegather-api.olprog-a.fr/api/v1/users?id=${this.user?.id}`, {
+    this.http.patch(`${this.baseUrl}/users?id=${this.user?.id}`, {
       "password": `${this.newPassword}`,
       "repeatedPassword": `${this.confirmPassword}`
-    }).pipe(
+    }, { withCredentials: true }).pipe(
       tap(response => {
         // biome-ignore lint/suspicious/noConsoleLog: <explanation>
         console.log('Password changed successfully', response);
@@ -160,9 +165,9 @@ export class ProfileComponent implements OnInit {
   }
 
   changePicture() {
-    this.http.patch<User>(`https://groovegather-api.olprog-a.fr/api/v1/users?id=${this.user?.id}`, {
+    this.http.patch<User>(`${this.baseUrl}/users?id=${this.user?.id}`, {
       picture: this.newPicture
-    }).pipe(
+    }, { withCredentials: true }).pipe(
       tap(response => {
         this.authService.setUser(response);
         this.closeChangePictureModal();
@@ -175,7 +180,7 @@ export class ProfileComponent implements OnInit {
   }
 
   deleteAccount() {
-    this.http.delete(`https://groovegather-api.olprog-a.fr/api/v1/users?id=${this.user?.id}`)
+    this.http.delete(`${this.baseUrl}/users?id=${this.user?.id}`)
   }
 }
 

@@ -22,7 +22,7 @@
 .pj-item_link:hover,
 .pj-item_link:hover .pj-item_date {
     text-decoration: none;
-    color: var(--light-color);
+    color: var(--color-on-bg);
 }
 
 .pj-item_link:hover .pj-item_bg {
@@ -38,15 +38,19 @@
     overflow: hidden;
     font-weight: 1000;
     font-size: 55px;
-    background: radial-gradient(circle, var(--red), var(--light-color));
+    background: radial-gradient(circle, var(--red), var(--color-on-bg));
     background-clip: text;
     color: transparent;
     animation: colorGradient 4s linear infinite;
     background-size: 1500% 1500%;
     position: relative;
-    filter: brightness(80%);
+    filter: brightness(var(--title-brightness));
     transition: background 2s ease;
     word-wrap: break-word;
+}
+
+.title-filter {
+    filter: contrast(230%);
 }
 
 .pj-item_link:hover .pj-item_title {
@@ -77,7 +81,7 @@
 
 .pj-item-box {
     font-size: 18px;
-    color: var(--light-color);
+    color: var(--color-on-bg);
     font-size: 18px;
     /* Duplicate rule, kept for clarity */
     position: relative;
@@ -127,8 +131,14 @@
     background-color: var(--blue);
 }
 
+.bg-blue:hover,
+.bg-pink:hover,
+.bg-purple:hover {
+    opacity: 75%;
+}
+
 .bg-orange+.pj-item_title {
-    background: radial-gradient(circle, var(--purple), var(--light-color));
+    background: radial-gradient(circle, var(--purple), var(--color-on-bg));
     background-clip: text;
     color: transparent;
     animation: colorGradient 4s linear infinite;
@@ -138,65 +148,60 @@
 
 
 .bg-green+.pj-item_title {
-    background: radial-gradient(circle, var(--red), var(--light-color));
+    background: radial-gradient(circle, var(--color-on-bg), #be1c1c, var(--color-on-bg));
     background-clip: text;
     color: transparent;
     animation: colorGradient 4s linear infinite;
-    background-size: 1500% 1500%;
+    background-size: 550%;
     transition: background 2s ease;
 }
 
 .bg-red+.pj-item_title {
-    background: radial-gradient(circle, var(--green), var(--light-color));
+    background: radial-gradient(circle, var(--color-on-bg), var(--pink), var(--color-on-bg));
     background-clip: text;
     color: transparent;
     animation: colorGradient 4s linear infinite;
-    background-size: 1500% 1500%;
+    background-size: 250%;
     transition: background 2s ease;
-    filter: brightness(60%)
 }
 
 .pj-item_link:hover .bg-red+.pj-item_title {
-    background: radial-gradient(circle, var(--green), var(--light-color));
+    background: radial-gradient(circle, var(--color-on-bg), var(--purple), var(--color-on-bg));
     background-clip: text;
     color: transparent;
     animation: colorGradient 4s linear infinite;
     background-size: 1500% 1500%;
     transition: background 2s ease;
-    filter: brightness(45%)
 }
 
 .bg-purple+.pj-item_title {
-    background: radial-gradient(circle, var(--blue), var(--light-color));
+    background: radial-gradient(circle, var(--pink), var(--color-on-bg));
     background-clip: text;
     color: transparent;
     animation: colorGradient 4s linear infinite;
     background-size: 1500% 1500%;
     transition: background 2s ease;
-    filter: brightness(60%);
 }
 
 .pj-item_link:hover .bg-purple+.pj-item_title {
-    background: radial-gradient(circle, var(--dark-color), var(--orange));
+    background: radial-gradient(circle, var(--color-on-bg), var(--blue));
     background-clip: text;
     animation: colorGradient 4s linear infinite;
     background-size: 1500% 1500%;
     transition: background 2s ease;
-    filter: brightness(120%);
 }
 
 .bg-pink+.pj-item_title {
-    background: radial-gradient(circle, var(--pink), var(--light-color));
+    background: radial-gradient(circle, var(--pink), var(--color-on-bg));
     background-clip: text;
     color: transparent;
     animation: colorGradient 4s linear infinite;
     background-size: 1500% 1500%;
     transition: background 2s ease;
-    filter: brightness(70%);
 }
 
 .pj-item_link:hover .bg-pink+.pj-item_title {
-    background: radial-gradient(circle, var(--orange), var(--dark-color));
+    background: radial-gradient(circle, var(--blue), var(--color-on-bg));
     background-clip: text;
     animation: colorGradient 4s linear infinite;
     background-size: 1500% 1500%;
@@ -205,17 +210,16 @@
 }
 
 .bg-blue+.pj-item_title {
-    background: radial-gradient(circle, var(--purple), var(--light-color));
+    background: radial-gradient(circle, var(--purple), var(--color-on-bg));
     background-clip: text;
     color: transparent;
     animation: colorGradient 4s linear infinite;
     background-size: 1500% 1500%;
     transition: background 2s ease;
-    filter: brightness(60%);
 }
 
 .pj-item_link:hover .bg-blue+.pj-item_title {
-    background: radial-gradient(circle, var(--orange), var(--dark-color));
+    background: radial-gradient(circle, var(--pink), var(--color-on-bg));
     background-clip: text;
     animation: colorGradient 4s linear infinite;
     background-size: 1500% 1500%;
@@ -260,7 +264,7 @@
     min-width: 10vw;
     height: max-content;
     margin: 0 8px 8px 0;
-    color: var(--light-color);
+    color: var(--color-on-bg);
 }
 
 .btn-miss {
@@ -285,7 +289,7 @@
     min-width: 10vw;
     height: max-content;
     margin: 0 8px 8px 0;
-    color: var(--light-color);
+    color: var(--color-on-bg);
 }
 
 .btn-genre {
@@ -310,13 +314,13 @@
     min-width: 10vw;
     height: max-content;
     margin: 0 8px 8px 0;
-    color: var(--light-color);
+    color: var(--color-on-bg);
 }
 
 .like-icon {
     width: 24px;
     height: 24px;
-    color: var(--light-color)
+    color: var(--color-on-bg)
 }
 
 @media only screen and (max-width: 979px) {

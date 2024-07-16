@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { catchError, of } from 'rxjs';
+import { Api } from '../models/api';
 import type { Project } from '../models/project.model';
 
 @Injectable({
@@ -9,6 +10,9 @@ import type { Project } from '../models/project.model';
 export class ProjectService {
 
   http = inject(HttpClient)
+
+  api = new Api();
+  baseUrl = this.api.prod
 
   mockProjects: Project[] = [
     {
@@ -49,7 +53,7 @@ export class ProjectService {
   // }
 
   getProjects() {
-    return this.http.get<Project[]>('https://groovegather-api.olprog-a.fr/api/v1/projects')
+    return this.http.get<Project[]>(`${this.baseUrl}/projects`)
       .pipe(
         catchError(error => {
           if (error.status === 500) {
@@ -60,7 +64,7 @@ export class ProjectService {
       );
   }
 
-  getProjectById(id: number) {
-    return this.http.get<Project>(`https://groovegather-api.olprog-a.fr/api/v1/projects/${id}`)
+  getProjectByName(name: string) {
+    return this.http.get<Project>(`${this.baseUrl}/projects/${name}`)
   }
 }

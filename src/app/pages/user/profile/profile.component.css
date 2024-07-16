@@ -43,13 +43,13 @@ img {
 h2 {
     position: relative;
     top: -3vh;
-    color: var(--light-color);
+    color: var(--color-on-bg);
 }
 
 .mail {
     position: relative;
     top: calc(-40px - 2vh);
-    color: var(--light-color);
+    color: var(--color-on-bg);
 }
 
 .mail-input {
@@ -89,7 +89,7 @@ img {
 .change-password-btn {
     background-color: transparent;
     border: none;
-    color: var(--light-color);
+    color: var(--color-on-bg);
     padding: 0.5rem 1rem;
     cursor: pointer;
     border-radius: 5px;
@@ -106,7 +106,7 @@ img {
 .change-password-btn:hover,
 .deco-btn:hover {
     background-color: var(--edit-button);
-    color: var(--light-color);
+    color: var(--color-on-bg);
 }
 
 .delete-btn {
@@ -129,7 +129,7 @@ img {
 button {
     background-color: transparent;
     border: none;
-    color: var(--light-color);
+    color: var(--color-on-bg);
     padding: 0 1rem;
     cursor: pointer;
     border-radius: 5px;
@@ -168,7 +168,7 @@ button:hover {
 
 .modal-content {
     max-height: 60vh;
-    color: var(--light-color);
+    color: var(--color-on-bg);
     border: 1px solid var(--lines);
     border-radius: 15px;
     width: 30vw;
@@ -220,7 +220,7 @@ button:hover {
 }
 
 .close {
-    color: var(--light-color);
+    color: var(--color-on-bg);
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -228,14 +228,14 @@ button:hover {
 
 .close:hover,
 .close:focus {
-    color: var(--light-color);
+    color: var(--color-on-bg);
     text-decoration: none;
     cursor: pointer;
 }
 
 input {
     background-color: var(--light-bg);
-    color: var(--light-color);
+    color: var(--color-on-bg);
     width: 240px;
 }
 
@@ -300,13 +300,13 @@ input {
 
 @media (min-width: 768px) {
     .container {
-        margin: 2vh 30vw;
+        margin: 2vh 24vw;
     }
 }
 
 @media (max-width: 1060px) {
     .modal-content {
         width: 60%;
-        margin: 10vh 20vw;
+        margin: 10vh 30vw;
     }
 }

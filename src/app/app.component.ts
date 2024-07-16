@@ -51,7 +51,31 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.themeService.applyTheme();
+    const token = this.getFromCookie('token');
+    // biome-ignore lint/suspicious/noConsoleLog: <explanation>
+    console.log('token: ', token)
+    if (token) {
+      this.authService.fetchUserInfoFromJwtToken(token);
+    }
     this.authSubscriptions();
+  }
+
+  public getFromCookie(name: string): string | null {
+    const nameEQ = `${name}=`;
+    const ca = document.cookie.split(';');
+    // biome-ignore lint/suspicious/noConsoleLog: <explanation>
+    console.log('Cookies:', document.cookie); // Log de débogage pour voir tous les cookies
+    for (let i = 0; i < ca.length; i++) {
+      const c = ca[i].trim(); // Utilisez trim() pour enlever les espaces de début et de fin
+      if (c.indexOf(nameEQ) === 0) {
+        // biome-ignore lint/suspicious/noConsoleLog: <explanation>
+        console.log('Found cookie:', c); // Log de débogage pour voir le cookie trouvé
+        return c.substring(nameEQ.length, c.length);
+      }
+    }
+    // biome-ignore lint/suspicious/noConsoleLog: <explanation>
+    console.log('Cookie not found'); // Log de débogage si le cookie n'est pas trouvé
+    return null;
   }
 
   authSubscriptions() {
