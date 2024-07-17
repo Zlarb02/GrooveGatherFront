@@ -107,6 +107,6 @@ nav {
 }
 
 nav li:hover {
-  background-color: var(--button);
-  color: var(--color);
+  background-color: var(--menu);
+  color: var(--bg);
 }

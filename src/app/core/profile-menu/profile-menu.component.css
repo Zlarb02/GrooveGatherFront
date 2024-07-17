@@ -60,14 +60,14 @@ a {
 }
 
 .dropdown-profile-menu .dropdown li:hover {
-  background-color: var(--button);
-  color: var(--color);
+  background-color: var(--menu);
+  color: var(--bg);
   border-radius: 0;
   transition: background .3s, color .3s, border-radius .5s;
 }
 
 #toggle-menu:checked+label {
-  background-color: var(--button);
+  background-color: var(--menu);
 }
 
 /* Affiche le menu déroulant et anime les éléments lorsqu'on coche la checkbox */

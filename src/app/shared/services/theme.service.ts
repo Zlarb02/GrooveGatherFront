@@ -62,6 +62,9 @@ export class ThemeService {
       root.style.setProperty('--title-brightness', '80%');
 
       root.style.setProperty('--linear-gradient', 'var(--user-inverse-linear-gradient)');
+
+      root.style.setProperty('--menu', 'var(--user-preferred-button)');
+
       root.style.setProperty('--button', 'var(--user-inverse-button)');
       root.style.setProperty('--edit-button', 'var(--user-inverse-edit-button)');
       root.style.setProperty('--edit-picture', 'var(--user-inverse-edit-picture)');
@@ -85,6 +88,9 @@ export class ThemeService {
       root.style.setProperty('--title-brightness', '80%');
 
       root.style.setProperty('--linear-gradient', 'var(--user-preferred-linear-gradient)');
+
+      root.style.setProperty('--menu', 'var(--user-inverse-button)');
+
       root.style.setProperty('--button', 'var(--user-preferred-button)');
       root.style.setProperty('--edit-button', 'var(--user-preferred-edit-button)');
       root.style.setProperty('--edit-picture', 'var(--user-preferred-edit-picture)');
@@ -111,6 +117,9 @@ export class ThemeService {
       root.style.setProperty('--title-brightness', '80%');
 
       root.style.setProperty('--linear-gradient', 'var(--user-inverse-linear-gradient)');
+
+      root.style.setProperty('--menu', 'var(--user-inverse-button)');
+
       root.style.setProperty('--button', 'var(--user-preferred-button)');
       root.style.setProperty('--edit-button', 'var(--user-preferred-edit-button)');
       root.style.setProperty('--edit-picture', 'var(--user-preferred-edit-picture)');;
@@ -136,6 +145,9 @@ export class ThemeService {
       root.style.setProperty('--title-brightness', '300%');
 
       root.style.setProperty('--linear-gradient', 'var(--user-preferred-linear-gradient)');
+
+      root.style.setProperty('--menu', 'var(--user-preferred-button)')
+
       root.style.setProperty('--button', 'var(--user-inverse-button)');
       root.style.setProperty('--edit-button', 'var(--user-inverse-edit-button)');
       root.style.setProperty('--edit-picture', 'var(--user-inverse-edit-picture)');
