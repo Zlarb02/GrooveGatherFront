@@ -26,7 +26,7 @@ export class ProfileMenuComponent {
   constructor(private router: Router) { }
 
   signOut() {
-    this.authService.clearToken();
+    this.authService.clearAllTokenCookies();
     this.router.navigate(['/home']);
     this.closeMenu(); // Close menu after signing out
   }

@@ -30,7 +30,7 @@ export class SignupComponent {
   router: Router = inject(Router);
   http = inject(HttpClient);
   api = new Api();
-  baseUrl = this.api.prod;
+  baseUrl = this.api.local;
 
   ngOnInit() {
     this.authService.user.subscribe(user => {
@@ -92,7 +92,7 @@ export class SignupComponent {
     this.authService.fetchUserInfoFromGoogleToken(response.credential); // Utiliser le token Google comme password pour le fetch
   }
   signOut() {
-    this.authService.clearToken();
+    this.authService.clearAllTokenCookies();
     this.router.navigate(['/']);
   }
 
@@ -114,7 +114,7 @@ export class SignupComponent {
 
           const url = `${this.baseUrl}/users/login`;
 
-          this.http.post(url, this.user, { withCredentials: false }).subscribe({
+          this.http.post(url, this.user, { withCredentials: true }).subscribe({
             // biome-ignore lint/suspicious/noExplicitAny: <explanation>
             next: (response: any) => {
               console.table('User successfully logged in', response);
