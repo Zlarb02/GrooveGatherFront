@@ -5,6 +5,10 @@
     padding-top: 15vh;
 }
 
+input {
+    color: var(--light-color);
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -235,7 +239,7 @@ button:hover {
 
 input {
     background-color: var(--light-bg);
-    color: var(--color-on-bg);
+    color: var(--light-color);
     width: 240px;
 }
 
