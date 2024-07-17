@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   router: Router = inject(Router);
   http = inject(HttpClient);
   api = new Api();
-  baseUrl = this.api.prod;
+  baseUrl = this.api.local;
 
   ngOnInit() {
     this.authService.user.subscribe(user => {
@@ -99,7 +99,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   signOut() {
-    this.authService.clearToken();
+    this.authService.clearAllTokenCookies();
     this.router.navigate(['/']);
   }
 

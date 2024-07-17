@@ -18,7 +18,7 @@ export class AuthService {
   responseMessage = '';
 
   api = new Api();
-  baseUrl = this.api.prod;
+  baseUrl = this.api.local;
 
   router: Router = inject(Router);
 
@@ -43,11 +43,17 @@ export class AuthService {
     return localStorage.getItem(key);
   }
 
-  clearToken() {
-    this._token.next('');
+  clearAllTokenCookies() {
+    const cookies = document.cookie.split(';');
+    for (const cookie of cookies) {
+      const [name, ...rest] = cookie.split('=');
+      if (name.trim() === 'token') {
+        document.cookie = `${name.trim()}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+      }
+    }
     this._user.next(null);
-    localStorage.removeItem('token');
   }
+
 
   private generatePassword(): string {
     const length = 8;
@@ -85,10 +91,10 @@ export class AuthService {
         this.setUser(user);
       } catch (e) {
         console.error('Invalid token format', e);
-        this.clearToken();
+        this.clearAllTokenCookies();
       }
     } else {
-      this.clearToken();
+      this.clearAllTokenCookies();
     }
   }
 
@@ -98,7 +104,7 @@ export class AuthService {
         this.setUser(user);
       }, error => {
         console.error('Failed to fetch user info', error);
-        this.clearToken();
+        this.clearAllTokenCookies();
       });
   }
 
@@ -112,7 +118,31 @@ export class AuthService {
           console.table('User successfully logged in', response);
           this.responseMessage = 'User successfully logged in';
 
-          this.setUser(response);
+
+          const url = `${this.baseUrl}/users/login`;
+
+          this.http.post(url, user, { withCredentials: true }).subscribe({
+            // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+            next: (response: any) => {
+              console.table('User successfully logged in', response);
+              this.responseMessage = 'User successfully logged in';
+              if (user) {
+                this.fetchUserInfo(user.email);
+              }
+              resolve();
+            },
+            error: (error) => {
+              console.error('Error logging in user', error);
+              this.responseMessage = `Error logging in user: ${error.message}`;
+              this.clearAllTokenCookies();
+              this._user.next(null);
+              reject();
+            },
+            complete: () => {
+              console.table('Request completed');
+            }
+          });
+
           resolve();
 
           this.router.navigate(['/search']);
@@ -120,6 +150,8 @@ export class AuthService {
         error: (error) => {
           console.error('Error logging in user', error);
           this.responseMessage = `Error logging in user: ${error.message}`;
+          this.clearAllTokenCookies();
+          this._user.next(null);
           reject();
         },
         complete: () => {
@@ -133,7 +165,13 @@ export class AuthService {
     try {
       const payload = JSON.parse(atob(token.split('.')[1]));
       const email = payload.email;
-      const password = this.generatePassword();
+      let password = this.getFromLocalStorage(email);
+
+      if (!password) {
+        password = this.generatePassword();
+        this.setToLocalStorage(email, password);
+      }
+
       const user: User = {
         name: payload.name,
         email: payload.email,
@@ -146,20 +184,22 @@ export class AuthService {
       this.http.get<User>(`${this.baseUrl}/users/user?email=${email}`, { withCredentials: false })
         .subscribe(
           userFetched => {
-            this.setUser(user);
             this.login(user);
+            this.setUser(user);
           },
           error => {
             this.register(user);
             console.error('Failed to fetch user info from token', error);
-            this.clearToken();
+
+            this.clearAllTokenCookies();
           }
         );
     } catch (e) {
-      console.error('Invalid token format', e);
-      this.clearToken();
+      console.error('Invalid token format', e)
+      this.clearAllTokenCookies();
     }
   }
+
 
   fetchUserInfoFromJwtToken(token: string) {
     try {
@@ -173,12 +213,13 @@ export class AuthService {
           },
           error => {
             console.error('Failed to fetch user info from token', error);
-            this.clearToken();
+
+            this.clearAllTokenCookies();
           }
         );
     } catch (e) {
-      console.error('Invalid token format', e);
-      this.clearToken();
+      console.error('Invalid token format', e)
+      this.clearAllTokenCookies();
     }
   }
 
@@ -199,6 +240,8 @@ export class AuthService {
         error: (error) => {
           console.error('Error logging in user', error);
           this.responseMessage = `Error logging in user: ${error.message}`;
+          this.clearAllTokenCookies();
+          this._user.next(null);
           reject();
         },
         complete: () => {
@@ -218,7 +261,8 @@ export class AuthService {
         },
         error => {
           console.error('Invalid token', error);
-          this.clearToken();
+
+          this.clearAllTokenCookies();
         }
       );
   }
