@@ -129,7 +129,7 @@ select {
     font-style: normal;
     font-weight: 500;
     line-height: 1.4rem;
-    height: 30px;
+    height: fit-content;
     letter-spacing: -0.00875rem;
     text-decoration: none;
     text-align: center;
@@ -137,6 +137,26 @@ select {
     background: color-mix(in srgb, var(--pill-accent) 25%, transparent);
     cursor: pointer;
     padding-right: 10px;
+}
+
+#mat-autocomplete-0,
+#mat-autocomplete-1,
+#mat-autocomplete-2,
+#mat-autocomplete-3,
+#mat-autocomplete-4,
+#mat-autocomplete-5,
+#mat-autocomplete-6,
+#mat-autocomplete-7,
+#mat-autocomplete-8,
+#mat-autocomplete-9 {
+    background-color: color-mix(in srgb, var(--thick-glass) 60%, var(--glass)) !important;
+    color: var(--color);
+}
+
+.mdc-list-item {
+    color: var(--light-color) !important;
+    background-color: color-mix(in srgb, var(--thick-glass) 60%, var(--glass)) !important;
+
 }
 
 button:hover,
@@ -179,7 +199,7 @@ body {
 
     --light-linear-gradient: linear-gradient(-45deg, #FFECB3, #FFB74D, #B3E5FC, #81D4FA);
 
-    --dark-linear-gradient: linear-gradient(-45deg, #9b2c91, #73258d, #135f76, #136d60);
+    --dark-linear-gradient: linear-gradient(-45deg, #5c1d5c, #511964, #0f4a5c, #0e5147);
 
 
     --light-link: var(--pink);

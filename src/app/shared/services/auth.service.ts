@@ -33,6 +33,9 @@ export class AuthService {
   setUser(user: User | null) {
     this._user.next(user);
     this.user = this._user.asObservable();
+    if (user?.name) {
+      this.router.navigate(['/profile']);
+    }
   }
 
   private setToLocalStorage(key: string, value: string) {

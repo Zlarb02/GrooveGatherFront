@@ -45,9 +45,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
       }
     });
   }
-
   ngAfterViewInit() {
     this.initializeGoogleSignIn();
+
   }
 
   initializeGoogleSignIn() {
