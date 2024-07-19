@@ -2,18 +2,18 @@ import { Component, inject } from '@angular/core';
 import { ProjectService } from '../../../shared/services/project.service';
 // biome-ignore lint/style/useImportType: <explanation>
 import { CommonModule } from '@angular/common';
+import { NgxPaginationModule } from 'ngx-pagination';
 import type { Project } from '../../../shared/models/project.model';
 
 
 @Component({
   selector: 'app-project-detail',
   standalone: true,
-  imports: [CommonModule],
+  imports: [NgxPaginationModule, CommonModule],
   templateUrl: './project-detail.component.html',
   styleUrl: './project-detail.component.css'
 })
 export class ProjectDetailComponent {
-
   project: Project = {
     name: "404 Not Found",
     genres: ["Jazz"],

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { catchError, of } from 'rxjs';
 import { Api } from '../models/api';
+import type { Operation } from '../models/operation';
 import type { Project } from '../models/project.model';
 
 @Injectable({
@@ -59,6 +60,15 @@ export class ProjectService {
           if (error.status === 500) {
             return of(this.mockProjects);
           }
+          throw error;
+        })
+      );
+  }
+
+  getUserProjects() {
+    return this.http.get<Operation[]>(`${this.baseUrl}/operations/user-projects`, { withCredentials: true })
+      .pipe(
+        catchError(error => {
           throw error;
         })
       );
