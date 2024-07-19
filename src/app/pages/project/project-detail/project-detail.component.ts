@@ -34,14 +34,16 @@ export class ProjectDetailComponent {
   projectService = inject(ProjectService);
 
   ngOnInit() {
-    const decoded = decodeURIComponent(String(window.location.href));
-    this.name = String(decoded).split('/').pop();
+    const url = (String(window.location.href));
+    this.name = String(url).split('/').pop();
     if (this.name) {
       this.projectService.getProjectByName(this.name).subscribe((project) => {
         this.project = project;
       });
     }
   }
+
+
 
   likeProject() {
     this.isLiked = !this.isLiked;

@@ -1,13 +1,17 @@
 .page {
   height: 100vh;
   padding-top: 15vh;
+  padding-bottom: 15vh;
   overflow-y: scroll;
+  width: 100vw;
 }
 
 .container {
   margin-bottom: 40vh;
+  margin-left: auto;
+  margin-right: auto;
   flex-direction: column;
-  height: 100vh;
+  height: auto;
   display: flex;
   flex-direction: column;
   -webkit-overflow-scrolling: touch;
@@ -24,12 +28,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  max-width: 390px;
+  margin: auto;
   gap: 3vh;
 
   input {
-    width: 80vw;
+    width: 100%;
     color: var(--color);
+    --pill-accent: var(--link);
   }
 
   /* Aligne les éléments au même niveau par rapport au top */
@@ -38,6 +44,11 @@
 #nameProject {
   margin-top: 2vh;
   margin-right: 2vw;
+}
+
+#nameProject:hover,
+#nameProject:focus {
+  color: var(--color-on-btn);
 }
 
 select {
@@ -73,20 +84,13 @@ textarea::placeholder {
 button {
   display: block;
   margin: auto;
+  border-color: var(--light-color);
 }
 
 .parentCarre {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-}
-
-.parentCarre>div:first-child {
-  margin-left: 10vh;
-}
-
-.parentCarre>div:last-child {
-  margin-right: 10vh;
+  gap: 2vw;
 }
 
 .orange {
@@ -115,18 +119,33 @@ button {
 
 .carre {
   border-radius: 10px;
-  height: 5vh;
-  width: 5vh;
+  height: 11vw;
+  width: 11vw;
   margin-top: 1vh;
   margin-bottom: 1vh;
+  border: 2px solid var(--color);
 }
 
-.carre:hover {
-  border: 2px solid var(--bg-inverse);
+@media (min-width: 768px) {
+  .carre {
+    border-radius: 10px;
+    height: 6vw;
+    width: 6vw;
+  }
 }
 
+@media (min-width: 1024px) {
+  .carre {
+    border-radius: 10px;
+    height: 4vw;
+    width: 4vw;
+  }
+}
+
+.carre:hover,
 .carre.selected {
-  border: 2px solid var(--light-placeholder);
+  border: 4px solid var(--bg);
+  background-image: url('../../../../assets/icons/check.svg');
 }
 
 .parentCouleur {
@@ -150,7 +169,7 @@ button {
 }
 
 .selected-skills span {
-  color: var(--light-color);
+  color: var(--color);
   align-items: center;
   border: 1px solid var(--bg);
   display: flex;
@@ -169,7 +188,6 @@ button {
   letter-spacing: -0.00875rem;
   text-decoration: none;
   max-width: 100%;
-  min-width: 10vw;
   height: 30px;
   margin: 0 8px 8px 0;
 }
@@ -177,7 +195,6 @@ button {
 .selected-skills button {
   background: none;
   border: none;
-  color: var(--purple);
   font-size: 16px;
   margin-left: 5px;
   cursor: pointer;
@@ -191,7 +208,7 @@ button {
 }
 
 .selected-skills2 span {
-  color: var(--light-color);
+  color: var(--color);
   align-items: center;
   border: 1px solid var(--bg);
   display: flex;
@@ -210,7 +227,6 @@ button {
   letter-spacing: -0.00875rem;
   text-decoration: none;
   max-width: 100%;
-  min-width: 10vw;
   height: 30px;
   margin: 0 8px 8px 0;
 }
@@ -218,7 +234,6 @@ button {
 .selected-skills2 button {
   background: none;
   border: none;
-  color: var(--red);
   font-size: 16px;
   margin-left: 5px;
   cursor: pointer;
@@ -236,7 +251,9 @@ button {
 textarea#description {
   text-align: center;
   margin-bottom: 1vh;
-  margin-top: 1vh
+  margin-top: 1vh;
+  color: var(--color);
+  background-color: color-mix(in srgb, var(--bg-inverse) 40%, transparent);
 }
 
 .selected-genres {
@@ -249,7 +266,6 @@ textarea#description {
 .selected-genres button {
   background: none;
   border: none;
-  color: var(--green);
   /* Couleur du texte pour le bouton de suppression */
   font-size: 16px;
   margin-left: 5px;
@@ -284,6 +300,7 @@ select option {
   /* Aligne les éléments au début horizontalement */
   margin-right: 1vw;
   /* Espacement entre les champs */
+  max-width: 95vw;
 }
 
 .form-group label {
@@ -306,7 +323,7 @@ select option {
 }
 
 .selected-genres span {
-  color: var(--light-color);
+  color: var(--color);
   align-items: center;
   border: 1px solid var(--bg);
   display: flex;
@@ -325,7 +342,6 @@ select option {
   letter-spacing: -0.00875rem;
   text-decoration: none;
   max-width: 100%;
-  min-width: 10vw;
   height: 30px;
   margin: 0 8px 8px 0;
 }
@@ -335,23 +351,20 @@ select option {
   margin-top: 3vh;
 }
 
-
+/* 
 .selected-files {
   display: flex;
   flex-wrap: wrap;
   margin-left: 10px;
-  /* Espace entre les compétences sélectionnées et le select */
 }
 
 .selected-files span {
   background-color: #f0f0f0;
-  /* Couleur de fond pour la compétence sélectionnée */
   padding: 5px 10px;
   border-radius: 5px;
   border: var(--pink) solid;
   color: var(--pink);
   margin-right: 5px;
-  /* Espace entre les compétences sélectionnées */
   margin-bottom: 5px;
   display: flex;
   align-items: center;
@@ -364,7 +377,7 @@ select option {
   font-size: 16px;
   margin-left: 5px;
   cursor: pointer;
-}
+} */
 
 #genre {
   --pill-accent: var(--purple);
@@ -376,4 +389,120 @@ select option {
 
 #requestedSkill {
   --pill-accent: var(--red);
+}
+
+.drop-zone {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 150px;
+  border: 2px dashed var(--lines);
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: color-mix(in srgb, var(--bg-inverse) 40%, transparent);
+}
+
+.drop-zone.dragging {
+  background-color: var(--lines);
+  border-color: var(--color);
+}
+
+.drop-zone-text {
+  color: var(--color);
+  padding: 10px;
+  text-align: center;
+}
+
+.file-container {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.file-details {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 1px;
+  border: 1px solid var(--color);
+  border-radius: 5px;
+  background-color: var(--bg);
+  max-width: 90vw;
+}
+
+.file-details.preview {
+  border: 2px solid var(--color);
+
+  border-radius: 8px;
+  background-color: var(--glass-darker);
+}
+
+
+.btn-set-main,
+.btn-deset-main {
+  border-radius: 5px;
+  background-color: color-mix(in srgb, var(--glass-dark) 50%, transparent);
+  color: var(--color);
+  margin-top: 7px;
+}
+
+
+
+.file-name {
+  flex-grow: 1;
+}
+
+.file-size,
+.file-extension {
+  font-size: 12px;
+  color: var(--placeholder);
+}
+
+.file-icon {
+  font-size: 20px;
+  background-color: var(--light-bg);
+  border-radius: 50%;
+}
+
+/* Styles CSS pour les icônes de fichiers */
+.file-icon {
+  display: inline-block;
+  width: 24px;
+  /* Ajustez la taille selon vos besoins */
+  height: 24px;
+  margin-right: 8px;
+  /* Marge entre l'icône et le nom du fichier */
+  vertical-align: middle;
+}
+
+.file-icon.pdf {
+  background-image: url('../../../../assets/icons/807-file-pdf.svg');
+  /* Icône pour les fichiers PDF */
+}
+
+.file-icon.txt {
+  background-image: url('../../../../assets/icons/800-format-document-txt.svg');
+  /* Icône pour les fichiers texte */
+}
+
+.file-icon.audio {
+  background-image: url('../../../../assets/icons/829-format-universal-audio.svg');
+  /* Icône pour les fichiers audio */
+}
+
+.file-icon.score {
+  background-image: url('../../../../assets/icons/format-score.png');
+  background-size: 110%;
+  /* Icône pour les partitions */
+}
+
+.file-icon.midi {
+  background-image: url('../../../../assets/icons/825-format-audio-midi.svg');
+  /* Icône pour les fichiers MIDI */
+}
+
+.file-icon.default {
+  background-image: url('../../../../assets/icons/899-format-unknown.svg');
 }

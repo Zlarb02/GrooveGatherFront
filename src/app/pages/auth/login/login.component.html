@@ -15,17 +15,17 @@
             </div>
             <br>
             <div>
-                <label for="password">Password</label>
+                <label for="password">Mot de passe</label>
                 <input type="password" id="password" name="password" required [(ngModel)]="user!.password"
                     placeholder="Password">
             </div>
             <div>
-                <a href="#">Forgot password?</a>
+                <a href="#">Mot de passe oublié ?</a>
                 <br>
             </div>
-            <button type="submit">Login</button>
+            <button type="submit">Se connecter</button>
             <br>
         </form>
-        <p>Don't have an account? <a [routerLink]="['/signup']">Sign Up</a></p>
+        <p>Pas encore de compte? <a [routerLink]="['/signup']">Créer un compte</a></p>
     </div>
 </div>

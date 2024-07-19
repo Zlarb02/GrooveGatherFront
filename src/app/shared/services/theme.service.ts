@@ -52,6 +52,7 @@ export class ThemeService {
       root.style.setProperty('--color', 'var(--user-inverse-color)');
       root.style.setProperty('--color-on-glass', 'var(--user-inverse-color)');
       root.style.setProperty('--color-on-bg', 'var(--light-color)');
+      root.style.setProperty('--color-on-btn', 'var(--user-inverse-color)');
 
       root.style.setProperty('--bg-inverse', 'var(--sober-bg-inverse)');
       root.style.setProperty('--bg-inverse-or-glass', 'var(--sober-bg-inverse)');
@@ -78,6 +79,7 @@ export class ThemeService {
       root.style.setProperty('--color', 'var(--user-preferred-color)');
       root.style.setProperty('--color-on-glass', 'var(--user-preferred-color)');
       root.style.setProperty('--color-on-bg', 'var(--light-color)');
+      root.style.setProperty('--color-on-btn', 'var(--user-preferred-color)');
 
       root.style.setProperty('--bg-inverse', 'var(--sober-bg-inverse)');
       root.style.setProperty('--bg-inverse-or-glass', 'var(--sober-bg-inverse)');
@@ -107,6 +109,7 @@ export class ThemeService {
       root.style.setProperty('--color', 'var(--user-inverse-color)');
       root.style.setProperty('--color-on-glass', 'var(--user-inverse-color)');
       root.style.setProperty('--color-on-bg', 'var(--user-inverse-color)');
+      root.style.setProperty('--color-on-btn', 'var(--user-preferred-color)');
 
       root.style.setProperty('--bg-inverse', 'var(--colored-bg-inverse)');
       root.style.setProperty('--bg-inverse-or-glass', 'var(--thick-glass)');
@@ -135,6 +138,7 @@ export class ThemeService {
       root.style.setProperty('--color', 'var(--user-preferred-color)');
       root.style.setProperty('--color-on-glass', 'var(--user-inverse-color)');
       root.style.setProperty('--color-on-bg', 'var(--user-preferred-color)');
+      root.style.setProperty('--color-on-btn', 'var(--user-inverse-color)');
 
       root.style.setProperty('--bg-inverse', 'var(--colored-bg-inverse)');
       root.style.setProperty('--bg-inverse-or-glass', 'var(--thick-glass)');

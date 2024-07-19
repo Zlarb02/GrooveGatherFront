@@ -15,20 +15,20 @@
             </div>
             <br>
             <div>
-                <label for="password">Password</label>
+                <label for="password">Mot de passe</label>
                 <input type="password" id="password" name="password" required [(ngModel)]="user!.password"
                     placeholder="Password">
             </div>
             <br>
             <div>
-                <label for="repeat-password">Repeat Password</label>
+                <label for="repeat-password">Confirmer mot de passe</label>
                 <input type="password" id="repeat-password" name="repeatPassword" required
                     [(ngModel)]="user!.repeatedPassword" placeholder="Repeat password">
             </div>
             <br>
-            <button type="submit">Sign Up</button>
+            <button type="submit">S'inscrire</button>
         </form>
         <br>
-        <p>Already have an account? <a [routerLink]="['/login']">Login</a></p>
+        <p>Vous avez déjà un compte? <a [routerLink]="['/login']">Se connecter</a></p>
     </div>
 </div>

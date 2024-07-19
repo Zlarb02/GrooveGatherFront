@@ -11,4 +11,5 @@ export interface Project {
     likes: number;
     skillsPresent: skillName[];
     skillsMissing: skillName[];
+    files?: File[];
 }
