@@ -11,7 +11,12 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { MatAutocomplete, MatAutocompleteModule, type MatAutocompleteSelectedEvent, MatOption } from '@angular/material/autocomplete';
+import {
+  MatAutocomplete,
+  MatAutocompleteModule,
+  type MatAutocompleteSelectedEvent,
+  MatOption,
+} from '@angular/material/autocomplete';
 import { Router } from '@angular/router';
 import { Api } from '../../../shared/models/api';
 import { genresList } from '../../../shared/models/genres-list';
@@ -22,7 +27,14 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 @Component({
   selector: 'app-create-project',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatAutocomplete, MatOption, MatAutocompleteModule, DragDropModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatAutocomplete,
+    MatOption,
+    MatAutocompleteModule,
+    DragDropModule,
+  ],
   templateUrl: './create-project.component.html',
   styleUrls: ['./create-project.component.css'],
 })
@@ -47,7 +59,6 @@ export class CreateProjectComponent {
   scoreFiles: File[] = [];
   archiveFiles: File[] = [];
 
-
   previewAudio: File | null = null;
 
   router: Router = inject(Router);
@@ -68,7 +79,7 @@ export class CreateProjectComponent {
       color: ['', Validators.required],
       date: [''],
       likes: [0],
-      files: this.formBuilder.array([]),
+      files: this.formBuilder.array([], Validators.required),
     });
   }
 
@@ -112,10 +123,7 @@ export class CreateProjectComponent {
   // Methods to add and remove used skills
   addUsedSkill(event: MatAutocompleteSelectedEvent) {
     const value = event.option.value;
-    if (
-      value &&
-      !this.selectedUsedSkills.includes(value)
-    ) {
+    if (value && !this.selectedUsedSkills.includes(value)) {
       this.selectedUsedSkills.push(value);
       this.skillsPresent.push(new FormControl(value));
     }
@@ -135,10 +143,7 @@ export class CreateProjectComponent {
   // Methods to add and remove requested skills
   addRequestedSkill(event: MatAutocompleteSelectedEvent) {
     const value = event.option.value;
-    if (
-      value &&
-      !this.selectedRequestedSkills.includes(value)
-    ) {
+    if (value && !this.selectedRequestedSkills.includes(value)) {
       this.selectedRequestedSkills.push(value);
       this.skillsMissing.push(new FormControl(value));
     }
@@ -212,7 +217,6 @@ export class CreateProjectComponent {
     }
   }
 
-
   getFileTypeIconClass(fileName: string): string {
     const extension = fileName.split('.').pop()?.toLowerCase();
     switch (extension) {
@@ -227,7 +231,7 @@ export class CreateProjectComponent {
         return 'audio';
       case 'gp':
       case 'tg':
-      case 'musicxml':
+      case 'xml':
         return 'score';
       case 'midi':
         return 'midi';
@@ -243,7 +247,9 @@ export class CreateProjectComponent {
     const units = ['octets', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
     const digitGroups = Math.floor(Math.log(sizeInBytes) / Math.log(1024));
 
-    const sizeFormatted = Number.parseFloat((sizeInBytes / 1024 ** digitGroups).toFixed(2));
+    const sizeFormatted = Number.parseFloat(
+      (sizeInBytes / 1024 ** digitGroups).toFixed(2)
+    );
     const unit = units[digitGroups];
 
     return `${sizeFormatted} ${unit}`;
@@ -256,7 +262,6 @@ export class CreateProjectComponent {
       this.previewAudio = file;
     }
   }
-
 
   // Method to handle form submission
   onSubmit() {
@@ -271,11 +276,15 @@ export class CreateProjectComponent {
       formData.append('likes', this.myForm.get('likes')?.value);
 
       // biome-ignore lint/complexity/noForEach: <explanation>
-      this.selectedGenres.forEach(genre => formData.append('genres', genre));
+      this.selectedGenres.forEach((genre) => formData.append('genres', genre));
       // biome-ignore lint/complexity/noForEach: <explanation>
-      this.selectedUsedSkills.forEach(skill => formData.append('skillsPresent', skill));
+      this.selectedUsedSkills.forEach((skill) =>
+        formData.append('skillsPresent', skill)
+      );
       // biome-ignore lint/complexity/noForEach: <explanation>
-      this.selectedRequestedSkills.forEach(skill => formData.append('skillsMissing', skill));
+      this.selectedRequestedSkills.forEach((skill) =>
+        formData.append('skillsMissing', skill)
+      );
       const filesArray = this.myForm.get('files') as FormArray;
       // biome-ignore lint/complexity/noForEach: <explanation>
       filesArray.controls.forEach((control) => {
@@ -283,58 +292,63 @@ export class CreateProjectComponent {
       });
 
       // POST request to the server
-      this.http.post(`${this.baseUrl}/projects`, formData, { withCredentials: true }).subscribe(
-        response => {
-          // biome-ignore lint/suspicious/noConsoleLog: <explanation>
-          console.log('Project created successfully:', response);
-          this.router.navigate(['/projects']);
-        },
-        error => {
-          console.error('Error creating project:', error);
-        }
-      );
+      this.http
+        .post(`${this.baseUrl}/projects`, formData, { withCredentials: true })
+        .subscribe(
+          (response) => {
+            // biome-ignore lint/suspicious/noConsoleLog: <explanation>
+            console.log('Project created successfully:', response);
+            this.router.navigate(['/projects']);
+          },
+          (error) => {
+            console.error('Error creating project:', error);
+          }
+        );
     }
   }
 
-
+  isAudioFile(fileName: string): boolean {
+    const audioExtensions = ['mp3', 'wav', 'ogg', 'flac', 'aac', 'wma'];
+    const extension = fileName.split('.').pop()?.toLowerCase();
+    return audioExtensions.includes(extension || '');
+  }
 
   uploadFile(file: File) {
-    const fileInput = document.getElementById("fileInput") as HTMLInputElement;
+    const fileInput = document.getElementById('fileInput') as HTMLInputElement;
     if (!fileInput || !fileInput.files) {
-      alert("File input element not found");
+      alert('File input element not found');
       return;
     }
 
     if (!file) {
-      alert("Please select a WAV file first");
+      alert('Please select a WAV file first');
       return;
     }
 
     const formData = new FormData();
-    formData.append("file", file);
+    formData.append('file', file);
 
     // Options de la requête fetch pour l'upload du fichier
     const requestOptions: RequestInit = {
       method: 'POST',
       body: formData,
       headers: {
-        'Access-Control-Allow-Origin': 'http://localhost:4200' // Remplacez par l'URL de votre frontend Angular
-      }
+        'Access-Control-Allow-Origin': 'http://localhost:4200', // Remplacez par l'URL de votre frontend Angular
+      },
     };
 
     // Effectuer la requête fetch pour convertir le fichier WAV en MP3
-    fetch("http://localhost:8080/api/v1/files/convert", requestOptions)
-      .then(response => {
+    fetch('http://localhost:8080/api/v1/files/convert', requestOptions)
+      .then((response) => {
         if (!response.ok) {
-          throw new Error("Network response was not ok");
+          throw new Error('Network response was not ok');
         }
         return response.json();
       })
-      .then(data => {
+      .then((data) => {
         this.wavUrl = `${this.baseUrl}/${data.wavUrl}`;
         this.mp3Url = `${this.baseUrl}/${data.mp3Url}`;
-
       })
-      .catch(error => console.error("Error:", error));
+      .catch((error) => console.error('Error:', error));
   }
 }

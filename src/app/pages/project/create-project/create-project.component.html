@@ -3,7 +3,7 @@
     <form class="form" [formGroup]="myForm" (ngSubmit)="onSubmit()">
       <div class="ligne1">
         <input id="nameProject" formControlName="name" type="text" class="form-control" placeholder="Nom du Projet" />
-        <div *ngIf="myForm.get('name')?.invalid && myForm.get('name')?.touched" class="error">
+        <div *ngIf="myForm.get('name')?.invalid || !myForm.get('name')?.touched" class="error">
           Le nom du projet est requis.
         </div>
         <div class="form-group">
@@ -26,6 +26,10 @@
           </div>
           <div *ngIf="myForm.get('genres')?.invalid && myForm.get('genres')?.touched" class="error">
             Le genre est requis.
+          </div>
+          <div *ngIf="selectedGenres.length === 0" class="error">
+
+            Le genre est requis, bordel !
           </div>
         </div>
       </div>
@@ -51,6 +55,10 @@
           <div *ngIf="myForm.get('skillsPresent')?.invalid && myForm.get('skillsPresent')?.touched" class="error">
             La compétence est requise.
           </div>
+          <div *ngIf="selectedUsedSkills.length === 0" class="error">
+
+            Au moins une compétence présente doit être ajoutée.
+          </div>
         </div>
         <div class="form-group">
           <label style="display:none;" class="" for="requestedSkill">Compétence manquante</label>
@@ -72,6 +80,10 @@
           <div *ngIf="myForm.get('skillsMissing')?.invalid && myForm.get('skillsMissing')?.touched" class="error">
             La compétence est requise.
           </div>
+          <div *ngIf="selectedRequestedSkills.length === 0" class="error">
+
+            Au moins une compétence demandée doit être ajoutée.
+          </div>
         </div>
       </div>
 
@@ -81,7 +93,7 @@
           <textarea id="description" formControlName="description" class="form-control"
             placeholder="Entrez la description de votre projet"></textarea>
         </div>
-        <div *ngIf="myForm.get('description')?.invalid && myForm.get('description')?.touched" class="error">
+        <div *ngIf="myForm.get('description')?.invalid || !myForm.get('description')?.touched" class="error">
           La description est requise.
         </div>
       </div>
@@ -103,21 +115,38 @@
               <span class="file-icon" [ngClass]="'file-icon ' + getFileTypeIconClass(file.name)"></span>
               <span class="file-name">{{ file.name }}</span>
               <span class="file-size">{{ formatFileSize(file.size) }}</span>
+
+
+
+
               <button type="button" (click)="removeFile(file)"
                 style="background-color: var(--light-bg); border-radius: 50%; width: 25px; height: 25px; border-color: transparent;">
                 <i class="gg-trash" style="color: rgb(186, 2, 2); --ggs:0.9; margin-left: -5px; margin-top: 0px;"></i>
               </button>
             </div>
-            <button
-              *ngIf="!(previewAudio == file) && ( file.name.split('.').pop() == 'mp3' || file.name.split('.').pop() == 'wav' || file.name.split('.').pop() == 'ogg' || file.name.split('.').pop() == 'flac' || file.name.split('.').pop() == 'aac' || file.name.split('.').pop() == 'wma')"
-              type="button" class="btn-set-main" (click)="setAsMainAudio(file); uploadFile(file);">
+
+
+            <!-- file.size <= 10000000 -->
+            <button *ngIf="file.size <= 10048576 && previewAudio !== file && isAudioFile(file.name)" type="button"
+              (click)="setAsMainAudio(file); uploadFile(file)">
               Définir comme piste d'écoute
             </button>
+
+
+            <div *ngIf="file.size > 10048576" class="error">
+              Le fichier est fait plus de 10 Gigabytes.
+            </div>
+
+
             <audio *ngIf="previewAudio == file" id="mp3Audio" controls [src]="mp3Url"></audio>
             <button *ngIf="previewAudio == file" type="button" class="btn-deset-main" (click)="setAsMainAudio(file)">
               Déselectionner
             </button>
             <br>
+            <div *ngIf="selectedFiles.length === 0 " class="error">
+              Il faut mettre au moins un fichier audio défini comme piste d'écoute.
+            </div>
+
           </div>
         </div>
       </div>
@@ -134,7 +163,7 @@
         <div class="carre pink" (click)="selectColor('pink')"></div>
       </div>
       <input id="color" formControlName="color" type="hidden" />
-      <div *ngIf="myForm.get('color')?.invalid && myForm.get('color')?.touched" class="error">
+      <div *ngIf="myForm.get('color')?.invalid || myForm.get('color')?.touched" class="error">
         La couleur est requise.
       </div>
 
