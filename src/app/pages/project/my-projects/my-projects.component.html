@@ -1,1 +1,62 @@
-<p>my-projects works!</p>
+<div id="my-projects-container">
+    <div *ngIf="projects.length" class="projects-pagination">
+
+        <div
+            style="display: flex; width: 100vw; flex-direction: row; align-items: center; justify-content: space-between;">
+            <div
+                style="display: flex; width: 100vw; flex-direction: row; gap:0.3rem; align-items: center; justify-content: start; margin: 0 4vw; font-size: 1.1rem;">
+                Triez Par:
+                <select name="sort" id="sort" [(ngModel)]="sortOption" (change)="toggleSort()">
+                    <option value="date">Date</option>
+                    <option value="popularity">Popularité</option>
+                </select>
+                <button class="sortBy" (click)="toggleSort()">
+                    <i class="gg-arrows-exchange-v sort-icon" [class.rotated]="isSortedAsc"></i>
+                </button>
+            </div>
+            <div
+                style="display: flex; width: 100vw; flex-direction: row; gap:0.3rem; align-items: center; justify-content: end; margin: 0 4vw;">
+
+                <select name="itemsPerPage" id="itemsPerPage" [(ngModel)]="itemsPerPage" (change)="toggleSort()">
+                    <option value=1>1</option>
+                    <option value=2>2</option>
+                    <option value=3>3</option>
+                    <option value=4>4</option>
+                    <option value=5>5</option>
+                    <option value=6>6</option>
+                    <option value=7>7</option>
+                    <option value=8>8</option>
+                    <option value=9>9</option>
+                    <option value=10>10</option>
+                    <option value=11>11</option>
+                    <option value=12>12</option>
+                    <option value=13>13</option>
+                    <option value=14>14</option>
+                    <option value=15>15</option>
+                    <option value=20>20</option>
+                    <option value=25>25</option>
+                    <option value=30>30</option>
+                    <option value=40>40</option>
+                    <option value=50>50</option>
+                    <option value=100>100</option>
+                </select>
+                <span class="perPage" style="height: 30px;
+    border-radius: 0 1rem 1rem 0; border-left: none; border-top: none; line-height: 14px;">par
+                    page</span>
+
+            </div>
+        </div>
+        <pagination-controls class="page-controls page-controls-up" (pageChange)="p = $event" previousLabel=""
+            nextLabel=""></pagination-controls>
+        <br>
+        <div class="projects-container" style="position: relative; z-index: 1 !important;">
+            <app-project-card class="project-card" style="position: relative; z-index: 1 !important;"
+                *ngFor="let project of projects | paginate: { itemsPerPage: itemsPerPage, currentPage: p }; index as i"
+                [project]="project" [i]="i" [class.bg-orange]="i % 6 === 0" [class.bg-green]="i % 6 === 1"
+                [class.bg-red]="i % 6 === 2" [class.bg-purple]="i % 6 === 3" [class.bg-pink]="i % 6 === 4"
+                [class.bg-blue]="i % 6 === 5"></app-project-card>
+        </div>
+        <pagination-controls class="page-controls" (pageChange)="p = $event" previousLabel=""
+            nextLabel=""></pagination-controls>
+    </div>
+</div>
