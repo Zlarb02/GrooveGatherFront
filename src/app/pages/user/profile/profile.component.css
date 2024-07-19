@@ -26,6 +26,7 @@ input {
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.3);
+    font-size: xx-large;
 }
 
 
@@ -48,12 +49,18 @@ h2 {
     position: relative;
     top: -3vh;
     color: var(--color-on-bg);
+    font-size: larger;
+    word-wrap: break-word;
 }
+
+
 
 .mail {
     position: relative;
     top: calc(-40px - 2vh);
     color: var(--color-on-bg);
+    max-width: 100%;
+    word-wrap: break-word;
 }
 
 .mail-input {
@@ -312,5 +319,11 @@ input {
     .modal-content {
         width: 60%;
         margin: 10vh 30vw;
+    }
+}
+
+@media (max-width: 500px) {
+    .container {
+        font-size: medium;
     }
 }

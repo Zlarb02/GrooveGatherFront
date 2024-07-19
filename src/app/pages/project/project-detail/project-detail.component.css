@@ -383,6 +383,15 @@
     width: 100%;
 }
 
+.description {
+    font-weight: 700;
+    font-size: 1.7rem;
+
+    p {
+        font-weight: 500;
+        font-size: 1.5rem;
+    }
+}
 
 @media screen and (min-width: 768px) {
     .description {

@@ -89,6 +89,7 @@
 }
 
 
+
 .active-filters>li:hover {
     background: color-mix(in srgb, var(--pill-accent) 20%, transparent);
 }
@@ -159,10 +160,12 @@
 select {
     background-color: var(--bg);
     color: var(--color);
+    font-size: 1rem;
+    height: 30px;
 }
 
 .separation {
-    width: 50%;
+    width: 90%;
     border-top: 1px solid transparent;
     margin: 16px 0;
 }
@@ -178,7 +181,7 @@ select {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 1vw;
+    gap: 5vw;
 }
 
 .choose-filters-title {
@@ -188,7 +191,6 @@ select {
     margin-left: 10%;
     margin-top: 10px;
     margin-bottom: 10px;
-
 }
 
 .filter-select {
@@ -196,8 +198,10 @@ select {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 8px;
+    max-width: 220px;
+    text-align: center;
     margin-bottom: 16px;
+    font-size: larger;
 
     input {
         height: 2.3rem;
@@ -218,7 +222,7 @@ select {
     border-radius: 0.25rem 1rem 1rem 0.25rem;
     padding-inline: 0.75rem;
     padding-block: 0.375rem;
-    font-size: 0.875rem;
+    font-size: 1rem;
     font-style: normal;
     font-weight: 500;
     line-height: 1.4rem;
@@ -291,9 +295,9 @@ select {
     translate: -20%;
     padding: 12px 24px;
     transition: transform 250ms ease-in-out;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 18px;
-    color: var(--light-color);
+    color: var(--color);
     background-color: var(--glass);
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z' fill='%23777777'/%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
@@ -310,6 +314,7 @@ select {
     color: var(--placeholder);
     text-transform: uppercase;
     letter-spacing: 1.5px;
+    font-size: 12px;
 }
 
 
