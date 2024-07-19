@@ -296,11 +296,12 @@ select option {
   display: flex;
   flex-direction: column;
   /* Changez de row à column pour aligner verticalement */
-  align-items: flex-start;
+  align-items: center;
   /* Aligne les éléments au début horizontalement */
   margin-right: 1vw;
   /* Espacement entre les champs */
   max-width: 95vw;
+
 }
 
 .form-group label {
@@ -395,7 +396,8 @@ select option {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 70vw;
+  max-width: 700px;
   height: 150px;
   border: 2px dashed var(--lines);
   border-radius: 4px;

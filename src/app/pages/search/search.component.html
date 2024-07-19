@@ -40,7 +40,7 @@
                     </mat-option>
                 </mat-autocomplete>
             </div>
-            <div class="filter-select"> Compétence déjà présente dans le projet :
+            <div class="filter-select"> Compétence présente dans un projet :
                 <input type="text" style="--pill-accent: var(--green);" [formControl]="skillControlPresent"
                     [matAutocomplete]="autoSkill" (keydown)="onKeydown($event)">
                 <mat-autocomplete #autoSkill="matAutocomplete">
@@ -76,7 +76,7 @@
         <div
             style="display: flex; width: 100vw; flex-direction: row; align-items: center; justify-content: space-between;">
             <div
-                style="display: flex; width: 100vw; flex-direction: row; gap:0.3rem; align-items: center; justify-content: start; margin: 0 4vw;">
+                style="display: flex; width: 100vw; flex-direction: row; gap:0.3rem; align-items: center; justify-content: start; margin: 0 4vw; font-size: 1.1rem;">
                 Triez Par:
                 <select name="sort" id="sort" [(ngModel)]="sortOption" (change)="toggleSort()">
                     <option value="date">Date</option>
@@ -88,7 +88,7 @@
             </div>
             <div
                 style="display: flex; width: 100vw; flex-direction: row; gap:0.3rem; align-items: center; justify-content: end; margin: 0 4vw;">
-                &nbsp;&nbsp;&nbsp;
+
                 <select name="itemsPerPage" id="itemsPerPage" [(ngModel)]="itemsPerPage" (change)="toggleSort()">
                     <option value=1>1</option>
                     <option value=2>2</option>
@@ -113,7 +113,7 @@
                     <option value=100>100</option>
                 </select>
                 <span class="perPage" style="height: 30px;
-    border-radius: 0 1rem 1rem 0; border-left: none; border-top: none; font-size: 14px; line-height: 14px;">par
+    border-radius: 0 1rem 1rem 0; border-left: none; border-top: none; line-height: 14px;">par
                     page</span>
 
             </div>
