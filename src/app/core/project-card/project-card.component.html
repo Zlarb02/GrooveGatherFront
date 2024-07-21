@@ -2,7 +2,6 @@
     <!-- project!.id needed -->
     <a [routerLink]="['/project', project?.name]" routerLinkActive="router-link-active" class="pj-item_link">
         <div class="filter">
-
             <div class="pj-item_bg" [class.bg-orange]="project?.color === 'orange'"
                 [class.bg-green]="project?.color === 'green'" [class.bg-red]="project?.color === 'red'"
                 [class.bg-purple]="project?.color === 'purple'" [class.bg-pink]="project?.color === 'pink'"
@@ -14,11 +13,11 @@
         <div class="pj-item-box">
             <div
                 style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; width: 100%;">
-                <span>
-                    <span *ngFor="let genre of project?.genres" style="display: inline-block;">
-                        <button class="btn-genre">{{genre}}</button>
-                    </span>
-                </span><br>
+
+                <span *ngFor="let genre of project?.genres" style="display: inline-block;">
+                    <button class="btn-genre">{{genre}}</button>
+                </span>
+                <br>
                 <span class="pj-item_date">
                     {{project?.date}}
                 </span>
@@ -35,7 +34,6 @@
                     </div>
                 </div>
                 <div class="pj-item-skills-miss">
-
                     <span style="font-weight: 400; font-size: 1.2em;">Manque :</span>
                     <div>
                         <span *ngFor="let skill of project?.skillsMissing">
@@ -44,8 +42,8 @@
                     </div><br> <br>
                 </div>
             </div>
-            <div style="display: flex; flex-direction: row; align-items: center; justify-content: center; width: 100% ">
-
+            <div
+                style="display: flex; flex-direction: row; align-items: center; justify-content: center; width: 100%; margin-top: 100px; ">
                 <p style="margin: 0 8px 0 8px">{{project?.likes}}</p>
                 <svg class="like-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -58,6 +56,33 @@
                 </svg>
             </div>
         </div>
-
     </a>
+    <div *ngIf="fileURL"
+        style="position: fixed; bottom: 55px; right: 20px; display: flex; justify-content: center; align-items: center;">
+        <button *ngIf="!isListened"
+            style="position: fixed; bottom: 95px; left: 20px; font-size: x-large; background-color: var(--edit-picture); color: var(--color-on-bg)"
+            (click)="playAudio()" class="listen-btn">
+            Ecouter
+        </button>
+        <button *ngIf="isListened"
+            style="position: fixed; bottom: 95px; left: 20px; font-size: x-large; background-color: var(--edit-picture); color: var(--color-on-bg)"
+            (click)="stopAudio()" class="listen-btn">
+            Stop
+        </button>
+        <div *ngIf="fileURL" class="audio-container">
+            <audio id="player" [src]="fileURL"></audio>
+            <div class="custom-controls">
+                <div style="display: flex; justify-content: center; align-items: center;">
+                    <button (click)="playAudio()">&#9654;</button>
+                    <button (click)="pauseAudio()">&#10074;&#10074;</button>
+                    <button (click)="stopAudio()">&#9724;</button>
+                </div>
+                <input type="range" (input)="changeVolume($event)" [value]="currentVolume" min="0" max="1" step="0.1"
+                    style="color: var(--edit-button)" class="volume-slider">
+            </div>
+        </div>
+        <div *ngIf="isListened" style="margin-bottom: 20px; padding: 10px; height: fit-content;" (click)="toggleMute()">
+            <i class="gg-volume volume-icon"></i> <i *ngIf="isMuted" class="volume-muted">/</i>
+        </div>
+    </div>
 </div>

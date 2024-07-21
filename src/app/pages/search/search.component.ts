@@ -36,13 +36,12 @@ export class SearchComponent {
   filteredGenres: string[] = [];
 
   isSortedAsc = true; // State for sort order
+  sortOption = 'date'; // default sort option
 
   projects: Project[] = [];
-
   genres = genresList;
 
   showMore = false;
-
 
   p = 1;
   itemsPerPage = 6;
@@ -55,6 +54,10 @@ export class SearchComponent {
 
   projectService = inject(ProjectService);
 
+  // New properties for filter values
+  skillPresentFilters: string[] = [];
+  skillMissingFilters: string[] = [];
+  genreFilters: string[] = [];
 
   ngOnInit(): void {
     this.getProjects();
@@ -63,7 +66,14 @@ export class SearchComponent {
   }
 
   getProjects() {
-    this.projectService.getProjects().subscribe((projects) => {
+    const sortDirection = this.isSortedAsc ? 'asc' : 'desc';
+    const filters = {
+      skillPresent: this.skillPresentFilters,
+      skillMissing: this.skillMissingFilters,
+      genre: this.genreFilters
+    };
+
+    this.projectService.getProjects(this.sortOption, sortDirection, filters).subscribe((projects) => {
       this.projects = projects;
       this.totalItems = this.projects.length;
     });
@@ -117,7 +127,6 @@ export class SearchComponent {
     }
   }
 
-
   addFilter(value: skillName | Genre, type: 'skillPresent' | 'skillMissing' | 'genre') {
     const filterClass = {
       skillPresent: 'filter-skill-present',
@@ -129,12 +138,33 @@ export class SearchComponent {
 
     if (!this.filters.some(f => f.value === value && f.class === filterClass)) {
       this.filters.unshift(filter);
+
+      // Update the filters arrays
+      if (type === 'skillPresent') {
+        this.skillPresentFilters.push(value as string);
+      } else if (type === 'skillMissing') {
+        this.skillMissingFilters.push(value as string);
+      } else if (type === 'genre') {
+        this.genreFilters.push(value as string);
+      }
+
+      this.getProjects(); // Fetch projects with updated filters
     }
   }
 
   removeFilter(index: number): void {
-    // Supprime le filtre à l'index spécifié
-    this.filters.splice(index, 1);
+    const removedFilter = this.filters.splice(index, 1)[0];
+
+    // Remove the filter from the corresponding filters array
+    if (removedFilter.class === 'filter-skill-present') {
+      this.skillPresentFilters = this.skillPresentFilters.filter(f => f !== removedFilter.value);
+    } else if (removedFilter.class === 'filter-skill-missing') {
+      this.skillMissingFilters = this.skillMissingFilters.filter(f => f !== removedFilter.value);
+    } else if (removedFilter.class === 'filter-genre') {
+      this.genreFilters = this.genreFilters.filter(f => f !== removedFilter.value);
+    }
+
+    this.getProjects(); // Fetch projects with updated filters
   }
 
   setupAutocomplete(): void {
@@ -163,8 +193,6 @@ export class SearchComponent {
       .subscribe(genres => this.filteredGenres = genres);
   }
 
-
-
   private _filterSkills(value: string): string[] {
     const filterValue = value ? value.toLowerCase() : '';
     return this.skillsPossibles.filter(skill => skill.toLowerCase().includes(filterValue));
@@ -174,8 +202,6 @@ export class SearchComponent {
     const filterValue = value ? value.toLowerCase() : '';
     return this.genres.filter(genre => genre.toLowerCase().includes(filterValue));
   }
-
-
 
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   onSearch(searchForm: any) {
@@ -191,32 +217,17 @@ export class SearchComponent {
     }
   }
 
-  sortOption = 'date'; // default sort option
-
   toggleSort() {
     this.isSortedAsc = !this.isSortedAsc; // Toggle sort order
-    if (this.sortOption === 'date') {
-      this.sortByDate();
-    } else if (this.sortOption === 'popularity') {
-      this.sortByPopularity();
-    }
+    this.getProjects(); // Fetch projects with updated sort order
   }
 
+  // Sorting functions remain unchanged
   sortByDate() {
-    if (this.isSortedAsc) {
-      this.projects.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-    } else {
-      this.projects.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-    }
+    // Sorting handled by back-end
   }
-
 
   sortByPopularity() {
-    if (this.isSortedAsc) {
-      this.projects.sort((a, b) => a.likes - b.likes);
-    } else {
-      this.projects.sort((a, b) => b.likes - a.likes);
-    }
+    // Sorting handled by back-end
   }
-
 }
