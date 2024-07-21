@@ -1,4 +1,9 @@
 <div id="my-projects-container">
+    <h1 style="margin-top: 4vh;">Projects dont je suis l'initiateur:</h1>
+    <div *ngIf="projects.length === 0" class="no-projects" style="width: 100%; text-align: center">
+        <h2 style="margin-top: 6vh;">Aucun projet</h2>
+        <button style="margin: auto;">Créer un projet</button>
+    </div>
     <div *ngIf="projects.length" class="projects-pagination">
 
         <div
@@ -58,5 +63,9 @@
         </div>
         <pagination-controls class="page-controls" (pageChange)="p = $event" previousLabel=""
             nextLabel=""></pagination-controls>
+    </div>
+    <h1 style="margin-top: 12vh;">Projects où je participe:</h1>
+    <div *ngIf="projects.length === 0" class="no-projects" style="width: 100%; text-align: center">
+        <h2 style="margin-top: 6vh;">Aucun projet</h2> <button style="margin: auto;">Explorer les projects</button>
     </div>
 </div>
