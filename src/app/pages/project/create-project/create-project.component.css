@@ -508,3 +508,10 @@ select option {
 .file-icon.default {
   background-image: url('../../../../assets/icons/899-format-unknown.svg');
 }
+
+.btn-primary{
+font-weight: 400;
+font-size: xx-large;
+padding: 13px;
+
+}
