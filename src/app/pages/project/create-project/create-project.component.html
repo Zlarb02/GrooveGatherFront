@@ -127,13 +127,13 @@
 
 
             <!-- file.size <= 10000000 -->
-            <button *ngIf="file.size <= 10048576 && previewAudio !== file && isAudioFile(file.name)" type="button"
+            <button *ngIf="file.size <= 1000048576 && previewAudio !== file && isAudioFile(file.name)" type="button"
               (click)="setAsMainAudio(file); uploadFile(file)">
               Définir comme piste d'écoute
             </button>
 
 
-            <div *ngIf="file.size > 10048576" class="error">
+            <div *ngIf="file.size > 100048576" class="error">
               Le fichier est fait plus de 10 Gigabytes.
             </div>
 

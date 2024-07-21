@@ -1,3 +1,4 @@
+import type { File } from "./File.model";
 import type { Genre } from "./genre";
 import type { skillName } from "./skill-name";
 

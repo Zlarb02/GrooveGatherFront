@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { catchError, of } from 'rxjs';
 import { Api } from '../models/api';
@@ -53,8 +53,21 @@ export class ProjectService {
   //     );
   // }
 
-  getProjects() {
-    return this.http.get<Project[]>(`${this.baseUrl}/projects`)
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  getProjects(sortBy: string, sortDirection: string, filters: any) {
+    let params = new HttpParams()
+      .set('sortBy', sortBy)
+      .set('direction', sortDirection)
+
+    // Add filter parameters to the request
+    // biome-ignore lint/complexity/noForEach: <explanation>
+    Object.keys(filters).forEach(filterKey => {
+      if (filters[filterKey].length) {
+        params = params.append(filterKey, filters[filterKey].join(','));
+      }
+    });
+
+    return this.http.get<Project[]>(`${this.baseUrl}/projects`, { params })
       .pipe(
         catchError(error => {
           if (error.status === 500) {
