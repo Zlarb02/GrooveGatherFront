@@ -265,45 +265,69 @@ export class CreateProjectComponent {
 
   // Method to handle form submission
   onSubmit() {
-    // biome-ignore lint/suspicious/noConsoleLog: <explanation>
-    console.log(this.myForm.value, this.selectedFiles);
     if (this.myForm.valid) {
-      const formData = new FormData();
-      formData.append('name', this.myForm.get('name')?.value);
-      formData.append('description', this.myForm.get('description')?.value);
-      formData.append('color', this.myForm.get('color')?.value);
-      formData.append('date', this.myForm.get('date')?.value);
-      formData.append('likes', this.myForm.get('likes')?.value);
+      // Étape 1: Uploader les fichiers et attendre la réponse
+      this.uploadFiles(this.selectedFiles).then(uploadedFiles => {
+        // biome-ignore lint/suspicious/noConsoleLog: <explanation>
+        console.log('Upload response:', uploadedFiles);
 
-      // biome-ignore lint/complexity/noForEach: <explanation>
-      this.selectedGenres.forEach((genre) => formData.append('genres', genre));
-      // biome-ignore lint/complexity/noForEach: <explanation>
-      this.selectedUsedSkills.forEach((skill) =>
-        formData.append('skillsPresent', skill)
-      );
-      // biome-ignore lint/complexity/noForEach: <explanation>
-      this.selectedRequestedSkills.forEach((skill) =>
-        formData.append('skillsMissing', skill)
-      );
-      const filesArray = this.myForm.get('files') as FormArray;
-      // biome-ignore lint/complexity/noForEach: <explanation>
-      filesArray.controls.forEach((control) => {
-        formData.append('files', control.value);
-      });
+        // Assurez-vous que uploadedFiles est un tableau valide d'objets
+        if (Array.isArray(uploadedFiles)) {
+          // Retirer la base de l'URL pour correspondre au format 'files/download?filename=...'
+          const baseUrlPattern = new RegExp(`^${this.baseUrl}/`);
 
-      // POST request to the server
-      this.http
-        .post(`${this.baseUrl}/projects`, formData, { withCredentials: true })
-        .subscribe(
-          (response) => {
-            // biome-ignore lint/suspicious/noConsoleLog: <explanation>
-            console.log('Project created successfully:', response);
-            this.router.navigate(['/projects']);
-          },
-          (error) => {
-            console.error('Error creating project:', error);
+          // Crée un tableau d'objets avec url, isTeaser, name, et size
+          const filesArray = uploadedFiles.map(file => ({
+            url: file.url.replace(baseUrlPattern, ''),
+            isTeaser: file.url.replace(baseUrlPattern, '') === this.mp3Url?.replace(baseUrlPattern, ''),
+            name: file.name,
+            size: file.size
+          }));
+
+          // Si mp3Url n'est pas présent dans les URLs, ajoutez-le comme isTeaser: true
+          const mp3FormattedUrl = this.mp3Url?.replace(baseUrlPattern, '');
+          if (mp3FormattedUrl && !filesArray.some(file => file.url === mp3FormattedUrl)) {
+            filesArray.push({
+              url: mp3FormattedUrl,
+              isTeaser: true,
+              name: 'MP3 Teaser', // Assurez-vous d'avoir un nom par défaut ou utilisez celui approprié
+              size: 0 // Définissez une taille par défaut si nécessaire
+            });
           }
-        );
+
+          // Mettre à jour les URLs des fichiers dans le formulaire
+          this.myForm.patchValue({ files: filesArray });
+
+          // Préparer le payload pour l'envoi du formulaire
+          const formData = {
+            ...this.myForm.value,
+            files: filesArray // Envoyer le tableau d'objets avec url, isTeaser, name et size
+          };
+
+          // biome-ignore lint/suspicious/noConsoleLog: <explanation>
+          console.log('Form data to be submitted:', formData);
+
+          // Étape 2: Poster le formulaire avec les données
+          this.http.post(`${this.baseUrl}/projects`, formData, { withCredentials: true }).subscribe(
+            response => {
+              // biome-ignore lint/suspicious/noConsoleLog: <explanation>
+              console.log('Project created successfully:', response);
+              this.router.navigate(['/projects']);
+            },
+            error => {
+              console.error('Error creating project:', error);
+            }
+          );
+        } else {
+          console.error('Uploaded files response is not an array:', uploadedFiles);
+        }
+      }).catch(error => {
+        console.error('Error uploading files:', error);
+      });
+    } else {
+      // biome-ignore lint/suspicious/noConsoleLog: <explanation>
+      console.log('Form is invalid');
+
     }
   }
 
@@ -312,6 +336,12 @@ export class CreateProjectComponent {
     const extension = fileName.split('.').pop()?.toLowerCase();
     return audioExtensions.includes(extension || '');
   }
+
+
+
+
+
+
 
   uploadFile(file: File) {
     const fileInput = document.getElementById('fileInput') as HTMLInputElement;
@@ -338,17 +368,39 @@ export class CreateProjectComponent {
     };
 
     // Effectuer la requête fetch pour convertir le fichier WAV en MP3
-    fetch('http://localhost:8080/api/v1/files/convert', requestOptions)
-      .then((response) => {
+
+    fetch(`${this.baseUrl}/files/convert`, requestOptions)
+      .then(response => {
+
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
         return response.json();
       })
-      .then((data) => {
+      .then(data => {
+        // biome-ignore lint/suspicious/noConsoleLog: <explanation>
+        console.log(data);
+
         this.wavUrl = `${this.baseUrl}/${data.wavUrl}`;
         this.mp3Url = `${this.baseUrl}/${data.mp3Url}`;
       })
       .catch((error) => console.error('Error:', error));
   }
+
+  uploadFiles(files: File[]): Promise<{ [key: string]: string }> {
+    const formData = new FormData();
+    // biome-ignore lint/complexity/noForEach: <explanation>
+    files.forEach(file => formData.append('files', file));
+
+    return this.http.post<{ [key: string]: string }>(`${this.baseUrl}/files/upload`, formData, { withCredentials: true })
+      .toPromise()
+      .then(response => {
+        return response || {}; // Assurez-vous de toujours retourner un objet
+      })
+      .catch(error => {
+        console.error('Error uploading files:', error);
+        return {}; // Retourner un objet vide en cas d'erreur
+      });
+  }
+
 }
