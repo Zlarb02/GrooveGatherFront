@@ -45,15 +45,6 @@
             </div><br> <br>
           </div>
         </div>
-
-        <div *ngIf="project" style="display: flex; flex-wrap: wrap; gap: 10px;">
-          <div *ngFor="let file of project.files; let i = index" class="audio-container">
-            <div class="file-details">
-              <div class="file-name">{{ file.name }}</div>
-              <div class="file-size">{{ formatFileSize(file.size) }}</div>
-            </div>
-          </div>
-        </div>
       </div>
 
       <div>

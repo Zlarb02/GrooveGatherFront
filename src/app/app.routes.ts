@@ -9,6 +9,7 @@ import { MessagesComponent } from './pages/messages/messages.component';
 import { NotificationComponent } from './pages/notification/notification.component';
 import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
 import { CreateProjectComponent } from './pages/project/create-project/create-project.component';
+import { EditProjectComponent } from './pages/project/edit-project/edit-project.component';
 import { MyProjectsComponent } from './pages/project/my-projects/my-projects.component';
 import { ProjectDetailComponent } from './pages/project/project-detail/project-detail.component';
 import { SearchComponent } from './pages/search/search.component';
@@ -55,6 +56,10 @@ export const routes: Routes = [
   {
     path: 'settings',
     component: SettingsComponent,
+  },
+  {
+    path: 'project/edit/:id',
+    component: EditProjectComponent,
   },
   {
     path: 'project/:id',
