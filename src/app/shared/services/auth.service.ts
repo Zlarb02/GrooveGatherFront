@@ -2,7 +2,8 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+// biome-ignore lint/style/useImportType: <explanation>
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Api } from '../models/api';
 import type { User } from '../models/user.model';
 
@@ -36,6 +37,10 @@ export class AuthService {
     if (user?.name) {
       this.router.navigate(['/profile']);
     }
+  }
+
+  canEdit(projectName: string): Observable<boolean> {
+    return this.http.get<boolean>(`${this.baseUrl}/operations/can-edit?projectName=${projectName}`, { withCredentials: true });
   }
 
   private setToLocalStorage(key: string, value: string) {

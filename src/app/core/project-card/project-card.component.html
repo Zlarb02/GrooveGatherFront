@@ -1,6 +1,7 @@
 <div ngif="project" class="pj_item">
     <!-- project!.id needed -->
-    <a [routerLink]="['/project', project?.name]" routerLinkActive="router-link-active" class="pj-item_link">
+    <a [routerLink]="canEdit ? ['/project', 'edit', project?.name] : ['/project', project?.name]"
+        routerLinkActive="router-link-active" class="pj-item_link">
         <div class="filter">
             <div class="pj-item_bg" [class.bg-orange]="project?.color === 'orange'"
                 [class.bg-green]="project?.color === 'green'" [class.bg-red]="project?.color === 'red'"

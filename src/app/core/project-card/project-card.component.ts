@@ -1,16 +1,17 @@
 import { CommonModule } from '@angular/common';
 // biome-ignore lint/style/useImportType: <explanation>
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Api } from '../../shared/models/api';
 import type { Project } from '../../shared/models/project.model';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-project-card',
   standalone: true,
   imports: [RouterLink, CommonModule],
   templateUrl: './project-card.component.html',
-  styleUrl: './project-card.component.css'
+  styleUrls: ['./project-card.component.css']
 })
 export class ProjectCardComponent implements OnInit {
   @Input() project?: Project;
@@ -18,15 +19,29 @@ export class ProjectCardComponent implements OnInit {
   isListened = false;
   lastVolume = 1; // Default to full volume
   currentVolume = 1; // Current volume level
+  canEdit = false; // Variable to store canEdit status
 
   api = new Api();
   baseUrl = this.api.local;
+
+  authService = inject(AuthService);
 
   ngOnInit(): void {
     if (this.project) {
       const teaserFile = this.project.files?.find(file => file.isTeaser);
       if (teaserFile) {
         this.fileURL = `${this.baseUrl}/${teaserFile.url}`;
+      }
+      if (this.project?.name) {
+        this.authService.canEdit(this.project.name).subscribe(
+          (canEdit: boolean) => {
+            this.canEdit = canEdit;
+          },
+          (error) => {
+            console.error('Error checking edit permissions', error);
+            this.canEdit = false;
+          }
+        );
       }
     }
   }
@@ -44,6 +59,10 @@ export class ProjectCardComponent implements OnInit {
     if (audio) {
       audio.pause();
     }
+  }
+
+  canEditProject(): boolean {
+    return this.canEdit;
   }
 
   stopAudio() {
