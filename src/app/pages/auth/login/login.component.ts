@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, type AfterViewInit, type OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { Subject } from 'rxjs';
 import { Api } from '../../../shared/models/api';
@@ -18,25 +18,35 @@ declare global {
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, RouterLink, FormsModule],
+  imports: [CommonModule, RouterLink, FormsModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css', '../signupLogin.css']
 })
 
 export class LoginComponent implements OnInit, AfterViewInit {
+
+  loginForm: FormGroup;
+
   user: User | null = {
     email: "", password: "", repeatedPassword: "", role: 0, subscription_level: 0
   };
+
   responseMessage = '';
   googleUserExist = false;
-
   userExists$: Subject<boolean> = new Subject<boolean>();
 
   authService = inject(AuthService);
-  router: Router = inject(Router);
+  router = inject(Router);
   http = inject(HttpClient);
   api = new Api();
   baseUrl = this.api.local;
+
+  constructor(private fb: FormBuilder) {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+    });
+  }
 
   ngOnInit() {
     this.authService.user.subscribe(user => {
@@ -45,9 +55,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
       }
     });
   }
+
   ngAfterViewInit() {
     this.initializeGoogleSignIn();
-
   }
 
   initializeGoogleSignIn() {
@@ -104,9 +114,16 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit() {
-    this.postUser().then(() => {
-      // Handle post-submit actions
-    });
+    if (this.loginForm.valid) {
+      const formValue = this.loginForm.value;
+      console.log('Form Value:', formValue);
+      // Votre logique d'authentification ici
+      this.postUser().then(() => {
+        // Handle post-submit actions
+      });
+    } else {
+      console.log('Form is invalid');
+    }
   }
 
   postUser(): Promise<void> {
