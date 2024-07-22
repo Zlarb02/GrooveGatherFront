@@ -1,92 +1,61 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
 // biome-ignore lint/style/useImportType: <explanation>
-import { NgxFileSaverService } from '@clemox/ngx-file-saver';
-import { Api } from '../../shared/models/api';
+import { Component, inject, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import type { MessageRequestDto, MessageResponseDto } from '../../shared/models/message.model';
+import { MessageService } from '../../shared/services/message.service';
 
 @Component({
   selector: 'app-messages',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './messages.component.html',
-  styleUrl: './messages.component.css'
+  styleUrls: ['./messages.component.css']
 })
-export class MessagesComponent {
+export class MessagesComponent implements OnInit {
+  sentMessages: MessageResponseDto[] = [];
+  receivedMessages: MessageResponseDto[] = [];
+  newMessage: MessageRequestDto = { receiverName: '', content: '' };
+  replyingToMessage: MessageResponseDto | null = null;
 
-  api = new Api();
-  baseUrl = this.api.local;
-  wavUrl: string | undefined;
-  mp3Url: string | undefined;
-  constructor(
-    private fileSaver: NgxFileSaverService
-  ) { }
-  uploadFile() {
-    const fileInput = document.getElementById("fileInput") as HTMLInputElement;
-    if (!fileInput || !fileInput.files) {
-      alert("File input element not found");
-      return;
-    }
+  combinedMessages: (MessageResponseDto & { isSent: boolean })[] = [];
 
-    const file = fileInput.files[0];
 
-    if (!file) {
-      alert("Please select a WAV file first");
-      return;
-    }
+  messageService = inject(MessageService);
 
-    const formData = new FormData();
-    formData.append("file", file);
+  ngOnInit(): void {
+    this.loadMessages();
+  }
 
-    // Options de la requête fetch pour l'upload du fichier
-    const requestOptions: RequestInit = {
-      method: 'POST',
-      body: formData,
-      headers: {
-        'Access-Control-Allow-Origin': 'http://localhost:4200' // Remplacez par l'URL de votre frontend Angular
+  loadMessages(): void {
+    this.messageService.getSentMessages().subscribe(sentMessages => {
+      const formattedSentMessages = sentMessages.map(message => ({ ...message, isSent: true }));
+      this.messageService.getReceivedMessages().subscribe(receivedMessages => {
+        const formattedReceivedMessages = receivedMessages.map(message => ({ ...message, isSent: false }));
+        this.combinedMessages = [...formattedSentMessages, ...formattedReceivedMessages]
+          .sort((a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime());
+      });
+    });
+  }
+
+  sendMessage(): void {
+    if (this.newMessage.receiverName && this.newMessage.content) {
+      if (this.replyingToMessage) {
+        this.newMessage.replyToMessageId = this.replyingToMessage.id;
+      } else {
+        this.newMessage.replyToMessageId = undefined;
       }
-    };
 
-    // Effectuer la requête fetch pour convertir le fichier WAV en MP3
-    fetch("http://localhost:8080/api/v1/files/convert", requestOptions)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then(data => {
-        this.wavUrl = `${this.baseUrl}/${data.wavUrl}`;
-        this.mp3Url = `${this.baseUrl}/${data.mp3Url}`;
-
-      })
-      .catch(error => console.error("Error:", error));
-  }
-
-  downloadOriginal() {
-    if (this.wavUrl) {
-      fetch(this.wavUrl)
-        .then(response => response.blob())
-        .then(blob => {
-          console.table(blob);
-          this.fileSaver.saveBlob(blob, 'wav.wav');
-        })
-        .catch(error => console.error("Error downloading original file:", error));
-    } else {
-      console.error("WAV URL is not defined");
+      this.messageService.sendMessage(this.newMessage).subscribe(() => {
+        this.loadMessages();
+        this.newMessage = { receiverName: '', content: '' };
+        this.replyingToMessage = null; // Clear the reply context
+      });
     }
   }
 
-  downloadConverted() {
-    if (this.mp3Url) {
-      fetch(this.mp3Url)
-        .then(response => response.blob())
-        .then(blob => {
-          console.table(blob);
-          this.fileSaver.saveBlob(blob, 'mp3.wav');
-        })
-        .catch(error => console.error("Error downloading converted file:", error));
-    } else {
-      console.error("MP3 URL is not defined");
-    }
+  replyToMessage(message: MessageResponseDto): void {
+    this.replyingToMessage = message;
+    this.newMessage.receiverName = message.senderName;
   }
 }
