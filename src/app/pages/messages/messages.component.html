@@ -1,34 +1,49 @@
 <div class="page">
     <div class="container">
-        <div class="notif">
-            <h2>Notification 1</h2>
-            <p>Machin vous a envoyé une demande de collaboration.</p>
-        </div>
-        <div class="notif">
-            <h2>Notification 2</h2>
-            <p>Truc vous a envoyé un message.</p>
-        </div>
-        <div class="notif">
-            <h2>Notification 3</h2>
-            <p>Bidule a liké le project intel.</p>
-        </div>
-        <div class="notif">
-            <h2>Notification 4</h2>
-            <p>Machin truc bidule a refusé votre demande de collaboration.</p>
-        </div>
-        <div class="notif">
-            <h2>Notification 5</h2>
-            <p>Intel à ajouter un fichier à Truc Bidule Project</p>
-        </div>
-        <div class="notif">
-            <h1>WAV to MP3 Converter</h1>
-            <input type="file" id="fileInput" accept=".wav,.flac" />
-            <button (click)="uploadFile()">Convert</button>
-            <div *ngIf="wavUrl && mp3Url">
-                <p>Download Links:</p>
-                <button (click)="downloadOriginal()">Download Original</button>
-                <button (click)="downloadConverted()">Download Converted MP3</button>
-                <audio id="mp3Audio" controls [src]="mp3Url"></audio>
+        <!-- Messages combinés -->
+        <div *ngFor="let message of combinedMessages"
+            [ngClass]="{'message': true, 'sent': message.isSent, 'received': !message.isSent}">
+            <!-- Affichage de la réponse à un message -->
+            <div *ngIf="message.replyToMessageContent" class="reply-quote">
+                <h4>Réponse à:</h4>
+                <blockquote>
+                    <p>{{ message.replyToMessageContent }}</p>
+                </blockquote>
             </div>
+            <div class="message-header">
+                <img *ngIf="message.isSent ? message.receiverPicture : message.senderPicture"
+                    [src]="message.isSent ? message.receiverPicture : message.senderPicture" alt="Profile picture"
+                    class="profile-picture">
+                <strong>{{ message.isSent ? message.receiverName : message.senderName }}</strong>
+            </div>
+            <!-- Affichage du contenu du message -->
+            <p>{{ message.content }}</p>
+            <p><small>{{ message.isSent ? 'Envoyé' : 'Reçu' }} le {{ message.timestamp | date:'short' }}</small></p>
+            <button *ngIf="!message.isSent" (click)="replyToMessage(message)">Répondre</button>
+        </div>
+
+        <!-- Bloc de citation pour la réponse -->
+        <div *ngIf="replyingToMessage" class="reply-quote" style="width: fit-content; margin-left: 20vw;">
+            <h4>Réponse à:</h4>
+            <blockquote>
+                <p>{{ replyingToMessage.content }}</p>
+            </blockquote>
+        </div>
+
+        <!-- Formulaire pour envoyer un message -->
+        <div class="send-message">
+            <h3>Envoyer un nouveau message</h3>
+            <form (ngSubmit)="sendMessage()">
+                <label for="receiverName" style="display: none;">Nom du destinataire:</label>
+                <input id="receiverName" placeholder="Nom du destinataire" [(ngModel)]="newMessage.receiverName"
+                    name="receiverName" required>
+                <br>
+                <label style="display: none;" for="content">Contenu du message:</label>
+                <textarea id="content" placeholder="Entrez votre message" [(ngModel)]="newMessage.content"
+                    name="content" required></textarea>
+
+                <button type="submit">Envoyer</button>
+            </form>
         </div>
     </div>
+</div>

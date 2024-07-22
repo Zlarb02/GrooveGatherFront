@@ -20,7 +20,7 @@
     background: color-mix(in srgb, var(--light-bg) 1%, var(--bg-or-glass));
 }
 
-.notif {
+.message {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -35,7 +35,117 @@
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     border: 1px solid rgba(106, 106, 106, 0.809);
-
     background: color-mix(in srgb, var(--bg-or-glass) 50%, transparent);
     color: var(--color-on-glass);
+    position: relative;
+    max-width: 80%;
+}
+
+.message.received {
+    align-self: flex-start;
+    background: color-mix(in srgb, var(--edit-button) 20%, transparent);
+}
+
+.message.sent {
+    align-self: flex-end;
+    background: color-mix(in srgb, var(--button) 20%, transparent);
+}
+
+.message-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.profile-picture {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: var(--light-bg);
+}
+
+button {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--blue);
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: color-mix(in srgb, var(--blue) 80%, transparent);
+}
+
+.reply-quote {
+    background: var(--bg-or-glass);
+    border-left: 4px solid var(--blue);
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 8px;
+    max-width: 90%;
+    width: fit-content;
+    position: relative;
+}
+
+.reply-quote blockquote {
+    margin: 0;
+    padding: 0;
+    font-style: italic;
+}
+
+.reply-quote h4 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: var(--blue);
+}
+
+.message-form {
+    margin-top: 2rem;
+}
+
+.send-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2vh;
+    width: 60vw;
+
+    --ggs: 0.9;
+    padding: 2vh;
+    margin: auto;
+    border-radius: 18px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(130, 130, 130, 0.3);
+    background: color-mix(in srgb, var(--light-bg) 1%, var(--bg-or-glass));
+
+    input {
+        right: 10px;
+    }
+
+    #content {
+        max-width: 50vw;
+        min-width: 50vw;
+        min-height: 80px;
+        max-height: 600px;
+        color: var(--light-color);
+        font-size: medium;
+    }
+
+    #content::placeholder {
+        color: rgb(92, 92, 92);
+    }
+}
+
+input {
+    --pill-accent: var(--blue);
+    filter: contrast(130%);
+}
+
+::placeholder {
+    color: var(--placeholder);
 }
