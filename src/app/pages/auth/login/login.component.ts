@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, type AfterViewInit, type OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms'; // Import ReactiveFormsModule
 import { Router, RouterLink } from '@angular/router';
 import { Subject } from 'rxjs';
 import { Api } from '../../../shared/models/api';
@@ -9,8 +9,7 @@ import type { User } from '../../../shared/models/user.model';
 import { AuthService } from '../../../shared/services/auth.service';
 
 declare global {
-  interface Window {
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  interface Window {    
     google: any;
   }
 }
@@ -18,25 +17,34 @@ declare global {
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, RouterLink, FormsModule],
+  imports: [CommonModule, RouterLink, ReactiveFormsModule], // Use ReactiveFormsModule instead of FormsModule
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css', '../signupLogin.css']
 })
-
 export class LoginComponent implements OnInit, AfterViewInit {
+
+  loginForm: FormGroup;
+
   user: User | null = {
     email: "", password: "", repeatedPassword: "", role: 0, subscription_level: 0
   };
+
   responseMessage = '';
   googleUserExist = false;
 
   userExists$: Subject<boolean> = new Subject<boolean>();
 
   authService = inject(AuthService);
-  router: Router = inject(Router);
-  http = inject(HttpClient);
+  http = inject(HttpClient); // Using inject for HttpClient
   api = new Api();
   baseUrl = this.api.local;
+
+  constructor(private fb: FormBuilder, private router: Router) { // Keep Router injection in constructor
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+    });
+  }
 
   ngOnInit() {
     this.authService.user.subscribe(user => {
@@ -45,9 +53,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
       }
     });
   }
+
   ngAfterViewInit() {
     this.initializeGoogleSignIn();
-
   }
 
   initializeGoogleSignIn() {
@@ -71,7 +79,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
         client_id: '674011661072-mvs1hadt0jgppkfv76b5tkeroohqtbij.apps.googleusercontent.com',
         auto_select: true,
         itp_support: true,
-        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
         callback: (response: any) => this.handleCredentialResponse(response),
       });
 
@@ -92,10 +99,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
     }
   }
 
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   handleCredentialResponse(response: any) {
     this.authService.setToken(response.credential);
-    this.authService.fetchUserInfoFromGoogleToken(response.credential); // Utiliser le token Google comme password pour le fetch
+    this.authService.fetchUserInfoFromGoogleToken(response.credential);
   }
 
   signOut() {
@@ -104,9 +110,16 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit() {
-    this.postUser().then(() => {
-      // Handle post-submit actions
-    });
+    if (this.loginForm.valid) {
+      const formValue = this.loginForm.value;
+      console.log('Form Value:', formValue);
+      // Votre logique d'authentification ici
+      this.postUser().then(() => {
+        // Handle post-submit actions
+      });
+    } else {
+      console.log('Form is invalid');
+    }
   }
 
   postUser(): Promise<void> {
@@ -114,7 +127,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
     return new Promise((resolve, reject) => {
       this.http.post(url, this.user, { withCredentials: true }).subscribe({
-        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
         next: (response: any) => {
           console.table('User successfully logged in', response);
           this.responseMessage = 'User successfully logged in';

@@ -41,7 +41,6 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 export class CreateProjectComponent {
   selectColor(color: string) {
     this.myForm.get('color')?.setValue(color);
-    // biome-ignore lint/complexity/noForEach: <explanation>
     document.querySelectorAll('.carre').forEach((element) => {
       element.classList.remove('selected');
     });
@@ -68,6 +67,15 @@ export class CreateProjectComponent {
 
   wavUrl: string | undefined;
   mp3Url: string | undefined;
+
+  errorMessage: string | null = null; // Variable pour les messages d'erreur
+  successMessage: string | null = null; // Variable pour les messages de succès
+
+  modifGenre = false;
+  modifselectedUsedSkills = false;
+  modifRequestedSkill = false;
+  modifSelectedFile = false;
+  modifPreviewAudio = false;
 
   constructor(private formBuilder: FormBuilder) {
     this.myForm = this.formBuilder.group({
@@ -117,6 +125,7 @@ export class CreateProjectComponent {
         (ctrl) => ctrl.value === genre
       );
       this.genres.removeAt(controlIndex);
+      this.modifGenre = true;
     }
   }
 
@@ -137,6 +146,7 @@ export class CreateProjectComponent {
         (ctrl) => ctrl.value === skill
       );
       this.skillsPresent.removeAt(controlIndex);
+      this.modifselectedUsedSkills = true;
     }
   }
 
@@ -157,6 +167,7 @@ export class CreateProjectComponent {
         (ctrl) => ctrl.value === skill
       );
       this.skillsMissing.removeAt(controlIndex);
+      this.modifRequestedSkill = true;
     }
   }
 
@@ -178,9 +189,12 @@ export class CreateProjectComponent {
     const index = this.selectedFiles.indexOf(file);
     if (index !== -1) {
       this.selectedFiles.splice(index, 1);
+      this.modifSelectedFile = true;
+      this.modifPreviewAudio = true;
     }
     if (this.previewAudio === file) {
       this.previewAudio = null;
+      this.modifPreviewAudio = true;
     }
   }
 
@@ -258,76 +272,85 @@ export class CreateProjectComponent {
   setAsMainAudio(file: File) {
     if (this.previewAudio === file) {
       this.previewAudio = null;
+      this.modifPreviewAudio = true;
     } else {
       this.previewAudio = file;
+      /*  this.modifPreviewAudio = false; */
     }
   }
 
   // Method to handle form submission
   onSubmit() {
+    // Réinitialiser les messages
+    this.errorMessage = null;
+    this.successMessage = null;
     if (this.myForm.valid) {
       // Étape 1: Uploader les fichiers et attendre la réponse
-      this.uploadFiles(this.selectedFiles).then(uploadedFiles => {
-        // biome-ignore lint/suspicious/noConsoleLog: <explanation>
-        console.log('Upload response:', uploadedFiles);
+      this.uploadFiles(this.selectedFiles)
+        .then((uploadedFiles) => {
+          // Assurez-vous que uploadedFiles est un tableau valide d'objets
+          if (Array.isArray(uploadedFiles)) {
+            // Retirer la base de l'URL pour correspondre au format 'files/download?filename=...'
+            const baseUrlPattern = new RegExp(`^${this.baseUrl}/`);
 
-        // Assurez-vous que uploadedFiles est un tableau valide d'objets
-        if (Array.isArray(uploadedFiles)) {
-          // Retirer la base de l'URL pour correspondre au format 'files/download?filename=...'
-          const baseUrlPattern = new RegExp(`^${this.baseUrl}/`);
+            const filesArray = uploadedFiles.map((file) => ({
+              url: file.url.replace(baseUrlPattern, ''),
+              isTeaser: file.isTeaser,
+              name: file.name,
+              size: file.size,
+            }));
 
-          // Crée un tableau d'objets avec url, isTeaser, name, et size
-          const filesArray = uploadedFiles.map(file => ({
-            url: file.url.replace(baseUrlPattern, ''),
-            isTeaser: file.url.replace(baseUrlPattern, '') === this.mp3Url?.replace(baseUrlPattern, ''),
-            name: file.name,
-            size: file.size
-          }));
-
-          // Si mp3Url n'est pas présent dans les URLs, ajoutez-le comme isTeaser: true
-          const mp3FormattedUrl = this.mp3Url?.replace(baseUrlPattern, '');
-          if (mp3FormattedUrl && !filesArray.some(file => file.url === mp3FormattedUrl)) {
-            filesArray.push({
-              url: mp3FormattedUrl,
-              isTeaser: true,
-              name: 'MP3 Teaser', // Assurez-vous d'avoir un nom par défaut ou utilisez celui approprié
-              size: 0 // Définissez une taille par défaut si nécessaire
-            });
-          }
-
-          // Mettre à jour les URLs des fichiers dans le formulaire
-          this.myForm.patchValue({ files: filesArray });
-
-          // Préparer le payload pour l'envoi du formulaire
-          const formData = {
-            ...this.myForm.value,
-            files: filesArray // Envoyer le tableau d'objets avec url, isTeaser, name et size
-          };
-
-          // biome-ignore lint/suspicious/noConsoleLog: <explanation>
-          console.log('Form data to be submitted:', formData);
-
-          // Étape 2: Poster le formulaire avec les données
-          this.http.post(`${this.baseUrl}/projects`, formData, { withCredentials: true }).subscribe(
-            response => {
-              // biome-ignore lint/suspicious/noConsoleLog: <explanation>
-              console.log('Project created successfully:', response);
-              this.router.navigate(['/projects']);
-            },
-            error => {
-              console.error('Error creating project:', error);
+            // Si mp3Url n'est pas présent dans les URLs, ajoutez-le comme isTeaser: true
+            const mp3FormattedUrl = this.mp3Url?.replace(baseUrlPattern, '');
+            if (
+              mp3FormattedUrl &&
+              !filesArray.some((file) => file.url === mp3FormattedUrl)
+            ) {
+              filesArray.push({
+                url: mp3FormattedUrl,
+                isTeaser: true,
+                name: 'MP3 Teaser',
+                size: 0,
+              });
             }
-          );
-        } else {
-          console.error('Uploaded files response is not an array:', uploadedFiles);
-        }
-      }).catch(error => {
-        console.error('Error uploading files:', error);
-      });
-    } else {
-      // biome-ignore lint/suspicious/noConsoleLog: <explanation>
-      console.log('Form is invalid');
 
+            // Mettre à jour les URLs des fichiers dans le formulaire
+            this.myForm.patchValue({ files: filesArray });
+
+            // Préparer le payload pour l'envoi du formulaire
+            const formData = {
+              ...this.myForm.value,
+              files: filesArray,
+            };
+
+            console.log('Form Data:', formData);
+
+            // Étape 2: Poster le formulaire avec les données
+            this.http
+              .post(`${this.baseUrl}/projects`, formData, {
+                withCredentials: true,
+              })
+              .subscribe(
+                (response) => {
+                  this.successMessage = 'Le projet a été créé avec succès!';
+                  this.router.navigate(['/projects']);
+                },
+                (error) => {
+                  this.errorMessage =
+                    'Erreur lors de la création du projet. Veuillez réessayer.';
+                  console.error('Error creating project:', error);
+                }
+              );
+          } else {
+            this.errorMessage = 'Erreur lors du téléchargement des fichiers.';
+          }
+        })
+        .catch((error) => {
+          this.errorMessage = 'Erreur lors du téléchargement des fichiers.';
+          console.error('Error uploading files:', error);
+        });
+    } else {
+      this.errorMessage = 'Veuillez remplir tous les champs requis.';
     }
   }
 
@@ -336,12 +359,6 @@ export class CreateProjectComponent {
     const extension = fileName.split('.').pop()?.toLowerCase();
     return audioExtensions.includes(extension || '');
   }
-
-
-
-
-
-
 
   uploadFile(file: File) {
     const fileInput = document.getElementById('fileInput') as HTMLInputElement;
@@ -358,7 +375,6 @@ export class CreateProjectComponent {
     const formData = new FormData();
     formData.append('file', file);
 
-    // Options de la requête fetch pour l'upload du fichier
     const requestOptions: RequestInit = {
       method: 'POST',
       body: formData,
@@ -367,40 +383,37 @@ export class CreateProjectComponent {
       },
     };
 
-    // Effectuer la requête fetch pour convertir le fichier WAV en MP3
-
     fetch(`${this.baseUrl}/files/convert`, requestOptions)
-      .then(response => {
-
+      .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
         return response.json();
       })
-      .then(data => {
-        // biome-ignore lint/suspicious/noConsoleLog: <explanation>
-        console.log(data);
-
+      .then((data) => {
         this.wavUrl = `${this.baseUrl}/${data.wavUrl}`;
         this.mp3Url = `${this.baseUrl}/${data.mp3Url}`;
       })
       .catch((error) => console.error('Error:', error));
   }
 
-  uploadFiles(files: File[]): Promise<{ [key: string]: string }> {
+  uploadFiles(
+    files: File[]
+  ): Promise<{ url: string; isTeaser: boolean; name: string; size: number }[]> {
     const formData = new FormData();
-    // biome-ignore lint/complexity/noForEach: <explanation>
-    files.forEach(file => formData.append('files', file));
+    files.forEach((file) => formData.append('files', file));
 
-    return this.http.post<{ [key: string]: string }>(`${this.baseUrl}/files/upload`, formData, { withCredentials: true })
+    return this.http
+      .post<{ url: string; isTeaser: boolean; name: string; size: number }[]>(
+        `${this.baseUrl}/files/upload`,
+        formData,
+        { withCredentials: true }
+      )
       .toPromise()
-      .then(response => {
-        return response || {}; // Assurez-vous de toujours retourner un objet
-      })
-      .catch(error => {
+      .then((response) => response || [])
+      .catch((error) => {
         console.error('Error uploading files:', error);
-        return {}; // Retourner un objet vide en cas d'erreur
+        return [];
       });
   }
-
 }

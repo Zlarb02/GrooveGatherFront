@@ -515,3 +515,19 @@ font-size: xx-large;
 padding: 13px;
 
 }
+
+
+/* Messages de succès et d'erreur */
+.message-container {
+  margin-top: 16px;
+}
+
+.message.success-message {
+  color: green;
+  font-size: 1em;
+}
+
+.message.error-message {
+  color: red;
+  font-size: 1em;
+}
