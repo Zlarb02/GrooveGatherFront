@@ -1,9 +1,14 @@
 <div class="page">
+
+
   <div class="container">
+
     <form class="form" [formGroup]="myForm" (ngSubmit)="onSubmit()">
       <div class="ligne1">
         <input id="nameProject" formControlName="name" type="text" class="form-control" placeholder="Nom du Projet" />
-        <div *ngIf="myForm.get('name')?.invalid || !myForm.get('name')?.touched" class="error">
+        <div
+          *ngIf="myForm.get('name')?.invalid && myForm.get('name')?.touched || myForm.get('name')?.invalid && myForm.get('name')?.dirty"
+          class="error">
           Le nom du projet est requis.
         </div>
         <div class="form-group">
@@ -24,13 +29,24 @@
               </div>
             </div>
           </div>
-          <div *ngIf="myForm.get('genres')?.invalid && myForm.get('genres')?.touched" class="error">
-            Le genre est requis.
-          </div>
-          <div *ngIf="selectedGenres.length === 0" class="error">
+          <!--           selectedGenres.length === 0 && -->
+          <!--           <div *ngIf="(myForm.get('genres')?.errors?.['required'] && 
+        (myForm.get('genres')?.touched || myForm.get('genres')?.dirty)) || 
+        (selectedGenres.length === 0 && 
+        (myForm.get('genres')?.touched || myForm.get('genres')?.dirty))" class="error">
+            Vous devez sélectionner au moins un genre.
+          </div> -->
 
-            Le genre est requis, bordel !
+          <!--           <div *ngIf="myForm.get('genres')?.touched || myForm.get('genres')?.dirty">
+            Vous devez sélectionner au moins un genre.
+          </div> -->
+
+          <div *ngIf="genres.length === 0 && modifGenre " class="error">
+            Vous devez sélectionner au moins un genre.
           </div>
+
+
+
         </div>
       </div>
 
@@ -55,7 +71,7 @@
           <div *ngIf="myForm.get('skillsPresent')?.invalid && myForm.get('skillsPresent')?.touched" class="error">
             La compétence est requise.
           </div>
-          <div *ngIf="selectedUsedSkills.length === 0" class="error">
+          <div *ngIf="selectedUsedSkills.length === 0 && modifselectedUsedSkills" class="error">
 
             Au moins une compétence présente doit être ajoutée.
           </div>
@@ -80,7 +96,7 @@
           <div *ngIf="myForm.get('skillsMissing')?.invalid && myForm.get('skillsMissing')?.touched" class="error">
             La compétence est requise.
           </div>
-          <div *ngIf="selectedRequestedSkills.length === 0" class="error">
+          <div *ngIf="selectedRequestedSkills.length === 0 && modifRequestedSkill" class="error">
 
             Au moins une compétence demandée doit être ajoutée.
           </div>
@@ -93,7 +109,7 @@
           <textarea id="description" formControlName="description" class="form-control"
             placeholder="Entrez la description de votre projet"></textarea>
         </div>
-        <div *ngIf="myForm.get('description')?.invalid || !myForm.get('description')?.touched" class="error">
+        <div *ngIf="myForm.get('description')?.invalid && myForm.get('description')?.touched" class="error">
           La description est requise.
         </div>
       </div>
@@ -102,7 +118,7 @@
         <div class="drop-zone" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)"
           (drop)="onDropFile($event)" (click)="openFileInput()">
           <div class="drop-zone-text">
-            Déposez vos fichiers ici <br>ou <br> Cliquez pour sélectionner des fichiers 
+            Déposez vos fichiers ici <br>ou <br> Cliquez pour sélectionner des fichiers
             <div style="height: 70px; width: 100%; display: flex; justify-content: center; align-items: center;">
               <i class="gg-attachment"></i>
             </div>
@@ -138,16 +154,17 @@
             <br>
           </div>
         </div>
-        <div *ngIf="selectedFiles.length === 0" class="error">
+        <div *ngIf="selectedFiles.length === 0 && modifSelectedFile" class="error">
           Il faut mettre au moins un fichier audio.
         </div>
-        <div *ngIf="!previewAudio" class="error">
+        <div *ngIf="(previewAudio === null || previewAudio === undefined) && modifPreviewAudio" class="error">
           Il faut définir une piste d'écoute.
         </div>
-      </div>
-      
 
-      <div class="parentCouleur"> 
+      </div>
+
+
+      <div class="parentCouleur">
         <p class="couleur" for="color">Sélectionnez une couleur :</p>
       </div>
       <div class="parentCarre">
@@ -159,7 +176,7 @@
         <div class="carre pink" (click)="selectColor('pink')"></div>
       </div>
       <input id="color" formControlName="color" type="hidden" />
-      <div *ngIf="myForm.get('color')?.invalid || myForm.get('color')?.touched" class="error">
+      <div *ngIf="myForm.get('color')?.invalid && myForm.get('color')?.touched" class="error">
         La couleur est requise.
       </div>
 
@@ -168,6 +185,14 @@
           CREER LE PROJET
         </button>
       </div>
+
+      <div *ngIf="errorMessage" class="message error-message">
+        {{ errorMessage }}
+      </div>
+      <div *ngIf="successMessage" class="message success-message">
+        {{ successMessage }}
+      </div>
+
     </form>
   </div>
 </div>
