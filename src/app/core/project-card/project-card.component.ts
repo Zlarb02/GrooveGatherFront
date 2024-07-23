@@ -1,9 +1,12 @@
 import { CommonModule } from '@angular/common';
 // biome-ignore lint/style/useImportType: <explanation>
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, Input, OnInit, ViewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
+// biome-ignore lint/style/useImportType: <explanation>
+import { Subscription } from 'rxjs';
 import { Api } from '../../shared/models/api';
 import type { Project } from '../../shared/models/project.model';
+import { AudioService } from '../../shared/services/audio.service';
 import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
@@ -13,18 +16,24 @@ import { AuthService } from '../../shared/services/auth.service';
   templateUrl: './project-card.component.html',
   styleUrls: ['./project-card.component.css']
 })
-export class ProjectCardComponent implements OnInit {
+export class ProjectCardComponent implements OnInit, AfterViewInit {
   @Input() project?: Project;
+  @Input() index?: number;  // Ajout de l'index en tant qu'Input
   fileURL?: string;
   isListened = false;
   lastVolume = 1; // Default to full volume
   currentVolume = 1; // Current volume level
   canEdit = false; // Variable to store canEdit status
 
+  @ViewChild('audioPlayer') audioPlayerRef!: ElementRef<HTMLAudioElement>; // Référence à l'élément audio
+
   api = new Api();
   baseUrl = this.api.local;
 
   authService = inject(AuthService);
+  audioService = inject(AudioService);
+
+  private stopAudioSubscription!: Subscription;
 
   ngOnInit(): void {
     if (this.project) {
@@ -44,30 +53,44 @@ export class ProjectCardComponent implements OnInit {
         );
       }
     }
+
+    this.stopAudioSubscription = this.audioService.stopAudio$.subscribe(() => {
+      this.stopAudio();
+    });
+  }
+
+  ngAfterViewInit() {
+    if (this.audioPlayerRef) {
+      const audio = this.audioPlayerRef.nativeElement;
+      audio.addEventListener('ended', () => {
+        this.isListened = false;
+      });
+    }
+  }
+
+  ngOnDestroy() {
+    this.stopAudioSubscription.unsubscribe();
   }
 
   playAudio() {
-    const audio = document.getElementById('player') as HTMLAudioElement;
-    if (audio) {
+    if (this.audioPlayerRef) {
+      const audio = this.audioPlayerRef.nativeElement;
+      this.audioService.stopAudio();  // Notify other components to stop their audio
       audio.play();
       this.isListened = true;
     }
   }
 
   pauseAudio() {
-    const audio = document.getElementById('player') as HTMLAudioElement;
-    if (audio) {
+    if (this.audioPlayerRef) {
+      const audio = this.audioPlayerRef.nativeElement;
       audio.pause();
     }
   }
 
-  canEditProject(): boolean {
-    return this.canEdit;
-  }
-
   stopAudio() {
-    const audio = document.getElementById('player') as HTMLAudioElement;
-    if (audio) {
+    if (this.audioPlayerRef) {
+      const audio = this.audioPlayerRef.nativeElement;
       audio.pause();
       audio.currentTime = 0;
       this.isListened = false;
@@ -75,24 +98,24 @@ export class ProjectCardComponent implements OnInit {
   }
 
   changeVolume(event: Event) {
-    const audio = document.getElementById('player') as HTMLAudioElement;
-    if (audio) {
+    if (this.audioPlayerRef) {
+      const audio = this.audioPlayerRef.nativeElement;
       const input = event.target as HTMLInputElement;
       audio.volume = Number(input.value);
-      this.currentVolume = audio.volume; // Update the current volume
+      this.currentVolume = audio.volume;
     }
   }
 
   toggleMute() {
-    const audio = document.getElementById('player') as HTMLAudioElement;
-    if (audio) {
+    if (this.audioPlayerRef) {
+      const audio = this.audioPlayerRef.nativeElement;
       if (audio.volume === 0) {
         audio.volume = this.lastVolume || 1;
-        this.currentVolume = audio.volume; // Update the current volume
+        this.currentVolume = audio.volume;
       } else {
         this.lastVolume = audio.volume;
         audio.volume = 0;
-        this.currentVolume = audio.volume; // Update the current volume
+        this.currentVolume = audio.volume;
       }
     }
   }

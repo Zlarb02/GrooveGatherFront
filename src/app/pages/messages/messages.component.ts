@@ -1,10 +1,13 @@
 import { CommonModule, NgClass } from '@angular/common';
+// biome-ignore lint/style/useImportType: <explanation>
 import { HttpClient } from '@angular/common/http';
+// biome-ignore lint/style/useImportType: <explanation>
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { catchError, map } from 'rxjs/operators';
 import { Api } from '../../shared/models/api';
 import type { MessageRequestDto, MessageResponseDto } from '../../shared/models/message.model';
+// biome-ignore lint/style/useImportType: <explanation>
 import { MessageService } from '../../shared/services/message.service';
 
 @Component({
@@ -69,6 +72,7 @@ export class MessagesComponent implements OnInit {
       { messageId, accepted: true },
       { withCredentials: true })
       .pipe(
+        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
         map((response: any) => response.message),
         catchError(error => {
           console.error('Error accepting request', error);
@@ -85,6 +89,7 @@ export class MessagesComponent implements OnInit {
       { messageId, accepted: false },
       { withCredentials: true })
       .pipe(
+        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
         map((response: any) => response.message),
         catchError(error => {
           console.error('Error rejecting request', error);

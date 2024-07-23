@@ -100,7 +100,7 @@
         <div class="projects-container" style="position: relative; z-index: 1 !important;">
             <app-project-card class="project-card" style="position: relative; z-index: 1 !important;"
                 *ngFor="let project of projects | paginate: { itemsPerPage: itemsPerPage, currentPage: p }; index as i"
-                [project]="project" [class.bg-orange]="i % 6 === 0" [class.bg-green]="i % 6 === 1"
+                [index]="i" [project]="project" [class.bg-orange]="i % 6 === 0" [class.bg-green]="i % 6 === 1"
                 [class.bg-red]="i % 6 === 2" [class.bg-purple]="i % 6 === 3" [class.bg-pink]="i % 6 === 4"
                 [class.bg-blue]="i % 6 === 5"></app-project-card>
         </div>

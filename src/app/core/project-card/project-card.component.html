@@ -1,12 +1,12 @@
-<div ngif="project" class="pj_item">
+<div *ngIf="project" class="pj_item">
     <!-- project!.id needed -->
-    <a [routerLink]="canEdit ? ['/project', 'edit', project?.name] : ['/project', project?.name]"
+    <a [routerLink]="canEdit ? ['/project', 'edit', project.name] : ['/project', project.name]"
         routerLinkActive="router-link-active" class="pj-item_link">
         <div class="filter">
-            <div class="pj-item_bg" [class.bg-orange]="project?.color === 'orange'"
-                [class.bg-green]="project?.color === 'green'" [class.bg-red]="project?.color === 'red'"
-                [class.bg-purple]="project?.color === 'purple'" [class.bg-pink]="project?.color === 'pink'"
-                [class.bg-blue]="project?.color === 'blue'"></div>
+            <div class="pj-item_bg" [class.bg-orange]="project.color === 'orange'"
+                [class.bg-green]="project.color === 'green'" [class.bg-red]="project.color === 'red'"
+                [class.bg-purple]="project.color === 'purple'" [class.bg-pink]="project.color === 'pink'"
+                [class.bg-blue]="project.color === 'blue'"></div>
             <div class="pj-item_title">
                 {{project!.name}}
             </div>
@@ -14,22 +14,21 @@
         <div class="pj-item-box">
             <div
                 style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; width: 100%;">
-
-                <span *ngFor="let genre of project?.genres" style="display: inline-block;">
+                <span *ngFor="let genre of project.genres" style="display: inline-block;">
                     <button class="btn-genre">{{genre}}</button>
                 </span>
                 <br>
                 <span class="pj-item_date">
-                    {{project?.date}}
+                    {{project.date}}
                 </span>
             </div><br> <br>
             <u style="font-weight: 600; font-size: 1.2em;">Description</u>: <p
-                style="font-size: 1.1em; font-weight: 400; padding:10px;">{{project?.description}}</p><br> <br>
+                style="font-size: 1.1em; font-weight: 400; padding:10px;">{{project.description}}</p><br> <br>
             <div class="pj-item_skills">
                 <div class="pj-item-skills-present">
                     <span style="font-weight: 400; font-size: 1.2em;">Déjà présent :</span>
                     <div>
-                        <span *ngFor="let skill of project?.skillsPresent">
+                        <span *ngFor="let skill of project.skillsPresent">
                             <button class="btn-present">{{skill}}</button>
                         </span>
                     </div>
@@ -37,7 +36,7 @@
                 <div class="pj-item-skills-miss">
                     <span style="font-weight: 400; font-size: 1.2em;">Manque :</span>
                     <div>
-                        <span *ngFor="let skill of project?.skillsMissing">
+                        <span *ngFor="let skill of project.skillsMissing">
                             <button class="btn-miss">{{skill}}</button>
                         </span>
                     </div><br> <br>
@@ -45,7 +44,7 @@
             </div>
             <div
                 style="display: flex; flex-direction: row; align-items: center; justify-content: center; width: 100%; margin-top: 100px; ">
-                <p style="margin: 0 8px 0 8px">{{project?.likes}}</p>
+                <p style="margin: 0 8px 0 8px">{{project.likes}}</p>
                 <svg class="like-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -71,7 +70,8 @@
             Stop
         </button>
         <div *ngIf="fileURL" class="audio-container">
-            <audio id="player" [src]="fileURL"></audio>
+            <!-- Ajout de l'index dans l'ID pour rendre chaque ID unique -->
+            <audio #audioPlayer [src]="fileURL"></audio>
             <div class="custom-controls">
                 <div style="display: flex; justify-content: center; align-items: center;">
                     <button (click)="playAudio()">&#9654;</button>
