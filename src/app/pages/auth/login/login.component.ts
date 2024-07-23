@@ -1,9 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, type AfterViewInit, type OnInit } from '@angular/core';
-// biome-ignore lint/style/useImportType: <explanation>
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'; // Import ReactiveFormsModule
-// biome-ignore lint/style/useImportType: <explanation>
+import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { Subject } from 'rxjs';
 import { Api } from '../../../shared/models/api';
@@ -20,34 +18,25 @@ declare global {
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, RouterLink, ReactiveFormsModule], // Use ReactiveFormsModule instead of FormsModule
+  imports: [CommonModule, RouterLink, FormsModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css', '../signupLogin.css']
 })
+
 export class LoginComponent implements OnInit, AfterViewInit {
-
-  loginForm: FormGroup;
-
   user: User | null = {
     email: "", password: "", repeatedPassword: "", role: 0, subscription_level: 0
   };
-
   responseMessage = '';
   googleUserExist = false;
 
   userExists$: Subject<boolean> = new Subject<boolean>();
 
   authService = inject(AuthService);
-  http = inject(HttpClient); // Using inject for HttpClient
+  router: Router = inject(Router);
+  http = inject(HttpClient);
   api = new Api();
   baseUrl = this.api.local;
-
-  constructor(private fb: FormBuilder, private router: Router) { // Keep Router injection in constructor
-    this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
-    });
-  }
 
   ngOnInit() {
     this.authService.user.subscribe(user => {
@@ -56,9 +45,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
       }
     });
   }
-
   ngAfterViewInit() {
     this.initializeGoogleSignIn();
+
   }
 
   initializeGoogleSignIn() {
@@ -106,7 +95,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   handleCredentialResponse(response: any) {
     this.authService.setToken(response.credential);
-    this.authService.fetchUserInfoFromGoogleToken(response.credential);
+    this.authService.fetchUserInfoFromGoogleToken(response.credential); // Utiliser le token Google comme password pour le fetch
   }
 
   signOut() {
@@ -115,19 +104,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit() {
-    if (this.loginForm.valid) {
-      const formValue = this.loginForm.value;
-
-      // biome-ignore lint/suspicious/noConsoleLog: <explanation>
-      console.log('Form Value:', formValue);
-      // Votre logique d'authentification ici
-      this.postUser().then(() => {
-        // Handle post-submit actions
-      });
-    } else {
-      // biome-ignore lint/suspicious/noConsoleLog: <explanation>
-      console.log('Form is invalid');
-    }
+    this.postUser().then(() => {
+      // Handle post-submit actions
+    });
   }
 
   postUser(): Promise<void> {
