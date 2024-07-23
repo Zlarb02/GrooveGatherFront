@@ -1,27 +1,31 @@
-import { CommonModule } from '@angular/common';
-// biome-ignore lint/style/useImportType: <explanation>
-import { Component, inject, OnInit } from '@angular/core';
+import { CommonModule, NgClass } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { catchError, map } from 'rxjs/operators';
+import { Api } from '../../shared/models/api';
 import type { MessageRequestDto, MessageResponseDto } from '../../shared/models/message.model';
 import { MessageService } from '../../shared/services/message.service';
 
 @Component({
   selector: 'app-messages',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, NgClass],
   templateUrl: './messages.component.html',
   styleUrls: ['./messages.component.css']
 })
 export class MessagesComponent implements OnInit {
   sentMessages: MessageResponseDto[] = [];
   receivedMessages: MessageResponseDto[] = [];
-  newMessage: MessageRequestDto = { receiverName: '', content: '' };
+  newMessage: MessageRequestDto = { receiverId: 0, content: '' }; // Utilisation de receiverId
   replyingToMessage: MessageResponseDto | null = null;
 
   combinedMessages: (MessageResponseDto & { isSent: boolean })[] = [];
 
+  constructor(private messageService: MessageService, private http: HttpClient) { }
 
-  messageService = inject(MessageService);
+  api = new Api();
+  baseUrl = this.api.local;
 
   ngOnInit(): void {
     this.loadMessages();
@@ -39,7 +43,7 @@ export class MessagesComponent implements OnInit {
   }
 
   sendMessage(): void {
-    if (this.newMessage.receiverName && this.newMessage.content) {
+    if (this.newMessage.receiverId && this.newMessage.content) {
       if (this.replyingToMessage) {
         this.newMessage.replyToMessageId = this.replyingToMessage.id;
       } else {
@@ -48,7 +52,7 @@ export class MessagesComponent implements OnInit {
 
       this.messageService.sendMessage(this.newMessage).subscribe(() => {
         this.loadMessages();
-        this.newMessage = { receiverName: '', content: '' };
+        this.newMessage = { receiverId: 0, content: '' };
         this.replyingToMessage = null; // Clear the reply context
       });
     }
@@ -56,6 +60,40 @@ export class MessagesComponent implements OnInit {
 
   replyToMessage(message: MessageResponseDto): void {
     this.replyingToMessage = message;
-    this.newMessage.receiverName = message.senderName;
+    this.newMessage.receiverId = message.senderId; // Utilisation de receiverId
   }
-}
+
+  // Méthodes pour accepter ou rejeter les demandes
+  acceptRequest(messageId: number): void {
+    this.http.put(`${this.baseUrl}/projects/response`,
+      { messageId, accepted: true },
+      { withCredentials: true })
+      .pipe(
+        map((response: any) => response.message),
+        catchError(error => {
+          console.error('Error accepting request', error);
+          return [];
+        })
+      )
+      .subscribe(message => {
+        this.loadMessages(); // Reload messages after processing the response
+      });
+  }
+
+  rejectRequest(messageId: number): void {
+    this.http.put(`${this.baseUrl}/projects/response`,
+      { messageId, accepted: false },
+      { withCredentials: true })
+      .pipe(
+        map((response: any) => response.message),
+        catchError(error => {
+          console.error('Error rejecting request', error);
+          return [];
+        })
+      )
+      .subscribe(message => {
+        this.loadMessages(); // Reload messages after processing the response
+      });
+  }
+
+}  

@@ -98,16 +98,16 @@ export class ProfileComponent implements OnInit {
   }
 
   validateEmail() {
-    this.http.patch(`${this.baseUrl}/users?id=${this.user?.id}`, {
+    this.http.patch<User>(`${this.baseUrl}/users?id=${this.user?.id}`, {
       email: this.mailInput
     }, { withCredentials: true }).pipe(
       tap(response => {
         // biome-ignore lint/suspicious/noConsoleLog: <explanation>
         console.log('Email updated successfully', response);
         // Récupérer les nouvelles valeurs depuis le backend
-        const updatedUser: User = response as User;
-        this.authService.setUser(updatedUser);
+        this.authService.setUser(response);
         this.isEditEmail = false;
+        this.signOut();
       }),
       catchError(error => {
         console.error('Error updating email', error);
@@ -131,11 +131,12 @@ export class ProfileComponent implements OnInit {
       return;
     }
 
-    this.http.patch(`${this.baseUrl}/users?id=${this.user?.id}`, {
+    this.http.patch<User>(`${this.baseUrl}/users?id=${this.user?.id}`, {
       "password": `${this.newPassword}`,
       "repeatedPassword": `${this.confirmPassword}`
     }, { withCredentials: true }).pipe(
       tap(response => {
+        this.authService.setUser(response);
         // biome-ignore lint/suspicious/noConsoleLog: <explanation>
         console.log('Password changed successfully', response);
         this.closeChangePasswordModal();

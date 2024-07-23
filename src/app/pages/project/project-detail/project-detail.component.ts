@@ -2,9 +2,15 @@ import { Component, inject } from '@angular/core';
 import { ProjectService } from '../../../shared/services/project.service';
 // biome-ignore lint/style/useImportType: <explanation>
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ToastrService } from 'ngx-toastr';
+import { switchMap, take, throwError } from 'rxjs';
 import { Api } from '../../../shared/models/api';
 import type { Project } from '../../../shared/models/project.model';
+import { AuthService } from '../../../shared/services/auth.service';
+
 
 
 @Component({
@@ -37,11 +43,16 @@ export class ProjectDetailComponent {
 
   fileURLs: string[] = [];
   projectService = inject(ProjectService);
+  authService = inject(AuthService);
+  http = inject(HttpClient);
+  router = inject(Router);
+  toastr = inject(ToastrService)
 
   api = new Api();
   baseUrl = this.api.local;
   fileURL = '';
   isListened = false;
+  userEmail!: string | undefined;
 
   ngOnInit() {
     const url = (String(window.location.href));
@@ -60,9 +71,51 @@ export class ProjectDetailComponent {
         }
       });
     }
-
-
   }
+
+  requestParticipation(): void {
+    // Ensure both project name and user data are available
+    if (!this.project.name) {
+      alert('Nom du projet non disponible.');
+      return;
+    }
+
+    // Use the user observable to get the user data and chain with switchMap
+    this.authService.user.pipe(
+      take(1), // Take only the latest value and complete
+      switchMap(user => {
+        if (user?.name) {
+          // Call the requestParticipation method from the projectService
+          return this.projectService.requestParticipation(this.project.name);
+          // biome-ignore lint/style/noUselessElse: <explanation>
+        } else {
+          // Handle the case where user is not available
+          this.router.navigate(['/login']);
+          return throwError(() => new Error('Utilisateur non connecté ou adresse e-mail non disponible.'));
+        }
+      })
+    ).subscribe({
+      next: response => {
+        alert('Votre demande de participation a été envoyée.');
+
+        this.toastr.success('Hello world!', 'Toastr fun!');
+
+      },
+      error: error => {
+        if (error.message === 'Utilisateur non connecté ou adresse e-mail non disponible.') {
+          alert(error.message);
+          this.toastr.error('Hello world!', 'Toastr fun!');
+        } else {
+          alert('Erreur lors de l\'envoi de la demande.');
+          console.error('Request participation error:', error);
+        }
+      }
+    });
+  }
+
+
+
+
 
   playAudio() {
     const audio = document.getElementById('player') as HTMLAudioElement;

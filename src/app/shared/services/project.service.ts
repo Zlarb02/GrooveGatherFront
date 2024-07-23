@@ -29,30 +29,6 @@ export class ProjectService {
     }
   ]
 
-  // sendProjects() {
-
-  //   return this.http.post<Project[]>('http://localhost:8080/api/v1/projects', )
-  //     .pipe(
-  //       catchError(error => {
-  //         if (error.status === 500) {
-  //           return of(
-  //             {
-  //               name: "test",
-  //               genres: ["test", "test"],
-  //               color: "test",
-  //               description: "test",
-  //               date: "test",
-  //               likes: 0,
-  //               skillsPresent: ["test", "test"],
-  //               skillsMissing: ["test", "test"],
-  //             }
-  //           );
-  //         }
-  //         throw error;
-  //       })
-  //     );
-  // }
-
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   getProjects(sortBy: string, sortDirection: string, filters: any) {
     let params = new HttpParams()
@@ -88,6 +64,10 @@ export class ProjectService {
   }
 
   getProjectByName(name: string) {
-    return this.http.get<Project>(`${this.baseUrl}/projects/${name}`)
+    return this.http.get<Project>(`${this.baseUrl}/projects/${name}`, { withCredentials: true })
+  }
+
+  requestParticipation(projectName: string) {
+    return this.http.post(`${this.baseUrl}/projects/request-participation`, { projectName }, { withCredentials: true });
   }
 }
