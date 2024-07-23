@@ -96,15 +96,13 @@ export class ProjectDetailComponent {
       })
     ).subscribe({
       next: response => {
-        alert('Votre demande de participation a été envoyée.');
-
-        this.toastr.success('Hello world!', 'Toastr fun!');
+        this.toastr.success('Votre demande de participation a été envoyée.');
 
       },
       error: error => {
         if (error.message === 'Utilisateur non connecté ou adresse e-mail non disponible.') {
-          alert(error.message);
-          this.toastr.error('Hello world!', 'Toastr fun!');
+
+          this.toastr.error(error.message);
         } else {
           alert('Erreur lors de l\'envoi de la demande.');
           console.error('Request participation error:', error);
