@@ -1,7 +1,5 @@
-import { Injectable } from '@angular/core';
-// biome-ignore lint/style/useImportType: <explanation>
 import { HttpClient } from '@angular/common/http';
-// biome-ignore lint/style/useImportType: <explanation>
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Api } from '../models/api';
 import type { MessageRequestDto, MessageResponseDto } from '../models/message.model';

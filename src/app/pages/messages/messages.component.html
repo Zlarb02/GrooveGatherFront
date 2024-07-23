@@ -7,26 +7,32 @@
             <div *ngIf="message.replyToMessageContent" class="reply-quote">
                 <h4>Réponse à:</h4>
                 <blockquote>
-                    <p>{{ message.replyToMessageContent }}</p>
+                    <div [innerHTML]="message.replyToMessageContent"></div>
                 </blockquote>
             </div>
             <div class="message-header">
+                <h3>{{ message.isSent ? 'à' : 'de' }}</h3>
+                <strong>{{ message.isSent ? (message.receiverName || 'Unknown') : (message.senderName || 'Unknown')
+                    }}</strong>
                 <img *ngIf="message.isSent ? message.receiverPicture : message.senderPicture"
                     [src]="message.isSent ? message.receiverPicture : message.senderPicture" alt="Profile picture"
                     class="profile-picture">
-                <strong>{{ message.isSent ? message.receiverName : message.senderName }}</strong>
             </div>
             <!-- Affichage du contenu du message -->
-            <p>{{ message.content }}</p>
+            <div [innerHTML]="message.content"></div>
             <p><small>{{ message.isSent ? 'Envoyé' : 'Reçu' }} le {{ message.timestamp | date:'short' }}</small></p>
             <button *ngIf="!message.isSent" (click)="replyToMessage(message)">Répondre</button>
+            <div *ngIf="!message.isSent && message.content.includes('Voulez-vous approuver cette demande ?')">
+                <button (click)="acceptRequest(message.id)">Accepter</button>
+                <button (click)="rejectRequest(message.id)">Rejeter</button>
+            </div>
         </div>
 
         <!-- Bloc de citation pour la réponse -->
         <div *ngIf="replyingToMessage" class="reply-quote" style="width: fit-content; margin-left: 20vw;">
             <h4>Réponse à:</h4>
             <blockquote>
-                <p>{{ replyingToMessage.content }}</p>
+                <div [innerHTML]="replyingToMessage.content"></div>
             </blockquote>
         </div>
 
@@ -34,9 +40,9 @@
         <div class="send-message">
             <h3>Envoyer un nouveau message</h3>
             <form (ngSubmit)="sendMessage()">
-                <label for="receiverName" style="display: none;">Nom du destinataire:</label>
-                <input id="receiverName" placeholder="Nom du destinataire" [(ngModel)]="newMessage.receiverName"
-                    name="receiverName" required>
+                <label for="receiverId" style="display: none;">ID du destinataire:</label>
+                <input id="receiverId" placeholder="ID du destinataire" [(ngModel)]="newMessage.receiverId"
+                    name="receiverId" required>
                 <br>
                 <label style="display: none;" for="content">Contenu du message:</label>
                 <textarea id="content" placeholder="Entrez votre message" [(ngModel)]="newMessage.content"

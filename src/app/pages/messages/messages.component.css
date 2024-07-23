@@ -123,6 +123,8 @@ button:hover {
     border: 1px solid rgba(130, 130, 130, 0.3);
     background: color-mix(in srgb, var(--light-bg) 1%, var(--bg-or-glass));
 
+    margin-bottom: 2cap;
+
     input {
         right: 10px;
     }
