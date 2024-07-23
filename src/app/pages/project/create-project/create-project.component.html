@@ -102,9 +102,9 @@
         <div class="drop-zone" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)"
           (drop)="onDropFile($event)" (click)="openFileInput()">
           <div class="drop-zone-text">
-            Déposez vos fichiers ici <br>ou <br> Cliquez pour sélectionner des fichiers <div
-              style="height: 70px; width: 100%; display: flex; justify-content: center; align-items: center;"><i
-                class="gg-attachment"></i>
+            Déposez vos fichiers ici <br>ou <br> Cliquez pour sélectionner des fichiers 
+            <div style="height: 70px; width: 100%; display: flex; justify-content: center; align-items: center;">
+              <i class="gg-attachment"></i>
             </div>
           </div>
           <input id="fileInput" type="file" multiple (change)="handleFileChange($event)" style="display: none;" />
@@ -115,16 +115,11 @@
               <span class="file-icon" [ngClass]="'file-icon ' + getFileTypeIconClass(file.name)"></span>
               <span class="file-name">{{ file.name }}</span>
               <span class="file-size">{{ formatFileSize(file.size) }}</span>
-
-
-
-
               <button type="button" (click)="removeFile(file)"
                 style="background-color: var(--light-bg); border-radius: 50%; width: 25px; height: 25px; border-color: transparent;">
                 <i class="gg-trash" style="color: rgb(186, 2, 2); --ggs:0.9; margin-left: -5px; margin-top: 0px;"></i>
               </button>
             </div>
-
 
             <!-- file.size <= 10000000 -->
             <button *ngIf="file.size <= 1000048576 && previewAudio !== file && isAudioFile(file.name)" type="button"
@@ -132,26 +127,27 @@
               Définir comme piste d'écoute
             </button>
 
-
             <div *ngIf="file.size > 100048576" class="error">
-              Le fichier est fait plus de 10 Gigabytes.
+              Le fichier fait plus de 10 Gigabytes.
             </div>
-
 
             <audio *ngIf="previewAudio == file" id="mp3Audio" controls [src]="mp3Url"></audio>
             <button *ngIf="previewAudio == file" type="button" class="btn-deset-main" (click)="setAsMainAudio(file)">
               Déselectionner
             </button>
             <br>
-            <div *ngIf="selectedFiles.length === 0 " class="error">
-              Il faut mettre au moins un fichier audio défini comme piste d'écoute.
-            </div>
-
           </div>
         </div>
+        <div *ngIf="selectedFiles.length === 0" class="error">
+          Il faut mettre au moins un fichier audio.
+        </div>
+        <div *ngIf="!previewAudio" class="error">
+          Il faut définir une piste d'écoute.
+        </div>
       </div>
+      
 
-      <div class="parentCouleur">
+      <div class="parentCouleur"> 
         <p class="couleur" for="color">Sélectionnez une couleur :</p>
       </div>
       <div class="parentCarre">
