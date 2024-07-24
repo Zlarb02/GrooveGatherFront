@@ -89,16 +89,18 @@
                             <div class="file-name">{{ file.name }}</div>
                             <div class="file-size">{{ formatFileSize(file.size) }}</div>
                             <a [href]="getFileDownloadUrl(file)" download class="download-btn">Télécharger <i
-                                    class="gg-software-download" style="margin-left: auto;"></i></a><button
+                                    class="gg-software-download" style="margin-left: auto;"></i></a>
+                            <button (click)="removeFile(file)"
                                 style="margin: auto; margin-top: 15px; background: transparent; border: none;">
                                 <i class="gg-trash" style="color: var(--red);"></i>
                             </button>
                         </div>
                     </div>
                     <br><br>
-                    <button
+                    <input type="file" (change)="onFileSelected($event)" />
+                    <button (click)="uploadFile()"
                         style="background-color: var(--glass); width: 130px; height: 150px; margin-left: 10px; margin-top: 10px; border: var(--bg) 1px solid; border-radius: 16px;">
-                        <i class="gg-file-add" style="--ggs: 3;color: var(--light-color); margin-left: 45px;"></i>
+                        <i class="gg-file-add" style="--ggs: 3; color: var(--light-color); margin-left: 45px;"></i>
                     </button>
                 </div>
             </div>

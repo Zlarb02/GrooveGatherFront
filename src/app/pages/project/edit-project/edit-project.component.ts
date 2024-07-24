@@ -1,20 +1,17 @@
-
-import { Component, inject } from '@angular/core';
-import { ProjectService } from '../../../shared/services/project.service';
-// biome-ignore lint/style/useImportType: <explanation>
 import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { switchMap, throwError } from 'rxjs';
 import { Api } from '../../../shared/models/api';
 import type { Project } from '../../../shared/models/project.model';
-
+import { ProjectService } from '../../../shared/services/project.service';
 
 @Component({
   selector: 'app-edit-project',
   standalone: true,
   imports: [NgxPaginationModule, CommonModule],
   templateUrl: './edit-project.component.html',
-  styleUrl: './edit-project.component.css'
+  styleUrls: ['./edit-project.component.css'] // Updated from styleUrl to styleUrls
 })
 export class EditProjectComponent {
   project: Project = {
@@ -26,13 +23,13 @@ export class EditProjectComponent {
     likes: 9999999,
     skillsPresent: ["Piano", "Batterie"],
     skillsMissing: ["Basse", "Composition"],
-    id: 0
+    id: 0,
+    files: [] // Make sure this property exists
   };
 
   id!: number;
   name!: string | undefined;
 
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   admins!: any[];
 
   lastVolume = 1; // Default to full volume
@@ -47,7 +44,6 @@ export class EditProjectComponent {
   baseUrl = this.api.local;
   fileURL = '';
   isListened = false;
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   owner: any;
 
   ngOnInit() {
@@ -69,7 +65,6 @@ export class EditProjectComponent {
           return throwError(() => new Error('Projet non trouvé'));
         })
       ).subscribe({
-        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
         next: (owner: any) => {
           this.owner = owner;
           this.fetchAdmins();
@@ -84,7 +79,6 @@ export class EditProjectComponent {
   fetchAdmins() {
     if (this.name) {
       this.projectService.getProjectAdmins(this.name).subscribe({
-        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
         next: (admins: any) => {
           this.admins = admins;
         },
@@ -95,7 +89,6 @@ export class EditProjectComponent {
     }
   }
 
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   getFileDownloadUrl(file: any): string {
     return `${this.baseUrl}/${file.url}`;
   }
@@ -175,4 +168,79 @@ export class EditProjectComponent {
     return `${sizeFormatted} ${unit}`;
   }
 
+  addFile(file: File) {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    // Simulez le téléchargement du fichier
+    // Remplacez cette partie par la logique de téléchargement réelle
+    const fileUrl = URL.createObjectURL(file);
+    const newFile = {
+      name: file.name,
+      url: fileUrl,
+      size: file.size,
+      isTeaser: false
+    };
+
+    if (this.project.files) { // Vérifiez si files est défini
+      this.project.files.push(newFile);
+    } else {
+      this.project.files = [newFile];
+    }
+
+    this.updateProject();
+  }
+
+  removeFile(file: any) {
+    if (this.project.files) { // Vérifiez si files est défini
+      this.project.files = this.project.files.filter(f => f !== file.url);
+      this.updateProject();
+    }
+  }
+
+  private updateProject() {
+    if (this.name) {
+      console.log(this.project)
+      this.projectService.patchProject(this.name, this.project).subscribe({
+        next: (updatedProject) => {
+          this.project = updatedProject;
+          this.fileURLs = updatedProject.files ? updatedProject.files.map(file => `${this.baseUrl}/${file.url}`) : [];
+        },
+        error: (error: Error) => {
+          console.error('Error updating project', error);
+        }
+      });
+    }
+  }
+
+  fileToUpload: File[] | null = [];
+
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.fileToUpload?.push(input.files[0]);
+    }
+  }
+
+  uploadFile(): void {
+    console.log(this.fileToUpload)
+    if (this.fileToUpload) {
+      this.projectService.uploadFiles(this.fileToUpload).subscribe((uploadedFiles: any) => {
+        // Assurez-vous que uploadedFiles est un objet contenant les URLs et les informations des fichiers
+
+        // Ajoutez les fichiers formatés à votre projet
+        this.project.files = uploadedFiles.length === 1 ? [uploadedFiles[0]] : []
+
+        // Mettez à jour le projet
+        this.projectService.patchProject(this.project.name, this.project).subscribe({
+          next: (updatedProject) => {
+            this.project = updatedProject;
+          },
+          error: (error) => {
+            console.error('Error updating project:', error);
+          }
+        });
+      });
+    }
+  }
 }

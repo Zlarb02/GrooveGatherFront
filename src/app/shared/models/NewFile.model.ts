@@ -1,4 +1,5 @@
-export interface File {
+export interface NewFile {
+    id?: number,
     url: string
     isTeaser: boolean
     name: string
