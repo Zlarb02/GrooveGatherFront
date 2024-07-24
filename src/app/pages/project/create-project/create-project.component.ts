@@ -413,7 +413,7 @@ export class CreateProjectComponent {
                     (response) => {
                       // biome-ignore lint/suspicious/noConsoleLog: <explanation>
                       console.log('Project created successfully:', response);
-                      this.router.navigate(['/projects']);
+                      this.router.navigate([`project/edit/${this.projectName}`]);
                     },
                     (error) => {
                       console.error('Error creating project:', error);

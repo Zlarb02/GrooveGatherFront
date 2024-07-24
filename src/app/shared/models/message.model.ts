@@ -1,5 +1,4 @@
 export interface MessageRequestDto {
-    receiverId?: number; // Changement de receiverName à receiverId
     receiverName: string;
     content: string;
     replyToMessageId?: number; // Ajouté pour la réponse
