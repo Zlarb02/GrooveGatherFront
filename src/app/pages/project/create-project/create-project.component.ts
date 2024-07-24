@@ -23,6 +23,7 @@ import { genresList } from '../../../shared/models/genres-list';
 import { SkillNamesList } from '../../../shared/models/skill-names-list';
 // biome-ignore lint/style/useImportType: <explanation>
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-create-project',
@@ -79,7 +80,7 @@ export class CreateProjectComponent {
   modifPreviewAudio = false;
   skillConflict = false;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private toastr: ToastrService) {
     this.myForm = this.formBuilder.group({
       name: ['', Validators.required],
       genres: this.formBuilder.array([], Validators.required),
@@ -93,7 +94,7 @@ export class CreateProjectComponent {
     });
   }
 
-/*   checkSkillConflict(): boolean {
+  /*   checkSkillConflict(): boolean {
     let conflict = false;
     let skill: string;
     for skill in  this.myForm.get('skillsMissing')?.value {
@@ -105,28 +106,35 @@ export class CreateProjectComponent {
     return conflict;
   } */
 
+  showToastSuccess(message: string, type: string) {
+    this.toastr.success(message, type);
+  }
 
-    checkSkillConflict(): boolean {
-      let conflict = false;
-      const skillsMissing = this.myForm.get('skillsMissing')?.value;
-      const skillsPresent = this.myForm.get('skillsPresent')?.value;
+  showToastError(message: string, type: string) {
+    this.toastr.error(message, type);
+  }
 
-      // Vérifie si chaque compétence manquante est présente dans la liste des compétences présentées
-      for (const skill of skillsMissing || []) { // Utilise un tableau vide comme fallback pour éviter l'erreur lorsqu'il n'y
-        if (skillsPresent.includes(skill)) {
-           conflict = true; // Si au moins une compétence manquante est trouvée dans les compétences présentées, définir
-//      conflict à true
-           break; // Sortir de la boucle dès qu'une compétence en conflit est trouvée
-           }
-          }
-          this.skillConflict = conflict; // Mettre à jour la propriété skillConflict en dehors de la boucle
-      return conflict; // Retourner le résultat final
+  checkSkillConflict(): boolean {
+    let conflict = false;
+    const skillsMissing = this.myForm.get('skillsMissing')?.value;
+    const skillsPresent = this.myForm.get('skillsPresent')?.value;
+
+    // Vérifie si chaque compétence manquante est présente dans la liste des compétences présentées
+    for (const skill of skillsMissing || []) {
+      // Utilise un tableau vide comme fallback pour éviter l'erreur lorsqu'il n'y
+      if (skillsPresent.includes(skill)) {
+        conflict = true; // Si au moins une compétence manquante est trouvée dans les compétences présentées, définir
+        //      conflict à true
+        break; // Sortir de la boucle dès qu'une compétence en conflit est trouvée
       }
-
+    }
+    this.skillConflict = conflict; // Mettre à jour la propriété skillConflict en dehors de la boucle
+    return conflict; // Retourner le résultat final
+  }
 
   compare(maListe: string[], elementASearch: string) {
     // Verification if the element belongs to the list
-    return maListe.includes(elementASearch)
+    return maListe.includes(elementASearch);
   }
 
   // Getter methods for form arrays
@@ -319,72 +327,95 @@ export class CreateProjectComponent {
 
   // Method to handle form submission
 
-
   // Method to handle form submission
   onSubmit() {
+    if (!this.myForm.valid) {
+      this.showToastError('formulaire invalide !', 'Erreur');
+      this.myForm.markAllAsTouched();
+      this.modifGenre = true;
+      this.modifselectedUsedSkills = true;
+      this.modifRequestedSkill = true;
+      this.modifSelectedFile = true;
+      this.modifPreviewAudio = true;
+      this.skillConflict = true;
+    }
     if (this.myForm.valid) {
       // Étape 1: Uploader les fichiers et attendre la réponse
-      this.uploadFiles(this.selectedFiles).then(uploadedFiles => {
-        // biome-ignore lint/suspicious/noConsoleLog: <explanation>
-        console.log('Upload response:', uploadedFiles);
-
-        // Assurez-vous que uploadedFiles est un tableau valide d'objets
-        if (Array.isArray(uploadedFiles)) {
-          // Retirer la base de l'URL pour correspondre au format 'files/download?filename=...'
-          const baseUrlPattern = new RegExp(`^${this.baseUrl}/`);
-
-          // Crée un tableau d'objets avec url, isTeaser, name, et size
-          const filesArray = uploadedFiles.map(file => ({
-            url: file.url.replace(baseUrlPattern, ''),
-            isTeaser: file.url.replace(baseUrlPattern, '') === this.mp3Url?.replace(baseUrlPattern, ''),
-            name: file.name,
-            size: file.size
-          }));
-
-          // Si mp3Url n'est pas présent dans les URLs, ajoutez-le comme isTeaser: true
-          const mp3FormattedUrl = this.mp3Url?.replace(baseUrlPattern, '');
-          if (mp3FormattedUrl && !filesArray.some(file => file.url === mp3FormattedUrl)) {
-            filesArray.push({
-              url: mp3FormattedUrl,
-              isTeaser: true,
-              name: 'MP3 Teaser', // Assurez-vous d'avoir un nom par défaut ou utilisez celui approprié
-              size: 0 // Définissez une taille par défaut si nécessaire
-            });
-          }
-
-          // Mettre à jour les URLs des fichiers dans le formulaire
-          this.myForm.patchValue({ files: filesArray });
-
-          // Préparer le payload pour l'envoi du formulaire
-          const formData = {
-            ...this.myForm.value,
-            files: filesArray // Envoyer le tableau d'objets avec url, isTeaser, name et size
-          };
-
+      this.uploadFiles(this.selectedFiles)
+        .then((uploadedFiles) => {
           // biome-ignore lint/suspicious/noConsoleLog: <explanation>
-          console.log('Form data to be submitted:', formData);
+          console.log('Upload response:', uploadedFiles);
 
-          // Étape 2: Poster le formulaire avec les données
-          this.http.post(`${this.baseUrl}/projects`, formData, { withCredentials: true }).subscribe(
-            response => {
-              // biome-ignore lint/suspicious/noConsoleLog: <explanation>
-              console.log('Project created successfully:', response);
-              this.router.navigate(['/projects']);
-            },
-            error => {
-              console.error('Error creating project:', error);
+          // Assurez-vous que uploadedFiles est un tableau valide d'objets
+          if (Array.isArray(uploadedFiles)) {
+            // Retirer la base de l'URL pour correspondre au format 'files/download?filename=...'
+            const baseUrlPattern = new RegExp(`^${this.baseUrl}/`);
+
+            // Crée un tableau d'objets avec url, isTeaser, name, et size
+            const filesArray = uploadedFiles.map((file) => ({
+              url: file.url.replace(baseUrlPattern, ''),
+              isTeaser:
+                file.url.replace(baseUrlPattern, '') ===
+                this.mp3Url?.replace(baseUrlPattern, ''),
+              name: file.name,
+              size: file.size,
+            }));
+
+            // Si mp3Url n'est pas présent dans les URLs, ajoutez-le comme isTeaser: true
+            const mp3FormattedUrl = this.mp3Url?.replace(baseUrlPattern, '');
+            if (
+              mp3FormattedUrl &&
+              !filesArray.some((file) => file.url === mp3FormattedUrl)
+            ) {
+              filesArray.push({
+                url: mp3FormattedUrl,
+                isTeaser: true,
+                name: 'MP3 Teaser', // Assurez-vous d'avoir un nom par défaut ou utilisez celui approprié
+                size: 0, // Définissez une taille par défaut si nécessaire
+              });
             }
-          );
-        } else {
-          console.error('Uploaded files response is not an array:', uploadedFiles);
-        }
-      }).catch(error => {
-        console.error('Error uploading files:', error);
-      });
+
+            // Mettre à jour les URLs des fichiers dans le formulaire
+            this.myForm.patchValue({ files: filesArray });
+
+            // Préparer le payload pour l'envoi du formulaire
+            const formData = {
+              ...this.myForm.value,
+              files: filesArray, // Envoyer le tableau d'objets avec url, isTeaser, name et size
+            };
+
+            // biome-ignore lint/suspicious/noConsoleLog: <explanation>
+            console.log('Form data to be submitted:', formData);
+
+            // Étape 2: Poster le formulaire avec les données
+            this.http
+              .post(`${this.baseUrl}/projects`, formData, {
+                withCredentials: true,
+              })
+              .subscribe(
+                (response) => {
+                  // biome-ignore lint/suspicious/noConsoleLog: <explanation>
+                  console.log('Project created successfully:', response);
+                  this.router.navigate(['/projects']);
+                },
+                (error) => {
+                  console.error('Error creating project:', error);
+                }
+              );
+            this.showToastSuccess('Projet créé !', 'Victoire !');
+          } else {
+            console.error(
+              'Uploaded files response is not an array:',
+              uploadedFiles
+            );
+          }
+        })
+        .catch((error) => {
+          console.error('Error uploading files:', error);
+        });
     } else {
       // biome-ignore lint/suspicious/noConsoleLog: <explanation>
       console.log('Form is invalid');
-
     }
   }
 
@@ -393,12 +424,6 @@ export class CreateProjectComponent {
     const extension = fileName.split('.').pop()?.toLowerCase();
     return audioExtensions.includes(extension || '');
   }
-
-
-
-
-
-
 
   uploadFile(file: File) {
     const fileInput = document.getElementById('fileInput') as HTMLInputElement;
@@ -427,14 +452,13 @@ export class CreateProjectComponent {
     // Effectuer la requête fetch pour convertir le fichier WAV en MP3
 
     fetch(`${this.baseUrl}/files/convert`, requestOptions)
-      .then(response => {
-
+      .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
         return response.json();
       })
-      .then(data => {
+      .then((data) => {
         // biome-ignore lint/suspicious/noConsoleLog: <explanation>
         console.log(data);
 
@@ -447,17 +471,21 @@ export class CreateProjectComponent {
   uploadFiles(files: File[]): Promise<{ [key: string]: string }> {
     const formData = new FormData();
     // biome-ignore lint/complexity/noForEach: <explanation>
-    files.forEach(file => formData.append('files', file));
+    files.forEach((file) => formData.append('files', file));
 
-    return this.http.post<{ [key: string]: string }>(`${this.baseUrl}/files/upload`, formData, { withCredentials: true })
+    return this.http
+      .post<{ [key: string]: string }>(
+        `${this.baseUrl}/files/upload`,
+        formData,
+        { withCredentials: true }
+      )
       .toPromise()
-      .then(response => {
+      .then((response) => {
         return response || {}; // Assurez-vous de toujours retourner un objet
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error uploading files:', error);
         return {}; // Retourner un objet vide en cas d'erreur
       });
   }
-
 }
