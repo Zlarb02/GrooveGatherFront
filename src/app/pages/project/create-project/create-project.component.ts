@@ -40,6 +40,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./create-project.component.css'],
 })
 export class CreateProjectComponent {
+  projectName = '';
   selectColor(color: string) {
     this.myForm.get('color')?.setValue(color);
     // biome-ignore lint/complexity/noForEach: <explanation>

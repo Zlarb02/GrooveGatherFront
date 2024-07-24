@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ProjectCardComponent } from '../../../core/project-card/project-card.component';
 import { genresList } from '../../../shared/models/genres-list';
@@ -10,7 +11,7 @@ import { ProjectService } from '../../../shared/services/project.service';
 @Component({
   selector: 'app-my-projects',
   standalone: true,
-  imports: [ProjectCardComponent, NgxPaginationModule, FormsModule, CommonModule],
+  imports: [ProjectCardComponent, NgxPaginationModule, FormsModule, CommonModule, RouterLink],
   templateUrl: './my-projects.component.html',
   styleUrl: './my-projects.component.css'
 })
@@ -35,6 +36,20 @@ export class MyProjectsComponent {
 
   getUserProjects() {
     this.projectService.getUserProjects().subscribe((operations) => {
+      // biome-ignore lint/complexity/noForEach: <explanation>
+      operations.forEach((operation) => {
+        if (operation.project) {
+          this.projectService.getProjectByName(operation.project).subscribe((project) => {
+            this.projects.push(project);
+          });
+        }
+      })
+      this.totalItems = this.projects.length;
+    });
+  }
+
+  getUserAdminProjects() {
+    this.projectService.getUserAdminProjects().subscribe((operations) => {
       // biome-ignore lint/complexity/noForEach: <explanation>
       operations.forEach((operation) => {
         if (operation.project) {

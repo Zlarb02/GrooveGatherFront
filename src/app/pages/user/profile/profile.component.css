@@ -19,7 +19,7 @@ input {
     overflow-y: scroll;
     --ggs: 0.9;
     padding-top: 2vh;
-    margin: 2vh 5vw;
+    margin: 2vh 5vw 0vh;
     background-color: var(--bg-inverse);
     border-radius: 18px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
