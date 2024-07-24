@@ -44,7 +44,7 @@
         <div class="send-message">
             <h3>Envoyer un nouveau message</h3>
             <form (ngSubmit)="sendMessage()">
-                <input id="receiverId" placeholder="Nom du destinataire" [(ngModel)]="newMessage.receiverId"
+                <input id="receiverId" placeholder="Nom du destinataire" [(ngModel)]="newMessage.receiverName"
                     name="receiverId" required>
                 <br>
                 <label style="display: none;" for="content">Contenu du message:</label>

@@ -38,7 +38,7 @@ export class ProfileComponent implements OnInit {
 
 
   api = new Api();
-  baseUrl = this.api.local;
+  baseUrl = this.api.prod;
 
   avatars = [
     { url: 'https://cdn.pixabay.com/photo/2024/06/25/19/44/man-8853455_1280.png' },

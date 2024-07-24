@@ -1,4 +1,4 @@
-import type { File } from "./File.model";
+import type { NewFile } from "./NewFile.model";
 import type { Genre } from "./genre";
 import type { skillName } from "./skill-name";
 
@@ -12,5 +12,5 @@ export interface Project {
     likes: number;
     skillsPresent: skillName[];
     skillsMissing: skillName[];
-    files?: File[];
+    files?: NewFile[];
 }

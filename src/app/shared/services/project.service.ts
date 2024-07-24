@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { catchError, type Observable, of } from 'rxjs';
+import { catchError, type Observable, of, throwError } from 'rxjs';
 import { Api } from '../models/api';
 import type { Operation } from '../models/operation';
 import type { Project } from '../models/project.model';
@@ -13,7 +13,7 @@ export class ProjectService {
   http = inject(HttpClient)
 
   api = new Api();
-  baseUrl = this.api.local
+  baseUrl = this.api.prod
 
   mockProjects: Project[] = [
     {
@@ -92,6 +92,42 @@ export class ProjectService {
       .pipe(
         catchError(error => {
           throw error;
+        })
+      );
+  }
+
+  patchProject(name: string, project: Project): Observable<Project> {
+    // Assurez-vous que project.files est défini avant de le mapper
+    const formattedProject = {
+      ...project,
+      files: project.files?.map(file => ({
+        id: file.id,
+        url: file.url,
+        name: file.name,
+        isTeaser: file.isTeaser,
+        size: file.size
+      })) || []  // Si project.files est undefined, utilisez un tableau vide
+    };
+
+    return this.http.patch<Project>(`${this.baseUrl}/projects/${name}`, formattedProject, { withCredentials: true })
+      .pipe(
+        catchError(error => {
+          console.error('Error updating project:', error);
+          return throwError(() => new Error('Failed to update project'));
+        })
+      );
+  }
+
+  uploadFiles(files: File[]): Observable<{ [key: string]: string }> {
+    const formData = new FormData();
+    // biome-ignore lint/complexity/noForEach: <explanation>
+    files.forEach(file => formData.append('files', file));
+
+    return this.http.post<{ [key: string]: string }>(`${this.baseUrl}/files/upload`, formData, { withCredentials: true })
+      .pipe(
+        catchError(error => {
+          console.error('Error uploading files:', error);
+          return of({});
         })
       );
   }

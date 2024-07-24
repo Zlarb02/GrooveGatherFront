@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   router: Router = inject(Router);
   http = inject(HttpClient);
   api = new Api();
-  baseUrl = this.api.local;
+  baseUrl = this.api.prod;
 
   ngOnInit() {
     this.authService.user.subscribe(user => {

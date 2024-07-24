@@ -66,7 +66,7 @@ export class CreateProjectComponent {
   router: Router = inject(Router);
   http = inject(HttpClient);
   api = new Api();
-  baseUrl = this.api.local;
+  baseUrl = this.api.prod;
 
   wavUrl: string | undefined;
   mp3Url: string | undefined;
@@ -413,7 +413,7 @@ export class CreateProjectComponent {
                     (response) => {
                       // biome-ignore lint/suspicious/noConsoleLog: <explanation>
                       console.log('Project created successfully:', response);
-                      this.router.navigate(['/projects']);
+                      this.router.navigate([`project/edit/${this.projectName}`]);
                     },
                     (error) => {
                       console.error('Error creating project:', error);
@@ -464,7 +464,7 @@ export class CreateProjectComponent {
       method: 'POST',
       body: formData,
       headers: {
-        'Access-Control-Allow-Origin': 'http://localhost:4200', // Remplacez par l'URL de votre frontend Angular
+        'Access-Control-Allow-Origin': 'http://groovegather.fr', // Remplacez par l'URL de votre frontend Angular
       },
     };
 

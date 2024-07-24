@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { ProjectService } from '../../../shared/services/project.service';
+import { ProjectService } from '../../../../app/shared/services/project.service';
 // biome-ignore lint/style/useImportType: <explanation>
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -7,9 +7,9 @@ import { Router } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ToastrService } from 'ngx-toastr';
 import { switchMap, take, throwError } from 'rxjs';
-import { Api } from '../../../shared/models/api';
-import type { Project } from '../../../shared/models/project.model';
-import { AuthService } from '../../../shared/services/auth.service';
+import { Api } from '../../../../app/shared/models/api';
+import type { Project } from '../../../../app/shared/models/project.model';
+import { AuthService } from '../../../../app/shared/services/auth.service';
 
 
 
@@ -49,7 +49,7 @@ export class ProjectDetailComponent {
   toastr = inject(ToastrService)
 
   api = new Api();
-  baseUrl = this.api.local;
+  baseUrl = this.api.prod;
   fileURL = '';
   isListened = false;
   userEmail!: string | undefined;
