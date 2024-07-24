@@ -28,7 +28,7 @@ export class MessagesComponent implements OnInit {
   constructor(private messageService: MessageService, private http: HttpClient) { }
 
   api = new Api();
-  baseUrl = this.api.local;
+  baseUrl = this.api.prod;
 
   ngOnInit(): void {
     this.loadMessages();

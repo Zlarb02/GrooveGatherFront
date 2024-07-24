@@ -30,7 +30,7 @@ export class SignupComponent {
   router: Router = inject(Router);
   http = inject(HttpClient);
   api = new Api();
-  baseUrl = this.api.local;
+  baseUrl = this.api.prod;
 
   ngOnInit() {
     this.authService.user.subscribe(user => {

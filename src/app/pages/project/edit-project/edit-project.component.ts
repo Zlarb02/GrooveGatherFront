@@ -41,7 +41,7 @@ export class EditProjectComponent {
   projectService = inject(ProjectService);
 
   api = new Api();
-  baseUrl = this.api.local;
+  baseUrl = this.api.prod;
   fileURL = '';
   isListened = false;
   owner: any;
@@ -242,5 +242,14 @@ export class EditProjectComponent {
         });
       });
     }
+  }
+
+  formatDate(dateStr: string): string {
+    const date = new Date(dateStr);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Les mois sont indexés à partir de 0
+    const year = date.getFullYear();
+
+    return `${day}/${month}/${year}`;
   }
 }
