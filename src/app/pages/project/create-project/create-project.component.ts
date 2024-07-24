@@ -346,79 +346,90 @@ export class CreateProjectComponent {
       );
     } else {
       if (this.myForm.valid) {
-        // Étape 1: Uploader les fichiers et attendre la réponse
-        this.uploadFiles(this.selectedFiles)
-          .then((uploadedFiles) => {
-            // biome-ignore lint/suspicious/noConsoleLog: <explanation>
-            console.log('Upload response:', uploadedFiles);
-
-            // Assurez-vous que uploadedFiles est un tableau valide d'objets
-            if (Array.isArray(uploadedFiles)) {
-              // Retirer la base de l'URL pour correspondre au format 'files/download?filename=...'
-              const baseUrlPattern = new RegExp(`^${this.baseUrl}/`);
-
-              // Crée un tableau d'objets avec url, isTeaser, name, et size
-              const filesArray = uploadedFiles.map((file) => ({
-                url: file.url.replace(baseUrlPattern, ''),
-                isTeaser:
-                  file.url.replace(baseUrlPattern, '') ===
-                  this.mp3Url?.replace(baseUrlPattern, ''),
-                name: file.name,
-                size: file.size,
-              }));
-
-              // Si mp3Url n'est pas présent dans les URLs, ajoutez-le comme isTeaser: true
-              const mp3FormattedUrl = this.mp3Url?.replace(baseUrlPattern, '');
-              if (
-                mp3FormattedUrl &&
-                !filesArray.some((file) => file.url === mp3FormattedUrl)
-              ) {
-                filesArray.push({
-                  url: mp3FormattedUrl,
-                  isTeaser: true,
-                  name: 'MP3 Teaser', // Assurez-vous d'avoir un nom par défaut ou utilisez celui approprié
-                  size: 0, // Définissez une taille par défaut si nécessaire
-                });
-              }
-
-              // Mettre à jour les URLs des fichiers dans le formulaire
-              this.myForm.patchValue({ files: filesArray });
-
-              // Préparer le payload pour l'envoi du formulaire
-              const formData = {
-                ...this.myForm.value,
-                files: filesArray, // Envoyer le tableau d'objets avec url, isTeaser, name et size
-              };
-
+        if (this.previewAudio === null) {
+          this.modifPreviewAudio = true;
+          this.showToastError(
+            "Le projet doit avoir une piste d'écoute ",
+            'Erreur'
+          );
+        } else {
+          // Étape 1: Uploader les fichiers et attendre la réponse
+          this.uploadFiles(this.selectedFiles)
+            .then((uploadedFiles) => {
               // biome-ignore lint/suspicious/noConsoleLog: <explanation>
-              console.log('Form data to be submitted:', formData);
+              console.log('Upload response:', uploadedFiles);
 
-              // Étape 2: Poster le formulaire avec les données
-              this.http
-                .post(`${this.baseUrl}/projects`, formData, {
-                  withCredentials: true,
-                })
-                .subscribe(
-                  (response) => {
-                    // biome-ignore lint/suspicious/noConsoleLog: <explanation>
-                    console.log('Project created successfully:', response);
-                    this.router.navigate(['/projects']);
-                  },
-                  (error) => {
-                    console.error('Error creating project:', error);
-                  }
+              // Assurez-vous que uploadedFiles est un tableau valide d'objets
+              if (Array.isArray(uploadedFiles)) {
+                // Retirer la base de l'URL pour correspondre au format 'files/download?filename=...'
+                const baseUrlPattern = new RegExp(`^${this.baseUrl}/`);
+
+                // Crée un tableau d'objets avec url, isTeaser, name, et size
+                const filesArray = uploadedFiles.map((file) => ({
+                  url: file.url.replace(baseUrlPattern, ''),
+                  isTeaser:
+                    file.url.replace(baseUrlPattern, '') ===
+                    this.mp3Url?.replace(baseUrlPattern, ''),
+                  name: file.name,
+                  size: file.size,
+                }));
+
+                // Si mp3Url n'est pas présent dans les URLs, ajoutez-le comme isTeaser: true
+                const mp3FormattedUrl = this.mp3Url?.replace(
+                  baseUrlPattern,
+                  ''
                 );
-              this.showToastSuccess('Projet créé !', 'Victoire !');
-            } else {
-              console.error(
-                'Uploaded files response is not an array:',
-                uploadedFiles
-              );
-            }
-          })
-          .catch((error) => {
-            console.error('Error uploading files:', error);
-          });
+                if (
+                  mp3FormattedUrl &&
+                  !filesArray.some((file) => file.url === mp3FormattedUrl)
+                ) {
+                  filesArray.push({
+                    url: mp3FormattedUrl,
+                    isTeaser: true,
+                    name: 'MP3 Teaser', // Assurez-vous d'avoir un nom par défaut ou utilisez celui approprié
+                    size: 0, // Définissez une taille par défaut si nécessaire
+                  });
+                }
+
+                // Mettre à jour les URLs des fichiers dans le formulaire
+                this.myForm.patchValue({ files: filesArray });
+
+                // Préparer le payload pour l'envoi du formulaire
+                const formData = {
+                  ...this.myForm.value,
+                  files: filesArray, // Envoyer le tableau d'objets avec url, isTeaser, name et size
+                };
+
+                // biome-ignore lint/suspicious/noConsoleLog: <explanation>
+                console.log('Form data to be submitted:', formData);
+
+                // Étape 2: Poster le formulaire avec les données
+                this.http
+                  .post(`${this.baseUrl}/projects`, formData, {
+                    withCredentials: true,
+                  })
+                  .subscribe(
+                    (response) => {
+                      // biome-ignore lint/suspicious/noConsoleLog: <explanation>
+                      console.log('Project created successfully:', response);
+                      this.router.navigate(['/projects']);
+                    },
+                    (error) => {
+                      console.error('Error creating project:', error);
+                    }
+                  );
+                this.showToastSuccess('Projet créé !', 'Victoire !');
+              } else {
+                console.error(
+                  'Uploaded files response is not an array:',
+                  uploadedFiles
+                );
+              }
+            })
+            .catch((error) => {
+              console.error('Error uploading files:', error);
+            });
+        }
       } else {
         // biome-ignore lint/suspicious/noConsoleLog: <explanation>
         console.log('Form is invalid');
