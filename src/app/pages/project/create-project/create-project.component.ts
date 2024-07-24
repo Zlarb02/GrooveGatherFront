@@ -77,6 +77,7 @@ export class CreateProjectComponent {
   modifRequestedSkill = false;
   modifSelectedFile = false;
   modifPreviewAudio = false;
+  skillConflict = false;
 
   constructor(private formBuilder: FormBuilder) {
     this.myForm = this.formBuilder.group({
@@ -90,6 +91,42 @@ export class CreateProjectComponent {
       likes: [0],
       files: this.formBuilder.array([], Validators.required),
     });
+  }
+
+/*   checkSkillConflict(): boolean {
+    let conflict = false;
+    let skill: string;
+    for skill in  this.myForm.get('skillsMissing')?.value {
+     conflict = this.myForm.get('skillsPresent')?.value.includes(skill);
+    if (conflict) {
+      this.skillConflict = true;
+    }
+  }
+    return conflict;
+  } */
+
+
+    checkSkillConflict(): boolean {
+      let conflict = false;
+      const skillsMissing = this.myForm.get('skillsMissing')?.value;
+      const skillsPresent = this.myForm.get('skillsPresent')?.value;
+
+      // Vérifie si chaque compétence manquante est présente dans la liste des compétences présentées
+      for (const skill of skillsMissing || []) { // Utilise un tableau vide comme fallback pour éviter l'erreur lorsqu'il n'y
+        if (skillsPresent.includes(skill)) {
+           conflict = true; // Si au moins une compétence manquante est trouvée dans les compétences présentées, définir
+//      conflict à true
+           break; // Sortir de la boucle dès qu'une compétence en conflit est trouvée
+           }
+          }
+          this.skillConflict = conflict; // Mettre à jour la propriété skillConflict en dehors de la boucle
+      return conflict; // Retourner le résultat final
+      }
+
+
+  compare(maListe: string[], elementASearch: string) {
+    // Verification if the element belongs to the list
+    return maListe.includes(elementASearch)
   }
 
   // Getter methods for form arrays

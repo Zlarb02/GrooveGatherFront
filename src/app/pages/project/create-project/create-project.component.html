@@ -100,6 +100,26 @@
 
             Au moins une compétence demandée doit être ajoutée.
           </div>
+
+          <div *ngIf="checkSkillConflict()">Attention vous avez sélectionné des compétences présentes et manquantes dans
+            votre projet</div>
+
+          <div *ngFor="let skill of selectedUsedSkills" class="error">
+            <div *ngIf="selectedRequestedSkills.includes(skill)" class="error">
+              {{skill}}
+            </div>
+          </div>
+
+
+          <!--          <div  *ngFor="let skill of myForm.get('skillsMissing')?.value">
+             <div *ngIf="myForm.get('selectedUsedSkills')?.value?.includes('Guitare')" class="error">
+              "{{skill}}"
+            </div> 
+          </div> -->
+
+
+
+
         </div>
       </div>
 
