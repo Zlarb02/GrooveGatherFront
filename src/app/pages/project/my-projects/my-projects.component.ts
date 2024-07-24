@@ -32,6 +32,7 @@ export class MyProjectsComponent {
   projectService = inject(ProjectService);
   ngOnInit(): void {
     this.getUserProjects();
+    this.getUserAdminProjects();
   }
 
   getUserProjects() {
@@ -49,11 +50,14 @@ export class MyProjectsComponent {
   }
 
   getUserAdminProjects() {
+    console.log("1")
     this.projectService.getUserAdminProjects().subscribe((operations) => {
+      console.log("2")
       // biome-ignore lint/complexity/noForEach: <explanation>
       operations.forEach((operation) => {
         if (operation.project) {
           this.projectService.getProjectByName(operation.project).subscribe((project) => {
+            console.log(project)
             this.projects.push(project);
           });
         }
