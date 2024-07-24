@@ -14,6 +14,41 @@
             <div class="pj-item_title">
                 {{ project.name }}
             </div>
+            <div *ngIf="owner" class="project-owner">
+                <div
+                    style="display: flex; align-items: center; justify-content: center; font-size: large; font-weight: 600; color: var(--light-color)">
+                    <div class="owner-name">
+                        <p>de {{ owner.name }}</p>
+                    </div>
+                    <div class="owner-profile-picture">
+                        <img *ngIf="owner.picture"
+                            style="height: 50px; width: auto; border-radius: 50%; margin-left: 10px;"
+                            [src]="owner.picture" alt="{{ owner.name }}'s profile picture" />
+                    </div>
+                </div>
+                <p *ngIf="admins.length > 0"
+                    style="font-size: 20px; font-weight: 500; margin: 15px; text-align: left; color: var(--light-color);">
+                    Et ses GG's mates :
+                </p>
+                <div
+                    style="display: flex; gap:10px; align-items: center; justify-content: start; flex-direction: row; font-size: large; font-weight: 600; color: var(--light-color)">
+                    <div *ngFor="let admin of admins"
+                        style="border: 1px solid var(--light-color); padding: 20px; border-radius: 16px; background-color: var(--glass);">
+                        <div class="owner-name">
+                            <p> {{ admin.name }}</p>
+                        </div>
+                        <div class="owner-profile-picture"
+                            style="margin-top:10px; display: flex; flex-direction: row; align-items: center; justify-content: space-evenly;">
+                            <img *ngIf="admin.picture"
+                                style="height: 50px; width: auto; border-radius: 50%; margin-left: 10px;"
+                                [src]="admin.picture" alt="{{ admin.name }}'s profile picture" />
+
+                            <i class="gg-trash" style="color: var(--red);"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="pj-item_box">
                 <div class="genre-date">
                     <span class="pj-item_genre">
@@ -22,6 +57,7 @@
                         </span>
                     </span>
                     <span class=" pj-item_date">
+                        <div style="font-weight: 300;">mis en ligne le</div>
                         {{project.date}}
                     </span>
                 </div><br><br>
@@ -47,13 +83,23 @@
                 </div>
 
                 <div *ngIf="project" style="display: flex; flex-wrap: wrap; gap: 10px;">
-                    <div *ngFor="let file of project.files; let i = index" class="audio-container">
+                    <div *ngFor="let file of project.files; let i = index" class="audio-container"
+                        style="background-color: var(--glass);">
                         <div class="file-details">
                             <div class="file-name">{{ file.name }}</div>
                             <div class="file-size">{{ formatFileSize(file.size) }}</div>
-                            <a [href]="getFileDownloadUrl(file)" download class="download-btn">Télécharger</a>
+                            <a [href]="getFileDownloadUrl(file)" download class="download-btn">Télécharger <i
+                                    class="gg-software-download" style="margin-left: auto;"></i></a><button
+                                style="margin: auto; margin-top: 15px; background: transparent; border: none;">
+                                <i class="gg-trash" style="color: var(--red);"></i>
+                            </button>
                         </div>
                     </div>
+                    <br><br>
+                    <button
+                        style="background-color: var(--glass); width: 130px; height: 150px; margin-left: 10px; margin-top: 10px; border: var(--bg) 1px solid; border-radius: 16px;">
+                        <i class="gg-file-add" style="--ggs: 3;color: var(--light-color); margin-left: 45px;"></i>
+                    </button>
                 </div>
             </div>
 
@@ -79,12 +125,12 @@
         <div *ngIf="fileURL"
             style="position: fixed; bottom: 55px; right: 20px; display: flex; justify-content: center; align-items: center;">
             <button *ngIf="!isListened"
-                style="position: fixed; bottom: 95px; left: 20px; font-size: x-large; background-color: var(--edit-picture); color: var(--color-on-bg)"
+                style="position: fixed; bottom: 2cqb; right: 20px; font-size: x-large; background-color: var(--edit-picture); color: var(--light-color)"
                 (click)="playAudio()" class="listen-btn">
                 Ecouter
             </button>
             <button *ngIf="isListened"
-                style="position: fixed; bottom: 95px; left: 20px; font-size: x-large; background-color: var(--edit-picture); color: var(--color-on-bg)"
+                style="position: fixed; bottom: 2cqb; right: 20px; font-size: x-large; background-color: var(--edit-picture); color: var(--light-color)"
                 (click)="stopAudio()" class="listen-btn">
                 Stop
             </button>

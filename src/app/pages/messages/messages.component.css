@@ -136,6 +136,7 @@ button:hover {
         max-height: 600px;
         color: var(--light-color);
         font-size: medium;
+        padding: 4px;
     }
 
     #content::placeholder {

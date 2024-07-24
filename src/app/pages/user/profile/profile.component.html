@@ -1,4 +1,4 @@
-<div class="page">  
+<div class="page">
     <div class="container">
         <img [src]="user?.picture" alt="User's profile">
         <button class="edit-btn edit-picture" (click)="openChangePictureModal()">
@@ -22,9 +22,16 @@
         <button *ngIf="isEditEmail" class="edit-btn edit-mail valid-btn" (click)="validateEmail()">
             <i class="gg-check mail-gg"></i>
         </button>
+
+        <a style="margin-top:-60px;" [routerLink]="['/my-projects']" routerLinkActive="router-link-active">
+            <h1 style="color: var(--color-on-bg);">Mes projets</h1>
+        </a>
+        <br><br>
+
         <button class="change-password-btn" (click)="openChangePasswordModal()">Modifier le mot de passe</button>
         <button class="deco-btn" (click)="signOut()">Se déconnecter</button>
-        <button class="delete-btn" (click)="deleteAccount()">Supprimer le compte <i class="gg-trash"></i></button>
+        <button class="delete-btn" (click)="openDeleteConfirmationModal()">Supprimer le compte <i
+                class="gg-trash"></i></button>
     </div>
 
     <!-- Change Password Modal -->
@@ -64,6 +71,22 @@
             <div style="display: flex; flex-direction: row; justify-content: space-around;">
                 <button (click)="changePicture()"
                     style="border: 1px solid var(--lines); background-color: var(--light-bg); color: var(--light-color);">Valider</button>
+            </div>
+        </div>
+    </div>
+    <div id="deleteConfirmationModal" class="modal" [ngClass]="{'show': isDeleteConfirmationModalOpen}">
+        <div class="modal-content">
+            <br>
+            <span class="close" (click)="closeDeleteConfirmationModal()"><i class="gg-close"></i></span>
+            <div style="display: flex; flex-direction: column; align-items: center; gap:10px;">
+                <p>Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.</p>
+            </div>
+            <br>
+            <div style="display: flex; flex-direction: row; justify-content: space-around;">
+                <button (click)="confirmDeleteAccount()"
+                    style="border: 1px solid var(--lines); background-color: var(--red); color: var(--light-color);">Supprimer</button>
+                <button (click)="closeDeleteConfirmationModal()"
+                    style="border: 1px solid var(--lines); background-color: var(--light-bg); color: var(--light-color);">Annuler</button>
             </div>
         </div>
     </div>

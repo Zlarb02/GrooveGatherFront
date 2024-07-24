@@ -14,6 +14,19 @@
       <div class="pj-item_title">
         {{ project.name }}
       </div>
+      <div *ngIf="owner" class="project-owner">
+        <div
+          style="display: flex; align-items: center; justify-content: center; font-size: large; font-weight: 600; color: var(--color-on-bg)">
+          <div class="owner-name">
+            <p>de {{owner.name}}</p>
+          </div>
+
+          <div class="owner-profile-picture">
+            <img *ngIf="owner.picture" style="height: 50px; width: auto; border-radius: 50%; margin-left: 10px;"
+              [src]="owner.picture" alt="{{owner.name}}'s profile picture" />
+          </div>
+        </div>
+      </div>
       <div class="pj-item_box">
         <div class="genre-date">
           <span class="pj-item_genre">
@@ -22,7 +35,8 @@
             </span>
           </span>
           <span class=" pj-item_date">
-            {{project.date}}
+            <div style="font-weight: 300;">mis en ligne le</div>
+            {{formatDate(project.date)}}
           </span>
         </div><br><br>
         <div class="description"><u>Description</u>: <p>{{project.description}}</p><br><br></div>
@@ -46,9 +60,10 @@
           </div>
         </div>
       </div>
+
       <div>
         <button (click)="requestParticipation()"
-          style="font-size: x-large; background-color: var(--edit-picture); color: var(--color-on-bg)">Demander
+          style="font-size: x-large; background-color: var(--edit-picture); color: var(--color-on-bg);">Demander
           à participer</button>
       </div>
 
@@ -71,7 +86,7 @@
       </div>
     </a>
     <div *ngIf="fileURL"
-      style="position: fixed; bottom: 55px; right: 20px; display: flex; justify-content: center; align-items: center;">
+      style="position: fixed; bottom: 50px; right: 20px; display: flex; justify-content: center; align-items: center;">
       <button *ngIf="!isListened"
         style="position: fixed; bottom: 95px; left: 20px; font-size: x-large; background-color: var(--edit-picture); color: var(--color-on-bg)"
         (click)="playAudio()" class="listen-btn">

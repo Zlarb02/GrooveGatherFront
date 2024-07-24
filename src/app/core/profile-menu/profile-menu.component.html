@@ -21,9 +21,6 @@
     <a [routerLink]="['/my-projects']" (click)="closeMenu()">
       <li>Mes projets</li>
     </a>
-    <a [routerLink]="['/settings']" (click)="closeMenu()">
-      <li>Paramètres</li>
-    </a>
     <li><app-theme-toggle style="transform: scale(.6);"></app-theme-toggle></li>
     <li><app-sober-glass-toggle style="transform: scale(.6);"></app-sober-glass-toggle></li>
     <li (click)="signOut()">Se déconnecter</li>

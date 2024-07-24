@@ -19,7 +19,7 @@
                 </span>
                 <br>
                 <span class="pj-item_date">
-                    {{project.date}}
+                    {{formatDate(project.date)}}
                 </span>
             </div><br> <br>
             <u style="font-weight: 600; font-size: 1.2em;">Description</u>: <p
@@ -40,6 +40,19 @@
                             <button class="btn-miss">{{skill}}</button>
                         </span>
                     </div><br> <br>
+                </div>
+            </div>
+            <div *ngIf="owner" class="project-owner">
+                <h4><i>Un projet de :</i></h4> <br>
+
+                <div style="display: flex; align-items: center; justify-content: space-around;">
+                    <div class="owner-name">
+                        <p>{{owner.name}}</p>
+                    </div>
+                    <div class="owner-profile-picture">
+                        <img *ngIf="owner.picture" style="height: 50px; width: auto; border-radius: 50%;"
+                            [src]="owner.picture" alt="{{owner.name}}'s profile picture" />
+                    </div>
                 </div>
             </div>
             <div
