@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
-import { catchError, of } from 'rxjs';
+import { inject, Injectable } from '@angular/core';
+import { catchError, type Observable, of } from 'rxjs';
 import { Api } from '../models/api';
 import type { Operation } from '../models/operation';
 import type { Project } from '../models/project.model';
@@ -54,6 +54,14 @@ export class ProjectService {
       );
   }
 
+  getProjectByName(name: string) {
+    return this.http.get<Project>(`${this.baseUrl}/projects/${name}`, { withCredentials: true })
+  }
+
+  requestParticipation(projectName: string) {
+    return this.http.post(`${this.baseUrl}/projects/request-participation`, { projectName }, { withCredentials: true });
+  }
+
   getUserProjects() {
     return this.http.get<Operation[]>(`${this.baseUrl}/operations/user-projects`, { withCredentials: true })
       .pipe(
@@ -63,11 +71,28 @@ export class ProjectService {
       );
   }
 
-  getProjectByName(name: string) {
-    return this.http.get<Project>(`${this.baseUrl}/projects/${name}`, { withCredentials: true })
+
+  getUserAdminProjects() {
+    return this.http.get<Operation[]>(`${this.baseUrl}/operations/admin-projects`, { withCredentials: true })
+      .pipe(
+        catchError(error => {
+          throw error;
+        })
+      );
   }
 
-  requestParticipation(projectName: string) {
-    return this.http.post(`${this.baseUrl}/projects/request-participation`, { projectName }, { withCredentials: true });
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  getProjectOwner(projectName: string): Observable<any> {
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+    return this.http.get<any>(`${this.baseUrl}/operations/project-owner?projectName=${projectName}`, { withCredentials: true });
+  }
+
+  getProjectAdmins(projectName: string) {
+    return this.http.get<Operation[]>(`${this.baseUrl}/operations/admins?projectName=${projectName}`, { withCredentials: true })
+      .pipe(
+        catchError(error => {
+          throw error;
+        })
+      );
   }
 }

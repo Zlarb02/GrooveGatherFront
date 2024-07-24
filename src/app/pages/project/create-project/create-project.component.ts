@@ -39,6 +39,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
   styleUrls: ['./create-project.component.css'],
 })
 export class CreateProjectComponent {
+  projectName = '';
   selectColor(color: string) {
     this.myForm.get('color')?.setValue(color);
     // biome-ignore lint/complexity/noForEach: <explanation>
@@ -332,7 +333,7 @@ export class CreateProjectComponent {
             response => {
               // biome-ignore lint/suspicious/noConsoleLog: <explanation>
               console.log('Project created successfully:', response);
-              this.router.navigate(['/projects']);
+              this.router.navigate([`project/edit/${this.projectName}`]);
             },
             error => {
               console.error('Error creating project:', error);

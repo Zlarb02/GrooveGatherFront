@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, type OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { catchError, tap, throwError } from 'rxjs';
 import { Api } from '../../../shared/models/api';
 import type { User } from '../../../shared/models/user.model';
@@ -12,7 +13,7 @@ import { AuthService } from '../../../shared/services/auth.service';
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
@@ -31,6 +32,7 @@ export class ProfileComponent implements OnInit {
   confirmPassword = '';
 
   http = inject(HttpClient);
+  toastr = inject(ToastrService);
   isChangePictureModalOpen = false;
   newPicture = '';
 
@@ -181,7 +183,40 @@ export class ProfileComponent implements OnInit {
   }
 
   deleteAccount() {
-    this.http.delete(`${this.baseUrl}/users?id=${this.user?.id}`)
+    this.http.delete(`${this.baseUrl}/users/delete?email=${this.user?.email}`, { withCredentials: true }).pipe(
+      tap((response) => {
+        this.toastr.success('Compte supprimé avec succès !');
+
+      }),
+      catchError(error => {
+        console.error('Error deleting account', error);
+        this.toastr.error('Une erreur est survenue.');
+        return throwError(error);
+      })
+    ).subscribe();
+  }
+  isDeleteConfirmationModalOpen = false;
+
+  openDeleteConfirmationModal() {
+    this.isDeleteConfirmationModalOpen = true;
+  }
+
+  closeDeleteConfirmationModal() {
+    this.isDeleteConfirmationModalOpen = false;
+  }
+
+  confirmDeleteAccount() {
+    this.closeDeleteConfirmationModal();
+    this.http.delete(`${this.baseUrl}/users/delete?email=${this.user?.email}`, { withCredentials: true }).pipe(
+      tap((response) => {
+        this.toastr.success('Compte supprimé avec succès !');
+      }),
+      catchError(error => {
+        console.error('Error deleting account', error);
+        this.toastr.error('Une erreur est survenue.');
+        return throwError(error);
+      })
+    ).subscribe();
   }
 }
 

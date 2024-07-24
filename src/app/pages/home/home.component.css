@@ -1,8 +1,17 @@
+.container {
+  height: 100vh;
+  padding-top: 15vh;
+  overflow-y: scroll;
+  width: 100vw;
+}
+
 main {
   text-align: center;
   overflow-y: scroll;
-  height: 115vh;
-  padding-top: 15vh;
+  overflow-x: hidden;
+  height: auto;
+  width: 100vw;
+  padding-bottom: 15vh;
 }
 
 h1 {
@@ -18,7 +27,7 @@ h3 {
 }
 
 img {
-  width: 100%;
+  width: 100vw;
   max-height: 30vh;
   object-fit: cover;
 
@@ -36,7 +45,7 @@ img {
   color: var(--color);
   border: var(--colored) 2px solid;
   border-radius: 12px;
-  padding: 18px;
+  padding: 0.4rem;
   font-size: 18px;
   font-weight: 400;
 

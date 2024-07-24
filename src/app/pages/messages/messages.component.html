@@ -21,11 +21,15 @@
             <!-- Affichage du contenu du message -->
             <div [innerHTML]="message.content"></div>
             <p><small>{{ message.isSent ? 'Envoyé' : 'Reçu' }} le {{ message.timestamp | date:'short' }}</small></p>
-            <button *ngIf="!message.isSent" (click)="replyToMessage(message)">Répondre</button>
             <div *ngIf="!message.isSent && message.content.includes('Voulez-vous approuver cette demande ?')">
-                <button (click)="acceptRequest(message.id)">Accepter</button>
-                <button (click)="rejectRequest(message.id)">Rejeter</button>
+                <button
+                    style="background-color: color-mix(in srgb, var(--green) 50%, transparent); color: var(--color-on-glass); filter:contrast(150%);"
+                    (click)="acceptRequest(message.id)">Accepter</button>
+                <button
+                    style="background-color: color-mix(in srgb, var(--red) 50%, transparent); color: var(--color-on-glass);"
+                    (click)="rejectRequest(message.id)">Rejeter</button>
             </div>
+            <button *ngIf="!message.isSent" (click)="replyToMessage(message)">Répondre</button>
         </div>
 
         <!-- Bloc de citation pour la réponse -->
@@ -40,8 +44,7 @@
         <div class="send-message">
             <h3>Envoyer un nouveau message</h3>
             <form (ngSubmit)="sendMessage()">
-                <label for="receiverId" style="display: none;">ID du destinataire:</label>
-                <input id="receiverId" placeholder="ID du destinataire" [(ngModel)]="newMessage.receiverId"
+                <input id="receiverId" placeholder="Nom du destinataire" [(ngModel)]="newMessage.receiverId"
                     name="receiverId" required>
                 <br>
                 <label style="display: none;" for="content">Contenu du message:</label>

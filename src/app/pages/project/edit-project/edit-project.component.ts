@@ -4,6 +4,7 @@ import { ProjectService } from '../../../shared/services/project.service';
 // biome-ignore lint/style/useImportType: <explanation>
 import { CommonModule } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { switchMap, throwError } from 'rxjs';
 import { Api } from '../../../shared/models/api';
 import type { Project } from '../../../shared/models/project.model';
 
@@ -31,6 +32,9 @@ export class EditProjectComponent {
   id!: number;
   name!: string | undefined;
 
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  admins!: any[];
+
   lastVolume = 1; // Default to full volume
   currentVolume = 1; // Current volume level
 
@@ -43,26 +47,52 @@ export class EditProjectComponent {
   baseUrl = this.api.local;
   fileURL = '';
   isListened = false;
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  owner: any;
 
   ngOnInit() {
     const url = (String(window.location.href));
     this.name = String(url).split('/').pop();
     if (this.name) {
-      this.projectService.getProjectByName(this.name).subscribe((project) => {
-        this.project = project;
-        if (this.project) {
-          const teaserFile = this.project.files?.find(file => file.isTeaser);
-          if (teaserFile) {
-            this.fileURL = `${this.baseUrl}/${teaserFile.url}`;
+      this.projectService.getProjectByName(this.name).pipe(
+        switchMap(project => {
+          this.project = project;
+          if (this.project) {
+            const teaserFile = this.project.files?.find(file => file.isTeaser);
+            if (teaserFile) {
+              this.fileURL = `${this.baseUrl}/${teaserFile.url}`;
+            }
+            this.fileURLs = project.files ? project.files.map(file => `${this.baseUrl}/${file.url}`) : [];
+
+            return this.projectService.getProjectOwner(this.project.name);
           }
-        }
-        if (project.files) {
-          this.fileURLs = project.files.map(file => `${this.baseUrl}/${file.url}`);
+          return throwError(() => new Error('Projet non trouvé'));
+        })
+      ).subscribe({
+        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+        next: (owner: any) => {
+          this.owner = owner;
+          this.fetchAdmins();
+        },
+        error: (error: Error) => {
+          console.error('Error fetching project owner', error);
         }
       });
     }
+  }
 
-
+  fetchAdmins() {
+    if (this.name) {
+      this.projectService.getProjectAdmins(this.name).subscribe({
+        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+        next: (admins: any) => {
+          this.admins = admins;
+        },
+        error: (error: Error) => {
+          console.error('Error fetching project admins', error);
+        }
+      });
+    }
   }
 
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>

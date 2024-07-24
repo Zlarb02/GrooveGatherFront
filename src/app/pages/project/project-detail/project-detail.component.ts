@@ -53,24 +53,46 @@ export class ProjectDetailComponent {
   fileURL = '';
   isListened = false;
   userEmail!: string | undefined;
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  owner?: any;
 
   ngOnInit() {
     const url = (String(window.location.href));
     this.name = String(url).split('/').pop();
     if (this.name) {
-      this.projectService.getProjectByName(this.name).subscribe((project) => {
-        this.project = project;
-        if (this.project) {
-          const teaserFile = this.project.files?.find(file => file.isTeaser);
-          if (teaserFile) {
-            this.fileURL = `${this.baseUrl}/${teaserFile.url}`;
+      this.projectService.getProjectByName(this.name).pipe(
+        switchMap(project => {
+          this.project = project;
+          if (this.project) {
+            const teaserFile = this.project.files?.find(file => file.isTeaser);
+            if (teaserFile) {
+              this.fileURL = `${this.baseUrl}/${teaserFile.url}`;
+            }
+            this.fileURLs = project.files ? project.files.map(file => `${this.baseUrl}/${file.url}`) : [];
+
+            return this.projectService.getProjectOwner(this.project.name);
           }
-        }
-        if (project.files) {
-          this.fileURLs = project.files.map(file => `${this.baseUrl}/${file.url}`);
+          return throwError(() => new Error('Projet non trouvé'));
+        })
+      ).subscribe({
+        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+        next: (owner: any) => {
+          this.owner = owner;
+        },
+        error: (error: Error) => {
+          console.error('Error fetching project owner', error);
         }
       });
     }
+  }
+
+  formatDate(dateStr: string): string {
+    const date = new Date(dateStr);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Les mois sont indexés à partir de 0
+    const year = date.getFullYear();
+
+    return `${day}/${month}/${year}`;
   }
 
   requestParticipation(): void {
@@ -97,7 +119,7 @@ export class ProjectDetailComponent {
     ).subscribe({
       next: response => {
         this.toastr.success('Votre demande de participation a été envoyée.');
-
+        this.router.navigate(['/messages']);
       },
       error: error => {
         if (error.message === 'Utilisateur non connecté ou adresse e-mail non disponible.') {

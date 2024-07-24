@@ -126,7 +126,15 @@ button {
   border: 2px solid var(--color);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 450px) {
+  .carre {
+    border-radius: 10px;
+    height: 8vw;
+    width: 8vw;
+  }
+}
+
+@media (min-width: 560px) {
   .carre {
     border-radius: 10px;
     height: 6vw;
@@ -509,10 +517,10 @@ select option {
   background-image: url('../../../../assets/icons/899-format-unknown.svg');
 }
 
-.btn-primary{
-font-weight: 400;
-font-size: xx-large;
-padding: 13px;
+.btn-primary {
+  font-weight: 400;
+  font-size: xx-large;
+  padding: 13px;
 
 }
 

@@ -20,7 +20,7 @@ import { MessageService } from '../../shared/services/message.service';
 export class MessagesComponent implements OnInit {
   sentMessages: MessageResponseDto[] = [];
   receivedMessages: MessageResponseDto[] = [];
-  newMessage: MessageRequestDto = { receiverId: 0, content: '' }; // Utilisation de receiverId
+  newMessage: MessageRequestDto = { receiverName: 'Nom d\'utilisateur', content: '' }; // Utilisation de receiverName
   replyingToMessage: MessageResponseDto | null = null;
 
   combinedMessages: (MessageResponseDto & { isSent: boolean })[] = [];
@@ -46,7 +46,7 @@ export class MessagesComponent implements OnInit {
   }
 
   sendMessage(): void {
-    if (this.newMessage.receiverId && this.newMessage.content) {
+    if (this.newMessage.receiverName && this.newMessage.content) {
       if (this.replyingToMessage) {
         this.newMessage.replyToMessageId = this.replyingToMessage.id;
       } else {
@@ -55,7 +55,7 @@ export class MessagesComponent implements OnInit {
 
       this.messageService.sendMessage(this.newMessage).subscribe(() => {
         this.loadMessages();
-        this.newMessage = { receiverId: 0, content: '' };
+        this.newMessage = { receiverName: 'Nom d\'utilisateur', content: '' };
         this.replyingToMessage = null; // Clear the reply context
       });
     }
@@ -63,7 +63,7 @@ export class MessagesComponent implements OnInit {
 
   replyToMessage(message: MessageResponseDto): void {
     this.replyingToMessage = message;
-    this.newMessage.receiverId = message.senderId; // Utilisation de receiverId
+    this.newMessage.receiverName = message.senderName; // Utilisation de receiverName
   }
 
   // Méthodes pour accepter ou rejeter les demandes
