@@ -49,7 +49,7 @@ export class ProjectDetailComponent {
   toastr = inject(ToastrService)
 
   api = new Api();
-  baseUrl = this.api.local;
+  baseUrl = this.api.prod;
   fileURL = '';
   isListened = false;
   userEmail!: string | undefined;

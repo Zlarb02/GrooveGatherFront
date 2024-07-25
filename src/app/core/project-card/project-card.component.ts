@@ -29,7 +29,7 @@ export class ProjectCardComponent implements OnInit, AfterViewInit {
   @ViewChild('audioPlayer') audioPlayerRef!: ElementRef<HTMLAudioElement>; // Référence à l'élément audio
 
   api = new Api();
-  baseUrl = this.api.local;
+  baseUrl = this.api.prod;
 
   authService = inject(AuthService);
   audioService = inject(AudioService);

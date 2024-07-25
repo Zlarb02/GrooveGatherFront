@@ -19,7 +19,7 @@ export class AuthService {
   responseMessage = '';
 
   api = new Api();
-  baseUrl = this.api.local;
+  baseUrl = this.api.prod;
 
   router: Router = inject(Router);
 

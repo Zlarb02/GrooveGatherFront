@@ -66,7 +66,7 @@ export class CreateProjectComponent {
   router: Router = inject(Router);
   http = inject(HttpClient);
   api = new Api();
-  baseUrl = this.api.local;
+  baseUrl = this.api.prod;
 
   wavUrl: string | undefined;
   mp3Url: string | undefined;

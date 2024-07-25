@@ -41,7 +41,7 @@ export class EditProjectComponent {
   projectService = inject(ProjectService);
 
   api = new Api();
-  baseUrl = this.api.local;
+  baseUrl = this.api.prod;
   fileURL = '';
   isListened = false;
   owner: any;
