@@ -39,7 +39,7 @@ img {
 .edit-btn {
     position: relative;
     background-color: var(--edit-button);
-    padding: 1rem;
+    padding: 0.4rem;
     cursor: pointer;
     border-radius: 5px;
     transition: background-color 0.3s ease;
@@ -74,11 +74,21 @@ h2 {
 }
 
 .edit-mail {
-    top: calc(-30px - 6vh);
+    top: calc(-30px - 5.5vh);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
 }
 
 .edit-name {
-    top: -6vh;
+    top: -5.5vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
 }
 
 .edit-picture {

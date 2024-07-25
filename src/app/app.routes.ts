@@ -1,5 +1,4 @@
 import type { Routes } from '@angular/router';
-import { ProjectDetailComponent } from '../assets/images/icons/project-detail/project-detail.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { SignupComponent } from './pages/auth/signup/signup.component';
@@ -12,6 +11,7 @@ import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.co
 import { CreateProjectComponent } from './pages/project/create-project/create-project.component';
 import { EditProjectComponent } from './pages/project/edit-project/edit-project.component';
 import { MyProjectsComponent } from './pages/project/my-projects/my-projects.component';
+import { ProjectDetailComponent } from './pages/project/project-detail/project-detail.component';
 import { SearchComponent } from './pages/search/search.component';
 import { ProfileComponent } from './pages/user/profile/profile.component';
 import { SettingsComponent } from './pages/user/settings/settings.component';

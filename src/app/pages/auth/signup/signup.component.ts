@@ -17,10 +17,13 @@ import { AuthService } from '../../../shared/services/auth.service';
 })
 export class SignupComponent {
   user: User | null = {
+    name: "",
     email: "", password: "", repeatedPassword: "", role: 0, subscription_level: 0
   };
   responseMessage = '';
   googleUserExist = false;
+
+  errorMessage = '';
 
   userExists$: Subject<boolean> = new Subject<boolean>();
 
@@ -30,7 +33,7 @@ export class SignupComponent {
   router: Router = inject(Router);
   http = inject(HttpClient);
   api = new Api();
-  baseUrl = this.api.prod;
+  baseUrl = this.api.local;
 
   ngOnInit() {
     this.authService.user.subscribe(user => {
@@ -97,9 +100,36 @@ export class SignupComponent {
   }
 
   onSubmit() {
+    this.errorMessage = ''; // Réinitialiser le message d'erreur
+
+    // Vérifications de base des champs
+    if (!this.user?.name) {
+      this.errorMessage += 'Le nom est requis. ';
+    }
+    if (!this.user?.email) {
+      this.errorMessage += "L'email est requise. ";
+    }
+    if (!this.user?.password) {
+      this.errorMessage += 'Le mot de passe est requis. ';
+    }
+
+    // Vérification des mots de passe identiques
+    if (this.user?.password !== this.user?.repeatedPassword) {
+      this.errorMessage += 'Les mots de passe ne correspondent pas.';
+    }
+
+    // Si le message d'erreur n'est pas vide, ne pas soumettre le formulaire
+    if (this.errorMessage) {
+      return;
+    }
+
+    // Si aucune erreur, procéder à l'envoi des données utilisateur
     this.postUser().then(() => {
+      // Logique après l'enregistrement de l'utilisateur, par exemple, redirection
+      this.router.navigate(['/search']);
     });
   }
+
 
   postUser(): Promise<void> {
     const url = `${this.baseUrl}/users/register`;

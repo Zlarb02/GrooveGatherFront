@@ -13,7 +13,7 @@ export class ProjectService {
   http = inject(HttpClient)
 
   api = new Api();
-  baseUrl = this.api.prod
+  baseUrl = this.api.local
 
   mockProjects: Project[] = [
     {

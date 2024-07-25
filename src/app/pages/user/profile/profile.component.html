@@ -8,7 +8,7 @@
         <input *ngIf="isEditName && user" type="text" class="name-input" [(ngModel)]="nameInput"
             (keyup.enter)="validateName()">
         <button *ngIf="!isEditName" class="edit-btn edit-name" (click)="editName()">
-            <i class="gg-pen name-gg"></i>
+            changer de nom <i class="gg-pen name-gg"></i>
         </button>
         <button *ngIf="isEditName" class="edit-btn edit-name valid-btn" (click)="validateName()">
             <i class="gg-check name-gg"></i>
@@ -17,14 +17,15 @@
         <input *ngIf="isEditEmail && user" type="text" class="mail-input" [(ngModel)]="mailInput"
             (keyup.enter)="validateEmail()">
         <button *ngIf="!isEditEmail" class="edit-btn edit-mail" (click)="editEmail()">
-            <i class="gg-pen mail-gg"></i>
+            changer d'adresse email <i class="gg-pen mail-gg"></i>
         </button>
         <button *ngIf="isEditEmail" class="edit-btn edit-mail valid-btn" (click)="validateEmail()">
             <i class="gg-check mail-gg"></i>
         </button>
 
         <a style="margin-top:-60px;" [routerLink]="['/my-projects']" routerLinkActive="router-link-active">
-            <h1 style="color: var(--color-on-bg);">Mes projets</h1>
+            <h1 style="color: var(--color-on-bg);"
+                style="background-color: var(--glass); padding: 10px; border-radius: 10px">Mes projets</h1>
         </a>
         <br><br>
 
