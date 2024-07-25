@@ -16,7 +16,7 @@
       </div>
       <div *ngIf="owner" class="project-owner">
         <div
-          style="display: flex; align-items: center; justify-content: center; font-size: large; font-weight: 600; color: var(--color-on-bg)">
+          style="display: flex; align-items: center; justify-content: center; font-size: large; font-weight: 600; color: var(--light-color)">
           <div class="owner-name">
             <p>de {{owner.name}}</p>
           </div>
@@ -63,7 +63,7 @@
 
       <div>
         <button (click)="requestParticipation()"
-          style="font-size: x-large; background-color: var(--edit-picture); color: var(--color-on-bg);">Demander
+          style="font-size: x-large; background-color: var(--edit-picture); color: var(--light-color);">Demander
           à participer</button>
       </div>
 
@@ -88,12 +88,12 @@
     <div *ngIf="fileURL"
       style="position: fixed; bottom: 50px; right: 20px; display: flex; justify-content: center; align-items: center;">
       <button *ngIf="!isListened"
-        style="position: fixed; bottom: 95px; left: 20px; font-size: x-large; background-color: var(--edit-picture); color: var(--color-on-bg)"
+        style="position: fixed; bottom: 95px; left: 20px; font-size: x-large; background-color: var(--edit-picture); color: var(--light-color)"
         (click)="playAudio()" class="listen-btn">
         Ecouter
       </button>
       <button *ngIf="isListened"
-        style="position: fixed; bottom: 95px; left: 20px; font-size: x-large; background-color: var(--edit-picture); color: var(--color-on-bg)"
+        style="position: fixed; bottom: 95px; left: 20px; font-size: x-large; background-color: var(--edit-picture); color: var(--light-color)"
         (click)="stopAudio()" class="listen-btn">
         Stop
       </button>

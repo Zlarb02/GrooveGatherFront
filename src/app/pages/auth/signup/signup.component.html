@@ -9,6 +9,15 @@
         </div>
         <br>
         <form (ngSubmit)="onSubmit()">
+
+            <div style="color: var(--red); background-color: antiquewhite; padding: 10px; border-radius: 10px;"
+                *ngIf="errorMessage" class="error-message">
+                {{ errorMessage }} <br> </div>
+            <div>
+                <label for="name">Name</label>
+                <input type="name" id="name" name="name" required [(ngModel)]="user!.name" placeholder="Nom">
+            </div>
+            <br>
             <div>
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" required [(ngModel)]="user!.email" placeholder="Email">
