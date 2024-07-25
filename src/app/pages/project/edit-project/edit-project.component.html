@@ -96,13 +96,12 @@
                             </button>
                         </div>
                     </div>
-                    <br><br>
-                    <input type="file" (change)="onFileSelected($event)" />
-                    <button (click)="uploadFile()"
-                        style="background-color: var(--glass); width: 130px; height: 150px; margin-left: 10px; margin-top: 10px; border: var(--bg) 1px solid; border-radius: 16px;">
-                        <i class="gg-file-add" style="--ggs: 3; color: var(--light-color); margin-left: 45px;"></i>
-                    </button>
                 </div>
+                <input type="file" (change)="onFileSelected($event)" />
+                <button (click)="uploadFile()"
+                    style="background-color: var(--glass); margin-left: 10px; margin-top: 10px; border: var(--bg) 1px solid; border-radius: 16px;">
+                    <i class="gg-file-add" style="--ggs: 3; color: var(--light-color); margin-left: 45px;"></i>
+                </button>
             </div>
 
             <div>
