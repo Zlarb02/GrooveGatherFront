@@ -74,7 +74,7 @@ h2 {
 }
 
 .edit-mail {
-    top: calc(-30px - 5.5vh);
+    top: calc(-30px - 5vh);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -83,7 +83,7 @@ h2 {
 }
 
 .edit-name {
-    top: -5.5vh;
+    top: -5vh;
     display: flex;
     flex-direction: row;
     align-items: center;
