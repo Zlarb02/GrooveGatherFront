@@ -96,3 +96,165 @@ a {
     display: none;
   }
 }
+
+
+
+
+
+
+
+.page {
+  width: 100%;
+  height: 80%;
+  padding-top: 15vh;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 75vh;
+  margin-top: -20vh;
+}
+
+h1 {
+  text-align: center;
+  color: var(--color);
+  background-color: var(--glass);
+  padding: 20px;
+  margin: 20px auto;
+  width: 80%;
+  border-radius: 35px;
+}
+
+.profile-container {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  gap: 4vw;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  background-color: var(--glass);
+  padding: 10px;
+  border-radius: 16px;
+  border: 1px solid var(--color);
+}
+
+.profile h2 {
+  text-align: center;
+  font-weight: 600;
+}
+
+.profile a {
+  font-size: large;
+  font-weight: 400;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.profile img {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+}
+
+.smallImg {
+  display: none;
+}
+
+.largeImg {
+  max-height: 20vw;
+  height: 40vw;
+  width: auto;
+  border-radius: 80px;
+  background-color: transparent;
+}
+
+.background-img {
+  position: fixed;
+  z-index: -1;
+  background-color: transparent;
+}
+
+.bg-work {
+  right: 0;
+  bottom: 10vh;
+  height: 40vw;
+  width: auto;
+}
+
+.bg-original {
+  bottom: 23vh;
+  left: 10vw;
+  width: 30vw;
+  height: auto;
+}
+
+
+@media screen and (max-width: 768px) {
+  .smallImg {
+    display: block;
+  }
+
+  .largeImg {
+    display: none;
+  }
+}
+
+
+/* Styles pour les conteneurs des images */
+
+
+.imgHoverable {
+  transition: transform 0.3s ease, filter 0.3s ease;
+  border-radius: 16px;
+}
+
+.imgHoverable:hover {
+  transform: scale(1.1);
+  filter: brightness(0.8);
+}
+
+.genius {
+  display: none;
+  margin-top: 3vh;
+  margin-bottom: -3vh;
+}
+
+.genese {
+  display: none;
+  margin-top: 3vh;
+  margin-bottom: -3vh;
+}
+
+.coffee {
+  display: none;
+  margin-top: 3vh;
+  margin-bottom: -3vh;
+}
+
+.largeImg:hover~.genius {
+  display: block;
+}
+
+.smallImg:hover~.genius {
+  display: block;
+}
+
+.originalTeamPic:hover~.genese {
+  display: block;
+}
+
+.atWorks:hover~.coffee {
+  display: block;
+}
