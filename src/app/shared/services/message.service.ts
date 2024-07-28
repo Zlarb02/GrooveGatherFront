@@ -11,8 +11,9 @@ import type { MessageRequestDto, MessageResponseDto } from '../models/message.mo
 })
 export class MessageService {
 
-    private apiUrl = 'messages'; // URL de base pour votre API
-    private baseUrl = new Api().local;
+    private api = new Api()
+    private baseUrl = this.api.prod
+    private apiUrl = 'messages'
 
     constructor(private http: HttpClient) { }
 
